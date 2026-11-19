@@ -131,6 +131,31 @@
       "code": "4-20",
       "name": "Unmapped district code",
       "count": 1
+    },
+    {
+      "code": "1-03",
+      "name": "Unmapped district code",
+      "count": 1
+    },
+    {
+      "code": "3-13",
+      "name": "Unmapped district code",
+      "count": 1
+    },
+    {
+      "code": "9-73",
+      "name": "Unmapped district code",
+      "count": 1
+    },
+    {
+      "code": "9-74",
+      "name": "Unmapped district code",
+      "count": 1
+    },
+    {
+      "code": "9-81",
+      "name": "Unmapped district code",
+      "count": 1
     }
   ],
   "candidateGroups": [
