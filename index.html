@@ -118,6 +118,13 @@ tbody tr:hover{background:#365f78}
 @media(max-width:1050px){.case-explorer-layout{grid-template-columns:1fr}.case-spotlight{min-height:unset}.case-spotlight .spotlight-orbit{margin:15px 0}.spotlight-guide{display:grid;grid-template-columns:repeat(2,1fr);column-gap:12px}.spotlight-guide>b{grid-column:1/-1}.spotlight-note{margin-top:14px}}
 @media(max-width:650px){.case-stats{grid-template-columns:repeat(2,1fr)}.case-stats>div{padding:10px}.case-stats b{font-size:20px}.case-stage-head{align-items:flex-start;flex-direction:column}.case-bubble-stage{min-height:430px}.case-bubble-svg{min-height:unset}.bubble-hint{font-size:8px;bottom:8px;left:9px;right:9px}.case-bubble-tooltip{left:12px!important;right:12px!important;top:auto!important;bottom:35px;width:auto;max-width:none}.case-spotlight{padding:16px}.spotlight-guide{grid-template-columns:1fr 1fr}.case-tools .select{flex:1;min-width:calc(50% - 8px)}.case-search{min-width:100%}}
 @media(prefers-reduced-motion:reduce){.case-bubble-node{animation:none!important}}
+
+/* Compact-screen constellation: preserve readable bubble labels with horizontal touch-pan */
+@media(max-width:650px){
+ .case-bubble-stage{min-height:465px;overflow-x:auto;overflow-y:hidden}
+ .case-bubble-svg{display:block;width:760px;min-width:760px;height:449px;min-height:unset}
+ .bubble-hint{position:sticky;left:0;width:calc(100vw - 42px);margin-top:-22px;bottom:8px}
+}
 </style></head>
 <body><div class="shell">
 <header class="top"><div class="brand"><div class="logo">SA</div><div><small>LEGAL DATA · INTELLIGENCE</small><b>SCHEDULE A / INSIGHT</b></div></div><div class="topright"><span class="live">● DATA CONNECTED</span><button class="ghost" id="focus">Focus mode ↗</button></div></header>
