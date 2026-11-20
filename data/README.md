@@ -13,3 +13,5 @@ The geography markers are orientation points, not district boundary geometry or 
 
 - `research_insights.json` retains the original legal-theme and court-decision text fields and adds labeled `analysisPoints` for each theme's core legal changes/business implications and each decision's issues, result, and authority/scope. The interface renders these as bullet lists in the legal-analysis panel, case cards, and case-detail view.
 - Each `case_dossiers.json` profile retains its original searchable text fields and adds `analysisPoints`: labeled bullet arrays for `summary`, `issue`, `response` (where a party response is recorded), `decision`, and `significance`. The dashboard renders these as structured lists in the bubble tooltip, quick-view panel, and full case drawer. Labels organize the source-supported analysis; they do not add new factual findings.
+
+- `case_dossiers.json` powers the interactive case archive's clustered bubble view and searchable list view. Hover/focus previews show issues, recorded party responses, court handling and research significance; click/keyboard activation opens the full point-by-point dossier, timeline and original sources.
