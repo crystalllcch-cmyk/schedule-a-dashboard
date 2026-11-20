@@ -139,6 +139,20 @@ tbody tr:hover{background:#365f78}
 .case-bubble-tooltip .analysis-points{padding-left:15px;gap:4px}
 .case-bubble-tooltip .analysis-points li{font-size:10px;line-height:1.6}
 .case-bubble-tooltip .analysis-points li b{font-size:9px}
+
+/* Structured legal-theme and decision-summary reading */
+.theme-analysis-block{margin:12px 0 16px;padding:15px 17px;border:1px solid #52718b;border-radius:12px;background:#203d56}
+.theme-analysis-label,.casecard-section-label{display:block;margin-bottom:8px;color:#9af3eb;font-size:10px;font-weight:800;letter-spacing:.04em}
+.theme-analysis-block .analysis-points{gap:7px}
+.narrative .analysis-points{padding-left:19px;gap:7px}
+.narrative .analysis-points li{font-size:11px}
+.casecard .impact{padding-top:10px;border-top:1px solid #ffffff20}
+.casecard .analysis-points{padding-left:16px;gap:5px}
+.casecard .analysis-points li{font-size:10px;line-height:1.65}
+.casecard .analysis-points li b{font-size:9px}
+.casecard .tagrow{display:block}
+.casecard .tagrow .analysis-points{margin-top:5px}
+.casecard .tagrow .analysis-points li{font-size:9px}
 </style></head>
 <body><div class="shell">
 <header class="top"><div class="brand"><div class="logo">SA</div><div><small>LEGAL DATA · INTELLIGENCE</small><b>SCHEDULE A / INSIGHT</b></div></div><div class="topright"><span class="live">● DATA CONNECTED</span><button class="ghost" id="focus">Focus mode ↗</button></div></header>
@@ -262,6 +276,11 @@ function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setT
 function go(v){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.view===v));document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+v));setTimeout(()=>{Object.values(charts).forEach(c=>c.resize());if(v==='geography'&&GEO)renderGeo()},100)}
 $('nav').onclick=e=>{let b=e.target.closest('[data-view]');if(b)go(b.dataset.view)};
 function detail(title,intro,items,url){$('dtitle').textContent=title;$('dintro').textContent=intro;$('dbody').innerHTML=items.map(x=>'<div class="drow"><small>'+x[0]+'</small><b>'+x[1]+'</b></div>').join('')+(url?'<div class="drow"><a href="'+url+'" target="_blank" rel="noopener">打开原始裁判 / 来源 ↗</a></div>':'');$('drawer').classList.add('open')}
+function caseDetail(title,intro,sections,url){
+ $('dtitle').textContent=title;$('dintro').textContent=intro;
+ $('dbody').innerHTML=sections.map(s=>'<div class="drow"><small>'+escapeHtml(s.title)+'</small>'+renderAnalysisList(s.points,s.fallback)+'</div>').join('')+(url?'<div class="drow"><a href="'+escapeHtml(url)+'" target="_blank" rel="noopener">打开原始裁判 / 来源 ↗</a></div>':'');
+ $('drawer').classList.add('open');
+}
 $('close').onclick=()=>$('drawer').classList.remove('open');$('drawer').onclick=e=>{if(e.target.id==='drawer')$('drawer').classList.remove('open')};
 function initChart(id){charts[id]=echarts.init($(id));return charts[id]}
 const axis={axisLine:{lineStyle:{color:'#5C7A93'}},axisLabel:{color:'#BED0DE',fontSize:10},splitLine:{lineStyle:{color:'#405D76'}}};
@@ -285,14 +304,31 @@ $('brandBars').onclick=e=>{const b=R.brands.brandRows.find(x=>x.brand===e.target
 $('brandCards').innerHTML=R.brands.brandRows.map((b,i)=>'<div class="card panel"><div class="eyebrow">BRAND / 0'+(i+1)+'</div><h3>'+b.brand+'</h3><div style="font-size:25px;font-weight:800;margin:9px 0">'+b['2026']+' <small style="font-size:10px;color:#B9CCDC">vs '+b['2025']+'</small></div><div class="sub">2026 Jan–Aug vs 2025 full year</div><div class="tagrow"><span class="pill">'+(b.speedRatio===null?'New entrant':b.speedRatio.toFixed(2)+'× monthly pace')+'</span></div></div>').join('');
 }
 function buildCourts(){
-$('themeButtons').innerHTML=R.legalThemes.map(t=>'<button class="tab '+(t.id===activeTheme?'active':'')+'" data-theme="'+t.id+'">'+t.title+'</button>').join('');
-function theme(t){activeTheme=t.id;$('themeButtons').querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.theme===t.id));$('themeDetail').innerHTML='<div class="eyebrow">LEGAL ISSUE / ANALYSIS</div><h3 style="font-size:19px">'+t.title+'</h3><p style="font-size:13px;line-height:1.9;color:#DCE8F1">'+t.summary+'</p><div class="narrative"><h3>业务判断</h3><p>'+t.business+'</p></div><div class="tagrow">'+t.cases.map(id=>{const c=R.cases.find(x=>x.id===id);return c?'<button class="pill" data-case="'+id+'">'+c.name+'</button>':''}).join('')+'</div>'}
-$('themeButtons').onclick=e=>{const t=R.legalThemes.find(x=>x.id===e.target.dataset.theme);if(t)theme(t)};theme(R.legalThemes[0]);
-$('caseCards').innerHTML=R.cases.map(c=>'<div class="casecard" data-case="'+c.id+'"><div class="level">'+c.level.toUpperCase()+' · '+c.date+'</div><h3>'+c.name+'</h3><p>'+c.court+' · '+c.citation+'</p><div class="impact">'+c.result+'</div><div class="tagrow"><span class="pill">'+c.issue+'</span></div></div>').join('');
-$('caseCards').onclick=e=>{const id=e.target.closest('[data-case]')?.dataset.case;const c=R.cases.find(x=>x.id===id);if(c)detail(c.name,c.court+' · '+c.date,[['裁判引用',c.citation],['核心争点',c.issue],['裁判结果',c.result],['法律效力与适用范围',c.effect],['证据类型',c.level]],c.url)};
-$('themeDetail').onclick=e=>{const c=R.cases.find(x=>x.id===e.target.dataset.case);if(c)detail(c.name,c.court+' · '+c.date,[['裁判引用',c.citation],['争点',c.issue],['裁判结果',c.result],['适用范围',c.effect]],c.url)};
+$('themeButtons').innerHTML=R.legalThemes.map(t=>'<button class="tab '+(t.id===activeTheme?'active':'')+'" data-theme="'+escapeHtml(t.id)+'">'+escapeHtml(t.title)+'</button>').join('');
+function theme(t){
+ activeTheme=t.id;$('themeButtons').querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.theme===t.id));
+ const p=t.analysisPoints||{};
+ $('themeDetail').innerHTML='<div class="eyebrow">LEGAL ISSUE / ANALYSIS</div><h3 style="font-size:19px">'+escapeHtml(t.title)+'</h3><div class="theme-analysis-block"><div class="theme-analysis-label">核心法律变化</div>'+renderAnalysisList(p.summary,t.summary)+'</div><div class="narrative"><h3>业务判断</h3>'+renderAnalysisList(p.business,t.business)+'</div><div class="tagrow">'+t.cases.map(id=>{const c=R.cases.find(x=>x.id===id);return c?'<button class="pill" data-case="'+escapeHtml(id)+'">'+escapeHtml(c.name)+'</button>':''}).join('')+'</div>';
 }
-function buildTimeline(){const events=[['2025.12','Smart Study','第二巡回：海牙公约与中国被告电子送达'],['2026.03','Liu v. Monthly','第七巡回：逐被告证明实际州内销售'],['2026.05','Kangol','第七巡回：邮件链接送达及地址查找勤勉度'],['2026.06','N.D. Ill. Standing Order','Gettleman法官明确逐被告审查要求'],['2026.09','E.D. Texas · Liu','地区法院将送达和个别管辖权分析用于专利案']];$('miniTimeline').innerHTML=events.map((x,i)=>'<div class="timeitem" data-event="'+i+'"><div class="year">'+x[0]+'</div><b>'+x[1]+'</b><small>'+x[2]+'</small></div>').join('');$('miniTimeline').onclick=e=>{let n=e.target.closest('[data-event]')?.dataset.event;if(n!==undefined){const c=R.cases[[0,1,2,10,8][Number(n)]];detail(c.name,c.court+' · '+c.date,[['争点',c.issue],['结果',c.result],['适用范围',c.effect]],c.url)}}}
+$('themeButtons').onclick=e=>{const t=R.legalThemes.find(x=>x.id===e.target.dataset.theme);if(t)theme(t)};theme(R.legalThemes[0]);
+$('caseCards').innerHTML=R.cases.map(c=>{
+ const p=c.analysisPoints||{};
+ return '<div class="casecard" data-case="'+escapeHtml(c.id)+'"><div class="level">'+escapeHtml(c.level.toUpperCase())+' · '+escapeHtml(c.date)+'</div><h3>'+escapeHtml(c.name)+'</h3><p>'+escapeHtml(c.court)+' · '+escapeHtml(c.citation)+'</p><div class="impact"><div class="casecard-section-label">裁判结果</div>'+renderAnalysisList(p.result,c.result)+'</div><div class="tagrow"><span class="casecard-section-label">核心争点</span>'+renderAnalysisList(p.issue,c.issue)+'</div></div>';
+}).join('');
+function openInsightCase(c){
+ const p=c.analysisPoints||{};
+ caseDetail(c.name,c.court+' · '+c.date,[
+  {title:'裁判引用',points:[{label:'引用信息',text:c.citation}]},
+  {title:'核心争点',points:p.issue,fallback:c.issue},
+  {title:'裁判结果',points:p.result,fallback:c.result},
+  {title:'法律效力与适用范围',points:p.effect,fallback:c.effect},
+  {title:'证据类型',points:[{label:'来源等级',text:c.level}]}
+ ],c.url);
+}
+$('caseCards').onclick=e=>{const id=e.target.closest('[data-case]')?.dataset.case;const c=R.cases.find(x=>x.id===id);if(c)openInsightCase(c)};
+$('themeDetail').onclick=e=>{const id=e.target.closest('[data-case]')?.dataset.case;const c=R.cases.find(x=>x.id===id);if(c)openInsightCase(c)};
+}
+function buildTimeline(){const events=[['2025.12','Smart Study','第二巡回：海牙公约与中国被告电子送达'],['2026.03','Liu v. Monthly','第七巡回：逐被告证明实际州内销售'],['2026.05','Kangol','第七巡回：邮件链接送达及地址查找勤勉度'],['2026.06','N.D. Ill. Standing Order','Gettleman法官明确逐被告审查要求'],['2026.09','E.D. Texas · Liu','地区法院将送达和个别管辖权分析用于专利案']];$('miniTimeline').innerHTML=events.map((x,i)=>'<div class="timeitem" data-event="'+i+'"><div class="year">'+x[0]+'</div><b>'+x[1]+'</b><small>'+x[2]+'</small></div>').join('');$('miniTimeline').onclick=e=>{let n=e.target.closest('[data-event]')?.dataset.event;if(n!==undefined){const c=R.cases[[0,1,2,10,8][Number(n)]];const p=c.analysisPoints||{};caseDetail(c.name,c.court+' · '+c.date,[{title:'核心争点',points:p.issue,fallback:c.issue},{title:'裁判结果',points:p.result,fallback:c.result},{title:'法律效力与适用范围',points:p.effect,fallback:c.effect}],c.url)}}}
 function refresh(){let qs=D.quarters.filter(q=>(filters.year==='all'||String(q.year)===filters.year)&&(filters.quarter==='all'||String(q.quarter)===filters.quarter));let count=qs.reduce((a,b)=>a+b.count,0);if(filters.district!=='all'){const d=D.districts.find(x=>x.code===filters.district);const dc=DQ.filter(x=>(x.circuit+'-'+x.district)===filters.district&&(filters.year==='all'||String(x.year)===filters.year)&&(filters.quarter==='all'||String(x.quarter)===filters.quarter)).reduce((a,x)=>a+x.count,0);$('filterSummary').textContent=(d?d.name:'Selected district')+' · '+fmt(dc)+' district candidates';$('total').textContent=fmt(dc);}else{$('filterSummary').textContent=qs.length+' quarters · '+fmt(count)+' candidates';$('total').textContent=fmt(count);}if(GEO)renderGeo();}
 ['year','quarter','district'].forEach(id=>$(id).onchange=()=>{filters={year:$('year').value,quarter:$('quarter').value,district:$('district').value};refresh();if(filters.district!=='all'){go('geography');toast('地区筛选已应用：'+$('district').selectedOptions[0].textContent)}});$('reset').onclick=()=>{$('year').value='all';$('quarter').value='all';$('district').value='all';filters={year:'all',quarter:'all',district:'all'};refresh();toast('筛选已重置')};
 $('focus').onclick=()=>{document.querySelector('.top').style.display=document.querySelector('.top').style.display==='none'?'flex':'none';document.querySelector('.footer').style.display=document.querySelector('.footer').style.display==='none'?'block':'none';};
