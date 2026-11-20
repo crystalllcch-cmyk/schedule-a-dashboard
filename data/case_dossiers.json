@@ -244,7 +244,7 @@
       "sourceNote": "Dkt.86完整Opinion & Order副本，包含三名被告的反对意见、原告reply及法院对PI、送达/管辖权异议和专利实体争议的处理。法院未就专利有效性作出裁定。",
       "summary": "原告针对七名Amazon卖家主张两项外观设计专利侵权。法院此前依单方申请签发TRO并冻结账户。三名被告出庭、提出反诉并反对PI。法院最终拒绝PI并撤销TRO，理由集中于原告未充分证明被告商品侵犯两项设计专利。",
       "issue": "单方TRO获准后，原告是否仍须在对抗式PI阶段独立证明设计专利侵权可能性？原告未在初始动议中充分比较、仅在reply中补充关键分析，能否满足举证责任？",
-      "decision": "不能自动满足。法院认为TRO系单方程序，被告此前没有机会反驳，TRO获准不代表PI标准已满足。原告的详细侵权比较直到reply才提出，相关论点被视为放弃；即使考虑reply，现有材料仍未充分说明专利设计与被告产品的具体相似之处，无法证明胜诉可能性。法院拒绝PI并撤销TRO；因未证明侵权可能性，未进一步裁定专利有效性争议。",
+      "decision": "不能自动满足。法院认为TRO系单方程序，被告此前没有机会反驳，TRO获准不代表PI标准已满足。原告关于具体侵权比较的关键论点直到reply才提出，法院将这些新论点视为放弃；即使考虑reply，现有材料仍未充分说明专利设计与被告产品的具体相似之处，无法证明胜诉可能性。法院拒绝PI并撤销TRO；因未证明侵权可能性，法院将专利有效性问题留在本次裁定之外，未作实体判断。",
       "significance": "TRO与PI必须分开审查；单方TRO不能替代对抗式PI的实体证明。外观设计专利案件应在初始PI动议中提供充分、具体的整体视觉比较，不能依赖reply补救。法院另认定三名出庭并积极参与诉讼、提出反诉的被告在本案记录下放弃了个人管辖权及送达异议，但该结论不等于专利有效性已获确认。",
       "timeline": [
         {
@@ -391,7 +391,7 @@
       "caseNo": "6:25-cv-00339-RP",
       "court": "W.D. Texas",
       "judge": "Robert Pitman",
-      "date": "2025-08-06 — 2026-08-31",
+      "date": "2025-08-06 — 2026-09-02",
       "period": "2025–2026",
       "topics": [
         "joinder",
@@ -401,11 +401,11 @@
       ],
       "outcome": "defendant-specific-narrowing",
       "outcomeLabel": "最终仅保留Ahomi店铺禁令",
-      "sourceLevel": "一级｜GovInfo Dkt.17、Dkt.67；结案状态由Patsnap docket data辅助核实",
-      "sourceNote": "Dkt.17记录首次TRO被拒及第二次申请部分获准；Dkt.67官方法院命令确认49名被告被无偏见驳回、仅Ahomi店铺获永久禁令；Patsnap docket data记录Dkt.68撤回损害赔偿请求及2026-09-02结案。",
+      "sourceLevel": "一级｜GovInfo Dkt.17；Dkt.67完整法院命令副本；结案状态由Patsnap docket data辅助核实",
+      "sourceNote": "Dkt.17官方GovInfo命令记录首次TRO被拒、第二次申请部分获准及电子邮件替代送达获准；Dkt.67完整法院命令副本确认49名被告被无偏见驳回、仅Ahomi店铺获永久禁令；Patsnap docket data记录Dkt.68撤回损害赔偿请求及2026-09-02结案。",
       "summary": "该案经历首次TRO被拒、第二次TRO部分获准、PI获准及缺席判决。首次TRO因拟议命令将涉案产品误写为缝纫产品、未充分识别Schedule A，且混用外观设计专利与实用专利侵权标准而被拒。第二次TRO仅批准资产冻结和加速取证，未批准销售禁令。最终法院认定大规模被告合并不当，49名被告被无偏见驳回，仅Ahomi店铺获得永久禁令。",
       "issue": "在实用专利Schedule A案件中，原告能否仅凭共同侵权指控及缺席程序，将大量卖家作为共同被告并主张共同责任及整体损害赔偿？",
-      "decision": "首次TRO因拟议命令中的产品描述、Schedule A识别及专利侵权法律标准错误被拒；第二次TRO部分获准，仅允许资产冻结和加速取证，未禁止销售。PI阶段法院维持资产冻结并批准销售禁令。2026-08-31缺席判决阶段，法院依据35 U.S.C. §299及Rule 20认定49名被告不应合并，予以无偏见驳回；仅Ahomi店铺获得永久禁令，损害赔偿须单独针对该店铺论证。原告随后撤回对Ahomi的损害赔偿请求，案件于2026-09-02结案。",
+      "decision": "首次TRO因拟议命令中的产品描述、Schedule A识别及专利侵权法律标准错误被拒；第二次TRO部分获准，仅允许资产冻结和加速取证，未禁止销售，并基于法院认定被告地址未知而批准电子邮件替代送达。PI阶段法院维持资产冻结并批准销售禁令。2026-08-31缺席判决阶段，法院依据35 U.S.C. §299及Rule 20认定49名被告不应合并，予以无偏见驳回；仅Ahomi店铺获得永久禁令，损害赔偿须单独针对该店铺论证。原告随后撤回对Ahomi的损害赔偿请求，案件于2026-09-02结案。",
       "significance": "TRO、PI及缺席判决是不同程序阶段，早期救济获准不能弥补最终阶段的被告合并缺陷。35 U.S.C. §299和Rule 20要求被告之间存在合格的交易或发生关系；共同侵犯同一专利、店铺相似或笼统主张共同责任不足以当然支持大规模合并。法院最终只对一个店铺保留永久禁令，未按原告最初请求对全部被告判给共同损害赔偿。",
       "timeline": [
         {
@@ -416,7 +416,7 @@
         {
           "date": "2025-08-08",
           "label": "第二次TRO部分获准",
-          "detail": "法院批准第三方资产冻结和加速取证，但未批准禁止制造、要约销售、销售或进口涉案产品的禁令。"
+          "detail": "法院批准第三方资产冻结、加速取证及电子邮件替代送达（基于法院认定被告地址未知、海牙公约第1条不适用），但未批准禁止制造、要约销售、销售或进口涉案产品的禁令。"
         },
         {
           "date": "2025-09-12",
@@ -436,19 +436,19 @@
       ],
       "sources": [
         {
-          "label": "Dkt.17 · Second TRO order",
+          "label": "Dkt.17 · Second TRO order · GovInfo",
           "url": "https://www.govinfo.gov/content/pkg/USCOURTS-txwd-6_25-cv-00339/pdf/USCOURTS-txwd-6_25-cv-00339-0.pdf",
-          "role": "GovInfo法院原始命令"
+          "role": "官方法院命令，记录首次TRO被拒、第二次TRO部分获准及替代送达"
         },
         {
           "label": "Dkt.67 · Default judgment order",
-          "url": "https://www.govinfo.gov/content/pkg/USCOURTS-txwd-6_25-cv-00339/pdf/USCOURTS-txwd-6_25-cv-00339-1.pdf",
-          "role": "GovInfo法院原始命令"
+          "url": "https://docs.justia.com/cases/federal/district-courts/texas/txwdce/6%3A2025cv00339/1172858000/67",
+          "role": "法院缺席判决命令全文副本"
         },
         {
           "label": "Patsnap case closure note (Dkt.68 summary)",
           "url": "https://eureka.patsnap.com/resources/blog/litigation/goodegg-stuff-v-the-partnerships-and-unincorporated-associations-identified-on-schedule-a/",
-          "role": "Secondary case summary for post-Dkt.67 withdrawal and final closure"
+          "role": "二级案卷数据，核对损害赔偿请求撤回及最终结案日期"
         }
       ]
     },
@@ -470,7 +470,7 @@
       "sourceLevel": "一级｜GovInfo官方法院文件",
       "sourceNote": "Dkt.12官方法院文件，2026-03-28。",
       "summary": "原告列出64名境外被告，但当时没有申请传票、没有完成送达，也没有寻求早期取证查明被告真实身份及联系方式。法院拒绝密封状态下的整体资产冻结和概括电子送达请求。",
-      "issue": "在被告真实身份、国籍和联系信息不清楚，且尚未送达的情况下，能否对64名境外被告实施整体资产冻结和概括电子送达？",
+      "issue": "原告未掌握64名境外被告的真实身份、国籍及可送达联系信息时，能否对其整体实施资产冻结并概括授权电子送达？",
       "decision": "法院拒绝相关动议。法院强调，整体冻结可能导致Amazon错误冻结无辜第三方资金；电子送达必须按每名被告、每个国家的规则及国际协议分别分析。",
       "significance": "是法院拒绝大范围资产限制和一揽子电子送达的原始裁判实例；属于该法官对该案的处理，不能直接称为W.D. Texas全院规则。",
       "timeline": [
@@ -507,7 +507,7 @@
       "sourceNote": "Dkt.46完整Opinion由GovInfo托管；Dkt.19替代送达裁定、Dkt.24 TRO、Dkt.47 PI命令、Dkt.66撤销PI动议裁定及Dkt.72驳回记录均可在公开案卷索引中核对。",
       "summary": "版权权利人针对Schedule A被告提起诉讼。法院先拒绝通过邮件及网站公告替代送达，随后签发TRO及资产限制。被告出庭、答辩并反诉，参与PI听证。法院最终批准PI，将资产冻结上限设为142,750美元；被告后续撤销PI动议被拒，案件于2026-03-11约定无偏见驳回。",
       "issue": "法院先拒绝电子邮件及网站公告替代送达后，如何处理TRO和PI；被告出庭并反对PI时，未及时提交的销售证据能否推翻PI及资产限制？",
-      "decision": "2025-12-05法院拒绝邮件及网站公告替代送达申请，认为中国对海牙公约第10条方式的反对使邮件送达不被授权。12-12法院签发TRO。2026-01-09法院批准PI，维持资产限制并将冻结上限设为142,750美元，5,000美元保证金留存。2-24法院拒绝被告撤销PI动议，指出法院已给双方PI裁定前补充证据的机会，被告未在期限内提交证据，PI签发后才提交反对材料。3-11案件依约定无偏见驳回。",
+      "decision": "2025-12-05法院拒绝邮件及网站公告替代送达申请，认为中国对海牙公约第10条方式的反对使邮件送达不被授权。12-12法院签发TRO。2026-01-09法院批准PI，维持资产限制并将冻结上限设为142,750美元，5,000美元保证金留存。听证中被告展示的截图未申请作为证据提交，销售证言有限；法院允许补充证据后，被告未提交材料反驳原告对截图及证人资格的质疑。2-24法院拒绝被告撤销PI动议，指出被告未在期限内提交PI前证据，PI签发后才提交反对材料。3-11案件依约定无偏见驳回。",
       "significance": "本案同时展示替代送达、TRO、PI、资产冻结和被告迟延举证的不同处理。被告出庭并提出异议并不当然解除冻结；法院明确给出PI前补充证据机会，迟延提交材料未能推翻PI。资产冻结上限为142,750美元，不能将听证时被告所称约170,000美元的实际冻结额误写为法院最终批准的冻结上限。",
       "timeline": [
         {
@@ -553,7 +553,7 @@
           "role": "替代送达、TRO、PI、撤销PI动议及最终驳回的程序记录"
         }
       ],
-      "partyResponse": "被告出庭、提交答辩和反诉，反对PI并主张听证时约170,000美元资产被冻结、经营受到影响；法院允许双方补充证据。被告未在PI裁定前的补充证据期限内提交材料，PI签发后才提交反对意见；其后撤销PI动议被拒。"
+      "partyResponse": "被告出庭反对PI。听证中，律师展示一张截图但未申请将其作为证据提交，并提供有限的所谓公司代表销售证言。原告称截图经软件修改、证人并非被告员工且缺乏个人知识。法院随后允许补充证据，被告未提交材料反驳上述指控，仅提交一份列出2023—2025年销售数字、但没有支持文件的声明。"
     },
     {
       "id": "milwaukee",
@@ -569,9 +569,9 @@
         "defendant-appearance"
       ],
       "outcome": "mixed-defendant-outcomes",
-      "outcomeLabel": "13名被告获撤销TRO并拒绝PI",
-      "sourceLevel": "一级｜GovInfo Dkt.66 Opinion & Order及Dkt.27公开minute entry",
-      "sourceNote": "Dkt.27公开minute entry记录PI听证的被告分别处理结果；Dkt.66为GovInfo官方法院Opinion & Order，完整裁定剩余被告azonzpower的Rule 12(b)(5)送达异议。",
+      "outcomeLabel": "13名被告PI被拒；azonzpower送达异议获准",
+      "sourceLevel": "法院裁判全文副本｜Dkt.66 Opinion & Order + Dkt.27 minute entry",
+      "sourceNote": "Dkt.27公开minute entry记录PI听证的被告分别处理结果；Dkt.66完整Opinion & Order副本裁定剩余被告azonzpower的Rule 12(b)(5)送达异议。该裁定未处理Rule 12(b)(6)主张。",
       "summary": "案件最初列有大规模Schedule A被告。法院先签发TRO并授权电子送达。2026-01-22，法院对出庭的13名被告拒绝PI并撤销其TRO，但对其余被告批准PI。此后12名出庭被告被原告无偏见自愿撤诉，剩余被告azonzpower继续挑战送达。2026-08-07，法院认定对该中国被告的电子邮件送达违反海牙公约，依据Rule 12(b)(5)无偏见驳回，未处理Rule 12(b)(6)抗辩。",
       "issue": "大规模Schedule A案件中，法院是否会按被告分别处理PI；对中国被告的电子邮件送达是否符合海牙公约及Rule 4(f)(3)？",
       "decision": "2026-01-22 minute entry记载：13名出庭被告的PI申请被拒、其TRO被撤销；对其他剩余被告的PI获准。原先共同提出动议的13名被告中，12名于2026-05-22被原告无偏见自愿撤诉，剩余azonzpower继续提出送达异议。2026-08-07法院认定中国未授权通过邮件或向当地律师送达，电子邮件送达不符合海牙公约，准许azonzpower依据Rule 12(b)(5)提出的动议并无偏见驳回；法院未处理Rule 12(b)(6)主张。",
@@ -610,9 +610,9 @@
           "role": "公开案卷记录，显示13名出庭被告与其余被告的PI结果不同"
         },
         {
-          "label": "Dkt.66 Opinion & Order · GovInfo official PDF",
-          "url": "https://www.govinfo.gov/content/pkg/USCOURTS-gand-1_25-cv-06945/pdf/USCOURTS-gand-1_25-cv-06945-0.pdf",
-          "role": "法院对azonzpower Rule 12(b)(5)送达异议的完整裁定"
+          "label": "Dkt.66 Opinion & Order · full text copy",
+          "url": "https://docs.justia.com/cases/federal/district-courts/georgia/gandce/1%3A2025cv06945/352785/66",
+          "role": "法院对azonzpower Rule 12(b)(5)送达异议的完整裁定副本"
         },
         {
           "label": "Public docket index · Dkt.60 / Dkt.66",
@@ -627,7 +627,7 @@
       "title": "Shenzhen Daisili Commercial Co.",
       "caseNo": "1:25-cv-02970",
       "court": "S.D. New York",
-      "judge": "未在本研究摘要中确认",
+      "judge": "",
       "date": "2025-04-11",
       "period": "2025",
       "topics": [
