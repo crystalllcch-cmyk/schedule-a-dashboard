@@ -2,13 +2,14 @@
 
 An interactive research dashboard for exploring U.S. Schedule A litigation trends, selected court decisions, and geographic candidate distributions.
 
-## Current prototype
+## Current prototype — v0.8 (2026-11-20)
 - FJC R24 v3 case-level candidate aggregates: 4,551 Schedule A-feature candidates, 2025 Q1–2026 Q2
 - Historical ABTL / Lex Machina series and quarterly FJC candidate trend
 - Five-brand Fashion Law sample and court-decision research summaries
 - Interactive year / quarter / district filters
 - U.S. geographic exploration with 13 city-level district locator points and 9 unmapped low-frequency FJC district codes
 - Case dossier archive with 16 selected, source-checked researched cases, clustered bubble and list views, hover previews, click-through full dossiers, procedural timelines, source-quality labels, and original-source links
+- Case archive v0.8: point-by-point background and issue previews in both bubble and list modes; recorded party responses, court handling, and research significance in hover/focus previews; keyboard-accessible detail opening; scrollable, position-clamped tooltips; source and evidence notes grouped at the end of full dossiers.
 - Click-through chart details and methodology notes
 
 ## Important data limitations
