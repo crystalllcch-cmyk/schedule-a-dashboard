@@ -155,7 +155,29 @@
         "smart-study",
         "kangol",
         "edtx-liu"
-      ]
+      ],
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "Smart Study",
+            "text": "海牙公约适用且中国对第10条方式提出反对时，不能将Rule 4(f)(3)作为邮件送达的通用绕行路径。"
+          },
+          {
+            "label": "Kangol",
+            "text": "通过邮件发送诉讼文件网页链接仍属于司法文书送达；法院还会审查原告查找实体地址的勤勉程度。"
+          }
+        ],
+        "business": [
+          {
+            "label": "先查地址",
+            "text": "先核查被告实体地址是否已知或可合理查明，再评估替代送达路径。"
+          },
+          {
+            "label": "不要绕行",
+            "text": "不能把Rule 4(f)(3)当作绕过海牙公约的通用方案。"
+          }
+        ]
+      }
     },
     {
       "id": "jurisdiction",
@@ -167,7 +189,29 @@
         "intercontinental",
         "hublot",
         "edtx-liu"
-      ]
+      ],
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "逐被告证明",
+            "text": "Liu v. Monthly要求针对每名被告证明其自身与法院地的联系。"
+          },
+          {
+            "label": "销售证据",
+            "text": "店铺可访问、开放配送或未完成结账页面，不能单独证明实际销售。"
+          }
+        ],
+        "business": [
+          {
+            "label": "逐项核对",
+            "text": "逐被告核对订单、付款、发货和交付证据。"
+          },
+          {
+            "label": "避免归属推定",
+            "text": "不能把一个店铺的交易自动归属于其他被告。"
+          }
+        ]
+      }
     },
     {
       "id": "injunction",
@@ -178,7 +222,29 @@
         "duoleduo",
         "nike-schelp",
         "nike-lanahan"
-      ]
+      ],
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "TRO不等于PI",
+            "text": "取得TRO不意味着PI必然获准。"
+          },
+          {
+            "label": "仍需审查",
+            "text": "法院仍会审查侵权证据、个人管辖权及救济范围。"
+          }
+        ],
+        "business": [
+          {
+            "label": "分阶段核对",
+            "text": "分别核对TRO与PI阶段的证据，不将单方TRO视为后续救济的当然依据。"
+          },
+          {
+            "label": "重点证据",
+            "text": "关注设计整体视觉差异、真实销售、被告个体联系和冻结资产范围。"
+          }
+        ]
+      }
     },
     {
       "id": "judge-variance",
@@ -190,7 +256,29 @@
         "nike-lanahan",
         "gettleman-order",
         "kendall-order"
-      ]
+      ],
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "同院不同法官",
+            "text": "同一地区法院的不同法官可能对相近申请作出不同处理。"
+          },
+          {
+            "label": "个案因素",
+            "text": "案件事实、程序阶段与证据质量均会影响结果。"
+          }
+        ],
+        "business": [
+          {
+            "label": "具体到法官",
+            "text": "研究应落到具体法官、具体案卷和具体动议。"
+          },
+          {
+            "label": "控制外推",
+            "text": "不能用单一地区的个案代表全院。"
+          }
+        ]
+      }
     },
     {
       "id": "procedure",
@@ -199,7 +287,29 @@
       "business": "核对法院本地规则、封存申请及删改程序，区分程序驳回、TRO拒绝与实体败诉。",
       "cases": [
         "daisili"
-      ]
+      ],
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "2025年已有实例",
+            "text": "S.D.N.Y. Shenzhen Daisili案于2025年因未遵守本地ECF程序而被驳回。"
+          },
+          {
+            "label": "不是新现象",
+            "text": "程序审查并非2026年才出现。"
+          }
+        ],
+        "business": [
+          {
+            "label": "核对本地规则",
+            "text": "核对法院本地规则、封存申请及删改程序。"
+          },
+          {
+            "label": "区分裁判性质",
+            "text": "区分程序驳回、TRO拒绝与实体败诉。"
+          }
+        ]
+      }
     }
   ],
   "cases": [
@@ -213,7 +323,35 @@
       "result": "海牙公约适用且地址已知或可合理查明时，不能以 Rule 4(f)(3) 邮件送达绕过公约。",
       "effect": "第二巡回区拘束先例；地址确实未知且合理勤勉查找的情形需单独分析。",
       "url": "https://law.justia.com/cases/federal/appellate-courts/ca2/24-313/24-313-2025-12-18.html",
-      "level": "上诉法院判决"
+      "level": "上诉法院判决",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "送达规则",
+            "text": "海牙公约适用且中国对第10条方式提出反对时，能否通过Rule 4(f)(3)邮件送达绕过公约？"
+          }
+        ],
+        "result": [
+          {
+            "label": "邮件送达",
+            "text": "不能以Rule 4(f)(3)邮件送达绕过海牙公约。"
+          },
+          {
+            "label": "适用例外",
+            "text": "地址确实未知且原告已合理勤勉查找的情形，仍需单独分析。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "判例效力",
+            "text": "第二巡回区拘束先例。"
+          },
+          {
+            "label": "适用边界",
+            "text": "不能将判决扩大为所有地址未知情形下均禁止替代送达。"
+          }
+        ]
+      }
     },
     {
       "id": "liu-monthly",
@@ -225,7 +363,35 @@
       "result": "店铺可访问、允许配送及未完成的 checkout 页面不足以证明实际完成州内销售；对每名被告需分别证明法院地联系。",
       "effect": "第七巡回区拘束先例；没有设立全国所有案件必须测试购买的固定规则。",
       "url": "https://media.ca7.uscourts.gov/cgi-bin/OpinionsWeb/processWebInputExternal.pl?Path=Y2026%2FD03-31%2FC%3A25-2074%3AJ%3AKirsch%3Aaut%3AT%3AfnOp%3AN%3A3515447%3AS%3A0&Submit=Display",
-      "level": "上诉法院判决"
+      "level": "上诉法院判决",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "个人管辖权",
+            "text": "在线店铺可访问、允许配送及未完成结账页面，能否证明对伊利诺伊州的实际销售及个人管辖权？"
+          }
+        ],
+        "result": [
+          {
+            "label": "实际销售",
+            "text": "店铺可访问、允许配送及未完成的checkout页面不足以证明实际完成州内销售。"
+          },
+          {
+            "label": "逐被告审查",
+            "text": "对每名被告均需分别证明其与法院地的联系。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "判例效力",
+            "text": "第七巡回区拘束先例。"
+          },
+          {
+            "label": "规则边界",
+            "text": "没有设立全国所有案件必须测试购买的固定规则。"
+          }
+        ]
+      }
     },
     {
       "id": "kangol",
@@ -237,7 +403,35 @@
       "result": "邮件附网页链接仍属于司法文书送达；需审查海牙公约适用、地址调查勤勉度及程序记录。",
       "effect": "第七巡回区拘束先例；判决发回审查勤勉度，并非一律认定所有邮件送达无效。",
       "url": "https://media.ca7.uscourts.gov/cgi-bin/OpinionsWeb/processWebInputExternal.pl?Path=Y2026%2FD05-29%2FC%3A25-2205%3AJ%3AKirsch%3Aaut%3AT%3AfnOp%3AN%3A3549218%3AS%3A0&Submit=Display",
-      "level": "上诉法院判决"
+      "level": "上诉法院判决",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "电子送达",
+            "text": "邮件发送诉讼文件网页链接是否仍属于司法文书送达，原告是否勤勉查找被告地址？"
+          }
+        ],
+        "result": [
+          {
+            "label": "送达性质",
+            "text": "邮件附网页链接仍属于司法文书送达。"
+          },
+          {
+            "label": "程序审查",
+            "text": "需审查海牙公约适用、地址调查勤勉度及程序记录。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "判例效力",
+            "text": "第七巡回区拘束先例。"
+          },
+          {
+            "label": "适用边界",
+            "text": "判决发回审查勤勉度，并非一律认定所有邮件送达无效。"
+          }
+        ]
+      }
     },
     {
       "id": "intercontinental",
@@ -249,7 +443,35 @@
       "result": "结账截图未证明完成交易和交付，法院拒绝TRO及邮件送达 without prejudice。",
       "effect": "地区法院个案；说明结账页面本身不足以替代完成销售证据。",
       "url": "https://dockets.justia.com/docket/illinois/ilndce/1:2025cv13806/489627",
-      "level": "地区法院裁定"
+      "level": "地区法院裁定",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "实际销售",
+            "text": "结账截图能否证明完成交易、交付，并建立逐被告个人管辖权？"
+          }
+        ],
+        "result": [
+          {
+            "label": "证据评价",
+            "text": "结账截图未证明完成交易和交付。"
+          },
+          {
+            "label": "裁判结果",
+            "text": "法院拒绝TRO及邮件送达申请，均为without prejudice。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "裁判性质",
+            "text": "地区法院个案。"
+          },
+          {
+            "label": "实务启示",
+            "text": "说明结账页面本身不足以替代完成销售证据。"
+          }
+        ]
+      }
     },
     {
       "id": "hublot",
@@ -261,7 +483,35 @@
       "result": "法院认为高价商品、未测试购买及网站互动性不足以替代实际销售证据，驳回诉状 without prejudice。",
       "effect": "地区法院个案；不得推广为所有案件必须测试购的统一规则。",
       "url": "https://cases.justia.com/federal/district-courts/illinois/ilndce/1%3A2026cv04668/499411/25/0.pdf",
-      "level": "地区法院裁定"
+      "level": "地区法院裁定",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "销售证据",
+            "text": "高价商品、未进行测试购买及网站互动，能否替代实际销售证据？"
+          }
+        ],
+        "result": [
+          {
+            "label": "证据评价",
+            "text": "高价商品、未测试购买及网站互动性不足以替代实际销售证据。"
+          },
+          {
+            "label": "裁判结果",
+            "text": "法院without prejudice驳回诉状。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "裁判性质",
+            "text": "地区法院个案。"
+          },
+          {
+            "label": "规则边界",
+            "text": "不得推广为所有案件必须测试购买的统一规则。"
+          }
+        ]
+      }
     },
     {
       "id": "duoleduo",
@@ -273,7 +523,35 @@
       "result": "先前取得TRO且存在实际销售及程序异议放弃，PI仍可能因侵权证据及设计专利整体视觉差异被拒。",
       "effect": "地区法院个案；TRO与PI是不同程序阶段，不能将TRO签发理解为PI自动获准。",
       "url": "https://cases.justia.com/federal/district-courts/illinois/ilndce/1%3A2025cv13392/489109/86/0.pdf",
-      "level": "地区法院裁定"
+      "level": "地区法院裁定",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "TRO与PI",
+            "text": "先前取得TRO后，原告是否仍须在PI阶段独立证明侵权可能性及设计整体视觉相似？"
+          }
+        ],
+        "result": [
+          {
+            "label": "PI审查",
+            "text": "法院认为现有材料不足以证明设计专利侵权可能性。"
+          },
+          {
+            "label": "裁判结果",
+            "text": "PI被拒绝，先前TRO被撤销。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "裁判性质",
+            "text": "地区法院个案。"
+          },
+          {
+            "label": "适用范围",
+            "text": "TRO与PI属于不同程序阶段，不能将TRO签发理解为PI自动获准。"
+          }
+        ]
+      }
     },
     {
       "id": "nike-schelp",
@@ -285,7 +563,31 @@
       "result": "法院在该案记录基础上批准PI及相关救济。",
       "effect": "地区法院个案；不代表同院所有法官或所有被告情形。",
       "url": "https://cases.justia.com/federal/district-courts/missouri/moedce/4%3A2026cv00169/226098/38/0.pdf",
-      "level": "地区法院裁定副本"
+      "level": "地区法院裁定副本",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "PI及平台救济",
+            "text": "在该案卷宗基础上，法院是否批准PI、个人管辖权及相关平台救济？"
+          }
+        ],
+        "result": [
+          {
+            "label": "裁判结果",
+            "text": "法院在该案记录基础上批准PI及相关救济。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "裁判性质",
+            "text": "地区法院个案。"
+          },
+          {
+            "label": "适用边界",
+            "text": "不代表同院所有法官或所有被告情形。"
+          }
+        ]
+      }
     },
     {
       "id": "nike-lanahan",
@@ -297,7 +599,35 @@
       "result": "法院认为仅有通过全国性平台向该州售出一件商品的联系不足以满足第八巡回区个人管辖权标准，拒绝TRO。",
       "effect": "与Schelp案形成同院不同处理对照；案件时间、法官和证据不同，不能据此计算批准率。",
       "url": "https://www.govinfo.gov/content/pkg/USCOURTS-moed-4_26-cv-00533/pdf/USCOURTS-moed-4_26-cv-00533-0.pdf",
-      "level": "官方法院裁定"
+      "level": "官方法院裁定",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "个人管辖权",
+            "text": "仅有通过全国性平台向该州售出一件商品，是否足以建立个人管辖权？"
+          }
+        ],
+        "result": [
+          {
+            "label": "管辖权审查",
+            "text": "法院认为仅有一笔平台州内销售的联系不足以满足第八巡回区个人管辖权标准。"
+          },
+          {
+            "label": "裁判结果",
+            "text": "法院拒绝TRO。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "对照价值",
+            "text": "与Schelp案形成同院不同处理对照。"
+          },
+          {
+            "label": "适用边界",
+            "text": "案件时间、法官和证据不同，不能据此计算批准率。"
+          }
+        ]
+      }
     },
     {
       "id": "edtx-liu",
@@ -309,7 +639,39 @@
       "result": "法院参考Smart Study与Kangol拒绝缺乏勤勉地址调查的邮件送达，并拒绝将某一店铺的真实销售归属于其他店铺。",
       "effect": "第五巡回区当时无直接控制性上诉先例；该案为地区法院适用，且涉及专利救济。",
       "url": "https://patentcasewatch.com/opinions/USCOURTS-txed-4_25-cv-01220-0",
-      "level": "地区法院裁定"
+      "level": "地区法院裁定",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "境外送达",
+            "text": "中国境内被告的邮件送达是否符合海牙公约及地址调查要求？"
+          },
+          {
+            "label": "个人管辖权",
+            "text": "一个店铺的真实销售能否归属于其他店铺或关联被告？"
+          }
+        ],
+        "result": [
+          {
+            "label": "送达",
+            "text": "法院参考Smart Study与Kangol，拒绝缺乏勤勉地址调查的邮件送达。"
+          },
+          {
+            "label": "逐被告管辖权",
+            "text": "法院拒绝将某一店铺的真实销售归属于其他店铺。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "裁判性质",
+            "text": "地区法院裁定。"
+          },
+          {
+            "label": "适用边界",
+            "text": "第五巡回区当时无直接控制性上诉先例；该案涉及专利救济。"
+          }
+        ]
+      }
     },
     {
       "id": "daisili",
@@ -321,7 +683,31 @@
       "result": "因未按S.D.N.Y. ECF Rule 6.14先行提交miscellaneous程序申请而驳回。",
       "effect": "程序性驳回，不是法院认定TRO实体要件不成立；证明程序审查在2025年已有实例。",
       "url": "https://cases.justia.com/federal/district-courts/new-york/nysdce/1%3A2025cv02970/640305/6/0.pdf",
-      "level": "地区法院裁定副本"
+      "level": "地区法院裁定副本",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "本地程序",
+            "text": "Schedule A案件是否遵守S.D.N.Y. ECF Rule 6.14的miscellaneous程序要求？"
+          }
+        ],
+        "result": [
+          {
+            "label": "裁判结果",
+            "text": "因未按S.D.N.Y. ECF Rule 6.14先行提交miscellaneous程序申请而被驳回。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "裁判性质",
+            "text": "地区法院程序性裁定副本。"
+          },
+          {
+            "label": "适用边界",
+            "text": "属于程序性驳回，不是法院认定TRO实体要件不成立。"
+          }
+        ]
+      }
     },
     {
       "id": "gettleman-order",
@@ -333,7 +719,35 @@
       "result": "对其本人Schedule A案件提出特定备忘录与证明要求。",
       "effect": "仅适用于该法官案件，不是N.D. Illinois全院规则。",
       "url": "https://www.ilnd.uscourts.gov/_assets/_documents/_forms/_judges/Gettleman/Schedule%20A%20Standing%20Order.pdf",
-      "level": "法官Standing Order"
+      "level": "法官Standing Order",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "个人管辖权",
+            "text": "如何逐被告说明与法院地的联系？"
+          },
+          {
+            "label": "被告合并",
+            "text": "如何说明Rule 20合并依据？"
+          },
+          {
+            "label": "境外送达",
+            "text": "如何说明海牙公约及境外送达问题？"
+          }
+        ],
+        "result": [
+          {
+            "label": "法官要求",
+            "text": "Standing Order对其本人Schedule A案件提出特定备忘录与证明要求。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "适用范围",
+            "text": "仅适用于Gettleman法官本人审理的案件，不是N.D. Illinois全院规则。"
+          }
+        ]
+      }
     },
     {
       "id": "kendall-order",
@@ -345,7 +759,27 @@
       "result": "对其本人部分Schedule A案件提出每名被告保证金要求。",
       "effect": "法官个人规则；实际适用范围应结合具体案件核验。",
       "url": "https://www.ilnd.uscourts.gov/",
-      "level": "法官Standing Order"
+      "level": "法官Standing Order",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "保证金",
+            "text": "Schedule A案件的保证金要求及其对具体案件的适用范围。"
+          }
+        ],
+        "result": [
+          {
+            "label": "法官要求",
+            "text": "Standing Order对其本人部分Schedule A案件提出每名被告保证金要求。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "适用范围",
+            "text": "属于法官个人规则；实际适用范围仍需结合具体案件核验。"
+          }
+        ]
+      }
     }
   ]
 }
