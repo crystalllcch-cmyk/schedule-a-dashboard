@@ -13,7 +13,7 @@
 The extract includes multiple candidate groups, including caption-prefix and explicit Schedule A text patterns. Candidate classification is not equivalent to docket-by-docket confirmation. FJC IDB exposes first-listed plaintiff and defendant only. A purposeful diagnostic sample has 73/94 records supported by public docket records; because it is not random and there is no independent negative-pool audit, national precision and recall are not estimable.
 
 ## District data reconciliation
-The district-quarter summary file sums to 4,542 records, while the case-level candidate extract sums to 4,551. Quarter differences (case-level minus district-quarter summary) are: 2025 Q1 +1, 2025 Q2 +3, 2025 Q3 +2, 2025 Q4 0, 2026 Q1 +1, 2026 Q2 +2. The dashboard preserves this discrepancy and does not assign the difference to any district.
+An earlier regional-summary export totaled 4,542 and omitted 9 candidate rows. For the interactive geography page, district-quarter counts have been rebuilt directly from all 4,551 rows in the R24 v3 case-level candidate detail, grouped by CIRCUIT + DISTRICT + calendar year + quarter. The rebuilt district-quarter table reconciles exactly to 4,551; 13 district codes are mapped to city-level locator points and 9 low-count codes remain unmapped.
 
 ## Not yet integrated
 Historical ABTL/Lex Machina series, five-brand activity sample, RPX quarterly metrics, CaseMagic snapshots, and court-decision database are not included in this prototype. They must be independently reconciled and sourced before appearing in public charts.
