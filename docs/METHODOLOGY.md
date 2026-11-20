@@ -1,4 +1,4 @@
-# Data methodology — prototype v0.1
+# Data methodology — current dashboard release v0.8 (2026-11-20)
 
 ## Primary dataset
 - File: `data/dashboard.json`
@@ -19,7 +19,7 @@ An earlier regional-summary export totaled 4,542 and omitted 9 candidate rows. F
 Historical ABTL/Lex Machina series, the five-brand Fashion Law sample, and selected appellate/district-court decisions are included in `data/research_insights.json`. Sixteen selected, source-checked case dossiers are included in `data/case_dossiers.json`. RPX quarterly metrics and CaseMagic rolling snapshots are not yet integrated into interactive charts because their units and coverage differ from the FJC candidate series; they remain separate comparison sources until their own display and caveats are implemented.
 
 
-## Research interpretation layer added in prototype v0.2
+## Research interpretation layer
 - Historical series: ABTL Orange County Report, Spring 2026, Figure 1, p.10; 2016–2025* values are 196, 250, 314, 405, 574, 804, 1,042, 1,424, 2,060, 2,808. The 2025 point is through 2025-11-11.
 - FJC H1 comparison: 2025 H1 1,316; 2026 H1 1,636; +320 / +24.32%. This is a same-source candidate comparison, not a confirmed national Schedule A filing growth rate.
 - H1 geography: N.D. Illinois 1,156 → 1,292; other districts 160 → 344. N.D. Illinois share 87.84% → 78.97%. These are candidate-pool regional figures.
