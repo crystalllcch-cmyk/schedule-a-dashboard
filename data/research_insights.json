@@ -1,0 +1,351 @@
+{
+  "historical": [
+    {
+      "year": 2016,
+      "count": 196
+    },
+    {
+      "year": 2017,
+      "count": 250
+    },
+    {
+      "year": 2018,
+      "count": 314
+    },
+    {
+      "year": 2019,
+      "count": 405
+    },
+    {
+      "year": 2020,
+      "count": 574
+    },
+    {
+      "year": 2021,
+      "count": 804
+    },
+    {
+      "year": 2022,
+      "count": 1042
+    },
+    {
+      "year": 2023,
+      "count": 1424
+    },
+    {
+      "year": 2024,
+      "count": 2060
+    },
+    {
+      "year": 2025,
+      "count": 2808,
+      "partial": true
+    }
+  ],
+  "historicalSource": {
+    "name": "ABTL Orange County Report, Spring 2026, Figure 1, p.10; data attributed to Lex Machina",
+    "url": "https://www.allenmatkins.com/a/web/5jtKChmncRtSMrDQtfg52x/brKH8S/2026-volume-1.pdf",
+    "cutoff": "2025-11-11"
+  },
+  "h1Comparison": {
+    "2025": {
+      "total": 1316,
+      "ndIllinois": 1156,
+      "otherDistricts": 160,
+      "nos": {
+        "820": 379,
+        "830": 112,
+        "840": 823,
+        "other": 2
+      }
+    },
+    "2026": {
+      "total": 1636,
+      "ndIllinois": 1292,
+      "otherDistricts": 344,
+      "nos": {
+        "820": 567,
+        "830": 99,
+        "840": 969,
+        "other": 1
+      }
+    },
+    "candidateGrowthPercent": 24.32,
+    "ndIllinoisShare": {
+      "2025": 87.84,
+      "2026": 78.97
+    }
+  },
+  "brands": {
+    "source": "The Fashion Law, Inside the State of Schedule A Litigation in Fashion, 2026-09-22",
+    "url": "https://www.thefashionlaw.com/inside-the-state-of-schedule-a-litigation-in-fashion/",
+    "totalCases": 203,
+    "annual": [
+      {
+        "period": "2021",
+        "count": 15
+      },
+      {
+        "period": "2022",
+        "count": 21
+      },
+      {
+        "period": "2023",
+        "count": 33
+      },
+      {
+        "period": "2024",
+        "count": 25
+      },
+      {
+        "period": "2025",
+        "count": 35
+      },
+      {
+        "period": "2026 Jan–Aug",
+        "count": 74
+      }
+    ],
+    "brandRows": [
+      {
+        "2025": 16,
+        "2026": 31,
+        "brand": "Dior",
+        "speedRatio": 2.91
+      },
+      {
+        "2025": 11,
+        "2026": 22,
+        "brand": "Chrome Hearts",
+        "speedRatio": 3
+      },
+      {
+        "2025": 5,
+        "2026": 3,
+        "brand": "Louis Vuitton",
+        "speedRatio": 0.9
+      },
+      {
+        "2025": 0,
+        "2026": 16,
+        "brand": "Stüssy",
+        "speedRatio": null
+      },
+      {
+        "2025": 3,
+        "2026": 2,
+        "brand": "Gucci",
+        "speedRatio": 1
+      }
+    ],
+    "monthlyRate": {
+      "2025": 2.92,
+      "2026JanAug": 9.25,
+      "ratio": 3.17
+    },
+    "concentratedBrandsShare": 93.2
+  },
+  "legalThemes": [
+    {
+      "id": "service",
+      "title": "境外送达",
+      "summary": "Smart Study 与 Kangol 将海牙公约适用、中国对第10条的反对与地址查找勤勉度纳入电子送达审查。",
+      "business": "先核查被告实体地址是否已知或可合理查明，再评估替代送达路径；不能把 Rule 4(f)(3) 当作绕过公约的通用方案。",
+      "cases": [
+        "smart-study",
+        "kangol",
+        "edtx-liu"
+      ]
+    },
+    {
+      "id": "jurisdiction",
+      "title": "个人管辖权",
+      "summary": "Liu v. Monthly 要求针对每名被告证明其自身与法院地的联系；店铺可访问、开放配送或未完成结账页面不能单独证明实际销售。",
+      "business": "逐被告核对订单、付款、发货和交付证据；不能把一个店铺的交易自动归属于其他被告。",
+      "cases": [
+        "liu-monthly",
+        "intercontinental",
+        "hublot",
+        "edtx-liu"
+      ]
+    },
+    {
+      "id": "injunction",
+      "title": "TRO与PI分别审查",
+      "summary": "取得TRO不意味着PI必然获准；法院仍会审查侵权证据、管辖权及救济范围。",
+      "business": "分别核对TRO与PI阶段证据，关注设计整体视觉差异、真实销售、被告个体联系和冻结资产范围。",
+      "cases": [
+        "duoleduo",
+        "nike-schelp",
+        "nike-lanahan"
+      ]
+    },
+    {
+      "id": "judge-variance",
+      "title": "法官尺度差异",
+      "summary": "同一地区法院的不同法官可能对相近申请作出不同处理，案件事实、程序阶段与证据质量均会影响结果。",
+      "business": "研究应落到具体法官、具体案卷和具体动议，不能用单一地区的个案代表全院。",
+      "cases": [
+        "nike-schelp",
+        "nike-lanahan",
+        "gettleman-order",
+        "kendall-order"
+      ]
+    },
+    {
+      "id": "procedure",
+      "title": "程序合规",
+      "summary": "2025年的 S.D.N.Y. Shenzhen Daisili 案已因本地 ECF 程序不合规而被驳回，程序审查并非2026年才出现。",
+      "business": "核对法院本地规则、封存申请及删改程序，区分程序驳回、TRO拒绝与实体败诉。",
+      "cases": [
+        "daisili"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "smart-study",
+      "name": "Smart Study Co. v. Shenzhenshixindajixieyouxiangongsi",
+      "court": "Second Circuit",
+      "date": "2025-12-18",
+      "citation": "164 F.4th 164 (2d Cir. 2025)",
+      "issue": "中国境内被告的电子邮件送达",
+      "result": "海牙公约适用且地址已知或可合理查明时，不能以 Rule 4(f)(3) 邮件送达绕过公约。",
+      "effect": "第二巡回区拘束先例；地址确实未知且合理勤勉查找的情形需单独分析。",
+      "url": "https://law.justia.com/cases/federal/appellate-courts/ca2/24-313/24-313-2025-12-18.html",
+      "level": "上诉法院判决"
+    },
+    {
+      "id": "liu-monthly",
+      "name": "Yinnv Liu v. Monthly",
+      "court": "Seventh Circuit",
+      "date": "2026-03-31",
+      "citation": "170 F.4th 1090 (7th Cir. 2026)",
+      "issue": "在线店铺与伊利诺伊州个人管辖权",
+      "result": "店铺可访问、允许配送及未完成的 checkout 页面不足以证明实际完成州内销售；对每名被告需分别证明法院地联系。",
+      "effect": "第七巡回区拘束先例；没有设立全国所有案件必须测试购买的固定规则。",
+      "url": "https://media.ca7.uscourts.gov/cgi-bin/OpinionsWeb/processWebInputExternal.pl?Path=Y2026%2FD03-31%2FC%3A25-2074%3AJ%3AKirsch%3Aaut%3AT%3AfnOp%3AN%3A3515447%3AS%3A0&Submit=Display",
+      "level": "上诉法院判决"
+    },
+    {
+      "id": "kangol",
+      "name": "Kangol LLC v. Hangzhou Chuanyue Silk Import & Export Co.",
+      "court": "Seventh Circuit",
+      "date": "2026-05-29",
+      "citation": "177 F.4th 793 (7th Cir. 2026)",
+      "issue": "电子邮件及网页链接送达",
+      "result": "邮件附网页链接仍属于司法文书送达；需审查海牙公约适用、地址调查勤勉度及程序记录。",
+      "effect": "第七巡回区拘束先例；判决发回审查勤勉度，并非一律认定所有邮件送达无效。",
+      "url": "https://media.ca7.uscourts.gov/cgi-bin/OpinionsWeb/processWebInputExternal.pl?Path=Y2026%2FD05-29%2FC%3A25-2205%3AJ%3AKirsch%3Aaut%3AT%3AfnOp%3AN%3A3549218%3AS%3A0&Submit=Display",
+      "level": "上诉法院判决"
+    },
+    {
+      "id": "intercontinental",
+      "name": "Intercontinental Great Brands",
+      "court": "N.D. Illinois",
+      "date": "2026-04-27",
+      "citation": "1:25-cv-13806, Dkt. 28",
+      "issue": "实际销售及逐被告管辖权证据",
+      "result": "结账截图未证明完成交易和交付，法院拒绝TRO及邮件送达 without prejudice。",
+      "effect": "地区法院个案；说明结账页面本身不足以替代完成销售证据。",
+      "url": "https://dockets.justia.com/docket/illinois/ilndce/1:2025cv13806/489627",
+      "level": "地区法院裁定"
+    },
+    {
+      "id": "hublot",
+      "name": "Hublot",
+      "court": "N.D. Illinois",
+      "date": "2026-05-18",
+      "citation": "1:26-cv-04668, Dkt. 25",
+      "issue": "高价商品与州内销售证据",
+      "result": "法院认为高价商品、未测试购买及网站互动性不足以替代实际销售证据，驳回诉状 without prejudice。",
+      "effect": "地区法院个案；不得推广为所有案件必须测试购的统一规则。",
+      "url": "https://cases.justia.com/federal/district-courts/illinois/ilndce/1%3A2026cv04668/499411/25/0.pdf",
+      "level": "地区法院裁定"
+    },
+    {
+      "id": "duoleduo",
+      "name": "Shenzhen Duoleduo",
+      "court": "N.D. Illinois",
+      "date": "2026-06-18",
+      "citation": "1:25-cv-13392, Dkt. 86",
+      "issue": "TRO后PI阶段的侵权证据",
+      "result": "先前取得TRO且存在实际销售及程序异议放弃，PI仍可能因侵权证据及设计专利整体视觉差异被拒。",
+      "effect": "地区法院个案；TRO与PI是不同程序阶段，不能将TRO签发理解为PI自动获准。",
+      "url": "https://cases.justia.com/federal/district-courts/illinois/ilndce/1%3A2025cv13392/489109/86/0.pdf",
+      "level": "地区法院裁定"
+    },
+    {
+      "id": "nike-schelp",
+      "name": "Nike, Inc. v. The Individuals, E.D. Missouri",
+      "court": "E.D. Missouri · Schelp",
+      "date": "2026-05-26",
+      "citation": "4:26-cv-00169, Dkt. 38",
+      "issue": "PI、个人管辖权及平台救济",
+      "result": "法院在该案记录基础上批准PI及相关救济。",
+      "effect": "地区法院个案；不代表同院所有法官或所有被告情形。",
+      "url": "https://cases.justia.com/federal/district-courts/missouri/moedce/4%3A2026cv00169/226098/38/0.pdf",
+      "level": "地区法院裁定副本"
+    },
+    {
+      "id": "nike-lanahan",
+      "name": "Nike, Inc. v. The Individuals, E.D. Missouri",
+      "court": "E.D. Missouri · Lanahan",
+      "date": "2026-06-23",
+      "citation": "4:26-cv-00533, Dkt. 36",
+      "issue": "仅有一笔平台州内销售能否建立个人管辖权",
+      "result": "法院认为仅有通过全国性平台向该州售出一件商品的联系不足以满足第八巡回区个人管辖权标准，拒绝TRO。",
+      "effect": "与Schelp案形成同院不同处理对照；案件时间、法官和证据不同，不能据此计算批准率。",
+      "url": "https://www.govinfo.gov/content/pkg/USCOURTS-moed-4_26-cv-00533/pdf/USCOURTS-moed-4_26-cv-00533-0.pdf",
+      "level": "官方法院裁定"
+    },
+    {
+      "id": "edtx-liu",
+      "name": "Liu, E.D. Texas",
+      "court": "E.D. Texas · Barker",
+      "date": "2026-09-30",
+      "citation": "4:25-cv-01220, Dkt. 20",
+      "issue": "海牙送达、管辖权及救济范围",
+      "result": "法院参考Smart Study与Kangol拒绝缺乏勤勉地址调查的邮件送达，并拒绝将某一店铺的真实销售归属于其他店铺。",
+      "effect": "第五巡回区当时无直接控制性上诉先例；该案为地区法院适用，且涉及专利救济。",
+      "url": "https://patentcasewatch.com/opinions/USCOURTS-txed-4_25-cv-01220-0",
+      "level": "地区法院裁定"
+    },
+    {
+      "id": "daisili",
+      "name": "Shenzhen Daisili Commercial Co.",
+      "court": "S.D. New York",
+      "date": "2025-04-11",
+      "citation": "1:25-cv-02970, Dkt. 6",
+      "issue": "Schedule A案件的本地程序要求",
+      "result": "因未按S.D.N.Y. ECF Rule 6.14先行提交miscellaneous程序申请而驳回。",
+      "effect": "程序性驳回，不是法院认定TRO实体要件不成立；证明程序审查在2025年已有实例。",
+      "url": "https://cases.justia.com/federal/district-courts/new-york/nysdce/1%3A2025cv02970/640305/6/0.pdf",
+      "level": "地区法院裁定副本"
+    },
+    {
+      "id": "gettleman-order",
+      "name": "Gettleman Schedule A Standing Order",
+      "court": "N.D. Illinois · Judge Gettleman",
+      "date": "2026-06-23",
+      "citation": "Standing Order",
+      "issue": "逐被告管辖权、Rule 20与海牙送达说明",
+      "result": "对其本人Schedule A案件提出特定备忘录与证明要求。",
+      "effect": "仅适用于该法官案件，不是N.D. Illinois全院规则。",
+      "url": "https://www.ilnd.uscourts.gov/_assets/_documents/_forms/_judges/Gettleman/Schedule%20A%20Standing%20Order.pdf",
+      "level": "法官Standing Order"
+    },
+    {
+      "id": "kendall-order",
+      "name": "Kendall Schedule A Standing Order",
+      "court": "N.D. Illinois · Judge Kendall",
+      "date": "2026-08-11",
+      "citation": "Standing Order",
+      "issue": "Schedule A案件保证金",
+      "result": "对其本人部分Schedule A案件提出每名被告保证金要求。",
+      "effect": "法官个人规则；实际适用范围应结合具体案件核验。",
+      "url": "https://www.ilnd.uscourts.gov/",
+      "level": "法官Standing Order"
+    }
+  ]
+}
