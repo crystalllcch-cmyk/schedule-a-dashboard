@@ -10,3 +10,5 @@ The geography markers are orientation points, not district boundary geometry or 
 - The interactive case archive groups the 16 dossiers into three editorial clusters (appellate rules; procedure/jurisdiction/service; TRO/PI/asset relief). Bubble size is a display hierarchy only, not case volume, success probability, or precedential weight. Bubble color indicates a primary issue selected for visualization.
 
 - Archive admission rule: include only dossiers whose core procedural result and legal significance are supported by a court opinion/order or a clearly recorded docket entry. Cases with essential rulings or current procedural status that cannot be confirmed are excluded from the interactive archive until verified.
+
+- Each `case_dossiers.json` profile retains its original searchable text fields and adds `analysisPoints`: labeled bullet arrays for `summary`, `issue`, `response` (where a party response is recorded), `decision`, and `significance`. The dashboard renders these as structured lists in the bubble tooltip, quick-view panel, and full case drawer. Labels organize the source-supported analysis; they do not add new factual findings.
