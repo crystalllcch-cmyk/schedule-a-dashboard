@@ -166,9 +166,8 @@ function buildGeo(){
  const path=usPath();$('usOutline').setAttribute('d',path);$('usOutlineShine').setAttribute('d',path);$('usClipPath').setAttribute('d',path);
  const grid=[];for(let x=100;x<1000;x+=100)grid.push('<line class="map-grid-line" x1="'+x+'" y1="0" x2="'+x+'" y2="600"/>');for(let y=80;y<600;y+=80)grid.push('<line class="map-grid-line" x1="0" y1="'+y+'" x2="1000" y2="'+y+'"/>');$('mapGrid').innerHTML=grid.join('');
  const known=GEO.districts.filter(d=>Number.isFinite(d.lat)&&Number.isFinite(d.lng));
- const max=Math.max(...known.map(d=>d.count));
  $('mapNodes').innerHTML=known.map(d=>{
-  const p=projectUS(d.lng,d.lat),off=displayOffset(d.code),x=p.x+off[0],y=p.y+off[1],r=6+18*Math.sqrt(d.count/max),label=['7-52','11-3C','3-15','2-08'].includes(d.code),lo=labelOffset(d.code);
+  const p=projectUS(d.lng,d.lat),off=displayOffset(d.code),x=p.x+off[0],y=p.y+off[1],r=6+18*Math.sqrt(geoValue(d)/Math.max(1,...known.map(x=>geoValue(x)))),label=['7-52','11-3C','3-15','2-08'].includes(d.code),lo=labelOffset(d.code);
   const labelSvg=label?'<line class="map-label-line" x1="'+x+'" y1="'+y+'" x2="'+(x+lo[0]*.72)+'" y2="'+(y+lo[1]*.72)+'"/><text class="map-label" x="'+(x+lo[0])+'" y="'+(y+lo[1])+'">'+escapeHtml(d.name)+'</text><text class="map-label-count" x="'+(x+lo[0])+'" y="'+(y+lo[1]+14)+'">'+fmt(d.count)+' candidates</text>':'';
   return '<g class="map-node" data-code="'+escapeHtml(d.code)+'" tabindex="0" role="button" aria-label="'+escapeHtml(d.name)+' '+fmt(d.count)+' candidates"><circle class="node-pulse" cx="'+x+'" cy="'+y+'" r="'+(r+3)+'"/><circle class="node-halo" cx="'+x+'" cy="'+y+'" r="'+(r+9)+'"/><circle class="node-ring" cx="'+x+'" cy="'+y+'" r="'+(r+2)+'"/><circle class="node-core" cx="'+x+'" cy="'+y+'" r="'+r+'"/>'+labelSvg+'<title>'+escapeHtml(d.name)+' · '+fmt(d.count)+' FJC candidates</title></g>';
  }).join('');
@@ -189,7 +188,7 @@ function renderGeo(){
  const rows=GEO.districts.filter(d=>Number.isFinite(d.lat)).map(d=>({...d,value:geoValue(d)})).sort((a,b)=>b.value-a.value);
  const max=Math.max(1,...rows.map(d=>d.value));
  $('districtRanking').innerHTML=rows.map((d,i)=>'<div class="rank-row '+(filters.district===d.code?'selected':'')+'" data-district="'+escapeHtml(d.code)+'"><span class="rank-num">'+String(i+1).padStart(2,'0')+'</span><div><div class="rank-name">'+escapeHtml(d.name)+'</div><div class="rank-track"><div class="rank-fill" style="width:'+(d.value/max*100)+'%"></div></div></div><span class="rank-count">'+fmt(d.value)+'</span></div>').join('');
- $('mapNodes').querySelectorAll('.map-node').forEach(node=>{const d=GEO.districts.find(x=>x.code===node.dataset.code);if(!d)return;const value=geoValue(d),r=6+18*Math.sqrt(d.count/Math.max(1,...GEO.districts.filter(x=>Number.isFinite(x.lat)).map(x=>x.count)));const core=node.querySelector('.node-core'),halo=node.querySelector('.node-halo'),ring=node.querySelector('.node-ring');core.setAttribute('r',r);halo.setAttribute('r',r+9);ring.setAttribute('r',r+2);node.classList.toggle('selected',filters.district===d.code);node.style.opacity=value===0?'.2':'1';});
+ $('mapNodes').querySelectorAll('.map-node').forEach(node=>{const d=GEO.districts.find(x=>x.code===node.dataset.code);if(!d)return;const value=geoValue(d),r=value?6+18*Math.sqrt(value/max):4;const core=node.querySelector('.node-core'),halo=node.querySelector('.node-halo'),ring=node.querySelector('.node-ring');core.setAttribute('r',r);halo.setAttribute('r',r+9);ring.setAttribute('r',r+2);node.classList.toggle('selected',filters.district===d.code);node.style.opacity=value===0?'.2':'1';});
  const chosen=GEO.districts.find(d=>d.code===filters.district&&Number.isFinite(d.lat))||null;
  $('mapSelectedName').textContent=chosen?chosen.name:'全部已映射地区';
  $('mapSelectedMeta').textContent=chosen?(chosen.locator+' · FJC地区代码 '+chosen.code+' · R24总量 '+fmt(chosen.count)):'选择节点可筛选地区；当前地图显示全部13个已映射地区';
