@@ -388,5 +388,14 @@ function renderCaseFiles(){
  $('caseGrid').innerHTML=rows.length?rows.map(c=>'<article class="case-card" data-case-id="'+escapeHtml(c.id)+'"><div class="case-top"><span class="case-no">'+escapeHtml(c.caseNo)+'</span><span class="case-evidence">'+escapeHtml(c.sourceLevel.split('｜')[0])+'</span></div><h3>'+escapeHtml(c.title)+'</h3><div class="case-meta">'+escapeHtml(c.court)+' · '+escapeHtml(c.date)+'</div><p class="case-summary">'+escapeHtml(c.summary)+'</p><div class="case-bottom"><span class="case-outcome">'+escapeHtml(c.outcomeLabel)+'</span><div class="case-tags">'+c.topics.slice(0,2).map(t=>'<span class="case-tag">'+escapeHtml(topicName(t))+'</span>').join('')+'</div></div></article>').join(''):'<div class="no-results">没有找到符合条件的案件档案。试试更换关键词或筛选条件。</div>';
  renderBubbleMap(rows);if(caseMode==='list'){$('caseBubbleView').style.display='none';$('caseGrid').hidden=false}else{$('caseBubbleView').style.display='block';$('caseGrid').hidden=true}
 }
+function openCase(id){
+ const c=CASES.cases.find(x=>x.id===id);if(!c)return;
+ $('dtitle').textContent=c.title;$('dintro').textContent=c.caseNo+' · '+c.court+' · '+c.date;
+ const timeline=c.timeline.map(t=>'<div class="case-event"><small>'+escapeHtml(t.date)+'</small><b>'+escapeHtml(t.label)+'</b><p>'+escapeHtml(t.detail)+'</p></div>').join('');
+ const sources=c.sources.map(x=>'<a class="case-source" href="'+escapeHtml(x.url)+'" target="_blank" rel="noopener"><b>'+escapeHtml(x.label)+'</b><br><span>'+escapeHtml(x.role)+'</span> ↗</a>').join('');
+ const response=c.partyResponse?'<div class="drow"><small>当事人回应 / 抗辩记录</small><b>'+escapeHtml(c.partyResponse)+'</b></div>':'';
+ $('dbody').innerHTML='<div class="drow"><small>研究结论</small><b>'+escapeHtml(c.summary)+'</b></div>'+response+'<div class="drow"><small>核心争点</small><b>'+escapeHtml(c.issue)+'</b></div><div class="drow"><small>法院处理</small><b>'+escapeHtml(c.decision)+'</b></div><div class="drow"><small>研究意义</small><b>'+escapeHtml(c.significance)+'</b></div><div class="drow"><small>法官 / 证据等级</small><b>'+escapeHtml(c.judge)+'<br>'+escapeHtml(c.sourceLevel)+'</b><p>'+escapeHtml(c.sourceNote)+'</p></div><div class="case-detail-section"><h3>PROCEDURAL TIMELINE / 程序时间线</h3><div class="case-timeline">'+timeline+'</div></div><div class="case-detail-section"><h3>SOURCE RECORD / 原始来源</h3>'+sources+'</div>';
+ $('drawer').classList.add('open');
+}
 async function start(){try{const [a,b,c,g,k]=await Promise.all([fetch('data/dashboard.json'),fetch('data/research_insights.json'),fetch('data/district_quarterly.json'),fetch('data/geography.json'),fetch('data/case_dossiers.json')]);if(!a.ok||!b.ok||!c.ok||!g.ok||!k.ok)throw Error('data');D=await a.json();R=await b.json();DQ=await c.json();GEO=await g.json();CASES=await k.json();D.districts.forEach(d=>{const o=document.createElement('option');o.value=d.code;o.textContent=d.name+' · '+d.code;$('district').appendChild(o)});init()}catch(e){toast('数据载入失败，请刷新页面')}}start();
 </script></body></html>
