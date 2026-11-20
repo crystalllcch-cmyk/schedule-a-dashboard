@@ -15,8 +15,8 @@ The extract includes multiple candidate groups, including caption-prefix and exp
 ## District data reconciliation
 An earlier regional-summary export totaled 4,542 and omitted 9 candidate rows. For the interactive geography page, district-quarter counts have been rebuilt directly from all 4,551 rows in the R24 v3 case-level candidate detail, grouped by CIRCUIT + DISTRICT + calendar year + quarter. The rebuilt district-quarter table reconciles exactly to 4,551; 13 district codes are mapped to city-level locator points and 9 low-count codes remain unmapped.
 
-## Not yet integrated
-Historical ABTL/Lex Machina series, five-brand activity sample, RPX quarterly metrics, CaseMagic snapshots, and court-decision database are not included in this prototype. They must be independently reconciled and sourced before appearing in public charts.
+## Integrated and pending datasets
+Historical ABTL/Lex Machina series, the five-brand Fashion Law sample, and selected appellate/district-court decisions are included in `data/research_insights.json`. Eighteen selected researched case dossiers are included in `data/case_dossiers.json`. RPX quarterly metrics and CaseMagic rolling snapshots are not yet integrated into interactive charts because their units and coverage differ from the FJC candidate series; they remain separate comparison sources until their own display and caveats are implemented.
 
 
 ## Research interpretation layer added in prototype v0.2
@@ -26,3 +26,10 @@ Historical ABTL/Lex Machina series, five-brand activity sample, RPX quarterly me
 - H1 NOS: 840 823 → 969; 820 379 → 567; 830 112 → 99. NOS is administrative classification, not verified claim type in each case.
 - Five-brand TFL sample: 2025 full year 35; 2026-01-01 to 2026-08-31 74; monthly pace comparison 3.17x. Brand-specific changes are shown separately. This is a purposive five-brand sample, not a national universe.
 - Legal decision records include appellate opinions, district-court orders, and judge-specific standing orders. The dashboard labels each type and its applicable authority; judge-specific orders are not presented as district-wide rules.
+
+
+## Interactive geography and case archive
+- `data/geography.json` and `data/district_quarterly.json` are both derived directly from the 4,551-row R24 v3 candidate detail, grouped by CIRCUIT + DISTRICT and calendar quarter. Their totals reconcile to 4,551.
+- 13 district codes are displayed at city-level locator points; 9 low-frequency codes remain unmapped. Map points are not district boundaries and do not identify a defendant's location.
+- `data/case_dossiers.json` contains 18 selected researched cases. Each profile preserves the case-specific timeline, outcome, source-quality label and source link. It is a selected research archive, not a complete case census.
+- Case records distinguish appellate opinions, official GovInfo court documents, court-order copies, docket minute entries, and secondary legal summaries. Where the source is a docket index or secondary summary, the interface labels it as such.
