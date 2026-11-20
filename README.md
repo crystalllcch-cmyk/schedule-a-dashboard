@@ -8,7 +8,7 @@ An interactive research dashboard for exploring U.S. Schedule A litigation trend
 - Five-brand Fashion Law sample and court-decision research summaries
 - Interactive year / quarter / district filters
 - U.S. geographic exploration with 13 city-level district locator points and 9 unmapped low-frequency FJC district codes
-- Case dossier archive with 18 selected researched cases, procedural timelines, source-quality labels, issue/outcome summaries, and original-source links
+- Case dossier archive with 16 selected, source-checked researched cases, procedural timelines, source-quality labels, issue/outcome summaries, and original-source links
 - Click-through chart details and methodology notes
 
 ## Important data limitations
@@ -16,7 +16,7 @@ The 4,551 records are Schedule A-feature candidates identified from FJC IDB char
 
 The district-quarter dataset used by the interactive map has been rebuilt directly from all 4,551 case-level candidate rows and reconciles to 4,551. Thirteen district codes are mapped to approximate city-level locator points; nine low-frequency district codes remain unmapped. Markers are not district boundary polygons or defendant locations.
 
-The 18 case dossiers are a selected research archive, not a comprehensive case census. Each dossier labels whether its source is an appellate opinion, official court PDF, court-order copy, docket minute entry, or secondary legal summary. Do not treat FJC candidates as confirmed Schedule A cases or infer nationwide grant/denial rates from the selected case sample.
+The 16 case dossiers are a selected research archive, not a comprehensive case census. Each dossier labels whether its source is an appellate opinion, official court PDF, court-order copy, docket minute entry, or secondary legal summary. Do not treat FJC candidates as confirmed Schedule A cases or infer nationwide grant/denial rates from the selected case sample.
 
 RPX quarterly metrics and CaseMagic rolling snapshots are not yet integrated into interactive charts because their units and coverage differ from the FJC candidate series. No confidential company information should be added to this public repository.
 
