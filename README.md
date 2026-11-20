@@ -8,7 +8,7 @@ An interactive research dashboard for exploring U.S. Schedule A litigation trend
 - Five-brand Fashion Law sample and court-decision research summaries
 - Interactive year / quarter / district filters
 - U.S. geographic exploration with 13 city-level district locator points and 9 unmapped low-frequency FJC district codes
-- Case dossier archive with 16 selected, source-checked researched cases, procedural timelines, source-quality labels, issue/outcome summaries, and original-source links
+- Case dossier archive with 16 selected, source-checked researched cases, clustered bubble and list views, hover previews, click-through full dossiers, procedural timelines, source-quality labels, and original-source links
 - Click-through chart details and methodology notes
 
 ## Important data limitations
