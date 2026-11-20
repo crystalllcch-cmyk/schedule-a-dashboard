@@ -11,4 +11,5 @@ The geography markers are orientation points, not district boundary geometry or 
 
 - Archive admission rule: include only dossiers whose core procedural result and legal significance are supported by a court opinion/order or a clearly recorded docket entry. Cases with essential rulings or current procedural status that cannot be confirmed are excluded from the interactive archive until verified.
 
+- `research_insights.json` retains the original legal-theme and court-decision text fields and adds labeled `analysisPoints` for each theme's core legal changes/business implications and each decision's issues, result, and authority/scope. The interface renders these as bullet lists in the legal-analysis panel, case cards, and case-detail view.
 - Each `case_dossiers.json` profile retains its original searchable text fields and adds `analysisPoints`: labeled bullet arrays for `summary`, `issue`, `response` (where a party response is recorded), `decision`, and `significance`. The dashboard renders these as structured lists in the bubble tooltip, quick-view panel, and full case drawer. Labels organize the source-supported analysis; they do not add new factual findings.
