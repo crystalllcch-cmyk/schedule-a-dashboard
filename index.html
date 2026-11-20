@@ -167,7 +167,17 @@ tbody tr:hover{background:#365f78}
 .case-bubble-tooltip::-webkit-scrollbar-thumb{background:#77cfc6aa;border-radius:8px}
 @media(max-width:650px){
  .case-bubble-tooltip{max-height:min(360px,calc(100% - 90px))}
-}</style></head>
+}
+/* Case archive list cards use the same point-by-point reading pattern as the dossier */
+.case-card-analysis{margin-top:11px;padding-top:9px;border-top:1px solid #ffffff20}
+.case-card-analysis-title{display:block;margin-bottom:5px;color:#a7f4e9;font-size:9px;letter-spacing:.04em}
+.case-card-analysis .analysis-points{padding-left:15px;gap:3px}
+.case-card-analysis .analysis-points li{font-size:9px;line-height:1.55}
+.case-card-analysis .analysis-points li b{font-size:9px;margin-right:4px}
+.case-card-more{display:block;margin:4px 0 0 15px;color:#a9c1d2;font-size:8px}
+.case-card-open-hint{margin-top:10px;padding-top:8px;border-top:1px solid #ffffff17;color:#a8e9e3;font-size:9px}
+.case-card[tabindex="0"]:focus{outline:2px solid #9df3e9;outline-offset:3px}
+</style></head>
 <body><div class="shell">
 <header class="top"><div class="brand"><div class="logo">SA</div><div><small>LEGAL DATA · INTELLIGENCE</small><b>SCHEDULE A / INSIGHT</b></div></div><div class="topright"><span class="live">● DATA CONNECTED</span><button class="ghost" id="focus">Focus mode ↗</button></div></header>
 <section class="hero"><div><div class="eyebrow">US FEDERAL LITIGATION · RESEARCH DASHBOARD</div><h1>看见诉讼趋势背后的<br><span class="gradient">结构、策略与司法变化</span></h1><p>从诉讼活动的增长与分化，到原告品牌的策略差异，再到上诉法院规则和地区法官的实际适用。用数据定位变化，用裁判解释变化。</p></div><div class="hero-meta">CORE WINDOW<strong>2025 — 2026</strong>HISTORICAL CONTEXT · 2016—2024<br>FJC SNAPSHOT · THROUGH 2026 Q2</div></section>
@@ -468,14 +478,23 @@ function buildCaseFiles(){
  if(!CASES)return;
  $('caseSearch').oninput=renderCaseFiles;$('caseTopic').onchange=renderCaseFiles;$('caseEvidence').onchange=renderCaseFiles;$('caseOutcome').onchange=renderCaseFiles;$('caseCluster').onchange=renderCaseFiles;
  $('caseGrid').onclick=e=>{const card=e.target.closest('[data-case-id]');if(card)openCase(card.dataset.caseId)};
+ $('caseGrid').onkeydown=e=>{const card=e.target.closest('[data-case-id]');if(card&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openCase(card.dataset.caseId)}};
  $('caseModeSwitch').onclick=e=>{const b=e.target.closest('[data-case-mode]');if(!b)return;caseMode=b.dataset.caseMode;document.querySelectorAll('[data-case-mode]').forEach(x=>x.classList.toggle('active',x===b));$('caseBubbleView').style.display=caseMode==='bubble'?'block':'none';$('caseGrid').hidden=caseMode!=='list'};
  renderCaseFiles();
+}
+function renderCaseCardSection(title,points,fallback,limit=2){
+ const rows=Array.isArray(points)&&points.length?points:(fallback?[{label:'',text:fallback}]:[]);
+ if(!rows.length)return '';
+ return '<div class="case-card-analysis"><b class="case-card-analysis-title">'+escapeHtml(title)+'</b>'+renderAnalysisList(rows.slice(0,limit))+(rows.length>limit?'<small class="case-card-more">另有 '+(rows.length-limit)+' 项 · 点击查看完整档案</small>':'')+'</div>';
 }
 function renderCaseFiles(){
  if(!CASES)return;const term=$('caseSearch').value.trim().toLowerCase(),topic=$('caseTopic').value,evidence=$('caseEvidence').value,outcome=$('caseOutcome').value,cluster=$('caseCluster').value;
  const rows=CASES.cases.filter(c=>{const hay=[c.title,c.caseNo,c.court,c.judge,c.summary,c.issue,c.decision,c.significance,c.partyResponse||''].join(' ').toLowerCase(),m=CASE_BUBBLES[c.id];return(!term||hay.includes(term))&&(topic==='all'||c.topics.includes(topic))&&(evidence==='all'||(evidence==='primary'?evidencePrimary(c):!evidencePrimary(c)))&&(outcome==='all'||outcomeGroup(c)===outcome)&&(cluster==='all'||(m&&m.cluster===cluster))});
  $('caseResultCount').textContent='显示 '+rows.length+' / '+CASES.cases.length+' 份档案';
- $('caseGrid').innerHTML=rows.length?rows.map(c=>'<article class="case-card" data-case-id="'+escapeHtml(c.id)+'"><div class="case-top"><span class="case-no">'+escapeHtml(c.caseNo)+'</span><span class="case-evidence">'+escapeHtml(c.sourceLevel.split('｜')[0])+'</span></div><h3>'+escapeHtml(c.title)+'</h3><div class="case-meta">'+escapeHtml(c.court)+' · '+escapeHtml(c.date)+'</div><p class="case-summary">'+escapeHtml(c.summary)+'</p><div class="case-bottom"><span class="case-outcome">'+escapeHtml(c.outcomeLabel)+'</span><div class="case-tags">'+c.topics.slice(0,2).map(t=>'<span class="case-tag">'+escapeHtml(topicName(t))+'</span>').join('')+'</div></div></article>').join(''):'<div class="no-results">没有找到符合条件的案件档案。试试更换关键词或筛选条件。</div>';
+ $('caseGrid').innerHTML=rows.length?rows.map(c=>{
+  const p=c.analysisPoints||{};
+  return '<article class="case-card" data-case-id="'+escapeHtml(c.id)+'" tabindex="0" role="button" aria-label="打开案件档案：'+escapeHtml(c.title)+'"><div class="case-top"><span class="case-no">'+escapeHtml(c.caseNo)+'</span><span class="case-evidence">'+escapeHtml(c.sourceLevel.split('｜')[0])+'</span></div><h3>'+escapeHtml(c.title)+'</h3><div class="case-meta">'+escapeHtml(c.court)+' · '+escapeHtml(c.date)+'</div>'+renderCaseCardSection('案件背景 / 关键程序',p.summary,c.summary,2)+renderCaseCardSection('核心争点',p.issue,c.issue,2)+'<div class="case-bottom"><span class="case-outcome">'+escapeHtml(c.outcomeLabel)+'</span><div class="case-tags">'+c.topics.slice(0,2).map(t=>'<span class="case-tag">'+escapeHtml(topicName(t))+'</span>').join('')+'</div></div><div class="case-card-open-hint">点击查看完整档案与程序时间线 ↗</div></article>';
+ }).join(''):'<div class="no-results">没有找到符合条件的案件档案。试试更换关键词或筛选条件。</div>';
  renderBubbleMap(rows);if(caseMode==='list'){$('caseBubbleView').style.display='none';$('caseGrid').hidden=false}else{$('caseBubbleView').style.display='block';$('caseGrid').hidden=true}
 }
 function openCase(id){
