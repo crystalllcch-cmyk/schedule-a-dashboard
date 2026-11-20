@@ -153,7 +153,21 @@ tbody tr:hover{background:#365f78}
 .casecard .tagrow{display:block}
 .casecard .tagrow .analysis-points{margin-top:5px}
 .casecard .tagrow .analysis-points li{font-size:9px}
-</style></head>
+
+/* Hover preview: keep long point-by-point analysis readable without clipping */
+.case-bubble-tooltip{
+ max-height:min(430px,calc(100% - 90px));
+ overflow-y:auto;
+ overscroll-behavior:contain;
+ pointer-events:auto;
+ scrollbar-width:thin;
+ scrollbar-color:#77cfc6 #193a52;
+}
+.case-bubble-tooltip::-webkit-scrollbar{width:6px}
+.case-bubble-tooltip::-webkit-scrollbar-thumb{background:#77cfc6aa;border-radius:8px}
+@media(max-width:650px){
+ .case-bubble-tooltip{max-height:min(360px,calc(100% - 90px))}
+}</style></head>
 <body><div class="shell">
 <header class="top"><div class="brand"><div class="logo">SA</div><div><small>LEGAL DATA · INTELLIGENCE</small><b>SCHEDULE A / INSIGHT</b></div></div><div class="topright"><span class="live">● DATA CONNECTED</span><button class="ghost" id="focus">Focus mode ↗</button></div></header>
 <section class="hero"><div><div class="eyebrow">US FEDERAL LITIGATION · RESEARCH DASHBOARD</div><h1>看见诉讼趋势背后的<br><span class="gradient">结构、策略与司法变化</span></h1><p>从诉讼活动的增长与分化，到原告品牌的策略差异，再到上诉法院规则和地区法官的实际适用。用数据定位变化，用裁判解释变化。</p></div><div class="hero-meta">CORE WINDOW<strong>2025 — 2026</strong>HISTORICAL CONTEXT · 2016—2024<br>FJC SNAPSHOT · THROUGH 2026 Q2</div></section>
@@ -411,7 +425,8 @@ function renderBubbleMap(rows){
  $('caseBubbleNodes').innerHTML=rows.map(c=>{const m=CASE_BUBBLES[c.id];if(!m)return'';const color=bubbleColor(c),no=c.caseNo.replace(/^No\.\s*/,'');return '<g class="case-bubble-node" data-case-id="'+escapeHtml(c.id)+'" tabindex="0" role="button" aria-label="'+escapeHtml(c.title)+' · '+escapeHtml(c.issue)+'"><circle class="bubble-aura" cx="'+m.x+'" cy="'+m.y+'" r="'+(m.r+13)+'" fill="'+color.glow+'"/><circle class="bubble-core" cx="'+m.x+'" cy="'+m.y+'" r="'+m.r+'" fill="'+color.fill+'"/><circle class="bubble-ring" cx="'+m.x+'" cy="'+m.y+'" r="'+(m.r-5)+'"/><text class="bubble-label" x="'+m.x+'" y="'+(m.y-(m.label.length>1?4:-1))+'">'+bubbleLabel(m)+'</text><text class="bubble-case-no" x="'+m.x+'" y="'+(m.y+m.r*.58)+'">'+escapeHtml(no.length>13?no.slice(0,12)+'…':no)+'</text><title>'+escapeHtml(c.title)+' · '+escapeHtml(c.outcomeLabel)+'</title></g>'}).join('');
  $('caseBubbleNodes').onpointerover=e=>{const n=e.target.closest('[data-case-id]');if(n)showCaseBubbleTip(n.dataset.caseId,e)};
  $('caseBubbleNodes').onpointermove=e=>{const n=e.target.closest('[data-case-id]');if(n)positionCaseBubbleTip(e)};
- $('caseBubbleNodes').onpointerout=e=>{if(!e.relatedTarget?.closest?.('[data-case-id]'))$('caseBubbleTooltip').classList.remove('show')};
+ $('caseBubbleNodes').onpointerout=e=>{if(!e.relatedTarget?.closest?.('[data-case-id], #caseBubbleTooltip'))$('caseBubbleTooltip').classList.remove('show')};
+ $('caseBubbleTooltip').onpointerout=e=>{if(!e.relatedTarget?.closest?.('[data-case-id]'))$('caseBubbleTooltip').classList.remove('show')};
  $('caseBubbleNodes').onclick=e=>{const n=e.target.closest('[data-case-id]');if(n){const c=CASES.cases.find(x=>x.id===n.dataset.caseId);if(c)updateCaseSpotlight(c);openCase(n.dataset.caseId)}};
  $('caseBubbleNodes').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){const n=e.target.closest('[data-case-id]');if(n){e.preventDefault();const c=CASES.cases.find(x=>x.id===n.dataset.caseId);if(c)updateCaseSpotlight(c);openCase(n.dataset.caseId)}}};
 }
@@ -433,12 +448,21 @@ function updateCaseSpotlight(c){
 }
 function showCaseBubbleTip(id,e){
  const c=CASES.cases.find(x=>x.id===id);if(!c)return;const p=c.analysisPoints||{},response=p.response?renderTipSection('当事人回应 / 抗辩',p.response,c.partyResponse):'';
- $('caseBubbleTooltip').innerHTML='<div class="tip-top"><span class="tip-no">'+escapeHtml(c.caseNo)+'</span><span class="tip-evidence">'+escapeHtml(c.sourceLevel.split('｜')[0])+'</span></div><h4>'+escapeHtml(c.title)+'</h4><div class="tip-meta">'+escapeHtml(c.court)+' · '+escapeHtml(c.date)+'</div>'+renderTipSection('核心争点',p.issue,c.issue)+response+renderTipSection('法院处理 · '+c.outcomeLabel,p.decision,c.decision)+renderTipSection('研究意义',p.significance,c.significance);
- updateCaseSpotlight(c);positionCaseBubbleTip(e);$('caseBubbleTooltip').classList.add('show');
+ const tip=$('caseBubbleTooltip');
+ tip.innerHTML='<div class="tip-top"><span class="tip-no">'+escapeHtml(c.caseNo)+'</span><span class="tip-evidence">'+escapeHtml(c.sourceLevel.split('｜')[0])+'</span></div><h4>'+escapeHtml(c.title)+'</h4><div class="tip-meta">'+escapeHtml(c.court)+' · '+escapeHtml(c.date)+'</div>'+renderTipSection('核心争点',p.issue,c.issue)+response+renderTipSection('法院处理 · '+c.outcomeLabel,p.decision,c.decision)+renderTipSection('研究意义',p.significance,c.significance);
+ tip.scrollTop=0;updateCaseSpotlight(c);tip.classList.add('show');positionCaseBubbleTip(e);
 }
 function positionCaseBubbleTip(e){
- const tip=$('caseBubbleTooltip'),box=$('caseBubbleView').getBoundingClientRect();if(window.innerWidth<=650){tip.style.left='12px';tip.style.top='auto';return}
- let x=e.clientX-box.left+16,y=e.clientY-box.top+16;if(x+345>box.width)x=e.clientX-box.left-350;if(y+330>box.height)y=Math.max(82,e.clientY-box.top-340);tip.style.left=Math.max(10,x)+'px';tip.style.top=Math.max(78,y)+'px';
+ const tip=$('caseBubbleTooltip'),box=$('caseBubbleView').getBoundingClientRect();
+ if(window.innerWidth<=650){tip.style.left='12px';tip.style.right='12px';tip.style.top='auto';tip.style.bottom='35px';return}
+ const margin=12,w=tip.offsetWidth||330,h=tip.offsetHeight||300;
+ let x=e.clientX-box.left+16;
+ if(x+w>box.width-margin)x=e.clientX-box.left-w-16;
+ x=Math.max(margin,Math.min(x,box.width-w-margin));
+ let y=e.clientY-box.top+16;
+ if(y+h>box.height-margin)y=e.clientY-box.top-h-16;
+ y=Math.max(78,Math.min(y,box.height-h-margin));
+ tip.style.left=x+'px';tip.style.right='auto';tip.style.top=y+'px';tip.style.bottom='auto';
 }
 function buildCaseFiles(){
  if(!CASES)return;
