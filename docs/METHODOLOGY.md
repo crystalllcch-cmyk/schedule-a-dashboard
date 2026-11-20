@@ -17,3 +17,12 @@ The district-quarter summary file sums to 4,542 records, while the case-level ca
 
 ## Not yet integrated
 Historical ABTL/Lex Machina series, five-brand activity sample, RPX quarterly metrics, CaseMagic snapshots, and court-decision database are not included in this prototype. They must be independently reconciled and sourced before appearing in public charts.
+
+
+## Research interpretation layer added in prototype v0.2
+- Historical series: ABTL Orange County Report, Spring 2026, Figure 1, p.10; 2016–2025* values are 196, 250, 314, 405, 574, 804, 1,042, 1,424, 2,060, 2,808. The 2025 point is through 2025-11-11.
+- FJC H1 comparison: 2025 H1 1,316; 2026 H1 1,636; +320 / +24.32%. This is a same-source candidate comparison, not a confirmed national Schedule A filing growth rate.
+- H1 geography: N.D. Illinois 1,156 → 1,292; other districts 160 → 344. N.D. Illinois share 87.84% → 78.97%. These are candidate-pool regional figures.
+- H1 NOS: 840 823 → 969; 820 379 → 567; 830 112 → 99. NOS is administrative classification, not verified claim type in each case.
+- Five-brand TFL sample: 2025 full year 35; 2026-01-01 to 2026-08-31 74; monthly pace comparison 3.17x. Brand-specific changes are shown separately. This is a purposive five-brand sample, not a national universe.
+- Legal decision records include appellate opinions, district-court orders, and judge-specific standing orders. The dashboard labels each type and its applicable authority; judge-specific orders are not presented as district-wide rules.
