@@ -32,5 +32,5 @@ RPX quarterly metrics and CaseMagic rolling snapshots are not yet integrated int
 ## Run locally
 Open `index.html` through a local static web server (not by double-clicking) so the JSON data files and map tiles can load.
 
-## Publish
-Enable GitHub Pages in repository Settings → Pages → Deploy from a branch → `main` → `/ (root)`.
+## Published site
+The dashboard is published through GitHub Pages at https://crystalllcch-cmyk.github.io/schedule-a-dashboard/. The latest Pages deployment for commit `3828be517f50058aca571e35093ed3de9ba65d71` completed successfully on 2026-11-20. Recheck the live page after future updates.
