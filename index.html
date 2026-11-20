@@ -219,7 +219,7 @@ tbody tr:hover{background:#365f78}
 <select id="caseCluster" class="select"><option value="all">全部主题星系</option><option value="appellate">上诉法院规则</option><option value="jurisdiction">程序、管辖权与境外送达</option><option value="relief">TRO / PI 与资产救济</option></select>
 <select id="caseTopic" class="select"><option value="all">全部争点</option><option value="service">境外送达</option><option value="jurisdiction">个人管辖权</option><option value="joinder">被告合并</option><option value="pi">TRO / PI</option><option value="asset-freeze">资产冻结</option><option value="evidence">侵权证据</option><option value="procedure">程序合规</option><option value="judge-variance">法官差异</option><option value="default">缺席判决</option><option value="design-patent">外观设计专利</option><option value="patent">专利实体</option><option value="due-process">正当程序</option><option value="defendant-appearance">被告出庭</option><option value="judge-practice">法官操作</option></select>
 <select id="caseEvidence" class="select"><option value="all">全部证据等级</option><option value="primary">一级裁判 / 官方文件</option><option value="secondary">转载、索引或专业分析</option></select>
-<select id="caseOutcome" class="select"><option value="all">全部结果</option><option value="granted">获准 / 上诉方获得救济</option><option value="denied">拒绝 / 驳回</option><option value="mixed">部分被告 / 上诉或程序结果分化</option></select>
+<select id="caseOutcome" class="select"><option value="all">全部结果</option><option value="granted">救济获准（TRO / PI）</option><option value="denied">拒绝 / 驳回</option><option value="mixed">被告分别处理 / 结果分化</option><option value="appellate">上诉法院裁判（维持 / 撤销 / 发回）</option></select>
 </div>
 <div class="case-explorer-layout"><div class="case-stage-column">
 <div class="case-stage-head"><div><b>案件星系 · CASE CONSTELLATION</b><small id="caseResultCount">显示16 / 16份档案</small></div><div class="case-mode-switch" id="caseModeSwitch"><button class="active" data-case-mode="bubble">✦ 气泡星图</button><button data-case-mode="list">☷ 列表索引</button></div></div>
@@ -331,7 +331,7 @@ function renderGeo(){
 }
 function topicName(t){return({service:'境外送达',jurisdiction:'个人管辖权',joinder:'被告合并',pi:'TRO / PI', 'asset-freeze':'资产冻结',evidence:'侵权证据',procedure:'程序合规','judge-variance':'法官差异',patent:'专利案件','design-patent':'设计专利',default:'缺席判决','due-process':'正当程序','defendant-appearance':'被告应诉','judge-practice':'法官个案规则'})[t]||t}
 function evidencePrimary(c){return c.sourceLevel.startsWith('一级')}
-function outcomeGroup(c){if(['pi-granted','pi-granted-unopposed'].includes(c.outcome))return'granted';if(['tro-denied','pi-denied','denied-without-prejudice','dismissed-without-prejudice','dismissed-procedural','sealed-motions-denied','relief-denied'].includes(c.outcome))return'denied';if(['defendant-specific-narrowing','mixed-defendant-outcomes','schedule-a-reduced','affirmed-in-part','reversed','remanded'].includes(c.outcome))return'mixed';return'pending'}
+function outcomeGroup(c){if(['pi-granted','pi-granted-unopposed'].includes(c.outcome))return'granted';if(['tro-denied','pi-denied','denied-without-prejudice','dismissed-without-prejudice','dismissed-procedural','sealed-motions-denied','relief-denied'].includes(c.outcome))return'denied';if(['affirmed','affirmed-in-part','reversed','remanded'].includes(c.outcome))return'appellate';if(['defendant-specific-narrowing','mixed-defendant-outcomes','schedule-a-reduced'].includes(c.outcome))return'mixed';return'pending'}
 let caseMode='bubble';
 const CASE_CLUSTERS={appellate:{name:'上诉法院规则',count:3},jurisdiction:{name:'程序、管辖权与境外送达',count:5},relief:{name:'TRO、PI 与资产救济',count:8}};
 const CASE_BUBBLES={
