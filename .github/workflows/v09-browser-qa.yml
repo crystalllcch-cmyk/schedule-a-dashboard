@@ -1,0 +1,36 @@
+name: V0.9 browser acceptance
+on:
+  push:
+    branches: [v0.9-research-integration-2026-11-23]
+    paths:
+      - index.html
+      - app.js
+      - data/**
+      - package.json
+      - scripts/browser_qa.cjs
+      - .github/workflows/v09-browser-qa.yml
+permissions:
+  contents: read
+jobs:
+  browser-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+      - name: Desktop and mobile Chromium acceptance
+        run: |
+          python3 -m http.server 8787 --bind 127.0.0.1 > /tmp/schedule-a-http.log 2>&1 &
+          npm run qa:browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v09-browser-qa
+          path: browser-qa-results/
+          retention-days: 14
+          if-no-files-found: warn
