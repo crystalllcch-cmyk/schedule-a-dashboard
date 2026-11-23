@@ -32,9 +32,19 @@ async function check(name, fn) {
       assert.ok(detail.charts.every(x=>x.width>0&&x.height>0),label+' '+view+' zero-sized chart');
       assert.ok(detail.charts.every(x=>x.canvas>0),label+' '+view+' missing actual ECharts rendering');
     }
+    await page.locator('[data-view="trend"]').click();
+    await check(label+' chart tooltip',async()=>{
+      await page.locator('#monthlyChart').scrollIntoViewIfNeeded();
+      const point=await page.evaluate(()=>{const el=document.getElementById('monthlyChart'),chart=echarts.getInstanceByDom(el),xy=chart.convertToPixel({seriesIndex:0},[0,230]),rect=el.getBoundingClientRect();return {x:rect.x+xy[0],y:rect.y+xy[1]};});
+      await page.mouse.move(point.x,point.y);await sleep(200);
+      const text=await page.locator('#monthlyChart').innerText();assert.match(text,/FJC R24 v3/);return {sourceTooltip:true};
+    });
     await page.locator('[data-view="geography"]').click();
+    await sleep(300);
     await check(label+' map markers and popup',async()=>{
       assert.equal(await page.locator('.leaflet-interactive').count(),22);
+      const outside=await page.evaluate(()=>{const r=document.getElementById('map').getBoundingClientRect();return [...document.querySelectorAll('.leaflet-interactive')].filter(el=>{const q=el.getBoundingClientRect(),x=q.x+q.width/2,y=q.y+q.height/2;return x<r.x||x>r.right||y<r.y||y>r.bottom;}).length;});
+      assert.equal(outside,0,'initial map clips locator centers');
       await page.locator('.leaflet-interactive').first().click();
       await page.locator('.leaflet-popup-content').waitFor();
       const text=await page.locator('.leaflet-popup-content').innerText();

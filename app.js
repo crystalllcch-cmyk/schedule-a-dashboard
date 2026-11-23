@@ -28,6 +28,13 @@ function initMap() {
   tiles.on('tileerror', () => { $('mapStatus').textContent = '地图底图暂不可用；定位点及下方数据表仍可使用。'; });
   tiles.addTo(map);
 }
+function fitMapView() {
+  if (!map || !document.getElementById('map').clientWidth) return;
+  const district = D.districts.find(x => x.code === selected('districtFilter'));
+  if (district) {map.setView([district.lat,district.lng],6);return;}
+  const points = D.districts.filter(x => selected('circuitFilter') === 'all' || x.circuit === selected('circuitFilter')).map(x => [x.lat,x.lng]);
+  if (points.length) map.fitBounds(points,{padding:[24,24],maxZoom:4});
+}
 function updateMap(rows) {
   if (!map) return;
   markers.forEach(m => m.remove()); markers = [];
@@ -38,8 +45,7 @@ function updateMap(rows) {
     marker.bindPopup('<b>' + esc(d.name) + '</b><br>' + esc(d.circuit) + '<br>当前筛选候选记录：' + fmt(n) + '<br>近似城市：' + esc(d.locator) + '<br><a target="_blank" rel="noopener" href="' + esc(d.locatorSource) + '">法院城市来源</a><br>' + quarters.map(q => esc(q.key) + '：' + fmt(q.count)).join('<br>'));
     markers.push(marker);
   });
-  const district = D.districts.find(x => x.code === selected('districtFilter'));
-  map.setView(district ? [district.lat, district.lng] : [38.7, -96], district ? 6 : 4);
+  fitMapView();
 }
 function updateFilings() {
   const rows = filingRows(), allYears = filingRows(true), year = selected('yearFilter');
@@ -59,7 +65,7 @@ function updateFilings() {
   const districts = D.districts.filter(x => (selected('circuitFilter') === 'all' || x.circuit === selected('circuitFilter')) && (selected('districtFilter') === 'all' || x.code === selected('districtFilter'))).map(x => ({...x, count: sum(rows.filter(r => r.district === x.code))})).sort((a,b) => b.count - a.count);
   updateChart('districtChart', {yAxis: {data: districts.map(x => x.name), inverse: true}, series: [{name: '候选记录（FJC R24 v3）', type: 'bar', data: districts.map(x => x.count), itemStyle: {color: '#719db2'}, label: {show: true, position: 'right', fontSize: 9}}]}, ['地区', '候选记录'], districts.map(x => [x.name, x.count]));
   const nos = D.nos.filter(n => selected('nosFilter') === 'all' || n.code === selected('nosFilter')).map(n => ({...n, count: sum(rows.filter(x => x.nos === n.code))}));
-  updateChart('nosChart', {series: [{type: 'pie', radius: ['34%', '62%'], label: {show: false}, data: nos.map(x => ({name: x.code + ' · ' + x.label, value: x.count}))}]}, ['NOS', '候选记录'], nos.map(x => [x.code + ' · ' + x.label, x.count]));
+  updateChart('nosChart', {series: [{type: 'pie', center: ['50%','38%'], radius: ['30%', '54%'], label: {show: false}, data: nos.map(x => ({name: x.code + ' · ' + x.label, value: x.count}))}]}, ['NOS', '候选记录'], nos.map(x => [x.code + ' · ' + x.label, x.count]));
   const changed = districts.map(d => ({name: d.name, value: sum(allYears.filter(x => x.district === d.code && halfOf(x) === '2026 H1')) - sum(allYears.filter(x => x.district === d.code && halfOf(x) === '2025 H1'))})).sort((a,b) => Math.abs(b.value)-Math.abs(a.value)).slice(0,6);
   updateChart('overviewDistrict', {yAxis: {data: changed.map(x => x.name)}, series: [{name: '2026 H1 − 2025 H1（候选记录）', type: 'bar', data: changed.map(x => x.value), itemStyle: {color: '#7da9bd'}, label: {show: true, position: 'right'}}]}, ['地区', 'H1同比增量'], changed.map(x => [x.name, x.value]));
   const other = allYears.filter(x => x.district !== '7-52');
@@ -115,10 +121,11 @@ function initUI() {
     document.querySelectorAll('.tab').forEach(b=>{b.classList.toggle('active',b===button);b.setAttribute('aria-pressed',String(b===button));});
     document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===button.dataset.view));
     const applicable=['overview','trend','geography'].includes(button.dataset.view);document.querySelector('.filters').hidden=!applicable;$('filterSummary').hidden=!applicable;
-    requestAnimationFrame(()=>{Object.values(charts).forEach(c=>c.resize());map?.invalidateSize();});
+    requestAnimationFrame(()=>{Object.values(charts).forEach(c=>c.resize());map?.invalidateSize();fitMapView();});
   });
   for (const id of ['outcomes','quality','plaintiffs','cases','method']) {const note=document.createElement('div');note.className='callout fixed-scope';note.textContent=id==='cases'?'精选案件档案使用下方独立筛选，不受FJC立案筛选影响。':'本模块保留自身统计总体；不随立案筛选变化。';$(id).prepend(note);}
   document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-pressed',String(b.classList.contains('active'))));
+  window.addEventListener('resize',()=>{map?.invalidateSize();fitMapView();});
   fixedFallbacks(); cases(); updateFilings();
 }
 async function readJSON(path) { const response=await fetch(path);if(!response.ok) throw new Error(path+' HTTP '+response.status);return response.json(); }
