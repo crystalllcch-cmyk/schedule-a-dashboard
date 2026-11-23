@@ -2,12 +2,12 @@
   "updated": "2026-11-23 · V0.9 research integration branch",
   "description": "Selected source-checked federal Schedule A cases, related appellate authority, pending appeals, and judge-specific orders. This is a selective archive, not a comprehensive case census.",
   "evidenceLevels": [
-    "一级｜完整上诉法院判决",
-    "一级｜GovInfo官方法院文件",
-    "一级｜法院命令PDF",
-    "一级程序记录｜公开docket minute entry",
-    "二级｜法院文书转载/专业法律文章",
-    "有限记录｜feed或docket索引"
+    "一级｜已刊发且具拘束力的上诉法院判决",
+    "一级｜GovInfo官方法院文件/官方裁定PDF",
+    "二级｜完整地区法院裁定或官方案卷命令",
+    "三级｜未刊发/非先例上诉处置",
+    "四级｜待决上诉及官方案件状态页",
+    "四级｜第三方公开案卷文字转载或有限docket记录"
   ],
   "cases": [
     {
@@ -2305,5 +2305,6 @@
         ]
       }
     }
-  ]
+  ],
+  "archiveNote": "精选研究档案，不是Schedule A全量案件普查。判例效力、裁判层级与来源等级分别标记；待决案件不作为已裁判规则。"
 }
