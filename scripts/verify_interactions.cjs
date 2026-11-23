@@ -33,8 +33,15 @@ async function boot(withCharts=false){
   set('caseTopic','all');w.document.getElementById('caseSearch').value='24-1538';w.document.getElementById('caseSearch').dispatchEvent(new w.Event('input'));assert.equal(w.document.querySelectorAll('.case').length,1);
   assert.match(w.document.getElementById('caseList').textContent,/非先例上诉处置/);
   const ids=[...w.document.querySelectorAll('[id]')].map(e=>e.id);assert.equal(ids.length,new Set(ids).size);
-  const button=w.document.querySelector('[data-view="outcomes"]');button.click();assert.equal(w.document.querySelector('.filters').hidden,true);
-  w.document.querySelector('[data-view="trend"]').click();assert.equal(w.document.querySelector('.filters').hidden,false);
+  const button=w.document.querySelector('[data-module="judiciary"]');button.click();assert.equal(w.document.querySelector('.filters').hidden,true);
+  assert.equal(w.document.querySelectorAll('.view.active').length,1);assert.equal(w.document.getElementById('cases').classList.contains('active'),true);
+  w.document.querySelector('[data-module="structure"]').click();assert.equal(w.document.querySelector('.filters').hidden,false);
+  assert.deepEqual([...w.document.querySelectorAll('.view.active')].map(x=>x.id),['geography','outcomes']);
+  w.document.querySelector('[data-module="validation"]').click();assert.equal(w.document.querySelector('.filters').hidden,true);
+  assert.deepEqual([...w.document.querySelectorAll('.view.active')].map(x=>x.id),['plaintiffs','quality','method']);
+  w.document.querySelector('[data-module="trend"]').click();assert.equal(w.document.querySelector('.filters').hidden,false);
+  assert.deepEqual([...w.document.querySelectorAll('.view.active')].map(x=>x.id),['overview','trend']);
+  assert.equal(w.document.querySelectorAll('.tab').length,4);
   assert.equal(w.document.querySelectorAll('.view').length,8);
   dom.window.close();return {mode:withCharts?'chart-adapter':'CDN-unavailable-fallback',passed:true};
 }
