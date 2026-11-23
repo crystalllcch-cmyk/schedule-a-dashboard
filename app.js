@@ -119,12 +119,31 @@ function initUI() {
   $('caseSearch').addEventListener('input',cases);
   for(const id of ['caseAuthority','caseEvidence','caseCircuit','caseStatus','caseTopic','caseCourt']) $(id).addEventListener('change',cases);
   const reset=document.createElement('button');reset.className='reset';reset.textContent='重置档案筛选';reset.onclick=()=>{$('caseSearch').value='';for(const id of ['caseAuthority','caseEvidence','caseCircuit','caseStatus','caseTopic','caseCourt']) $(id).value='all';cases();};document.querySelector('.tools').appendChild(reset);
-  for (const button of document.querySelectorAll('.tab')) button.addEventListener('click',()=>{
-    document.querySelectorAll('.tab').forEach(b=>{b.classList.toggle('active',b===button);b.setAttribute('aria-pressed',String(b===button));});
-    document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===button.dataset.view));
-    const applicable=['overview','trend','geography'].includes(button.dataset.view);document.querySelector('.filters').hidden=!applicable;$('filterSummary').hidden=!applicable;
+  // Four research modules preserve the eight audited sections; no denominator is merged.
+  const modules = {
+    trend: {title:'01 · 趋势与拐点',description:'总览判断、月度/季度/半年度候选案卷趋势与比较基准。',ids:['overview','trend'],names:['研究总览','时间趋势'],filing:true},
+    structure: {title:'02 · 地域与结构',description:'地区与NOS结构、地图分布，以及独立口径的结案和程序结果。',ids:['geography','outcomes'],names:['地区与权利类型','结案与程序结果'],filing:true},
+    judiciary: {title:'03 · 司法规则与案件档案',description:'以案件、法院裁判、程序时间线和证据等级为核心的司法规则研究。',ids:['cases'],names:['法院规则与案件档案'],filing:false},
+    validation: {title:'04 · 品牌样本与数据核验',description:'品牌活动样本、外部历史参考、识别质量及可复核研究方法。',ids:['plaintiffs','quality','method'],names:['品牌样本与历史参考','候选识别质量','方法与来源'],filing:false}
+  };
+  // Research reading order is independent of historical DOM order.
+  const main = document.querySelector('main');
+  for (const id of ['overview','trend','geography','outcomes','cases','plaintiffs','quality','method']) main.appendChild($(id));
+  function activateModule(key) {
+    const module = modules[key];
+    if (!module) return;
+    document.querySelectorAll('.tab').forEach(b=>{const active=b.dataset.module===key;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});
+    document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',module.ids.includes(v.id)));
+    document.querySelector('.filters').hidden=!module.filing;
+    $('filterSummary').hidden=!module.filing;
+    $('moduleTitle').textContent=module.title;
+    $('moduleDescription').textContent=module.description;
+    $('moduleLinks').replaceChildren();
+    module.ids.forEach((id,i)=>{const button=document.createElement('button');button.type='button';button.textContent=module.names[i];button.addEventListener('click',()=>$(id).scrollIntoView({behavior:'smooth',block:'start'}));$('moduleLinks').appendChild(button);});
     requestAnimationFrame(()=>{Object.values(charts).forEach(c=>c.resize());map?.invalidateSize();fitMapView();});
-  });
+  }
+  for (const button of document.querySelectorAll('.tab')) button.addEventListener('click',()=>activateModule(button.dataset.module));
+  activateModule('trend');
   for (const id of ['outcomes','quality','plaintiffs','cases','method']) {const note=document.createElement('div');note.className='callout fixed-scope';note.textContent=id==='cases'?'精选案件档案使用下方独立筛选，不受FJC立案筛选影响。':'本模块保留自身统计总体；不随立案筛选变化。';$(id).prepend(note);}
   document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-pressed',String(b.classList.contains('active'))));
   window.addEventListener('resize',()=>{const width=document.getElementById('map').clientWidth;if(map&&width&&width!==lastMapWidth){map.invalidateSize();fitMapView();}});
