@@ -74,7 +74,7 @@ function updateFilings() {
   const categories = D.nos.filter(x => selected('nosFilter') === 'all' || x.code === selected('nosFilter'));
   const other25 = categories.map(n => sum(other.filter(x => x.nos === n.code && halfOf(x) === '2025 H1'))), other26 = categories.map(n => sum(other.filter(x => x.nos === n.code && halfOf(x) === '2026 H1')));
   updateChart('regionNosChart', {xAxis: {data: categories.map(x => x.code)}, series: [{name: '2025 H1', type: 'bar', data: other25, itemStyle:{color:'#b4c7d1'}},{name: '2026 H1', type: 'bar', data: other26, itemStyle:{color:'#6d9e9b'}}]}, ['NOS', '2025 H1', '2026 H1'], categories.map((n,i) => [n.code, other25[i], other26[i]]));
-  $('filingData').innerHTML = table(['月度', '候选记录'], months.map(x => [x.key, x.count])) + table(['地区', '候选记录'], districts.map(x => [x.name, x.count])) + table(['NOS', '候选记录'], nos.map(x => [x.code + ' · ' + x.label, x.count]));
+  renderDistrictList(rows);\n  $('filingData').innerHTML = table(['月度', '候选记录'], months.map(x => [x.key, x.count])) + table(['地区', '候选记录'], districts.map(x => [x.name, x.count])) + table(['NOS', '候选记录'], nos.map(x => [x.code + ' · ' + x.label, x.count]));
   updateMap(rows);
 }
 function cases() {
@@ -85,11 +85,30 @@ function cases() {
     && (topic === 'all' || (x.topics || []).some(t => (aliases[topic] || [topic]).includes(t)))
     && [x.title,x.caseNo,x.court,x.summary,x.issue,x.significance,x.decision,...(x.topics||[])].join(' ').toLowerCase().includes(q));
   $('caseCount').textContent = '显示 ' + arr.length + ' / ' + C.cases.length + ' 案';
+  renderCaseConstellation(arr);
   $('caseList').innerHTML = arr.map(x => '<details class="case"><summary><div><h3>' + esc(x.title) + '</h3><div class="meta2">' + esc(x.caseNo) + ' · ' + esc(x.court) + ' · ' + esc(x.date) + ' · ' + esc(x.outcomeLabel || '') + '</div></div><span class="tag">' + esc(x.authorityType) + '<br>' + esc(x.evidenceType) + '</span></summary><div class="casebody"><div class="callout">判例效力：' + esc(x.authorityType) + ' ｜ 来源：' + esc(x.evidenceType) + '<br>' + esc(x.sourceNote || '') + '</div>'
     + [['案件背景',x.summary],['核心争点',x.issue],['法院处理',x.decision],['研究意义与适用边界',x.significance]].map(([h,t]) => '<h4>'+h+'</h4><p>'+esc(t)+'</p>').join('')
     + '<h4>程序时间线</h4><div class="timeline">' + (x.timeline||[]).map(t => '<div><b>'+esc(t.date)+' · '+esc(t.label)+'</b><br>'+esc(t.detail)+'</div>').join('') + '</div><h4>来源</h4><ul>'
     + (x.sources||[]).map(s => '<li><a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.label)+'</a> <span class="meta2">('+esc(s.role||'')+')</span></li>').join('')+'</ul></div></details>').join('') || '<div class="callout">没有匹配的案件。可清空搜索或重置档案筛选。</div>';
 }
+function renderCaseConstellation(arr) {
+  const el=$('caseConstellation'); if(!el) return;
+  if(!window.echarts){el.innerHTML='<div class="callout">图表资源暂不可用；档案列表仍可正常使用。</div>';return;}
+  if(!charts.caseConstellation) mk('caseConstellation',{tooltip:{trigger:'item',formatter:p=>esc(p.data.title)+'<br>'+esc(p.data.caseNo)+'<br>'+esc(p.data.circuit)+' · '+esc(p.data.date)+'<br>'+esc(p.data.authorityType)},grid:{left:130,right:28,top:24,bottom:48},xAxis:{type:'time',name:'案件日期',axisLabel:{color:'#6b8090'},splitLine:{lineStyle:{color:'#edf2f5}}},yAxis:{type:'category',name:'巡回区',data:[...new Set(C.cases.map(x=>x.circuit||'其他'))].sort(),axisLabel:{fontSize:10,color:'#62798b'},splitLine:{show:true,lineStyle:{color:'#edf2f5'}}},series:[{type:'scatter',symbolSize:13,data:[],emphasis:{focus:'self',scale:1.5}}]});
+  const symbols={'已刊发上诉先例':'diamond','非先例上诉处置':'triangle','地区法院裁定':'circle','法官专项命令':'rect','待决上诉':'roundRect','相关上诉判例':'pin'};
+  const colors=['#327ca4','#58a69c','#947db9','#c18a50','#c87883','#8298aa'];
+  const types=[...new Set(arr.map(x=>x.authorityType))];
+  const series=types.map((type,i)=>({name:type,type:'scatter',symbol:symbols[type]||'circle',symbolSize:14,itemStyle:{color:colors[i%colors.length],borderColor:'#fff',borderWidth:1.5},data:arr.filter(x=>x.authorityType===type).map(x=>({value:[new Date(x.date+'T12:00:00Z').getTime(),x.circuit||'其他'],title:x.title,caseNo:x.caseNo,circuit:x.circuit||'其他',date:x.date,authorityType:x.authorityType,caseKey:x.caseNo}))}));
+  charts.caseConstellation.setOption({legend:{type:'scroll',bottom:0,textStyle:{fontSize:10}},series},{replaceMerge:['series']});
+  if(!charts.caseConstellation.__bound){charts.caseConstellation.on('click',p=>{const target=C.cases.find(x=>x.caseNo===p.data.caseKey);if(!target)return;$('caseSearch').value=target.caseNo;for(const id of ['caseAuthority','caseEvidence','caseCircuit','caseStatus','caseTopic','caseCourt'])$(id).value='all';cases();$('caseList').hidden=false;$('caseConstellationPanel').hidden=true;document.querySelectorAll('[data-case-mode]').forEach(b=>{const active=b.dataset.caseMode==='list';b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});const details=[...$('caseList').querySelectorAll('details.case')][0];if(details){details.open=true;details.scrollIntoView({behavior:'smooth',block:'center'});}});charts.caseConstellation.__bound=true;}
+}
+function renderDistrictList(rows){
+ const agg=D.districts.map(d=>({d,count:sum(rows.filter(x=>x.district===d.code))})).filter(x=>selected('circuitFilter')==='all'||x.d.circuit===selected('circuitFilter')).filter(x=>selected('districtFilter')==='all'||x.d.code===selected('districtFilter')).sort((a,b)=>b.count-a.count);
+ $('districtList').innerHTML=table(['排名','地区法院','巡回区','候选记录','近似城市'],agg.map((x,i)=>[i+1,x.d.name,x.d.circuit,fmt(x.count),x.d.locator]));
+ $('districtList').querySelectorAll('tbody tr').forEach((tr,i)=>tr.addEventListener('click',()=>{$('districtFilter').value=agg[i].d.code;updateFilings();$('geoMapPanel').hidden=false;$('geoListPanel').hidden=true;setGeoMode('map');}));
+}
+function setGeoMode(mode){$('geoMapPanel').hidden=mode!=='map';$('geoListPanel').hidden=mode!=='list';document.querySelectorAll('[data-geo-mode]').forEach(b=>{const active=b.dataset.geoMode===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});if(mode==='map')requestAnimationFrame(()=>{map?.invalidateSize();fitMapView();Object.values(charts).forEach(c=>c.resize());});}
+function setCaseMode(mode){$('caseList').hidden=mode!=='list';$('caseConstellationPanel').hidden=mode!=='constellation';document.querySelectorAll('[data-case-mode]').forEach(b=>{const active=b.dataset.caseMode===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});if(mode==='constellation')requestAnimationFrame(()=>charts.caseConstellation?.resize());}
 function addOptions(id, values) {
   [...new Set(values)].sort().forEach(v => { const o=document.createElement('option'); o.value=v; o.textContent=v; $(id).appendChild(o); });
 }
@@ -116,6 +135,8 @@ function initUI() {
     updateFilings();
   });
   $('resetFilters').onclick=()=>{ for(const id of ['yearFilter','circuitFilter','districtFilter','nosFilter']) $(id).value='all';updateFilings(); };
+  document.querySelectorAll('[data-geo-mode]').forEach(b=>b.addEventListener('click',()=>setGeoMode(b.dataset.geoMode)));
+  document.querySelectorAll('[data-case-mode]').forEach(b=>b.addEventListener('click',()=>setCaseMode(b.dataset.caseMode)));
   $('caseSearch').addEventListener('input',cases);
   for(const id of ['caseAuthority','caseEvidence','caseCircuit','caseStatus','caseTopic','caseCourt']) $(id).addEventListener('change',cases);
   const reset=document.createElement('button');reset.className='reset';reset.textContent='重置档案筛选';reset.onclick=()=>{$('caseSearch').value='';for(const id of ['caseAuthority','caseEvidence','caseCircuit','caseStatus','caseTopic','caseCourt']) $(id).value='all';cases();};document.querySelector('.tools').appendChild(reset);
