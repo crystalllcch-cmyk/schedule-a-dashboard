@@ -23,7 +23,7 @@ function updateChart(id, option, headers, rows) {
 }
 function initMap() {
   if (!window.L) { $('map').innerHTML = '<div class="callout">地图未能加载；下方地区数据表仍可查看全部数值。</div>'; return; }
-  map = L.map('map').setView([38.7, -96], 4);
+  map = L.map('map',{zoomSnap:0.5}).setView([38.7, -96], 4);
   const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 11, attribution: '© OpenStreetMap' });
   tiles.on('tileerror', () => { $('mapStatus').textContent = '地图底图暂不可用；定位点及下方数据表仍可使用。'; });
   tiles.addTo(map);

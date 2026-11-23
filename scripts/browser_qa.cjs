@@ -49,6 +49,8 @@ async function check(name, fn) {
       await page.locator('.leaflet-popup-content').waitFor();
       const text=await page.locator('.leaflet-popup-content').innerText();
       assert.match(text,/N.D. Illinois/);assert.match(text,/2026 Q2/);assert.match(text,/3,840/);
+      await page.locator('.leaflet-popup-close-button').click({trial:true});
+      await sleep(500);
       await page.screenshot({path:path.join(output,label+'-map-popup.png'),fullPage:true});
       const closeInside=await page.evaluate(()=>{const r=document.getElementById('map').getBoundingClientRect(),q=document.querySelector('.leaflet-popup-close-button').getBoundingClientRect();return q.top>=r.top&&q.bottom<=r.bottom;});
       assert.ok(closeInside,'popup close button clipped after screenshot/resize');
