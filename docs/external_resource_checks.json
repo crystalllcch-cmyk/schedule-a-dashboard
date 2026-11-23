@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-23",
+  "scope": "HTTP checks from executor, not browser load or visual checks",
+  "results": [
+    {
+      "url": "https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js",
+      "status": 200,
+      "content_type": "application/javascript; charset=utf-8",
+      "sample_bytes": 2048
+    },
+    {
+      "url": "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js",
+      "status": 200,
+      "content_type": "text/javascript; charset=utf-8",
+      "sample_bytes": 2048
+    },
+    {
+      "url": "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css",
+      "status": 200,
+      "content_type": "text/css; charset=utf-8",
+      "sample_bytes": 2048
+    },
+    {
+      "url": "https://a.tile.openstreetmap.org/4/3/6.png",
+      "status": 200,
+      "content_type": "image/png",
+      "sample_bytes": 2048
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap",
+      "status": 200,
+      "content_type": "text/css; charset=utf-8",
+      "sample_bytes": 2048
+    }
+  ]
+}

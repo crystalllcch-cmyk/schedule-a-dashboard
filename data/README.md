@@ -1,17 +1,19 @@
-# Data files
+# V0.9 data files
 
-- `dashboard.json`: FJC R24 v3 candidate aggregates, district aggregates, candidate-group aggregates, NOS counts, and source registry.
-- `district_quarterly.json`: rebuilt directly from all 4,551 rows in `R24_FJC_v3_修正后候选明细_2026-11-13.csv`, grouped by FJC circuit + district + quarter. Total reconciles to 4,551.
-- `geography.json`: district totals and quarter breakdowns, plus city-level locator coordinates for 13 mapped district codes. Nine low-count district codes remain unmapped and appear in a separate list.
-- `case_dossiers.json`: 16 selected case profiles with source-quality labels, supported procedural timelines, issues, outcomes, and source links. Six profiles also include a `partyResponse` summary, populated only where the dossier expressly records a defendant or party response; absence of this field must not be read as proof that no defense was raised.
+The current page loads exactly three files:
 
-The geography markers are orientation points, not district boundary geometry or the location of a particular defendant. The case dossier archive is a selected research sample, not a complete census. Do not treat FJC candidates as confirmed Schedule A cases.
+| File | Role |
+| --- | --- |
+| `v09_research.json` | Accepted research findings, 22 district locators, latest episode outcomes, probability sample and external reference series |
+| `filing_cells.json` | 247 anonymous month × district × NOS cells regenerated from all 4,551 R24 v3 records; shared filing filters |
+| `case_dossiers.json` | 26 dossiers; authority, source category, circuit and procedural status are separate fields |
 
-- The interactive case archive groups the 16 dossiers into three editorial clusters (appellate rules; procedure/jurisdiction/service; TRO/PI/asset relief). Bubble size is a display hierarchy only, not case volume, success probability, or precedential weight. Bubble color indicates a primary issue selected for visualization.
+`filing_cells.json` source SHA-256: `9521b865871587fcca66f0d7e852d5ec18c98d547014ad654d986cad98746a57`.
 
-- Archive admission rule: include only dossiers whose core procedural result and legal significance are supported by a court opinion/order or a clearly recorded docket entry. Cases with essential rulings or current procedural status that cannot be confirmed are excluded from the interactive archive until verified.
+Regenerate with `python scripts/build_filing_cells.py /path/to/R24.csv data/filing_cells.json`. The script validates the source fingerprint, row count, unique keys and ORIGIN=1.
 
-- `research_insights.json` retains the original legal-theme and court-decision text fields and adds labeled `analysisPoints` for each theme's core legal changes/business implications and each decision's issues, result, and authority/scope. The interface renders these as bullet lists in the legal-analysis panel, case cards, and case-detail view.
-- Each `case_dossiers.json` profile retains its original searchable text fields and adds `analysisPoints`: labeled bullet arrays for `summary`, `issue`, `response` (where a party response is recorded), `decision`, and `significance`. The dashboard renders these as structured lists in the bubble tooltip, quick-view panel, and full case drawer. Labels organize the source-supported analysis; they do not add new factual findings.
+## Preserved V0.8 files
 
-- `case_dossiers.json` powers the interactive case archive's clustered bubble view and searchable list view. Hover/focus previews show issues, recorded party responses, court handling and research significance; click/keyboard activation opens the full point-by-point dossier, timeline and original sources.
+`dashboard.json`, `geography.json`, `research_insights.json` and `district_quarterly.json` are historical snapshots; V0.9 does not load them. Old diagnostic-sample and 13/22 map-coverage statements are superseded. They remain only as historical context. Current methodology is in `docs/METHODOLOGY.md`.
+
+The 22 map points are approximate cities, not court buildings or judicial boundaries. Filing filters apply only to filing aggregates. Outcomes, sample precision, TFL and ABTL retain their own scopes and denominators. Dossier filters are independent.

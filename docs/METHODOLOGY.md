@@ -63,7 +63,7 @@ R05 sample:
 
 R03 selected 8 cases each from W.D. Pennsylvania and S.D. New York; all 16 sampled records had public docket evidence supporting Schedule A filing characteristics. The sample is too small and was designed for district diagnostics, not national precision estimation.
 
-PLOUT v. REN SHIJU et al., No.2:26-cv-01134 (W.D. Pa., Aug.14, 2026, ECF 52) denied a misjoinder motion at the motion stage based on pleaded coordination allegations. The available text is reproduced by third-party docket sources; the underlying entry was text-only and no signed PDF/PACER-certified snapshot was obtained in this research batch. It is a counterexample to a universal claim that courts uniformly reject Schedule A joinder, not proof that all defendants were factually coordinated.
+PLOUT v. REN SHIJU et al., No.2:26-cv-01134 (W.D. Pa., Aug.14, 2026, text order denying motion ECF 52; order entry number unverified) denied a misjoinder motion at the motion stage based on pleaded coordination allegations. The available text is reproduced by third-party docket sources; the underlying entry was text-only and no signed PDF/PACER-certified snapshot was obtained in this research batch. It is a counterexample to a universal claim that courts uniformly reject Schedule A joinder, not proof that all defendants were factually coordinated.
 
 ## 8. Brand sample and ABTL / Lex Machina
 
@@ -108,3 +108,12 @@ Do not present Smart Study/Kangol, Liu, Wood, Louis Poulsen, Jacki Easlick, Adid
 ## 11. Release controls
 
 V0.9 prototype is on branch `v0.9-research-integration-2026-11-23`. The V0.8 `main` branch and published GitHub Pages site remain unchanged. Do not merge/deploy until all charts, map points, source links, case records, filters, responsive layouts and methodology notes pass independent testing.
+
+
+## 12. R12 shared filters and source corrections
+
+Filing visualizations share 247 anonymous month × district × NOS cells built from the accepted CSV (SHA-256 `9521b865871587fcca66f0d7e852d5ec18c98d547014ad654d986cad98746a57`). Year, circuit, district and NOS restrictions are intersected. All 18 monthly, 22 district and 7 NOS marginals reconcile with accepted aggregates. H1 and quarter comparisons keep named comparison windows and apply the same geographic/NOS scope. Outcome, precision and external-series modules retain their original denominators.
+
+Authority type, source category, circuit and procedural status are separate dossier fields; source provenance does not determine precedential force. Archived `legacySourceLevel` text is retained for audit, not filtering. E.D. New York locator corrected to Brooklyn city coordinates (40.6782, -73.9442).
+
+Jacki Easlick official August 17, 2026 Erratum changes page 3 footnote 1 from permissible to impermissible; its timeline records this correction. In PLOUT, ECF 52 refers to the July 20 motion, not the August 14 order entry. The third-party text supports an August 14 order denying that motion; its own entry number remains unverified.

@@ -1,0 +1,184 @@
+{
+  "date": "2026-11-23",
+  "scope": "city-level orientation review and official court-city affiliation; not surveyed courthouse coordinates or district polygons",
+  "count": 22,
+  "correction": "E.D. New York: 40.7282,-73.7949 -> Brooklyn 40.6782,-73.9442",
+  "locators": [
+    {
+      "code": "7-52",
+      "name": "N.D. Illinois",
+      "locator": "Chicago",
+      "lat": 41.8781,
+      "lng": -87.6298,
+      "locatorSource": "https://www.ilnd.uscourts.gov/"
+    },
+    {
+      "code": "11-3C",
+      "name": "S.D. Florida",
+      "locator": "Miami",
+      "lat": 25.7617,
+      "lng": -80.1918,
+      "locatorSource": "https://www.flsd.uscourts.gov/court-info/court-locations"
+    },
+    {
+      "code": "3-15",
+      "name": "W.D. Pennsylvania",
+      "locator": "Pittsburgh",
+      "lat": 40.4406,
+      "lng": -79.9959,
+      "locatorSource": "https://www.pawd.uscourts.gov/"
+    },
+    {
+      "code": "2-08",
+      "name": "S.D. New York",
+      "locator": "Manhattan",
+      "lat": 40.7128,
+      "lng": -74.006,
+      "locatorSource": "https://www.nysd.uscourts.gov/"
+    },
+    {
+      "code": "5-42",
+      "name": "W.D. Texas",
+      "locator": "Austin",
+      "lat": 30.2672,
+      "lng": -97.7431,
+      "locatorSource": "https://www.txwd.uscourts.gov/"
+    },
+    {
+      "code": "7-55",
+      "name": "N.D. Indiana",
+      "locator": "Fort Wayne",
+      "lat": 41.0793,
+      "lng": -85.1394,
+      "locatorSource": "https://www.innd.uscourts.gov/"
+    },
+    {
+      "code": "5-40",
+      "name": "E.D. Texas",
+      "locator": "Tyler",
+      "lat": 32.3513,
+      "lng": -95.3011,
+      "locatorSource": "https://www.txed.uscourts.gov/"
+    },
+    {
+      "code": "11-3A",
+      "name": "M.D. Florida",
+      "locator": "Orlando",
+      "lat": 28.5383,
+      "lng": -81.3792,
+      "locatorSource": "https://www.flmd.uscourts.gov/"
+    },
+    {
+      "code": "4-22",
+      "name": "E.D. Virginia",
+      "locator": "Richmond",
+      "lat": 37.5407,
+      "lng": -77.436,
+      "locatorSource": "https://www.vaed.uscourts.gov/"
+    },
+    {
+      "code": "3-12",
+      "name": "D. New Jersey",
+      "locator": "Trenton",
+      "lat": 40.2171,
+      "lng": -74.7429,
+      "locatorSource": "https://www.njd.uscourts.gov/"
+    },
+    {
+      "code": "8-65",
+      "name": "E.D. Missouri",
+      "locator": "St. Louis",
+      "lat": 38.627,
+      "lng": -90.1994,
+      "locatorSource": "https://www.moed.uscourts.gov/"
+    },
+    {
+      "code": "5-41",
+      "name": "S.D. Texas",
+      "locator": "Houston",
+      "lat": 29.7604,
+      "lng": -95.3698,
+      "locatorSource": "https://www.txs.uscourts.gov/"
+    },
+    {
+      "code": "2-07",
+      "name": "E.D. New York",
+      "locator": "Brooklyn",
+      "lat": 40.6782,
+      "lng": -73.9442,
+      "locatorSource": "https://www.nyed.uscourts.gov/index.php/locations"
+    },
+    {
+      "code": "1-01",
+      "name": "D. Massachusetts",
+      "locator": "Boston",
+      "lat": 42.3601,
+      "lng": -71.0589,
+      "locatorSource": "https://www.mad.uscourts.gov/divisions.htm"
+    },
+    {
+      "code": "1-03",
+      "name": "D. Rhode Island",
+      "locator": "Providence",
+      "lat": 41.824,
+      "lng": -71.4128,
+      "locatorSource": "https://www.rid.uscourts.gov/providence"
+    },
+    {
+      "code": "3-13",
+      "name": "E.D. Pennsylvania",
+      "locator": "Philadelphia",
+      "lat": 39.9526,
+      "lng": -75.1652,
+      "locatorSource": "https://www.paed.uscourts.gov/court-info/court-locations/philadelphia"
+    },
+    {
+      "code": "4-17",
+      "name": "E.D. North Carolina",
+      "locator": "Raleigh",
+      "lat": 35.7796,
+      "lng": -78.6382,
+      "locatorSource": "https://www.nced.uscourts.gov/courtlocations/Default.aspx?loc=ral"
+    },
+    {
+      "code": "4-20",
+      "name": "D. South Carolina",
+      "locator": "Columbia",
+      "lat": 34.0007,
+      "lng": -81.0348,
+      "locatorSource": "https://www.scd.uscourts.gov/court/columbia.asp"
+    },
+    {
+      "code": "9-73",
+      "name": "C.D. California",
+      "locator": "Los Angeles",
+      "lat": 34.0522,
+      "lng": -118.2437,
+      "locatorSource": "https://www.cacd.uscourts.gov/locations"
+    },
+    {
+      "code": "9-74",
+      "name": "S.D. California",
+      "locator": "San Diego",
+      "lat": 32.7157,
+      "lng": -117.1611,
+      "locatorSource": "https://www.usmarshals.gov/local-districts/southern-district-of-california/courthouse-locations"
+    },
+    {
+      "code": "10-83",
+      "name": "D. Kansas",
+      "locator": "Wichita",
+      "lat": 37.6872,
+      "lng": -97.3301,
+      "locatorSource": "https://www.ksd.uscourts.gov/wichita"
+    },
+    {
+      "code": "9-81",
+      "name": "W.D. Washington",
+      "locator": "Seattle",
+      "lat": 47.6062,
+      "lng": -122.3321,
+      "locatorSource": "https://www.wawd.uscourts.gov/visitors"
+    }
+  ]
+}

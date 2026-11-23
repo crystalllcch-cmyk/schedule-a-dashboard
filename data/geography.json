@@ -1,1 +1,274 @@
-{"source":"R24_FJC_v3_修正后候选明细_2026-11-13.csv","unit":"case-level candidate records grouped by FJC circuit and district code","coverage":"2025-01-01 to 2026-06-30","total":4551,"knownMappedTotal":4542,"unmappedTotal":9,"locationNote":"Coordinates are approximate city-center locator points selected for orientation only; they are not official courthouse coordinates, district boundary geometry, or the location of any specific defendant. W.D. Texas has multiple divisions; Austin is used as a district-level locator. Nine unmapped FJC district codes are shown separately.","districts":[{"code":"7-52","name":"N.D. Illinois","count":3840,"lat":41.8781,"lng":-87.6298,"locator":"Chicago","quarters":{"2025Q1":566,"2025Q2":590,"2025Q3":675,"2025Q4":717,"2026Q1":634,"2026Q2":658}},{"code":"11-3C","name":"S.D. Florida","count":282,"lat":25.7617,"lng":-80.1918,"locator":"Miami","quarters":{"2025Q1":69,"2025Q2":65,"2025Q3":48,"2025Q4":49,"2026Q1":18,"2026Q2":33}},{"code":"3-15","name":"W.D. Pennsylvania","count":178,"lat":40.4406,"lng":-79.9959,"locator":"Pittsburgh","quarters":{"2025Q2":2,"2025Q4":42,"2026Q1":72,"2026Q2":62}},{"code":"2-08","name":"S.D. New York","count":112,"lat":40.7128,"lng":-74.006,"locator":"Manhattan","quarters":{"2025Q1":1,"2025Q2":7,"2025Q3":1,"2026Q1":24,"2026Q2":79}},{"code":"5-42","name":"W.D. Texas","count":43,"lat":30.2672,"lng":-97.7431,"locator":"Austin · district locator","quarters":{"2025Q1":1,"2025Q2":5,"2025Q3":8,"2025Q4":11,"2026Q1":8,"2026Q2":10}},{"code":"7-55","name":"N.D. Indiana","count":26,"lat":41.6764,"lng":-86.252,"locator":"South Bend","quarters":{"2025Q2":2,"2025Q3":4,"2025Q4":4,"2026Q1":9,"2026Q2":7}},{"code":"5-40","name":"E.D. Texas","count":23,"lat":32.3513,"lng":-95.3011,"locator":"Tyler","quarters":{"2025Q2":3,"2025Q3":5,"2025Q4":8,"2026Q1":3,"2026Q2":4}},{"code":"4-22","name":"E.D. Virginia","count":13,"lat":37.5407,"lng":-77.436,"locator":"Richmond","quarters":{"2025Q1":1,"2025Q2":1,"2025Q3":2,"2025Q4":8,"2026Q2":1}},{"code":"11-3A","name":"M.D. Florida","count":13,"lat":28.5383,"lng":-81.3792,"locator":"Orlando","quarters":{"2025Q3":3,"2025Q4":2,"2026Q1":1,"2026Q2":7}},{"code":"8-65","name":"E.D. Missouri","count":4,"lat":38.627,"lng":-90.1994,"locator":"St. Louis","quarters":{"2025Q4":2,"2026Q1":1,"2026Q2":1}},{"code":"3-12","name":"D. New Jersey","count":4,"lat":40.7357,"lng":-74.1724,"locator":"Newark","quarters":{"2025Q2":1,"2025Q3":3}},{"code":"5-41","name":"S.D. Texas","count":2,"lat":29.7604,"lng":-95.3698,"locator":"Houston","quarters":{"2025Q4":1,"2026Q1":1}},{"code":"2-07","name":"E.D. New York","count":2,"lat":40.6782,"lng":-73.9442,"locator":"Brooklyn","quarters":{"2025Q2":1,"2025Q3":1}},{"code":"1-01","name":"Unmapped FJC district code","count":1,"quarters":{"2025Q4":1}},{"code":"3-13","name":"Unmapped FJC district code","count":1,"quarters":{"2025Q3":1}},{"code":"1-03","name":"Unmapped FJC district code","count":1,"quarters":{"2025Q4":1}},{"code":"4-17","name":"Unmapped FJC district code","count":1,"quarters":{"2026Q2":1}},{"code":"4-20","name":"Unmapped FJC district code","count":1,"quarters":{"2026Q2":1}},{"code":"9-74","name":"Unmapped FJC district code","count":1,"quarters":{"2025Q3":1}},{"code":"9-73","name":"Unmapped FJC district code","count":1,"quarters":{"2026Q2":1}},{"code":"10-83","name":"Unmapped FJC district code","count":1,"quarters":{"2025Q2":1}},{"code":"9-81","name":"Unmapped FJC district code","count":1,"quarters":{"2025Q4":1}}]}
+{
+  "source": "R24_FJC_v3_修正后候选明细_2026-11-13.csv",
+  "unit": "case-level candidate records grouped by FJC circuit and district code",
+  "coverage": "2025-01-01 to 2026-06-30",
+  "total": 4551,
+  "knownMappedTotal": 4542,
+  "unmappedTotal": 9,
+  "locationNote": "Coordinates are approximate city-center locator points selected for orientation only; they are not official courthouse coordinates, district boundary geometry, or the location of any specific defendant. W.D. Texas has multiple divisions; Austin is used as a district-level locator. Nine unmapped FJC district codes are shown separately.",
+  "districts": [
+    {
+      "code": "7-52",
+      "name": "N.D. Illinois",
+      "count": 3840,
+      "lat": 41.8781,
+      "lng": -87.6298,
+      "locator": "Chicago",
+      "quarters": {
+        "2025Q1": 566,
+        "2025Q2": 590,
+        "2025Q3": 675,
+        "2025Q4": 717,
+        "2026Q1": 634,
+        "2026Q2": 658
+      }
+    },
+    {
+      "code": "11-3C",
+      "name": "S.D. Florida",
+      "count": 282,
+      "lat": 25.7617,
+      "lng": -80.1918,
+      "locator": "Miami",
+      "quarters": {
+        "2025Q1": 69,
+        "2025Q2": 65,
+        "2025Q3": 48,
+        "2025Q4": 49,
+        "2026Q1": 18,
+        "2026Q2": 33
+      }
+    },
+    {
+      "code": "3-15",
+      "name": "W.D. Pennsylvania",
+      "count": 178,
+      "lat": 40.4406,
+      "lng": -79.9959,
+      "locator": "Pittsburgh",
+      "quarters": {
+        "2025Q2": 2,
+        "2025Q4": 42,
+        "2026Q1": 72,
+        "2026Q2": 62
+      }
+    },
+    {
+      "code": "2-08",
+      "name": "S.D. New York",
+      "count": 112,
+      "lat": 40.7128,
+      "lng": -74.006,
+      "locator": "Manhattan",
+      "quarters": {
+        "2025Q1": 1,
+        "2025Q2": 7,
+        "2025Q3": 1,
+        "2026Q1": 24,
+        "2026Q2": 79
+      }
+    },
+    {
+      "code": "5-42",
+      "name": "W.D. Texas",
+      "count": 43,
+      "lat": 30.2672,
+      "lng": -97.7431,
+      "locator": "Austin · district locator",
+      "quarters": {
+        "2025Q1": 1,
+        "2025Q2": 5,
+        "2025Q3": 8,
+        "2025Q4": 11,
+        "2026Q1": 8,
+        "2026Q2": 10
+      }
+    },
+    {
+      "code": "7-55",
+      "name": "N.D. Indiana",
+      "count": 26,
+      "lat": 41.6764,
+      "lng": -86.252,
+      "locator": "South Bend",
+      "quarters": {
+        "2025Q2": 2,
+        "2025Q3": 4,
+        "2025Q4": 4,
+        "2026Q1": 9,
+        "2026Q2": 7
+      }
+    },
+    {
+      "code": "5-40",
+      "name": "E.D. Texas",
+      "count": 23,
+      "lat": 32.3513,
+      "lng": -95.3011,
+      "locator": "Tyler",
+      "quarters": {
+        "2025Q2": 3,
+        "2025Q3": 5,
+        "2025Q4": 8,
+        "2026Q1": 3,
+        "2026Q2": 4
+      }
+    },
+    {
+      "code": "4-22",
+      "name": "E.D. Virginia",
+      "count": 13,
+      "lat": 37.5407,
+      "lng": -77.436,
+      "locator": "Richmond",
+      "quarters": {
+        "2025Q1": 1,
+        "2025Q2": 1,
+        "2025Q3": 2,
+        "2025Q4": 8,
+        "2026Q2": 1
+      }
+    },
+    {
+      "code": "11-3A",
+      "name": "M.D. Florida",
+      "count": 13,
+      "lat": 28.5383,
+      "lng": -81.3792,
+      "locator": "Orlando",
+      "quarters": {
+        "2025Q3": 3,
+        "2025Q4": 2,
+        "2026Q1": 1,
+        "2026Q2": 7
+      }
+    },
+    {
+      "code": "8-65",
+      "name": "E.D. Missouri",
+      "count": 4,
+      "lat": 38.627,
+      "lng": -90.1994,
+      "locator": "St. Louis",
+      "quarters": {
+        "2025Q4": 2,
+        "2026Q1": 1,
+        "2026Q2": 1
+      }
+    },
+    {
+      "code": "3-12",
+      "name": "D. New Jersey",
+      "count": 4,
+      "lat": 40.7357,
+      "lng": -74.1724,
+      "locator": "Newark",
+      "quarters": {
+        "2025Q2": 1,
+        "2025Q3": 3
+      }
+    },
+    {
+      "code": "5-41",
+      "name": "S.D. Texas",
+      "count": 2,
+      "lat": 29.7604,
+      "lng": -95.3698,
+      "locator": "Houston",
+      "quarters": {
+        "2025Q4": 1,
+        "2026Q1": 1
+      }
+    },
+    {
+      "code": "2-07",
+      "name": "E.D. New York",
+      "count": 2,
+      "lat": 40.6782,
+      "lng": -73.9442,
+      "locator": "Brooklyn",
+      "quarters": {
+        "2025Q2": 1,
+        "2025Q3": 1
+      }
+    },
+    {
+      "code": "1-01",
+      "name": "Unmapped FJC district code",
+      "count": 1,
+      "quarters": {
+        "2025Q4": 1
+      }
+    },
+    {
+      "code": "3-13",
+      "name": "Unmapped FJC district code",
+      "count": 1,
+      "quarters": {
+        "2025Q3": 1
+      }
+    },
+    {
+      "code": "1-03",
+      "name": "Unmapped FJC district code",
+      "count": 1,
+      "quarters": {
+        "2025Q4": 1
+      }
+    },
+    {
+      "code": "4-17",
+      "name": "Unmapped FJC district code",
+      "count": 1,
+      "quarters": {
+        "2026Q2": 1
+      }
+    },
+    {
+      "code": "4-20",
+      "name": "Unmapped FJC district code",
+      "count": 1,
+      "quarters": {
+        "2026Q2": 1
+      }
+    },
+    {
+      "code": "9-74",
+      "name": "Unmapped FJC district code",
+      "count": 1,
+      "quarters": {
+        "2025Q3": 1
+      }
+    },
+    {
+      "code": "9-73",
+      "name": "Unmapped FJC district code",
+      "count": 1,
+      "quarters": {
+        "2026Q2": 1
+      }
+    },
+    {
+      "code": "10-83",
+      "name": "Unmapped FJC district code",
+      "count": 1,
+      "quarters": {
+        "2025Q2": 1
+      }
+    },
+    {
+      "code": "9-81",
+      "name": "Unmapped FJC district code",
+      "count": 1,
+      "quarters": {
+        "2025Q4": 1
+      }
+    }
+  ],
+  "_versionNotice": {
+    "version": "V0.8 historical snapshot",
+    "usedByV09": false,
+    "supersededBy": "v09_research.json and filing_cells.json",
+    "note": "Preserved for historical comparison; old sample and map coverage statements are superseded."
+  }
+}

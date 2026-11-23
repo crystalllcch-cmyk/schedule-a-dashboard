@@ -30,15 +30,21 @@
 ## 数据文件
 
 - `data/v09_research.json`：V0.9整合指标、月度/季度、地区、NOS、结案、抽样、品牌样本及历史序列。
-- `data/case_dossiers.json`：26个精选案件档案及时间线、来源等级、原始链接。
+- `data/case_dossiers.json`：26个精选案件档案及时间线、判例效力、来源等级、巡回区、程序状态和原始链接。
+- `data/filing_cells.json`：由已核验候选CSV重建的247个匿名月度×地区×NOS统计单元。
 - `index.html`：V0.9互动看板页面。
 - `data/dashboard.json`、`data/geography.json`、`data/research_insights.json`及`data/district_quarterly.json`：保留的V0.8历史文件，不作为V0.9页面主数据源。
 - `docs/METHODOLOGY.md`：V0.9研究方法、字段定义、口径与限制。
 
 ## 本地预览
 
-通过本地静态HTTP服务器打开仓库根目录（例如 `python -m http.server 8000`），再访问 `http://localhost:8000`。页面使用ECharts、Leaflet、OpenStreetMap tiles及Google Fonts外部资源。
+通过本地静态HTTP服务器打开仓库根目录（例如 `python -m http.server 8000`），再访问 `http://localhost:8000`。页面使用ECharts、Leaflet、OpenStreetMap tiles及Google Fonts外部资源。图表资源不可用时显示数值表格；地图不可用时仍可查看地区数据。
+
+R12已补齐年份×巡回区×地区×NOS共同筛选，以及案件判例效力、来源等级、巡回区和状态独立筛选。验证记录见 `docs/R12_QA.md`；实际浏览器视觉验收仍未完成。
+
+交互逻辑验证：`npm install` 后运行 `npm test`。该验证使用DOM环境和图表适配器，不替代浏览器渲染验收。
 
 ## 发布规则
 
 只有完成数据核对、交互测试、来源链接抽查、页面验收及用户确认后，才可将V0.9合并至`main`并触发GitHub Pages部署。当前分支不自动替代V0.8线上版本。
+

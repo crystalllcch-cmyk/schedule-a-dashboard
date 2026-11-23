@@ -1,0 +1,8 @@
+{
+  "name": "schedule-a-dashboard",
+  "private": true,
+  "version": "0.9.0",
+  "description": "Static Schedule A research dashboard",
+  "scripts": { "test": "node scripts/verify_interactions.cjs" },
+  "devDependencies": { "jsdom": "31.0.1" }
+}

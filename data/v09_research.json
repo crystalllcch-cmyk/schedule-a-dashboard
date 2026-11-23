@@ -6,7 +6,8 @@
     "coverage": "2025-01-02—2026-06-30",
     "unit": "FJC案件级Schedule A特征候选记录（ORIGIN=1）",
     "candidateCount": 4551,
-    "caveat": "候选记录不是逐案确认的Schedule A案件；案件数不等于被告数、店铺数、Listing数或独立执法活动数。"
+    "caveat": "候选记录不是逐案确认的Schedule A案件；案件数不等于被告数、店铺数、Listing数或独立执法活动数。",
+    "filingFilterSource": "filing_cells.json: month × district × NOS; regenerated from verified R24 v3 CSV"
   },
   "monthly": [
     {
@@ -253,7 +254,8 @@
       "count": 3840,
       "lat": 41.8781,
       "lng": -87.6298,
-      "locator": "Chicago"
+      "locator": "Chicago",
+      "locatorSource": "https://www.ilnd.uscourts.gov/"
     },
     {
       "code": "11-3C",
@@ -263,7 +265,8 @@
       "count": 282,
       "lat": 25.7617,
       "lng": -80.1918,
-      "locator": "Miami"
+      "locator": "Miami",
+      "locatorSource": "https://www.flsd.uscourts.gov/court-info/court-locations"
     },
     {
       "code": "3-15",
@@ -273,7 +276,8 @@
       "count": 178,
       "lat": 40.4406,
       "lng": -79.9959,
-      "locator": "Pittsburgh"
+      "locator": "Pittsburgh",
+      "locatorSource": "https://www.pawd.uscourts.gov/"
     },
     {
       "code": "2-08",
@@ -283,7 +287,8 @@
       "count": 112,
       "lat": 40.7128,
       "lng": -74.006,
-      "locator": "Manhattan"
+      "locator": "Manhattan",
+      "locatorSource": "https://www.nysd.uscourts.gov/"
     },
     {
       "code": "5-42",
@@ -293,7 +298,8 @@
       "count": 43,
       "lat": 30.2672,
       "lng": -97.7431,
-      "locator": "Austin"
+      "locator": "Austin",
+      "locatorSource": "https://www.txwd.uscourts.gov/"
     },
     {
       "code": "7-55",
@@ -303,7 +309,8 @@
       "count": 26,
       "lat": 41.0793,
       "lng": -85.1394,
-      "locator": "Fort Wayne"
+      "locator": "Fort Wayne",
+      "locatorSource": "https://www.innd.uscourts.gov/"
     },
     {
       "code": "5-40",
@@ -313,7 +320,8 @@
       "count": 23,
       "lat": 32.3513,
       "lng": -95.3011,
-      "locator": "Tyler"
+      "locator": "Tyler",
+      "locatorSource": "https://www.txed.uscourts.gov/"
     },
     {
       "code": "11-3A",
@@ -323,7 +331,8 @@
       "count": 13,
       "lat": 28.5383,
       "lng": -81.3792,
-      "locator": "Orlando"
+      "locator": "Orlando",
+      "locatorSource": "https://www.flmd.uscourts.gov/"
     },
     {
       "code": "4-22",
@@ -333,7 +342,8 @@
       "count": 13,
       "lat": 37.5407,
       "lng": -77.436,
-      "locator": "Richmond"
+      "locator": "Richmond",
+      "locatorSource": "https://www.vaed.uscourts.gov/"
     },
     {
       "code": "3-12",
@@ -343,7 +353,8 @@
       "count": 4,
       "lat": 40.2171,
       "lng": -74.7429,
-      "locator": "Trenton"
+      "locator": "Trenton",
+      "locatorSource": "https://www.njd.uscourts.gov/"
     },
     {
       "code": "8-65",
@@ -353,7 +364,8 @@
       "count": 4,
       "lat": 38.627,
       "lng": -90.1994,
-      "locator": "St. Louis"
+      "locator": "St. Louis",
+      "locatorSource": "https://www.moed.uscourts.gov/"
     },
     {
       "code": "5-41",
@@ -363,7 +375,8 @@
       "count": 2,
       "lat": 29.7604,
       "lng": -95.3698,
-      "locator": "Houston"
+      "locator": "Houston",
+      "locatorSource": "https://www.txs.uscourts.gov/"
     },
     {
       "code": "2-07",
@@ -371,9 +384,10 @@
       "state": "NY",
       "circuit": "Second Circuit",
       "count": 2,
-      "lat": 40.7282,
-      "lng": -73.7949,
-      "locator": "Brooklyn locator"
+      "lat": 40.6782,
+      "lng": -73.9442,
+      "locator": "Brooklyn",
+      "locatorSource": "https://www.nyed.uscourts.gov/index.php/locations"
     },
     {
       "code": "1-01",
@@ -383,7 +397,8 @@
       "count": 1,
       "lat": 42.3601,
       "lng": -71.0589,
-      "locator": "Boston"
+      "locator": "Boston",
+      "locatorSource": "https://www.mad.uscourts.gov/divisions.htm"
     },
     {
       "code": "1-03",
@@ -393,7 +408,8 @@
       "count": 1,
       "lat": 41.824,
       "lng": -71.4128,
-      "locator": "Providence"
+      "locator": "Providence",
+      "locatorSource": "https://www.rid.uscourts.gov/providence"
     },
     {
       "code": "3-13",
@@ -403,7 +419,8 @@
       "count": 1,
       "lat": 39.9526,
       "lng": -75.1652,
-      "locator": "Philadelphia"
+      "locator": "Philadelphia",
+      "locatorSource": "https://www.paed.uscourts.gov/court-info/court-locations/philadelphia"
     },
     {
       "code": "4-17",
@@ -413,7 +430,8 @@
       "count": 1,
       "lat": 35.7796,
       "lng": -78.6382,
-      "locator": "Raleigh"
+      "locator": "Raleigh",
+      "locatorSource": "https://www.nced.uscourts.gov/courtlocations/Default.aspx?loc=ral"
     },
     {
       "code": "4-20",
@@ -423,7 +441,8 @@
       "count": 1,
       "lat": 34.0007,
       "lng": -81.0348,
-      "locator": "Columbia"
+      "locator": "Columbia",
+      "locatorSource": "https://www.scd.uscourts.gov/court/columbia.asp"
     },
     {
       "code": "9-73",
@@ -433,7 +452,8 @@
       "count": 1,
       "lat": 34.0522,
       "lng": -118.2437,
-      "locator": "Los Angeles"
+      "locator": "Los Angeles",
+      "locatorSource": "https://www.cacd.uscourts.gov/locations"
     },
     {
       "code": "9-74",
@@ -443,7 +463,8 @@
       "count": 1,
       "lat": 32.7157,
       "lng": -117.1611,
-      "locator": "San Diego"
+      "locator": "San Diego",
+      "locatorSource": "https://www.usmarshals.gov/local-districts/southern-district-of-california/courthouse-locations"
     },
     {
       "code": "10-83",
@@ -453,7 +474,8 @@
       "count": 1,
       "lat": 37.6872,
       "lng": -97.3301,
-      "locator": "Wichita"
+      "locator": "Wichita",
+      "locatorSource": "https://www.ksd.uscourts.gov/wichita"
     },
     {
       "code": "9-81",
@@ -463,7 +485,8 @@
       "count": 1,
       "lat": 47.6062,
       "lng": -122.3321,
-      "locator": "Seattle"
+      "locator": "Seattle",
+      "locatorSource": "https://www.wawd.uscourts.gov/visitors"
     }
   ],
   "status": {
