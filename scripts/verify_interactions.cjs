@@ -40,6 +40,10 @@ async function boot(withCharts=false){
   w.document.querySelector('[data-module="validation"]').click();assert.equal(w.document.querySelector('.filters').hidden,true);
   assert.deepEqual([...w.document.querySelectorAll('.view.active')].map(x=>x.id),['plaintiffs','quality','method']);
   w.document.querySelector('[data-module="trend"]').click();assert.equal(w.document.querySelector('.filters').hidden,false);
+  w.document.querySelector('[data-geo-mode="list"]').click();assert.equal(w.document.getElementById('geoListPanel').hidden,false);assert.equal(w.document.getElementById('geoMapPanel').hidden,true);
+  w.document.querySelector('[data-geo-mode="map"]').click();assert.equal(w.document.getElementById('geoMapPanel').hidden,false);assert.equal(w.document.getElementById('geoListPanel').hidden,true);
+  w.document.querySelector('[data-module="judiciary"]').click();w.document.querySelector('[data-case-mode="constellation"]').click();assert.equal(w.document.getElementById('caseConstellationPanel').hidden,false);assert.equal(w.document.getElementById('caseList').hidden,true);
+  w.document.querySelector('[data-case-mode="list"]').click();assert.equal(w.document.getElementById('caseList').hidden,false);assert.equal(w.document.getElementById('caseConstellationPanel').hidden,true);
   assert.deepEqual([...w.document.querySelectorAll('.view.active')].map(x=>x.id),['overview','trend']);
   assert.equal(w.document.querySelectorAll('.tab').length,4);
   assert.equal(w.document.querySelectorAll('.view').length,8);
