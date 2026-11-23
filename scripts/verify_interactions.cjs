@@ -7,7 +7,7 @@ async function boot(withCharts=false){
   const dom=new JSDOM(html,{runScripts:'outside-only',pretendToBeVisual:true,url:'https://qa.invalid/'}),w=dom.window;
   w.fetch=async url=>({ok:true,json:async()=>JSON.parse(fs.readFileSync(path.join(root,url.replace('./','')),'utf8'))});
   let chartOptions={};
-  if(withCharts) w.echarts={init:el=>({setOption:(v)=>{chartOptions[el.id]={...chartOptions[el.id],...v}},resize:()=>{}})};
+  if(withCharts) w.echarts={init:el=>({setOption:(v)=>{chartOptions[el.id]={...chartOptions[el.id],...v}},resize:()=>{},on:()=>{}})};
   const inline=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n');
   w.eval(inline+'\n'+fs.readFileSync(path.join(root,'app.js'),'utf8')+'\nwindow.__qaTotal = () => sum(filingRows());');
   for(let i=0;i<20&&!w.document.querySelector('.case');i++)await new Promise(r=>setTimeout(r,5));
