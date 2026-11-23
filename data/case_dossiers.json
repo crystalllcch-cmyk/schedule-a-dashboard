@@ -2278,11 +2278,11 @@
       "outcome": "affirmed-minimum-statutory-damages",
       "outcomeLabel": "维持最低法定赔偿",
       "sourceLevel": "三级｜2–1未刊发/非先例处置",
-      "sourceNote": "非经典多被告Schedule A案件；多数意见非先例，附有异议意见。",
+      "sourceNote": "第七巡回官方NONPRECEDENTIAL DISPOSITION；多数意见2–1，Pryor法官另有异议。",
       "summary": "单一具名被告的商标/域名案件。多数意见认为缺席仅确立责任，不自动确立最高法定赔偿额；原告未在default judgment阶段同步提供支持最高金额的证据和论证。",
       "issue": "被告缺席是否自动支持原告请求的最高法定赔偿额？",
       "decision": "第七巡回多数意见维持最低法定赔偿；Pryor法官异议认为地区法院仍应解释其裁量理由。",
-      "significance": "可作为相关商标缺席赔偿问题的补充观察，但不是经典Schedule A案件，也不是拘束性先例。应保留2–1及异议信息。",
+      "significance": "可作为相关商标缺席赔偿问题的补充观察，但不是经典Schedule A案件，也不是拘束性先例。多数意见为2–1非先例处置，Pryor法官异议认为地区法院未充分解释最低赔偿裁量。",
       "timeline": [
         {
           "date": "2026-04-29",
@@ -2293,7 +2293,7 @@
       "sources": [
         {
           "label": "Seventh Circuit official disposition",
-          "url": "https://media.ca7.uscourts.gov/cgi-bin/OpinionsWeb/processWebInputExternal.pl?Path=Y2026%2FD04-29%2FC%3A25-2659%3AJ%3APerCuriam%3Aaut%3AT%3AfnOp%3AN%3A3532605%3AS%3A0&Submit=Display",
+          "url": "https://media.ca7.uscourts.gov/cgi-bin/OpinionsWeb/processWebInputExternal.pl?Path=Y2026%2FD04-29%2FC%3A25-2659%3AJ%3APerCuriam%3Aaut%3AT%3AnpDp%3AN%3A3532605%3AS%3A0&Submit=Display",
           "role": "官方上诉法院文件"
         }
       ],
