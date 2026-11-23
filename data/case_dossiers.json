@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-20",
-  "description": "Selected researched case dossiers. Each entry is evidence-labelled; timelines include only events supported by the underlying project research records. This is not a comprehensive case census.",
+  "updated": "2026-11-23 · V0.9 research integration branch",
+  "description": "Selected source-checked federal Schedule A cases, related appellate authority, pending appeals, and judge-specific orders. This is a selective archive, not a comprehensive case census.",
   "evidenceLevels": [
     "一级｜完整上诉法院判决",
     "一级｜GovInfo官方法院文件",
@@ -1620,6 +1620,687 @@
           {
             "label": "适用边界",
             "text": "属于法官个案样本，且均为无人对抗的PI hearing，不能推广为W.D. Pa.全院规则。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shangyou-jiayi",
+      "title": "Shangyou Jiayi Lighting Product Co. v. Partnerships and Unincorporated Associations Identified in Schedule A",
+      "caseNo": "4:25-cv-01416-JCB · Dkt.18",
+      "court": "E.D. Texas",
+      "judge": "J. Campbell Barker",
+      "date": "2026-09-30",
+      "period": "2026",
+      "topics": [
+        "service",
+        "pj",
+        "joinder",
+        "tro",
+        "asset",
+        "bond",
+        "platform"
+      ],
+      "outcome": "relief-denied",
+      "outcomeLabel": "送达、TRO及广泛资产限制请求未获准",
+      "sourceLevel": "一级｜GovInfo官方法院裁定PDF",
+      "sourceNote": "官方法院文件；地区法院个案，不是巡回区拘束性先例。",
+      "summary": "实用专利Schedule A案件涉及14名被告。原告主要依赖Amazon checkout截图及共同经营指称，请求邮件送达、TRO、资产限制及加速取证。法院分别审查海牙公约送达、个人管辖权、35 U.S.C. §299合并、Rule 65(b)(1)(B)通知认证、平台非当事人义务、专利claim chart、资产冻结依据及保证金。",
+      "issue": "仅凭checkout截图和共同经营指称，能否建立逐被告个人管辖权、满足专利案合并条件并取得TRO及广泛资产冻结？",
+      "decision": "法院拒绝以现有材料支持邮件送达、TRO及广泛资产限制/加速取证请求。裁定强调§299合并与个人管辖权是两个独立问题；checkout截图不等于完成购买；平台服务商不能仅因提供服务就自动成为Rule 65(d)(2)受约束非当事人；不能仅为保全未来金钱判决而冻结被告全部资产。",
+      "significance": "可用于说明Schedule A专利案件仍须逐被告证明管辖权、具体满足§299及Rule 65要求；不能外推为所有商标/版权案件均禁止资产冻结。必须与同日另一案Liu v. Schedule A（4:25-cv-01220）分开。",
+      "timeline": [
+        {
+          "date": "2026-09-30",
+          "label": "法院作出Dkt.18裁定",
+          "detail": "法院分别处理送达、个人管辖权、§299合并、TRO、资产限制、平台命令及保证金等问题。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "GovInfo official court PDF · Dkt.18",
+          "url": "https://www.govinfo.gov/content/pkg/USCOURTS-txed-4_25-cv-01416/pdf/USCOURTS-txed-4_25-cv-01416-0.pdf",
+          "role": "官方法院裁定"
+        }
+      ],
+      "partyResponse": "",
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "案件背景",
+            "text": "实用专利Schedule A案件涉及14名被告。原告主要依赖Amazon checkout截图及共同经营指称，请求邮件送达、TRO、资产限制及加速取证。法院分别审查海牙公约送达、个人管辖权、35 U.S.C. §299合并、Rule 65(b)(1)(B)通知认证、平台非当事人义务、专利claim chart、资产冻结依据及保证金。"
+          }
+        ],
+        "issue": [
+          {
+            "label": "核心争点",
+            "text": "仅凭checkout截图和共同经营指称，能否建立逐被告个人管辖权、满足专利案合并条件并取得TRO及广泛资产冻结？"
+          }
+        ],
+        "decision": [
+          {
+            "label": "处理结果",
+            "text": "法院拒绝以现有材料支持邮件送达、TRO及广泛资产限制/加速取证请求。裁定强调§299合并与个人管辖权是两个独立问题；checkout截图不等于完成购买；平台服务商不能仅因提供服务就自动成为Rule 65(d)(2)受约束非当事人；不能仅为保全未来金钱判决而冻结被告全部资产。"
+          }
+        ],
+        "significance": [
+          {
+            "label": "适用边界",
+            "text": "可用于说明Schedule A专利案件仍须逐被告证明管辖权、具体满足§299及Rule 65要求；不能外推为所有商标/版权案件均禁止资产冻结。必须与同日另一案Liu v. Schedule A（4:25-cv-01220）分开。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "louis-poulsen",
+      "title": "Louis Poulsen A/S v. Lightzey",
+      "caseNo": "No.25-2048",
+      "court": "Seventh Circuit",
+      "judge": "法院合议庭",
+      "date": "2026-11-17",
+      "period": "2026",
+      "topics": [
+        "pj",
+        "fees",
+        "schedule-a"
+      ],
+      "outcome": "affirmed-fees-denial",
+      "outcomeLabel": "维持拒绝律师费裁定",
+      "sourceLevel": "三级｜未刊发/非先例上诉处置",
+      "sourceNote": "第七巡回未刊发处置；不构成拘束性先例。",
+      "summary": "Schedule A商标案涉及436家零售商。被告Lightzey主张原告没有美国侵权销售，应获得律师费。第七巡回维持地区法院拒绝认定本案属于Lanham Act §1117(a)下exceptional case的裁量决定。",
+      "issue": "原告最终缺乏美国侵权销售，是否当然使案件成为可判给被告律师费的exceptional case？",
+      "decision": "第七巡回认为地区法院拒绝律师费并非滥用裁量。法院没有裁定测试购买是否是建立个人管辖权的绝对必要条件，也没有决定购物车截图及其他店铺交易证据是否足以支持jurisdictional discovery。",
+      "significance": "仅涉及律师费裁量，不是新的个人管辖权判例；不得写成第七巡回确认无需测试购买即可建立管辖权。",
+      "timeline": [
+        {
+          "date": "2026-11-17",
+          "label": "第七巡回维持",
+          "detail": "维持地区法院拒绝律师费的决定。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Seventh Circuit official disposition",
+          "url": "https://media.ca7.uscourts.gov/cgi-bin/OpinionsWeb/processWebInputExternal.pl?Path=Y2026%2FD11-17%2FC%3A25-2048%3AJ%3APerCuriam%3Aaut%3AT%3AnpDp%3AN%3A3643788%3AS%3A0&Submit=Display",
+          "role": "官方上诉法院裁判PDF"
+        }
+      ],
+      "partyResponse": "",
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "案件背景",
+            "text": "Schedule A商标案涉及436家零售商。被告Lightzey主张原告没有美国侵权销售，应获得律师费。第七巡回维持地区法院拒绝认定本案属于Lanham Act §1117(a)下exceptional case的裁量决定。"
+          }
+        ],
+        "issue": [
+          {
+            "label": "核心争点",
+            "text": "原告最终缺乏美国侵权销售，是否当然使案件成为可判给被告律师费的exceptional case？"
+          }
+        ],
+        "decision": [
+          {
+            "label": "处理结果",
+            "text": "第七巡回认为地区法院拒绝律师费并非滥用裁量。法院没有裁定测试购买是否是建立个人管辖权的绝对必要条件，也没有决定购物车截图及其他店铺交易证据是否足以支持jurisdictional discovery。"
+          }
+        ],
+        "significance": [
+          {
+            "label": "适用边界",
+            "text": "仅涉及律师费裁量，不是新的个人管辖权判例；不得写成第七巡回确认无需测试购买即可建立管辖权。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wood-3d-cir",
+      "title": "Thomas Wood v. Eiazuiks",
+      "caseNo": "No.25-2340",
+      "court": "Third Circuit",
+      "judge": "法院合议庭",
+      "date": "2026-05-19",
+      "period": "2026",
+      "topics": [
+        "joinder",
+        "pj",
+        "copyright"
+      ],
+      "outcome": "vacated-remanded",
+      "outcomeLabel": "撤销驳回并发回具体分析",
+      "sourceLevel": "三级｜未刊发/非先例上诉意见",
+      "sourceNote": "第三巡回未刊发意见（IOP 5.7）；不具拘束性先例效力。",
+      "summary": "版权Schedule A案件涉及54名境外被告。地区法院基于个人管辖权及Rule 20问题驳回诉讼。第三巡回撤销并发回，要求地区法院分析被告是否向宾州提供并实际销售/运送侵权商品，以及Rule 20合并的具体事实基础。",
+      "issue": "地区法院能否在未分析逐被告论坛州联系、Rule 20共同交易/事件及Rule 21分离替代方案的情况下，直接驳回多被告诉讼？",
+      "decision": "第三巡回撤销并发回，要求地区法院对实际销售/交付及Rule 20事实基础作有理由分析，并考虑misjoinder是否可由Rule 21 severance修复。法院没有判定54名被告必然可以合并，也没有认定仅有Amazon listing即可建立管辖权。",
+      "significance": "提醒法院不能以抽象的Rule 20或管辖权疑问取代逐案事实分析；但该非先例裁判未判定原告最终满足管辖权或合并标准。",
+      "timeline": [
+        {
+          "date": "2026-05-19",
+          "label": "第三巡回发回",
+          "detail": "要求地区法院具体分析实际销售/交付、共同交易及Rule 21分离可能性。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Third Circuit official nonprecedential opinion",
+          "url": "https://www2.ca3.uscourts.gov/opinarch/252340np.pdf",
+          "role": "官方上诉法院意见"
+        }
+      ],
+      "partyResponse": "",
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "案件背景",
+            "text": "版权Schedule A案件涉及54名境外被告。地区法院基于个人管辖权及Rule 20问题驳回诉讼。第三巡回撤销并发回，要求地区法院分析被告是否向宾州提供并实际销售/运送侵权商品，以及Rule 20合并的具体事实基础。"
+          }
+        ],
+        "issue": [
+          {
+            "label": "核心争点",
+            "text": "地区法院能否在未分析逐被告论坛州联系、Rule 20共同交易/事件及Rule 21分离替代方案的情况下，直接驳回多被告诉讼？"
+          }
+        ],
+        "decision": [
+          {
+            "label": "处理结果",
+            "text": "第三巡回撤销并发回，要求地区法院对实际销售/交付及Rule 20事实基础作有理由分析，并考虑misjoinder是否可由Rule 21 severance修复。法院没有判定54名被告必然可以合并，也没有认定仅有Amazon listing即可建立管辖权。"
+          }
+        ],
+        "significance": [
+          {
+            "label": "适用边界",
+            "text": "提醒法院不能以抽象的Rule 20或管辖权疑问取代逐案事实分析；但该非先例裁判未判定原告最终满足管辖权或合并标准。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jacki-easlick",
+      "title": "Jacki Easlick, LLC v. CJ Emerald",
+      "caseNo": "Nos.24-1538 / 24-1826",
+      "court": "Federal Circuit",
+      "judge": "法院合议庭",
+      "date": "2026-08-14",
+      "period": "2026",
+      "topics": [
+        "tro",
+        "pi",
+        "design-patent",
+        "irreparable-harm"
+      ],
+      "outcome": "affirmed-pi-denial",
+      "outcomeLabel": "维持对出庭被告拒绝PI",
+      "sourceLevel": "三级｜未刊发/非先例上诉意见",
+      "sourceNote": "Federal Circuit非先例意见；2026-08-17 Erratum更正脚注文字。",
+      "summary": "设计专利Schedule A案件涉及67名在线卖家，原告先取得针对全部被告的ex parte TRO。PI阶段，地区法院对出庭被告AccEncyc拒绝初步禁令，Federal Circuit维持。",
+      "issue": "原告先前取得针对全部被告的ex parte TRO，是否限制地区法院在PI阶段独立审查侵权可能性和不可弥补损害？",
+      "decision": "Federal Circuit维持对AccEncyc拒绝PI的决定，指出TRO阶段的单方临时救济不限制PI阶段的独立审查；原告仍须证明侵权可能性及不可弥补损害。法院没有审理Schedule A制度本身的正当性。",
+      "significance": "直接说明TRO与PI属于不同程序阶段，TRO获准不意味着PI自动获准。法院未审理Schedule A制度整体正当性。",
+      "timeline": [
+        {
+          "date": "地区法院阶段",
+          "label": "对67名卖家签发ex parte TRO",
+          "detail": "原告取得针对全部Schedule A被告的临时限制令。"
+        },
+        {
+          "date": "PI阶段",
+          "label": "拒绝对AccEncyc签发PI",
+          "detail": "地区法院认为原告未充分证明初步禁令条件。"
+        },
+        {
+          "date": "2026-08-14",
+          "label": "Federal Circuit维持",
+          "detail": "上诉法院维持拒绝PI的结果。"
+        },
+        {
+          "date": "2026-08-17",
+          "label": "发布Erratum",
+          "detail": "更正意见脚注文字，应以更正后的版本为准。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Federal Circuit official opinion",
+          "url": "https://www.cafc.uscourts.gov/opinions-orders/24-1538.OPINION.8-14-2026_2739398.pdf",
+          "role": "官方上诉法院意见"
+        },
+        {
+          "label": "Federal Circuit Erratum",
+          "url": "https://www.cafc.uscourts.gov/opinions-orders/24-1538.ERRATA.8-17-2026_2740054.pdf",
+          "role": "官方更正文件"
+        }
+      ],
+      "partyResponse": "",
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "案件背景",
+            "text": "设计专利Schedule A案件涉及67名在线卖家，原告先取得针对全部被告的ex parte TRO。PI阶段，地区法院对出庭被告AccEncyc拒绝初步禁令，Federal Circuit维持。"
+          }
+        ],
+        "issue": [
+          {
+            "label": "核心争点",
+            "text": "原告先前取得针对全部被告的ex parte TRO，是否限制地区法院在PI阶段独立审查侵权可能性和不可弥补损害？"
+          }
+        ],
+        "decision": [
+          {
+            "label": "处理结果",
+            "text": "Federal Circuit维持对AccEncyc拒绝PI的决定，指出TRO阶段的单方临时救济不限制PI阶段的独立审查；原告仍须证明侵权可能性及不可弥补损害。法院没有审理Schedule A制度本身的正当性。"
+          }
+        ],
+        "significance": [
+          {
+            "label": "适用边界",
+            "text": "直接说明TRO与PI属于不同程序阶段，TRO获准不意味着PI自动获准。法院未审理Schedule A制度整体正当性。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "adidas-11th-pending",
+      "title": "Adidas AG v. locality.com, et al.",
+      "caseNo": "No.25-12597",
+      "court": "Eleventh Circuit",
+      "judge": "法院合议庭",
+      "date": "2026-11-04",
+      "period": "2026",
+      "topics": [
+        "service",
+        "pj",
+        "pending-appeal"
+      ],
+      "outcome": "pending",
+      "outcomeLabel": "已完成口头辩论，尚无上诉判决",
+      "sourceLevel": "四级｜待决上诉及官方案件页",
+      "sourceNote": "官方案件页仅确认程序状态；不得展示为裁判结论。",
+      "summary": "S.D. Florida Schedule A案件中，两名中国被告挑战邮件及网站公告送达，并请求撤销缺席判决。地区法院2025-07-01拒绝撤销。两名被告上诉，第十一巡回于2026-11-04进行口头辩论。",
+      "issue": "中国对海牙公约第10条方式的反对是否排除电子邮件送达；个人管辖权及Rule 60(b)(1)是否支持撤销缺席判决？",
+      "decision": "截至2026-11-23，Eleventh Circuit官方案件页记录2026-11-04口头辩论，尚未显示上诉判决。不得提前归纳巡回区规则或称已形成判例。",
+      "significance": "是观察第十一巡回是否采纳Smart Study/Kangol海牙公约解释的重要案件。地区法院裁定不等于第十一巡回拘束性判决。",
+      "timeline": [
+        {
+          "date": "2025-07-01",
+          "label": "S.D. Florida拒绝撤销缺席判决",
+          "detail": "地区法院维持既有送达及缺席判决处理。"
+        },
+        {
+          "date": "2026-11-04",
+          "label": "第十一巡回口头辩论",
+          "detail": "两名被告就送达、管辖权及Rule 60(b)(1)提出上诉。"
+        },
+        {
+          "date": "截至2026-11-23",
+          "label": "尚无上诉意见",
+          "detail": "官方案件页未显示判决。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Eleventh Circuit official case page",
+          "url": "https://www.ca11.uscourts.gov/node/7267",
+          "role": "官方待决案件页"
+        },
+        {
+          "label": "S.D. Florida 2025-07-01 order",
+          "url": "https://app.midpage.ai/document/adidas-ag-v-the-individuals-1000444470976",
+          "role": "地区法院裁定公开副本"
+        }
+      ],
+      "partyResponse": "",
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "案件背景",
+            "text": "S.D. Florida Schedule A案件中，两名中国被告挑战邮件及网站公告送达，并请求撤销缺席判决。地区法院2025-07-01拒绝撤销。两名被告上诉，第十一巡回于2026-11-04进行口头辩论。"
+          }
+        ],
+        "issue": [
+          {
+            "label": "核心争点",
+            "text": "中国对海牙公约第10条方式的反对是否排除电子邮件送达；个人管辖权及Rule 60(b)(1)是否支持撤销缺席判决？"
+          }
+        ],
+        "decision": [
+          {
+            "label": "处理结果",
+            "text": "截至2026-11-23，Eleventh Circuit官方案件页记录2026-11-04口头辩论，尚未显示上诉判决。不得提前归纳巡回区规则或称已形成判例。"
+          }
+        ],
+        "significance": [
+          {
+            "label": "适用边界",
+            "text": "是观察第十一巡回是否采纳Smart Study/Kangol海牙公约解释的重要案件。地区法院裁定不等于第十一巡回拘束性判决。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "plout-rule20",
+      "title": "PLOUT v. REN SHIJU et al.",
+      "caseNo": "2:26-cv-01134 · ECF No.52",
+      "court": "W.D. Pennsylvania",
+      "judge": "Christy Criswell Wiegand",
+      "date": "2026-08-14",
+      "period": "2026",
+      "topics": [
+        "joinder",
+        "rule20",
+        "pi",
+        "pj"
+      ],
+      "outcome": "motion-denied",
+      "outcomeLabel": "驳回撤销PI及misjoinder动议",
+      "sourceLevel": "四级｜第三方公开案卷文字转载",
+      "sourceNote": "原始条目为text-only；未取得签署PDF或PACER认证快照。",
+      "summary": "多家网站经营者提出动议，要求撤销初步禁令，并以个人管辖权和错误合并为由请求驳回。法院在动议阶段接受原告关于被告合作、沟通、共享信息及协调行为的具体指称，认定该案当时满足Rule 20合并条件。",
+      "issue": "原告关于被告共同协作的具体指称，是否足以在诉状/动议阶段支持Rule 20合并？",
+      "decision": "法院引用第三巡回logical relationship标准及Doggie Dental相关分析，驳回撤销PI及misjoinder动议。法院在该阶段将原告诉状指称视为真实，不代表已完成证据调查并实体确认各被告确实协同。",
+      "significance": "构成“所有法院/法官都对Schedule A合并审查趋严”的反例，提示Rule 20裁判存在事实与法官尺度差异。由于现有文本来自第三方转载，须明确证据等级。",
+      "timeline": [
+        {
+          "date": "2026-08-14",
+          "label": "法院作出ECF 52文字裁定",
+          "detail": "驳回被告撤销PI及misjoinder动议。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "TroHub public docket text",
+          "url": "https://www.trohub.com/cases/a17e0dfe339c460d85b4ccb1706b365b-2-26-cv-01134-plout-v-schedule-a-defendants",
+          "role": "第三方公开案卷文字转载"
+        },
+        {
+          "label": "Justia docket index",
+          "url": "https://dockets.justia.com/docket/pennsylvania/pawdce/2%3A2026cv01134/331816",
+          "role": "公开案卷索引"
+        }
+      ],
+      "partyResponse": "",
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "案件背景",
+            "text": "多家网站经营者提出动议，要求撤销初步禁令，并以个人管辖权和错误合并为由请求驳回。法院在动议阶段接受原告关于被告合作、沟通、共享信息及协调行为的具体指称，认定该案当时满足Rule 20合并条件。"
+          }
+        ],
+        "issue": [
+          {
+            "label": "核心争点",
+            "text": "原告关于被告共同协作的具体指称，是否足以在诉状/动议阶段支持Rule 20合并？"
+          }
+        ],
+        "decision": [
+          {
+            "label": "处理结果",
+            "text": "法院引用第三巡回logical relationship标准及Doggie Dental相关分析，驳回撤销PI及misjoinder动议。法院在该阶段将原告诉状指称视为真实，不代表已完成证据调查并实体确认各被告确实协同。"
+          }
+        ],
+        "significance": [
+          {
+            "label": "适用边界",
+            "text": "构成“所有法院/法官都对Schedule A合并审查趋严”的反例，提示Rule 20裁判存在事实与法官尺度差异。由于现有文本来自第三方转载，须明确证据等级。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dolls-kill",
+      "title": "Dolls Kill, Inc. v. MengEryt",
+      "caseNo": "No.24-2841",
+      "court": "Seventh Circuit",
+      "judge": "法院合议庭",
+      "date": "2025-10-30",
+      "period": "2025",
+      "topics": [
+        "copyright",
+        "damages",
+        "default"
+      ],
+      "outcome": "vacated-remanded",
+      "outcomeLabel": "撤销最低法定赔偿处理并发回",
+      "sourceLevel": "三级｜未刊发/非先例上诉处置",
+      "sourceNote": "第七巡回非先例处置；直接涉及Schedule A版权案件。",
+      "summary": "版权人起诉15个Amazon店铺，其中两名被告缺席。第七巡回处理Copyright Act §504下版权人选择实际损害/利润或法定赔偿的权利，以及请求被告利润时双方的举证责任。",
+      "issue": "版权人选择请求§504(b)利润时，原告和被告分别承担何种证明责任？",
+      "decision": "法院认为版权人有权选择§504(b)利润请求；原告须证明被告总收入，扣除成本由被告证明。法院撤销仅给最低法定赔偿的处理并发回。",
+      "significance": "对Schedule A版权缺席判决损害赔偿有直接参考价值，但属于非先例处置。缺席不等于原告自动获得其主张的利润金额。",
+      "timeline": [
+        {
+          "date": "2025-10-30",
+          "label": "第七巡回发回",
+          "detail": "明确§504(b)利润请求证明责任并撤销最低法定赔偿处理。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "GovInfo official appellate PDF",
+          "url": "https://www.govinfo.gov/content/pkg/USCOURTS-ca7-24-02841/pdf/USCOURTS-ca7-24-02841-0.pdf",
+          "role": "官方上诉法院文件"
+        }
+      ],
+      "partyResponse": "",
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "案件背景",
+            "text": "版权人起诉15个Amazon店铺，其中两名被告缺席。第七巡回处理Copyright Act §504下版权人选择实际损害/利润或法定赔偿的权利，以及请求被告利润时双方的举证责任。"
+          }
+        ],
+        "issue": [
+          {
+            "label": "核心争点",
+            "text": "版权人选择请求§504(b)利润时，原告和被告分别承担何种证明责任？"
+          }
+        ],
+        "decision": [
+          {
+            "label": "处理结果",
+            "text": "法院认为版权人有权选择§504(b)利润请求；原告须证明被告总收入，扣除成本由被告证明。法院撤销仅给最低法定赔偿的处理并发回。"
+          }
+        ],
+        "significance": [
+          {
+            "label": "适用边界",
+            "text": "对Schedule A版权缺席判决损害赔偿有直接参考价值，但属于非先例处置。缺席不等于原告自动获得其主张的利润金额。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "abc-corp-i-appeal-2025",
+      "title": "ABC Corp. I v. Partnership & Unincorporated Associations Identified on Schedule A",
+      "caseNo": "Nos.24-1471 / 24-1472",
+      "court": "Federal Circuit",
+      "judge": "法院合议庭",
+      "date": "2025-08-14",
+      "period": "2025",
+      "topics": [
+        "design-patent",
+        "prior-art",
+        "pi"
+      ],
+      "outcome": "affirmed-noninfringement",
+      "outcomeLabel": "维持非侵权简易判决",
+      "sourceLevel": "三级｜未刊发/非先例上诉处置",
+      "sourceNote": "2025后续上诉为非先例；应与2022年已刊发的51/52 F.4th同案先例分开。",
+      "summary": "在Federal Circuit于2022年就设计专利PI及整体视觉印象问题作出已刊发判决并发回后，2025年上诉审查地区法院的非侵权简易判决。",
+      "issue": "已存在于现有技术中的主导hourglass形状，是否仍可单独作为设计专利侵权相似性的决定性特征？",
+      "decision": "Federal Circuit维持非侵权简易判决，强调应将现有技术中的主导形状作为背景，结合剩余设计要素和普通观察者整体视觉印象进行比较。",
+      "significance": "应与2022年ABC Corp. I 51 F.4th 1365（Rule 65(a) notice）及52 F.4th 934（设计专利整体视觉印象/Rule 65(d)）建立同案历史链接。2025年裁判本身不具先例效力。",
+      "timeline": [
+        {
+          "date": "2022-10-28",
+          "label": "Federal Circuit已刊发判决",
+          "detail": "就PI notice及设计专利整体视觉印象问题作出判决并发回。"
+        },
+        {
+          "date": "2025-08-14",
+          "label": "后续上诉裁定",
+          "detail": "维持地区法院非侵权简易判决。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Federal Circuit official 2025 opinion",
+          "url": "https://www.cafc.uscourts.gov/opinions-orders/24-1471.OPINION.8-14-2025_2558427.pdf",
+          "role": "官方上诉法院文件"
+        }
+      ],
+      "partyResponse": "",
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "案件背景",
+            "text": "在Federal Circuit于2022年就设计专利PI及整体视觉印象问题作出已刊发判决并发回后，2025年上诉审查地区法院的非侵权简易判决。"
+          }
+        ],
+        "issue": [
+          {
+            "label": "核心争点",
+            "text": "已存在于现有技术中的主导hourglass形状，是否仍可单独作为设计专利侵权相似性的决定性特征？"
+          }
+        ],
+        "decision": [
+          {
+            "label": "处理结果",
+            "text": "Federal Circuit维持非侵权简易判决，强调应将现有技术中的主导形状作为背景，结合剩余设计要素和普通观察者整体视觉印象进行比较。"
+          }
+        ],
+        "significance": [
+          {
+            "label": "适用边界",
+            "text": "应与2022年ABC Corp. I 51 F.4th 1365（Rule 65(a) notice）及52 F.4th 934（设计专利整体视觉印象/Rule 65(d)）建立同案历史链接。2025年裁判本身不具先例效力。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dyson-profits",
+      "title": "Dyson Technology Ltd. v. David 7 Store",
+      "caseNo": "No.23-2948 · 132 F.4th 526",
+      "court": "Seventh Circuit",
+      "judge": "法院合议庭",
+      "date": "2025-03-24",
+      "period": "2025",
+      "topics": [
+        "trademark",
+        "damages",
+        "profits"
+      ],
+      "outcome": "published-opinion",
+      "outcomeLabel": "阐明Lanham Act §1117(a)利润举证责任",
+      "sourceLevel": "一级｜已刊发上诉法院判决",
+      "sourceNote": "第七巡回已刊发拘束性判决；上诉意见未明确将案件定性为Schedule A，作为相关多店铺网络侵权判例。",
+      "summary": "多店铺商标侵权案件涉及Lanham Act §1117(a)利润计算。第七巡回说明原告证明侵权销售额后，被告承担证明可扣除成本的责任。",
+      "issue": "Lanham Act §1117(a)下，原告及被告分别承担何种利润计算证明责任？",
+      "decision": "原告证明侵权销售额即可满足利润证明的初始要求；被告承担证明成本/扣除项目的责任。法院可基于案件事实调整利润额，但须作出相应判断。",
+      "significance": "对多店铺商标侵权及缺席判决后的利润计算具有重要价值。由于上诉意见未明确将其称为Schedule A案件，应标为相关多店铺商标侵权先例。",
+      "timeline": [
+        {
+          "date": "2025-03-24",
+          "label": "第七巡回发布判决",
+          "detail": "阐明§1117(a)利润证明的初始责任及成本扣除责任。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Seventh Circuit official published opinion",
+          "url": "https://media.ca7.uscourts.gov/cgi-bin/OpinionsWeb/processWebInputExternal.pl?Path=Y2025%2FD03-24%2FC%3A23-2948%3AJ%3AJackson-Akiwumi%3Aaut%3AT%3AfnOp%3AN%3A3349641%3AS%3A0&Submit=Display",
+          "role": "官方已刊发判决"
+        }
+      ],
+      "partyResponse": "",
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "案件背景",
+            "text": "多店铺商标侵权案件涉及Lanham Act §1117(a)利润计算。第七巡回说明原告证明侵权销售额后，被告承担证明可扣除成本的责任。"
+          }
+        ],
+        "issue": [
+          {
+            "label": "核心争点",
+            "text": "Lanham Act §1117(a)下，原告及被告分别承担何种利润计算证明责任？"
+          }
+        ],
+        "decision": [
+          {
+            "label": "处理结果",
+            "text": "原告证明侵权销售额即可满足利润证明的初始要求；被告承担证明成本/扣除项目的责任。法院可基于案件事实调整利润额，但须作出相应判断。"
+          }
+        ],
+        "significance": [
+          {
+            "label": "适用边界",
+            "text": "对多店铺商标侵权及缺席判决后的利润计算具有重要价值。由于上诉意见未明确将其称为Schedule A案件，应标为相关多店铺商标侵权先例。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "huajie-default-damages",
+      "title": "Shenzhen Huajie Technology Co. v. Shenzhen Leyibei Technology Co.",
+      "caseNo": "No.25-2659",
+      "court": "Seventh Circuit",
+      "judge": "上诉法院合议庭（2–1）",
+      "date": "2026-04-29",
+      "period": "2026",
+      "topics": [
+        "trademark",
+        "default",
+        "damages"
+      ],
+      "outcome": "affirmed-minimum-statutory-damages",
+      "outcomeLabel": "维持最低法定赔偿",
+      "sourceLevel": "三级｜2–1未刊发/非先例处置",
+      "sourceNote": "非经典多被告Schedule A案件；多数意见非先例，附有异议意见。",
+      "summary": "单一具名被告的商标/域名案件。多数意见认为缺席仅确立责任，不自动确立最高法定赔偿额；原告未在default judgment阶段同步提供支持最高金额的证据和论证。",
+      "issue": "被告缺席是否自动支持原告请求的最高法定赔偿额？",
+      "decision": "第七巡回多数意见维持最低法定赔偿；Pryor法官异议认为地区法院仍应解释其裁量理由。",
+      "significance": "可作为相关商标缺席赔偿问题的补充观察，但不是经典Schedule A案件，也不是拘束性先例。应保留2–1及异议信息。",
+      "timeline": [
+        {
+          "date": "2026-04-29",
+          "label": "第七巡回发布非先例处置",
+          "detail": "多数意见维持最低法定赔偿；存在异议。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Seventh Circuit official disposition",
+          "url": "https://media.ca7.uscourts.gov/cgi-bin/OpinionsWeb/processWebInputExternal.pl?Path=Y2026%2FD04-29%2FC%3A25-2659%3AJ%3APerCuriam%3Aaut%3AT%3AfnOp%3AN%3A3532605%3AS%3A0&Submit=Display",
+          "role": "官方上诉法院文件"
+        }
+      ],
+      "partyResponse": "",
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "案件背景",
+            "text": "单一具名被告的商标/域名案件。多数意见认为缺席仅确立责任，不自动确立最高法定赔偿额；原告未在default judgment阶段同步提供支持最高金额的证据和论证。"
+          }
+        ],
+        "issue": [
+          {
+            "label": "核心争点",
+            "text": "被告缺席是否自动支持原告请求的最高法定赔偿额？"
+          }
+        ],
+        "decision": [
+          {
+            "label": "处理结果",
+            "text": "第七巡回多数意见维持最低法定赔偿；Pryor法官异议认为地区法院仍应解释其裁量理由。"
+          }
+        ],
+        "significance": [
+          {
+            "label": "适用边界",
+            "text": "可作为相关商标缺席赔偿问题的补充观察，但不是经典Schedule A案件，也不是拘束性先例。应保留2–1及异议信息。"
           }
         ]
       }
