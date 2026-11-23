@@ -3,7 +3,7 @@ const { chromium } = require('playwright');
 const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
-const output = path.resolve('browser-qa-results');
+const output = path.resolve(process.env.QA_OUTPUT || 'browser-qa-results');
 fs.mkdirSync(output, { recursive: true });
 const report = { startedAt: new Date().toISOString(), browser: 'Chromium', views: [], interactions: [], errors: [], status: 'running' };
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -50,6 +50,8 @@ async function check(name, fn) {
       const text=await page.locator('.leaflet-popup-content').innerText();
       assert.match(text,/N.D. Illinois/);assert.match(text,/2026 Q2/);assert.match(text,/3,840/);
       await page.screenshot({path:path.join(output,label+'-map-popup.png'),fullPage:true});
+      const closeInside=await page.evaluate(()=>{const r=document.getElementById('map').getBoundingClientRect(),q=document.querySelector('.leaflet-popup-close-button').getBoundingClientRect();return q.top>=r.top&&q.bottom<=r.bottom;});
+      assert.ok(closeInside,'popup close button clipped after screenshot/resize');
       await page.locator('.leaflet-popup-close-button').click();
       const tiles=await page.locator('.leaflet-tile-loaded').count();
       assert.ok(tiles>0,'OSM tiles not loaded');return {markers:22,tiles,popup:text};

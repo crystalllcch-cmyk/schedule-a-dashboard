@@ -28,8 +28,10 @@ function initMap() {
   tiles.on('tileerror', () => { $('mapStatus').textContent = '地图底图暂不可用；定位点及下方数据表仍可使用。'; });
   tiles.addTo(map);
 }
+let lastMapWidth = 0;
 function fitMapView() {
   if (!map || !document.getElementById('map').clientWidth) return;
+  lastMapWidth = document.getElementById('map').clientWidth;
   const district = D.districts.find(x => x.code === selected('districtFilter'));
   if (district) {map.setView([district.lat,district.lng],6);return;}
   const points = D.districts.filter(x => selected('circuitFilter') === 'all' || x.circuit === selected('circuitFilter')).map(x => [x.lat,x.lng]);
@@ -42,7 +44,7 @@ function updateMap(rows) {
     const districtRows = rows.filter(x => x.district === d.code), n = sum(districtRows);
     const quarters = groupRows(districtRows, D.quarters.filter(q => selected('yearFilter') === 'all' || q.label.startsWith(selected('yearFilter'))).map(q => q.label), quarterOf);
     const marker = L.circleMarker([d.lat, d.lng], {radius: Math.max(4, Math.min(17, 4 + Math.sqrt(n) / 3)), color: n ? '#356b89' : '#aab8c3', fillColor: n ? '#79a8bb' : '#e2e8ed', fillOpacity: .78, weight: 1}).addTo(map);
-    marker.bindPopup('<b>' + esc(d.name) + '</b><br>' + esc(d.circuit) + '<br>当前筛选候选记录：' + fmt(n) + '<br>近似城市：' + esc(d.locator) + '<br><a target="_blank" rel="noopener" href="' + esc(d.locatorSource) + '">法院城市来源</a><br>' + quarters.map(q => esc(q.key) + '：' + fmt(q.count)).join('<br>'));
+    marker.bindPopup('<b>' + esc(d.name) + '</b><br>' + esc(d.circuit) + '<br>当前筛选候选记录：' + fmt(n) + '<br>近似城市：' + esc(d.locator) + '<br><a target="_blank" rel="noopener" href="' + esc(d.locatorSource) + '">法院城市来源</a><br>' + quarters.map(q => esc(q.key) + '：' + fmt(q.count)).join('<br>'), {maxHeight:200,autoPanPadding:[16,16],keepInView:true});
     markers.push(marker);
   });
   fitMapView();
@@ -125,7 +127,7 @@ function initUI() {
   });
   for (const id of ['outcomes','quality','plaintiffs','cases','method']) {const note=document.createElement('div');note.className='callout fixed-scope';note.textContent=id==='cases'?'精选案件档案使用下方独立筛选，不受FJC立案筛选影响。':'本模块保留自身统计总体；不随立案筛选变化。';$(id).prepend(note);}
   document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-pressed',String(b.classList.contains('active'))));
-  window.addEventListener('resize',()=>{map?.invalidateSize();fitMapView();});
+  window.addEventListener('resize',()=>{const width=document.getElementById('map').clientWidth;if(map&&width&&width!==lastMapWidth){map.invalidateSize();fitMapView();}});
   fixedFallbacks(); cases(); updateFilings();
 }
 async function readJSON(path) { const response=await fetch(path);if(!response.ok) throw new Error(path+' HTTP '+response.status);return response.json(); }
