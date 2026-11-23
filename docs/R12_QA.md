@@ -1,5 +1,7 @@
 # R12｜V0.9筛选联动修正与验收记录
 
+> 历史阶段记录：本报告当时待完成的浏览器验收已于R13完成，当前状态见[R13_BROWSER_ACCEPTANCE.md](R13_BROWSER_ACCEPTANCE.md)。
+
 - 项目：案件趋势发展变化
 - 日期：2026-11-23（北京时间）
 - 开发分支：`v0.9-research-integration-2026-11-23`

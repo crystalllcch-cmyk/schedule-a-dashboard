@@ -40,7 +40,7 @@
 
 通过本地静态HTTP服务器打开仓库根目录（例如 `python -m http.server 8000`），再访问 `http://localhost:8000`。页面使用ECharts、Leaflet、OpenStreetMap tiles及Google Fonts外部资源。图表资源不可用时显示数值表格；地图不可用时仍可查看地区数据。
 
-R12已补齐年份×巡回区×地区×NOS共同筛选，以及案件判例效力、来源等级、巡回区和状态独立筛选。验证记录见 `docs/R12_QA.md`；实际浏览器视觉验收仍未完成。
+R12已补齐年份×巡回区×地区×NOS共同筛选，以及案件判例效力、来源等级、巡回区和状态独立筛选。R13已完成真实Chromium桌面/手机及单文件候选版验收；记录见 `docs/R13_BROWSER_ACCEPTANCE.md`。目前等待用户审阅与发布决定，线上V0.8未变。
 
 交互逻辑验证：`npm install` 后运行 `npm test`。该验证使用DOM环境和图表适配器，不替代浏览器渲染验收。
 
