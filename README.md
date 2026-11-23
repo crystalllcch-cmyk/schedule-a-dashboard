@@ -2,9 +2,9 @@
 
 美国 Schedule A 诉讼趋势与法院审查变化研究看板。
 
-## V0.9 research integration prototype — 2026-11-23
+## V0.9 release — 2026-11-23
 
-本版本在独立开发分支 `v0.9-research-integration-2026-11-23` 中构建，**不是线上发布版本**。GitHub Pages的V0.8线上版本和`main`分支保持不变。
+V0.9已完成研究、交互及真实浏览器验收，用户于2026-11-23确认发布。V0.8恢复分支为 `archive/v0.8-before-v0.9-2026-11-23`，恢复提交为 `15e80242faf69224eac37ddb4e7177fc0d05159f`。
 
 ### 当前模块
 
@@ -40,11 +40,11 @@
 
 通过本地静态HTTP服务器打开仓库根目录（例如 `python -m http.server 8000`），再访问 `http://localhost:8000`。页面使用ECharts、Leaflet、OpenStreetMap tiles及Google Fonts外部资源。图表资源不可用时显示数值表格；地图不可用时仍可查看地区数据。
 
-R12已补齐年份×巡回区×地区×NOS共同筛选，以及案件判例效力、来源等级、巡回区和状态独立筛选。R13已完成真实Chromium桌面/手机及单文件候选版验收；记录见 `docs/R13_BROWSER_ACCEPTANCE.md`。目前等待用户审阅与发布决定，线上V0.8未变。
+R12已补齐年份×巡回区×地区×NOS共同筛选，以及案件判例效力、来源等级、巡回区和状态独立筛选。R13已完成真实Chromium桌面/手机及单文件候选版验收；记录见 `docs/R13_BROWSER_ACCEPTANCE.md`。用户已确认正式发布。
 
 交互逻辑验证：`npm install` 后运行 `npm test`。该验证使用DOM环境和图表适配器，不替代浏览器渲染验收。
 
 ## 发布规则
 
-只有完成数据核对、交互测试、来源链接抽查、页面验收及用户确认后，才可将V0.9合并至`main`并触发GitHub Pages部署。当前分支不自动替代V0.8线上版本。
+只有完成数据核对、交互测试、来源链接抽查、页面验收及用户确认后，才可将V0.9合并至`main`并触发GitHub Pages部署。本次发布已取得用户确认。
 

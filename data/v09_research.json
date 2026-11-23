@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "美国 Schedule A 诉讼趋势与法院审查变化",
-    "version": "0.9 prototype",
+    "version": "0.9",
     "sourceDate": "2026-11-23",
     "coverage": "2025-01-02—2026-06-30",
     "unit": "FJC案件级Schedule A特征候选记录（ORIGIN=1）",
