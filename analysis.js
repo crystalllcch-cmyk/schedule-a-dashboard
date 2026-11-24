@@ -9,11 +9,11 @@ function openAnalysisPanel(title,summary,sections,sources=[],eyebrow='图表深�
   $('analysisEyebrow').textContent=eyebrow;$('analysisTitle').textContent=title;$('analysisSummary').textContent=summary;
   $('analysisBody').innerHTML=sections.map(x=>analysisSection(x[0],x[1])).join('');
   $('analysisSources').innerHTML=sources.length?'<h3>研究来源与口径</h3>'+sources.map(x=>'<a href="'+esc(x.url)+'" target="_blank" rel="noopener">'+esc(x.label)+'</a>').join(''):'';
-  $('analysisOverlay').hidden=false;document.body.style.overflow='hidden';$('analysisClose').focus();
+  $('analysisOverlay').hidden=false;document.body.classList.add('analysis-open');document.body.style.overflow='hidden';$('analysisClose').focus();
 }
 function closeAnalysisPanel(){
   if($('analysisOverlay').hidden)return;
-  $('analysisOverlay').hidden=true;document.body.style.overflow='';
+  $('analysisOverlay').hidden=true;document.body.classList.remove('analysis-open');document.body.style.overflow='';
   if(lastAnalysisFocus&&lastAnalysisFocus.isConnected)lastAnalysisFocus.focus();
   lastAnalysisFocus=null;
 }
