@@ -56,10 +56,11 @@ async function check(name, fn) {
       await page.mouse.click(point.x,point.y);await page.locator('#analysisOverlay').waitFor({state:'visible'});
       assert.match(await page.locator('#analysisTitle').innerText(),/候选记录变化/);
       assert.match(await page.locator('#analysisBody').innerText(),/同期司法事件/);
+      const hoverTipVisible=await page.locator('.echarts-tooltip').isVisible().catch(()=>false);assert.equal(hoverTipVisible,false);
       const panelBox=await page.locator('.analysis-drawer').boundingBox();assert.ok(panelBox&&panelBox.width>0&&panelBox.height>0);
       await page.screenshot({path:path.join(output,label+'-analysis-panel.png'),fullPage:false});
       await page.keyboard.press('Escape');assert.equal(await page.locator('#analysisOverlay').isVisible(),false);
-      return {sourceTooltip:true,analysisDrawer:true,relatedEvents:true,panelWidth:panelBox.width,panelHeight:panelBox.height};
+      return {sourceTooltip:true,analysisDrawer:true,relatedEvents:true,hoverTooltipHidden:!hoverTipVisible,panelWidth:panelBox.width,panelHeight:panelBox.height};
     });
     await page.locator('[data-module="structure"]').click();
     await sleep(300);
