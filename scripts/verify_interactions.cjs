@@ -15,6 +15,10 @@ async function boot(withCharts=false){
   const set=(id,value)=>{w.document.getElementById(id).value=value;w.document.getElementById(id).dispatchEvent(new w.Event('change'));};
   const total=()=>w.__qaTotal();
   assert.equal(total(),4551);
+  assert.equal(w.document.getElementById('kpiCandidates').textContent,'4,551');
+  assert.equal(w.document.getElementById('kpiH1Growth').textContent,'+24.3%');
+  assert.equal(w.document.getElementById('kpiNdilShare').textContent,'79.0%');
+  assert.equal(w.document.getElementById('kpiCopyrightGrowth').textContent,'+49.6%');
   const exclude=w.document.getElementById('excludeIllinois');exclude.checked=true;exclude.dispatchEvent(new w.Event('change'));assert.equal(total(),711);w.document.getElementById('resetFilters').click();
   set('yearFilter','2026');set('quarterFilter','2026 Q2');assert.equal(total(),865);assert.equal([...w.document.getElementById('quarterFilter').options].some(x=>x.value==='2026 Q3'),false);set('quarterFilter','all');
   set('yearFilter','2026');assert.equal(total(),1636);
@@ -56,6 +60,12 @@ async function boot(withCharts=false){
   w.document.querySelector('[data-module="judiciary"]').click();w.document.querySelector('[data-case-mode="constellation"]').click();assert.equal(w.document.getElementById('caseConstellationPanel').hidden,false);assert.equal(w.document.getElementById('caseList').hidden,true);
   w.document.querySelector('[data-case-mode="list"]').click();assert.equal(w.document.getElementById('caseList').hidden,false);assert.equal(w.document.getElementById('caseConstellationPanel').hidden,true);
   w.document.querySelector('[data-module="trend"]').click();
+  const trendModes=[['quarter','quarterTrendPanel'],['half','halfTrendPanel'],['month','monthlyTrendPanel']];
+  for(const [mode,visibleId] of trendModes){
+    w.document.querySelector('[data-trend-view="'+mode+'"]').click();
+    assert.equal(w.document.getElementById(visibleId).hidden,false);
+    assert.equal([...w.document.querySelectorAll('[data-trend-view]')].filter(x=>x.getAttribute('aria-pressed')==='true').length,1);
+  }
   assert.deepEqual([...w.document.querySelectorAll('.view.active')].map(x=>x.id),['overview','trend']);
   assert.equal(w.document.querySelectorAll('.tab').length,4);
   assert.equal(w.document.querySelectorAll('.view').length,8);
