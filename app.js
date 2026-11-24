@@ -19,6 +19,27 @@ function table(headers, rows) {
   return '<div class="data-fallback"><table class="table"><thead><tr>' + headers.map(x => '<th>' + esc(x) + '</th>').join('')
     + '</tr></thead><tbody>' + rows.map(row => '<tr>' + row.map(x => '<td>' + esc(x) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>';
 }
+function updateFixedKpis() {
+  const total = sum(F.cells);
+  const h25 = sum(F.cells.filter(x => x.month >= '2025-01' && x.month <= '2025-06'));
+  const h26 = sum(F.cells.filter(x => x.month >= '2026-01' && x.month <= '2026-06'));
+  const nd25 = sum(F.cells.filter(x => x.month >= '2025-01' && x.month <= '2025-06' && x.district === '7-52'));
+  const nd26 = sum(F.cells.filter(x => x.month >= '2026-01' && x.month <= '2026-06' && x.district === '7-52'));
+  const cr25 = sum(F.cells.filter(x => x.month >= '2025-01' && x.month <= '2025-06' && x.nos === '820'));
+  const cr26 = sum(F.cells.filter(x => x.month >= '2026-01' && x.month <= '2026-06' && x.nos === '820'));
+  const yoy = (h26 / h25 - 1) * 100;
+  const ndShare25 = nd25 / h25 * 100, ndShare26 = nd26 / h26 * 100;
+  const crGrowth = (cr26 / cr25 - 1) * 100;
+  const crContribution = (cr26 - cr25) / (h26 - h25) * 100;
+  $('kpiCandidates').textContent = fmt(total);
+  $('kpiCandidatesNote').textContent = '2025.01—2026.06 · ORIGIN=1新立案记录';
+  $('kpiH1Growth').textContent = '+' + yoy.toFixed(1) + '%';
+  $('kpiH1GrowthNote').textContent = fmt(h26) + '条；较2025 H1增加' + fmt(h26-h25) + '条';
+  $('kpiNdilShare').textContent = ndShare26.toFixed(1) + '%';
+  $('kpiNdilShareNote').textContent = fmt(nd26) + '条；较2025 H1下降' + (ndShare25-ndShare26).toFixed(1) + '个百分点';
+  $('kpiCopyrightGrowth').textContent = '+' + crGrowth.toFixed(1) + '%';
+  $('kpiCopyrightGrowthNote').textContent = fmt(cr25) + '→' + fmt(cr26) + '条；贡献全池净增量' + crContribution.toFixed(1) + '%';
+}
 function updateChart(id, option, headers, rows) {
   if (charts[id]) { option.tooltip = {trigger: id === 'nosChart' ? 'item' : 'axis', confine: true, formatter: params => {const items=Array.isArray(params)?params:[params];return esc(items[0]?.name||'')+'<br>'+items.map(p=>esc(p.seriesName||'候选记录')+'：'+fmt(p.value)).join('<br>')+'<br>'+(['overviewHalf','overviewDistrict','regionNosChart'].includes(id)?'固定比较期间；地理及NOS条件有效':'当前立案筛选合计：'+fmt(sum(filingRows()))+' 条')+'<br>FJC R24 v3 · FILEDATE截至2026-06-30';}}; charts[id].setOption(option, { replaceMerge: ['series'] }); }
   else $(id).innerHTML = table(headers, rows);
@@ -60,6 +81,7 @@ function updateFilings() {
   $('filterSummary').textContent = '当前立案筛选：' + scope + ' ｜ ' + fmt(sum(rows)) + ' 条候选记录。来源：FJC R24 v3，FILEDATE截至2026-06-30。';
   for (const id of ['overviewTrend', 'monthlyChart']) updateChart(id, {xAxis: {data: months.map(x => x.key)}, series: [{name: '候选记录（FJC R24 v3）', type: 'line', data: months.map(x => x.count), itemStyle: {color: '#3d7da0'}, symbolSize: 5}]}, ['月度', '候选记录'], months.map(x => [x.key, x.count]));
   updateChart('quarterChart', {xAxis: {data: quarters.map(x => x.key)}, series: [{name: '候选记录（FJC R24 v3）', type: 'bar', data: quarters.map(x => x.count), itemStyle: {color: '#719db3'}, label: {show: true, position: 'top'}}]}, ['季度', '候选记录'], quarters.map(x => [x.key, x.count]));
+  updateChart('halfTrendChart', {xAxis: {data: halves.map(x => x.key)}, series: [{name: '候选记录（FJC R24 v3）', type: 'bar', data: halves.map(x => x.count), itemStyle: {color: '#659b9a'}, label: {show: true, position: 'top'}}]}, ['半年度', '候选记录'], halves.map(x => [x.key, x.count]));
   updateChart('overviewHalf', {xAxis: {data: halves.map(x => x.key)}, series: [{name: '候选记录（FJC R24 v3）', type: 'bar', data: halves.map(x => x.count), itemStyle: {color: '#659b9a'}, label: {show: true, position: 'top'}}]}, ['半年度', '候选记录'], halves.map(x => [x.key, x.count]));
   const h25 = sum(allYears.filter(x => halfOf(x) === '2025 H1')), h252 = sum(allYears.filter(x => halfOf(x) === '2025 H2')), h26 = sum(allYears.filter(x => halfOf(x) === '2026 H1'));
   $('halfComparison').textContent = '同一地区/巡回区/NOS条件下：2026 H1同比 ' + pct(h26, h25) + '；较2025 H2 ' + pct(h26, h252) + '。';
@@ -170,6 +192,7 @@ function renderCircuits(rows){const root=$('circuitSummary');root.replaceChildre
 function syncQuarters(){const prev=selected('quarterFilter'),year=selected('yearFilter'),el=$('quarterFilter');el.replaceChildren(new Option('全部可用季度','all'));D.quarters.filter(q=>year==='all'||q.label.startsWith(year)).forEach(q=>el.add(new Option(q.label,q.label)));if([...el.options].some(x=>x.value===prev))el.value=prev;}
 function setGeoMode(mode){$('geoMapPanel').hidden=mode!=='map';$('geoListPanel').hidden=mode!=='list';document.querySelectorAll('[data-geo-mode]').forEach(b=>{const active=b.dataset.geoMode===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});if(mode==='map')requestAnimationFrame(()=>{map?.invalidateSize();fitMapView();Object.values(charts).forEach(c=>c.resize());});}
 function setCaseMode(mode){$('caseList').hidden=mode!=='list';$('caseConstellationPanel').hidden=mode!=='constellation';document.querySelectorAll('[data-case-mode]').forEach(b=>{const active=b.dataset.caseMode===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});if(mode==='constellation')requestAnimationFrame(()=>charts.caseConstellation?.resize());}
+function setTrendView(mode){const panels={month:'monthlyTrendPanel',quarter:'quarterTrendPanel',half:'halfTrendPanel'};for(const [key,id] of Object.entries(panels))$(id).hidden=key!==mode;document.querySelectorAll('[data-trend-view]').forEach(b=>{const active=b.dataset.trendView===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});const chartId={month:'monthlyChart',quarter:'quarterChart',half:'halfTrendChart'}[mode];requestAnimationFrame(()=>charts[chartId]?.resize());}
 function addOptions(id, values) {
   [...new Set(values)].sort().forEach(v => { const o=document.createElement('option'); o.value=v; o.textContent=v; $(id).appendChild(o); });
 }
@@ -177,6 +200,7 @@ function fixedFallbacks() {
   if (window.echarts) return;
   const content = {
     statusChart: [['状态','候选记录'], [['已终止',3506],['待审',1045]]],
+    halfTrendChart: [['半年度','候选记录'], D.halfYears.map(x => [x.period,x.count])],
     dispChart: [['DISP','数量'], D.disp.map(x => [x.code+' · '+x.label,x.count])],
     judgmentChart: [['判决子集','数量'], [['有利原告',1360],['有利被告',8]]],
     precisionChart: [['估计','百分比'], [['保守点估计',88.59],['95%区间下限',82.34],['95%区间上限',94.84],['敏感性上端',100]]],
@@ -199,6 +223,8 @@ function initUI() {
     updateFilings();
   });
   $('resetFilters').onclick=()=>{ for(const id of ['yearFilter','quarterFilter','circuitFilter','districtFilter','nosFilter']) $(id).value='all';$('excludeIllinois').checked=false;syncQuarters();updateFilings(); };
+  document.querySelectorAll('[data-trend-view]').forEach(b=>b.addEventListener('click',()=>setTrendView(b.dataset.trendView)));
+  setTrendView('month');
   document.querySelectorAll('[data-geo-mode]').forEach(b=>b.addEventListener('click',()=>setGeoMode(b.dataset.geoMode)));
   document.querySelectorAll('[data-case-mode]').forEach(b=>b.addEventListener('click',()=>setCaseMode(b.dataset.caseMode)));
   $('caseSearch').addEventListener('input',cases);
@@ -241,6 +267,7 @@ async function readJSON(path) { const response=await fetch(path);if(!response.ok
 Promise.all(['v09_research','case_dossiers','filing_cells'].map(x=>readJSON('./data/'+x+'.json'))).then(([d,c,f])=>{
   D=d;C=c;F=f;
   if(sum(F.cells)!==4551) throw new Error('立案交叉表总量不一致');
+  updateFixedKpis();
   const status=document.createElement('div');status.id='mapStatus';status.className='mapnote';status.setAttribute('role','status');$('map').after(status);
   const fallback=document.createElement('details');fallback.className='callout';fallback.innerHTML='<summary>查看当前筛选数据与来源</summary><p>FJC R24 v3：月度 × 地区 × NOS汇总；统计单位为候选案卷记录，零值表示该候选池内没有符合条件的记录。</p><div id="filingData"></div>';$('geography').appendChild(fallback);
   initCharts();initMap();initUI();
