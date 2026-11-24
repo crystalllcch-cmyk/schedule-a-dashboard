@@ -13,6 +13,9 @@ async function boot(withCharts=false){
   w.eval(inline+'\n'+fs.readFileSync(path.join(root,'analysis.js'),'utf8')+'\n'+fs.readFileSync(path.join(root,'app.js'),'utf8')+'\nwindow.__qaTotal = () => sum(filingRows());');
   for(let i=0;i<20&&!w.document.querySelector('.case');i++)await new Promise(r=>setTimeout(r,5));
   assert.equal(w.document.querySelectorAll('.case').length,26);
+  assert.equal(w.document.querySelectorAll('.case-galaxy-node').length,26);
+  assert.equal(w.document.querySelectorAll('#mapNodes .map-node').length,22);
+  assert.ok(w.document.getElementById('usOutline').getAttribute('d').startsWith('M'));
   const set=(id,value)=>{w.document.getElementById(id).value=value;w.document.getElementById(id).dispatchEvent(new w.Event('change'));};
   const total=()=>w.__qaTotal();
   assert.equal(total(),4551);
