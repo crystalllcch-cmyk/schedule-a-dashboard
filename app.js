@@ -41,7 +41,7 @@ function updateFixedKpis() {
   $('kpiCopyrightGrowthNote').textContent = fmt(cr25) + '→' + fmt(cr26) + '条；贡献全池净增量' + crContribution.toFixed(1) + '%';
 }
 function updateChart(id, option, headers, rows) {
-  if (charts[id]) { option.tooltip = {trigger: id === 'nosChart' ? 'item' : 'axis', confine: true, formatter: params => {const items=Array.isArray(params)?params:[params];return esc(items[0]?.name||'')+'<br>'+items.map(p=>esc(p.seriesName||'候选记录')+'：'+fmt(p.value)).join('<br>')+'<br>'+(['overviewHalf','overviewDistrict','regionNosChart'].includes(id)?'固定比较期间；地理及NOS条件有效':'当前立案筛选合计：'+fmt(sum(filingRows()))+' 条')+'<br>FJC R24 v3 · FILEDATE截至2026-06-30';}}; charts[id].setOption(option, { replaceMerge: ['series'] }); }
+  if (charts[id]) { option.tooltip = {trigger: id === 'nosChart' ? 'item' : 'axis', confine: true, formatter: params => chartTooltip(id,params)}; charts[id].setOption(option, { replaceMerge: ['series'] }); }
   else $(id).innerHTML = table(headers, rows);
 }
 function initMap() {
@@ -101,6 +101,7 @@ function updateFilings() {
   renderDistrictList(rows); renderCircuits(rows);
   $('filingData').innerHTML = table(['月度', '候选记录'], months.map(x => [x.key, x.count])) + table(['地区', '候选记录'], districts.map(x => [x.name, x.count])) + table(['NOS', '候选记录'], nos.map(x => [x.code + ' · ' + x.label, x.count]));
   updateMap(rows);
+  updateDynamicInsights(rows,allYears);
 }
 function cases() {
   const q = selected('caseSearch').trim().toLowerCase(), topic = selected('caseTopic');
@@ -256,12 +257,15 @@ function initUI() {
   for (const button of document.querySelectorAll('.tab')) button.addEventListener('click',()=>activateModule(button.dataset.module));
   activateModule('trend');
   renderResearchIntegration();
-  document.querySelector('main').addEventListener('click',event=>{const button=event.target.closest('[data-research-case]');if(!button)return;const dossier=C.cases.find(x=>x.caseNo===button.dataset.researchCase);if(!dossier)return;activateModule('judiciary');$('linkedCaseContent').innerHTML=caseMarkup(dossier).replace('class="case"','class="linked-case"');$('linkedCaseContent').querySelector('details').open=true;$('linkedCasePanel').hidden=false;$('linkedCasePanel').scrollIntoView?.({behavior:'smooth',block:'start'});});
+  document.querySelector('main').addEventListener('click',event=>{const button=event.target.closest('[data-research-case]');if(!button)return;const dossier=C.cases.find(x=>x.caseNo===button.dataset.researchCase);if(!dossier)return;closeAnalysisPanel();activateModule('judiciary');$('linkedCaseContent').innerHTML=caseMarkup(dossier).replace('class="case"','class="linked-case"');$('linkedCaseContent').querySelector('details').open=true;$('linkedCasePanel').hidden=false;$('linkedCasePanel').scrollIntoView?.({behavior:'smooth',block:'start'});});
   $('closeLinkedCase').onclick=()=>{$('linkedCasePanel').hidden=true;$('linkedCaseContent').replaceChildren();};
+  $('analysisClose').addEventListener('click',closeAnalysisPanel);
+  $('analysisBackdrop').addEventListener('click',closeAnalysisPanel);
+  document.addEventListener('keydown',event=>{if(event.key==='Escape')closeAnalysisPanel();});
   for (const id of ['outcomes','quality','plaintiffs','cases','method']) {const note=document.createElement('div');note.className='callout fixed-scope';note.textContent=id==='cases'?'精选案件档案使用下方独立筛选，不受FJC立案筛选影响。':'本模块保留自身统计总体；不随立案筛选变化。';$(id).prepend(note);}
   document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-pressed',String(b.classList.contains('active'))));
   window.addEventListener('resize',()=>{const width=document.getElementById('map').clientWidth;if(map&&width&&width!==lastMapWidth){map.invalidateSize();fitMapView();}});
-  fixedFallbacks(); cases(); updateFilings();
+  fixedFallbacks(); cases(); updateFilings(); bindAnalysisEvents();
 }
 async function readJSON(path) { const response=await fetch(path);if(!response.ok) throw new Error(path+' HTTP '+response.status);return response.json(); }
 Promise.all(['v09_research','case_dossiers','filing_cells'].map(x=>readJSON('./data/'+x+'.json'))).then(([d,c,f])=>{
