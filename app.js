@@ -1,9 +1,11 @@
 // V0.9 filing filters share one anonymous month × district × NOS table.
 const sum = rows => rows.reduce((n, x) => n + x.count, 0);
 const selected = id => $(id).value;
+const timeMatch = month => (selected('yearFilter')==='all'||month.startsWith(selected('yearFilter'))) && (selected('quarterFilter')==='all'||quarterOf({month})===selected('quarterFilter'));
+const districtMatch = d => (selected('districtFilter')==='all'||d.code===selected('districtFilter')) && (selected('circuitFilter')==='all'||d.circuit===selected('circuitFilter')) && (!$('excludeIllinois').checked||d.code!=='7-52');
 const pct = (a, b) => b ? ((a / b - 1) * 100).toFixed(2) + '%' : '基期为0，不计算';
 function filingRows(ignoreYear = false) {
-  return F.cells.filter(x => (ignoreYear || selected('yearFilter') === 'all' || x.month.startsWith(selected('yearFilter')))
+  return F.cells.filter(x => (ignoreYear || timeMatch(x.month)) && (!$('excludeIllinois').checked || x.district !== '7-52')
     && (selected('districtFilter') === 'all' || x.district === selected('districtFilter'))
     && (selected('circuitFilter') === 'all' || D.districts.find(d => d.code === x.district).circuit === selected('circuitFilter'))
     && (selected('nosFilter') === 'all' || x.nos === selected('nosFilter')));
@@ -32,17 +34,17 @@ let lastMapWidth = 0;
 function fitMapView() {
   if (!map || !document.getElementById('map').clientWidth) return;
   lastMapWidth = document.getElementById('map').clientWidth;
-  const district = D.districts.find(x => x.code === selected('districtFilter'));
+  const district = D.districts.find(x => x.code === selected('districtFilter') && districtMatch(x));
   if (district) {map.setView([district.lat,district.lng],6);return;}
-  const points = D.districts.filter(x => selected('circuitFilter') === 'all' || x.circuit === selected('circuitFilter')).map(x => [x.lat,x.lng]);
+  const points = D.districts.filter(districtMatch).map(x => [x.lat,x.lng]);
   if (points.length) map.fitBounds(points,{padding:[24,24],maxZoom:4});
 }
 function updateMap(rows) {
   if (!map) return;
   markers.forEach(m => m.remove()); markers = [];
-  D.districts.forEach(d => {
+  D.districts.filter(districtMatch).forEach(d => {
     const districtRows = rows.filter(x => x.district === d.code), n = sum(districtRows);
-    const quarters = groupRows(districtRows, D.quarters.filter(q => selected('yearFilter') === 'all' || q.label.startsWith(selected('yearFilter'))).map(q => q.label), quarterOf);
+    const quarters = groupRows(districtRows, D.quarters.filter(q => (selected('yearFilter') === 'all' || q.label.startsWith(selected('yearFilter'))) && (selected('quarterFilter')==='all'||q.label===selected('quarterFilter'))).map(q => q.label), quarterOf);
     const marker = L.circleMarker([d.lat, d.lng], {radius: Math.max(4, Math.min(17, 4 + Math.sqrt(n) / 3)), color: n ? '#356b89' : '#aab8c3', fillColor: n ? '#79a8bb' : '#e2e8ed', fillOpacity: .78, weight: 1}).addTo(map);
     marker.bindPopup('<b>' + esc(d.name) + '</b><br>' + esc(d.circuit) + '<br>当前筛选候选记录：' + fmt(n) + '<br>近似城市：' + esc(d.locator) + '<br><a target="_blank" rel="noopener" href="' + esc(d.locatorSource) + '">法院城市来源</a><br>' + quarters.map(q => esc(q.key) + '：' + fmt(q.count)).join('<br>'), {maxHeight:200,autoPanPadding:[16,16],keepInView:true});
     markers.push(marker);
@@ -51,10 +53,10 @@ function updateMap(rows) {
 }
 function updateFilings() {
   const rows = filingRows(), allYears = filingRows(true), year = selected('yearFilter');
-  const months = groupRows(rows, D.monthly.filter(x => year === 'all' || x.month.startsWith(year)).map(x => x.month), x => x.month);
-  const quarters = groupRows(rows, D.quarters.filter(x => year === 'all' || x.label.startsWith(year)).map(x => x.label), quarterOf);
-  const halves = groupRows(rows, D.halfYears.filter(x => year === 'all' || x.period.startsWith(year)).map(x => x.period), halfOf);
-  const scope = ['yearFilter', 'circuitFilter', 'districtFilter', 'nosFilter'].map(id => $(id).selectedOptions[0].textContent).join(' · ');
+  const months = groupRows(rows, D.monthly.filter(x => timeMatch(x.month)).map(x => x.month), x => x.month);
+  const quarters = groupRows(rows, D.quarters.filter(x => (year === 'all' || x.label.startsWith(year)) && (selected('quarterFilter')==='all'||x.label===selected('quarterFilter'))).map(x => x.label), quarterOf);
+  const halves = groupRows(allYears, D.halfYears.map(x => x.period), halfOf);
+  const scope = ['yearFilter','quarterFilter','circuitFilter','districtFilter','nosFilter'].map(id => $(id).selectedOptions[0].textContent).join(' · ') + ($('excludeIllinois').checked?' · 排除 N.D. Illinois':'');
   $('filterSummary').textContent = '当前立案筛选：' + scope + ' ｜ ' + fmt(sum(rows)) + ' 条候选记录。来源：FJC R24 v3，FILEDATE截至2026-06-30。';
   for (const id of ['overviewTrend', 'monthlyChart']) updateChart(id, {xAxis: {data: months.map(x => x.key)}, series: [{name: '候选记录（FJC R24 v3）', type: 'line', data: months.map(x => x.count), itemStyle: {color: '#3d7da0'}, symbolSize: 5}]}, ['月度', '候选记录'], months.map(x => [x.key, x.count]));
   updateChart('quarterChart', {xAxis: {data: quarters.map(x => x.key)}, series: [{name: '候选记录（FJC R24 v3）', type: 'bar', data: quarters.map(x => x.count), itemStyle: {color: '#719db3'}, label: {show: true, position: 'top'}}]}, ['季度', '候选记录'], quarters.map(x => [x.key, x.count]));
@@ -63,8 +65,8 @@ function updateFilings() {
   $('halfComparison').textContent = '同一地区/巡回区/NOS条件下：2026 H1同比 ' + pct(h26, h25) + '；较2025 H2 ' + pct(h26, h252) + '。';
   $('halfRows').innerHTML = halves.map(x => '<tr><td>' + esc(x.key) + '</td><td>' + fmt(x.count) + '</td><td>' + (x.count / 6).toFixed(1) + '</td><td>' + (x.key === '2026 H1' ? pct(x.count, h25) : '—') + '</td></tr>').join('');
   const q = key => sum(allYears.filter(x => quarterOf(x) === key));
-  $('quarterComparison').textContent = '同一地区/巡回区/NOS条件下：2026 Q1较2025 Q4 ' + pct(q('2026 Q1'), q('2025 Q4')) + '；2026 Q2较Q1 ' + pct(q('2026 Q2'), q('2026 Q1')) + '。比较期间固定，不受年份显示选择影响。';
-  const districts = D.districts.filter(x => (selected('circuitFilter') === 'all' || x.circuit === selected('circuitFilter')) && (selected('districtFilter') === 'all' || x.code === selected('districtFilter'))).map(x => ({...x, count: sum(rows.filter(r => r.district === x.code))})).sort((a,b) => b.count - a.count);
+  $('quarterComparison').textContent = '同一地区/巡回区/NOS条件下：2026 Q1较2025 Q4 ' + pct(q('2026 Q1'), q('2025 Q4')) + '；2026 Q2较Q1 ' + pct(q('2026 Q2'), q('2026 Q1')) + '。比较期间固定，不受年份或季度显示选择影响。';
+  const districts = D.districts.filter(districtMatch).map(x => ({...x, count: sum(rows.filter(r => r.district === x.code))})).sort((a,b) => b.count - a.count);
   updateChart('districtChart', {yAxis: {data: districts.map(x => x.name), inverse: true}, series: [{name: '候选记录（FJC R24 v3）', type: 'bar', data: districts.map(x => x.count), itemStyle: {color: '#719db2'}, label: {show: true, position: 'right', fontSize: 9}}]}, ['地区', '候选记录'], districts.map(x => [x.name, x.count]));
   const nos = D.nos.filter(n => selected('nosFilter') === 'all' || n.code === selected('nosFilter')).map(n => ({...n, count: sum(rows.filter(x => x.nos === n.code))}));
   updateChart('nosChart', {series: [{type: 'pie', center: ['50%','38%'], radius: ['30%', '54%'], label: {show: false}, data: nos.map(x => ({name: x.code + ' · ' + x.label, value: x.count}))}]}, ['NOS', '候选记录'], nos.map(x => [x.code + ' · ' + x.label, x.count]));
@@ -74,7 +76,7 @@ function updateFilings() {
   const categories = D.nos.filter(x => selected('nosFilter') === 'all' || x.code === selected('nosFilter'));
   const other25 = categories.map(n => sum(other.filter(x => x.nos === n.code && halfOf(x) === '2025 H1'))), other26 = categories.map(n => sum(other.filter(x => x.nos === n.code && halfOf(x) === '2026 H1')));
   updateChart('regionNosChart', {xAxis: {data: categories.map(x => x.code)}, series: [{name: '2025 H1', type: 'bar', data: other25, itemStyle:{color:'#b4c7d1'}},{name: '2026 H1', type: 'bar', data: other26, itemStyle:{color:'#6d9e9b'}}]}, ['NOS', '2025 H1', '2026 H1'], categories.map((n,i) => [n.code, other25[i], other26[i]]));
-  renderDistrictList(rows);\n  $('filingData').innerHTML = table(['月度', '候选记录'], months.map(x => [x.key, x.count])) + table(['地区', '候选记录'], districts.map(x => [x.name, x.count])) + table(['NOS', '候选记录'], nos.map(x => [x.code + ' · ' + x.label, x.count]));
+  renderDistrictList(rows); renderCircuits(rows);\n  $('filingData').innerHTML = table(['月度', '候选记录'], months.map(x => [x.key, x.count])) + table(['地区', '候选记录'], districts.map(x => [x.name, x.count])) + table(['NOS', '候选记录'], nos.map(x => [x.code + ' · ' + x.label, x.count]));
   updateMap(rows);
 }
 function cases() {
@@ -86,7 +88,7 @@ function cases() {
     && [x.title,x.caseNo,x.court,x.summary,x.issue,x.significance,x.decision,...(x.topics||[])].join(' ').toLowerCase().includes(q));
   $('caseCount').textContent = '显示 ' + arr.length + ' / ' + C.cases.length + ' 案';
   renderCaseConstellation(arr);
-  $('caseList').innerHTML = arr.map(x => '<details class="case"><summary><div><h3>' + esc(x.title) + '</h3><div class="meta2">' + esc(x.caseNo) + ' · ' + esc(x.court) + ' · ' + esc(x.date) + ' · ' + esc(x.outcomeLabel || '') + '</div></div><span class="tag">' + esc(x.authorityType) + '<br>' + esc(x.evidenceType) + '</span></summary><div class="casebody"><div class="callout">判例效力：' + esc(x.authorityType) + ' ｜ 来源：' + esc(x.evidenceType) + '<br>' + esc(x.sourceNote || '') + '</div>'
+  $('caseList').innerHTML = arr.map(x => '<details class="case" data-case-key="'+esc(x.caseNo)+'"><summary><div><h3>' + esc(x.title) + '</h3><div class="meta2">' + esc(x.caseNo) + ' · ' + esc(x.court) + ' · ' + esc(x.date) + ' · ' + esc(x.outcomeLabel || '') + '</div></div><span class="tag">' + esc(x.authorityType) + '<br>' + esc(x.evidenceType) + '</span></summary><div class="casebody"><div class="callout">判例效力：' + esc(x.authorityType) + ' ｜ 来源：' + esc(x.evidenceType) + '<br>' + esc(x.sourceNote || '') + '</div>'
     + [['案件背景',x.summary],['核心争点',x.issue],['法院处理',x.decision],['研究意义与适用边界',x.significance]].map(([h,t]) => '<h4>'+h+'</h4><p>'+esc(t)+'</p>').join('')
     + '<h4>程序时间线</h4><div class="timeline">' + (x.timeline||[]).map(t => '<div><b>'+esc(t.date)+' · '+esc(t.label)+'</b><br>'+esc(t.detail)+'</div>').join('') + '</div><h4>来源</h4><ul>'
     + (x.sources||[]).map(s => '<li><a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.label)+'</a> <span class="meta2">('+esc(s.role||'')+')</span></li>').join('')+'</ul></div></details>').join('') || '<div class="callout">没有匹配的案件。可清空搜索或重置档案筛选。</div>';
@@ -95,18 +97,22 @@ function renderCaseConstellation(arr) {
   const el=$('caseConstellation'); if(!el) return;
   if(!window.echarts){el.innerHTML='<div class="callout">图表资源暂不可用；档案列表仍可正常使用。</div>';return;}
   if(!charts.caseConstellation) mk('caseConstellation',{tooltip:{trigger:'item',formatter:p=>esc(p.data.title)+'<br>'+esc(p.data.caseNo)+'<br>'+esc(p.data.circuit)+' · '+esc(p.data.date)+'<br>'+esc(p.data.authorityType)},grid:{left:130,right:28,top:24,bottom:48},xAxis:{type:'time',name:'案件日期',axisLabel:{color:'#6b8090'},splitLine:{lineStyle:{color:'#edf2f5}}},yAxis:{type:'category',name:'巡回区',data:[...new Set(C.cases.map(x=>x.circuit||'其他'))].sort(),axisLabel:{fontSize:10,color:'#62798b'},splitLine:{show:true,lineStyle:{color:'#edf2f5'}}},series:[{type:'scatter',symbolSize:13,data:[],emphasis:{focus:'self',scale:1.5}}]});
-  const symbols={'已刊发上诉先例':'diamond','非先例上诉处置':'triangle','地区法院裁定':'circle','法官专项命令':'rect','待决上诉':'roundRect','相关上诉判例':'pin'};
+  const symbols={'已刊发上诉先例':'diamond','非先例上诉处置':'triangle','地区法院个案裁定/命令':'circle','法官专项命令':'rect','待决上诉':'roundRect','相关上诉判例':'pin'};
   const colors=['#327ca4','#58a69c','#947db9','#c18a50','#c87883','#8298aa'];
-  const types=[...new Set(arr.map(x=>x.authorityType))];
-  const series=types.map((type,i)=>({name:type,type:'scatter',symbol:symbols[type]||'circle',symbolSize:14,itemStyle:{color:colors[i%colors.length],borderColor:'#fff',borderWidth:1.5},data:arr.filter(x=>x.authorityType===type).map(x=>({value:[new Date(x.date+'T12:00:00Z').getTime(),x.circuit||'其他'],title:x.title,caseNo:x.caseNo,circuit:x.circuit||'其他',date:x.date,authorityType:x.authorityType,caseKey:x.caseNo}))}));
+  const types=[...new Set(C.cases.map(x=>x.authorityType))]; $('constellationEmpty').textContent=arr.length?'':'当前筛选无匹配档案。';
+  const series=types.map((type,i)=>({name:type,type:'scatter',symbol:symbols[type]||'circle',symbolSize:14,itemStyle:{color:colors[i%colors.length],borderColor:'#fff',borderWidth:1.5},data:arr.filter(x=>x.authorityType===type).map(x=>({value:[Date.parse((x.date.match(/\d{4}-\d{2}-\d{2}/g)||[]).slice(-1)[0]+'T12:00:00Z'),x.circuit||'其他'],title:x.title,caseNo:x.caseNo,circuit:x.circuit||'其他',date:x.date,authorityType:x.authorityType,caseKey:x.caseNo}))}));
   charts.caseConstellation.setOption({legend:{type:'scroll',bottom:0,textStyle:{fontSize:10}},series},{replaceMerge:['series']});
-  if(!charts.caseConstellation.__bound){charts.caseConstellation.on('click',p=>{const target=C.cases.find(x=>x.caseNo===p.data.caseKey);if(!target)return;$('caseSearch').value=target.caseNo;for(const id of ['caseAuthority','caseEvidence','caseCircuit','caseStatus','caseTopic','caseCourt'])$(id).value='all';cases();$('caseList').hidden=false;$('caseConstellationPanel').hidden=true;document.querySelectorAll('[data-case-mode]').forEach(b=>{const active=b.dataset.caseMode==='list';b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});const details=[...$('caseList').querySelectorAll('details.case')][0];if(details){details.open=true;details.scrollIntoView({behavior:'smooth',block:'center'});}});charts.caseConstellation.__bound=true;}
+  if(!charts.caseConstellation.__bound){charts.caseConstellation.on('click',p=>openCase(p.data?.caseKey));charts.caseConstellation.__bound=true;}
 }
+function openCase(key){const details=[...$('caseList').querySelectorAll('details.case')].find(el=>el.dataset.caseKey===key);if(!details)return;setCaseMode('list');details.open=true;details.scrollIntoView?.({behavior:'smooth',block:'center'});}
+function chooseDistrict(code){$('districtFilter').value=code;$('districtFilter').dispatchEvent(new Event('change'));setGeoMode('map');}
 function renderDistrictList(rows){
- const agg=D.districts.map(d=>({d,count:sum(rows.filter(x=>x.district===d.code))})).filter(x=>selected('circuitFilter')==='all'||x.d.circuit===selected('circuitFilter')).filter(x=>selected('districtFilter')==='all'||x.d.code===selected('districtFilter')).sort((a,b)=>b.count-a.count);
+ const agg=D.districts.filter(districtMatch).map(d=>({d,count:sum(rows.filter(x=>x.district===d.code))})).sort((a,b)=>b.count-a.count);
  $('districtList').innerHTML=table(['排名','地区法院','巡回区','候选记录','近似城市'],agg.map((x,i)=>[i+1,x.d.name,x.d.circuit,fmt(x.count),x.d.locator]));
- $('districtList').querySelectorAll('tbody tr').forEach((tr,i)=>tr.addEventListener('click',()=>{$('districtFilter').value=agg[i].d.code;updateFilings();$('geoMapPanel').hidden=false;$('geoListPanel').hidden=true;setGeoMode('map');}));
+ $('districtList').querySelectorAll('tbody tr').forEach((tr,i)=>{const cell=tr.cells[1];const b=document.createElement('button');b.type='button';b.className='district-select';b.textContent=agg[i].d.name;b.addEventListener('click',()=>chooseDistrict(agg[i].d.code));cell.replaceChildren(b);});
 }
+function renderCircuits(rows){const root=$('circuitSummary');root.replaceChildren();const groups=[...new Set(D.districts.filter(d=>!$('excludeIllinois').checked||d.code!=='7-52').map(d=>d.circuit))].map(circuit=>({circuit,count:sum(rows.filter(r=>D.districts.find(d=>d.code===r.district).circuit===circuit))})).sort((a,b)=>b.count-a.count);groups.forEach(g=>{const b=document.createElement('button');b.type='button';b.textContent=g.circuit+' · '+fmt(g.count);b.setAttribute('aria-pressed',String(selected('circuitFilter')===g.circuit));b.onclick=()=>{const next=selected('circuitFilter')===g.circuit?'all':g.circuit;$('districtFilter').value='all';$('circuitFilter').value=next;$('circuitFilter').dispatchEvent(new Event('change'));};root.appendChild(b);});}
+function syncQuarters(){const prev=selected('quarterFilter'),year=selected('yearFilter'),el=$('quarterFilter');el.replaceChildren(new Option('全部可用季度','all'));D.quarters.filter(q=>year==='all'||q.label.startsWith(year)).forEach(q=>el.add(new Option(q.label,q.label)));if([...el.options].some(x=>x.value===prev))el.value=prev;}
 function setGeoMode(mode){$('geoMapPanel').hidden=mode!=='map';$('geoListPanel').hidden=mode!=='list';document.querySelectorAll('[data-geo-mode]').forEach(b=>{const active=b.dataset.geoMode===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});if(mode==='map')requestAnimationFrame(()=>{map?.invalidateSize();fitMapView();Object.values(charts).forEach(c=>c.resize());});}
 function setCaseMode(mode){$('caseList').hidden=mode!=='list';$('caseConstellationPanel').hidden=mode!=='constellation';document.querySelectorAll('[data-case-mode]').forEach(b=>{const active=b.dataset.caseMode===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});if(mode==='constellation')requestAnimationFrame(()=>charts.caseConstellation?.resize());}
 function addOptions(id, values) {
@@ -126,15 +132,18 @@ function fixedFallbacks() {
   Object.entries(content).forEach(([id,[headers,rows]]) => $(id).innerHTML=table(headers,rows));
 }
 function initUI() {
-  addOptions('circuitFilter', D.districts.map(x=>x.circuit));
+  addOptions('circuitFilter', D.districts.map(x=>x.circuit)); syncQuarters();
   for (const d of D.districts.slice().sort((a,b)=>a.name.localeCompare(b.name))) {const o=document.createElement('option'); o.value=d.code;o.textContent=d.name;$('districtFilter').appendChild(o);}
   for (const [id,field] of Object.entries({caseCourt:'court',caseAuthority:'authorityType',caseEvidence:'evidenceType',caseCircuit:'circuit'})) addOptions(id,C.cases.map(x=>x[field]));
-  for (const id of ['yearFilter','circuitFilter','districtFilter','nosFilter']) $(id).addEventListener('change',()=>{
+  for (const id of ['yearFilter','quarterFilter','circuitFilter','districtFilter','nosFilter','excludeIllinois']) $(id).addEventListener('change',()=>{
+    if(id==='yearFilter')syncQuarters();
+    if(id==='excludeIllinois' && $('excludeIllinois').checked && selected('districtFilter')==='7-52')$('districtFilter').value='all';
+    if(id==='districtFilter' && selected(id)==='7-52')$('excludeIllinois').checked=false;
     if(id==='circuitFilter') { if(selected('districtFilter')!=='all' && D.districts.find(x=>x.code===selected('districtFilter')).circuit!==selected('circuitFilter') && selected('circuitFilter')!=='all') $('districtFilter').value='all'; }
     if(id==='districtFilter' && selected(id)!=='all') $('circuitFilter').value=D.districts.find(x=>x.code===selected(id)).circuit;
     updateFilings();
   });
-  $('resetFilters').onclick=()=>{ for(const id of ['yearFilter','circuitFilter','districtFilter','nosFilter']) $(id).value='all';updateFilings(); };
+  $('resetFilters').onclick=()=>{ for(const id of ['yearFilter','quarterFilter','circuitFilter','districtFilter','nosFilter']) $(id).value='all';$('excludeIllinois').checked=false;syncQuarters();updateFilings(); };
   document.querySelectorAll('[data-geo-mode]').forEach(b=>b.addEventListener('click',()=>setGeoMode(b.dataset.geoMode)));
   document.querySelectorAll('[data-case-mode]').forEach(b=>b.addEventListener('click',()=>setCaseMode(b.dataset.caseMode)));
   $('caseSearch').addEventListener('input',cases);
