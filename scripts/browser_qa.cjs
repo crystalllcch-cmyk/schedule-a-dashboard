@@ -66,22 +66,18 @@ async function check(name, fn) {
     });
     await page.locator('[data-module="structure"]').click();
     await sleep(300);
-    await check(label+' map markers and popup',async()=>{
-      assert.equal(await page.locator('.leaflet-interactive').count(),22);
-      const outside=await page.evaluate(()=>{const r=document.getElementById('map').getBoundingClientRect();return [...document.querySelectorAll('.leaflet-interactive')].filter(el=>{const q=el.getBoundingClientRect(),x=q.x+q.width/2,y=q.y+q.height/2;return x<r.x||x>r.right||y<r.y||y>r.bottom;}).length;});
-      assert.equal(outside,0,'initial map clips locator centers');
-      await page.locator('.leaflet-interactive').first().click();
-      await page.locator('.leaflet-popup-content').waitFor();
-      const text=await page.locator('.leaflet-popup-content').innerText();
-      assert.match(text,/N.D. Illinois/);assert.match(text,/2026 Q2/);assert.match(text,/3,840/);
-      await page.locator('.leaflet-popup-close-button').click({trial:true});
-      await sleep(500);
+    await check(label+' V0.8 SVG map and synchronized district filtering',async()=>{
+      assert.equal(await page.locator('.map-node').count(),22);
+      assert.equal(await page.locator('#usOutline').getAttribute('d')?.startsWith('M'),true);
+      const first=page.locator('.map-node[data-code="7-52"]');
+      await first.click();
+      await page.locator('#mapSelectedName').filter({hasText:'N.D. Illinois'}).waitFor();
+      assert.equal(await page.locator('#mapSelectedCount').innerText(),'3,840');
+      assert.match(await page.locator('#filterSummary').innerText(),/3,840 条候选记录/);
       await page.screenshot({path:path.join(output,label+'-map-popup.png'),fullPage:true});
-      const closeInside=await page.evaluate(()=>{const r=document.getElementById('map').getBoundingClientRect(),q=document.querySelector('.leaflet-popup-close-button').getBoundingClientRect();return q.top>=r.top&&q.bottom<=r.bottom;});
-      assert.ok(closeInside,'popup close button clipped after screenshot/resize');
-      await page.locator('.leaflet-popup-close-button').click();
-      const tiles=await page.locator('.leaflet-tile-loaded').count();
-      assert.ok(tiles>0,'OSM tiles not loaded');return {markers:22,tiles,popup:text};
+      await page.locator('#mapClear').click();
+      await page.locator('#filterSummary').filter({hasText:'4,551 条候选记录'}).waitFor();
+      return {mappedDistricts:22,outline:true,selectedDistrict:'N.D. Illinois',selectedCount:3840};
     });
     await check(label+' shared filters 2026 / W.D. Pennsylvania / copyright',async()=>{
       await page.selectOption('#yearFilter','2026');await page.selectOption('#districtFilter','3-15');await page.selectOption('#nosFilter','820');
@@ -104,16 +100,28 @@ async function check(name, fn) {
       assert.equal(await page.locator('#quarterFilter option[value="2026 Q3"]').count(),0);
       await page.locator('#resetFilters').click();await page.check('#excludeIllinois');
       assert.match(await page.locator('#filterSummary').innerText(),/711 条候选记录/);
-      assert.equal(await page.locator('.leaflet-interactive').count(),21);
+      assert.equal(await page.locator('.map-node[data-code="7-52"]').evaluate(el=>getComputedStyle(el).opacity),'.2');
+      assert.equal(await page.locator('.map-node').count(),22);
       await page.locator('[data-geo-mode="list"]').click();assert.equal(await page.locator('#districtList tbody tr').count(),21);
       assert.ok(!(await page.locator('#districtList').innerText()).includes('N.D. Illinois'));
       await page.locator('[data-geo-mode="map"]').click();await page.locator('#resetFilters').click();
       return {quarter:865,excluded:711};
     });
     await page.locator('[data-module="judiciary"]').click();
+    await check(label+' 26-case topic galaxy and tooltip',async()=>{
+      await page.locator('[data-case-mode="constellation"]').click();
+      assert.equal(await page.locator('.case-galaxy-node').count(),26);
+      await page.locator('.case-galaxy-node').first().hover();
+      await page.locator('#caseGalaxyTooltip.show').waitFor();
+      assert.ok((await page.locator('#caseSpotlight').innerText()).includes('核心争点'));
+      await page.screenshot({path:path.join(output,label+'-case-galaxy.png'),fullPage:true});
+      return {dossierNodes:26,hoverTooltip:true,spotlight:true};
+    });
     await check(label+' constellation and non-destructive drill-down',async()=>{
       await page.selectOption('#caseStatus','pending');
       await page.locator('[data-case-mode="constellation"]').click();
+      assert.equal(await page.locator('.case-galaxy-node').count(),1);
+      await page.locator('[data-case-visual="timeline"]').click();
       const data=await page.evaluate(()=>echarts.getInstanceByDom(document.getElementById('caseConstellation')).getOption().series.flatMap(s=>s.data));
       assert.equal(data.length,1);assert.ok(Number.isFinite(data[0].value[0]));
       await page.evaluate(()=>openCase(echarts.getInstanceByDom(document.getElementById('caseConstellation')).getOption().series.flatMap(s=>s.data)[0].caseKey));
