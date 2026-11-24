@@ -1,7 +1,7 @@
 name: V0.9 browser acceptance
 on:
   push:
-    branches: [v0.9-research-integration-2026-11-23, feature/four-module-information-architecture-2026-11-23]
+    branches: [v0.9-research-integration-2026-11-23, feature/four-module-information-architecture-2026-11-23, feature/p1-content-storytelling-2026-11-24]
     paths:
       - index.html
       - app.js
