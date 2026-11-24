@@ -57,7 +57,7 @@ async function check(name, fn) {
       assert.match(await page.locator('#analysisTitle').innerText(),/候选记录变化/);
       assert.match(await page.locator('#analysisBody').innerText(),/同期司法事件/);
       const panelBox=await page.locator('.analysis-drawer').boundingBox();assert.ok(panelBox&&panelBox.width>0&&panelBox.height>0);
-      await page.screenshot({path:path.join(out,label+'-analysis-panel.png'),fullPage:false});
+      await page.screenshot({path:path.join(output,label+'-analysis-panel.png'),fullPage:false});
       await page.keyboard.press('Escape');assert.equal(await page.locator('#analysisOverlay').isVisible(),false);
       return {sourceTooltip:true,analysisDrawer:true,relatedEvents:true,panelWidth:panelBox.width,panelHeight:panelBox.height};
     });
