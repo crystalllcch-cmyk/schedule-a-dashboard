@@ -32,7 +32,7 @@ function updateFixedKpis() {
   const crGrowth = (cr26 / cr25 - 1) * 100;
   const crContribution = (cr26 - cr25) / (h26 - h25) * 100;
   $('kpiCandidates').textContent = fmt(total);
-  $('kpiCandidatesNote').textContent = '2025.01—2026.06 · ORIGIN=1新立案记录';
+  $('kpiCandidatesNote').textContent = '2025.01—2026.06 · ORIGIN（案件记录来源类型）=1新立案记录';
   $('kpiH1Growth').textContent = '+' + yoy.toFixed(1) + '%';
   $('kpiH1GrowthNote').textContent = fmt(h26) + '条；较2025 H1增加' + fmt(h26-h25) + '条';
   $('kpiNdilShare').textContent = ndShare26.toFixed(1) + '%';
