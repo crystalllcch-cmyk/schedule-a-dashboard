@@ -6,8 +6,9 @@ async function boot(withCharts=false){
   const html=fs.readFileSync(path.join(root,'index.html'),'utf8').replace(/<script src="[^\"]*"><\/script>/g,'');
   const dom=new JSDOM(html,{runScripts:'outside-only',pretendToBeVisual:true,url:'https://qa.invalid/'}),w=dom.window;
   w.fetch=async url=>({ok:true,json:async()=>JSON.parse(fs.readFileSync(path.join(root,url.replace('./','')),'utf8'))});
-  let chartOptions={};
-  if(withCharts) w.echarts={init:el=>({setOption:(v)=>{chartOptions[el.id]={...chartOptions[el.id],...v}},resize:()=>{},on:()=>{}})};
+  let chartOptions={},chartHandlers={};
+  w.__qaChartHandlers=chartHandlers;
+  if(withCharts) w.echarts={init:el=>({setOption:(v)=>{chartOptions[el.id]={...chartOptions[el.id],...v}},resize:()=>{},on:(event,handler)=>{chartHandlers[el.id]=handler;}})};
   const inline=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n');
   w.eval(inline+'\n'+fs.readFileSync(path.join(root,'analysis.js'),'utf8')+'\n'+fs.readFileSync(path.join(root,'app.js'),'utf8')+'\nwindow.__qaTotal = () => sum(filingRows());');
   for(let i=0;i<20&&!w.document.querySelector('.case');i++)await new Promise(r=>setTimeout(r,5));
@@ -70,6 +71,34 @@ async function boot(withCharts=false){
   assert.match(w.document.getElementById('analysisBody').textContent,/同期司法事件/);
   w.document.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Escape'}));
   assert.equal(w.document.getElementById('analysisOverlay').hidden,true);
+  if(withCharts){
+    const chartSamples=[
+      ['monthlyChart',{name:'2026-06',value:280},/2026-06/],
+      ['quarterChart',{name:'2026 Q2',value:865},/2026 Q2/],
+      ['halfTrendChart',{name:'2026 H1',value:1636},/2026 H1/],
+      ['districtChart',{name:'W.D. Pennsylvania'},/地区分析/],
+      ['overviewDistrict',{name:'W.D. Pennsylvania'},/地区分析/],
+      ['nosChart',{name:'820 · 版权'},/NOS 820/],
+      ['regionNosChart',{name:'820'},/非N.D. Illinois/],
+      ['statusChart',{name:'已终止'},/最新episode状态/],
+      ['dispChart',{name:'18 · 统计性关闭'},/DISP 18/],
+      ['judgmentChart',{name:'有利原告'},/NOJ判决子集/],
+      ['precisionChart',{name:'保守点估计'},/识别精度/],
+      ['brandAnnualChart',{name:'2026 Jan–Aug'},/TFL五品牌样本/],
+      ['brandChart',{name:'Dior'},/Dior/],
+      ['abtlChart',{name:'2025*'},/2025年历史参考/],
+      ['overviewTrend',{name:'2026-06'},/2026-06/],
+      ['overviewHalf',{name:'2026 H1'},/2026 H1/]
+    ];
+    for(const [id,params,expected] of chartSamples){
+      assert.equal(typeof chartHandlers[id],'function','missing chart click handler: '+id);
+      chartHandlers[id](params);
+      assert.equal(w.document.getElementById('analysisOverlay').hidden,false);
+      assert.match(w.document.getElementById('analysisTitle').textContent,expected,id+' panel title');
+      w.document.getElementById('analysisClose').click();
+      assert.equal(w.document.getElementById('analysisOverlay').hidden,true);
+    }
+  }
   const trendModes=[['quarter','quarterTrendPanel'],['half','halfTrendPanel'],['month','monthlyTrendPanel']];
   for(const [mode,visibleId] of trendModes){
     w.document.querySelector('[data-trend-view="'+mode+'"]').click();
