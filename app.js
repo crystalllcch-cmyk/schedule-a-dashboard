@@ -109,6 +109,68 @@ function updateFilings() {
   updateMap(rows);
   updateDynamicInsights(rows,allYears);
 }
+let activeCaseVisual='galaxy';
+const GALAXY_GROUPS={
+ appeals:{title:'上诉裁判与规则',cx:270,cy:185,color:'url(#galaxyFillCyan)',glow:'#73e7df',countId:'galaxyCountAppeals'},
+ jurisdiction:{title:'个人管辖权与境外送达',cx:830,cy:185,color:'url(#galaxyFillBlue)',glow:'#9abfff',countId:'galaxyCountJurisdiction'},
+ joinder:{title:'被告合并与程序管理',cx:270,cy:515,color:'url(#galaxyFillViolet)',glow:'#c5aaff',countId:'galaxyCountJoinder'},
+ relief:{title:'TRO、PI、资产与赔偿',cx:830,cy:515,color:'url(#galaxyFillAmber)',glow:'#ffd38a',countId:'galaxyCountRelief'}
+};
+function galaxyGroup(c){
+ const topics=c.topics||[];
+ if((c.authorityType||'').includes('上诉')||(c.authorityType||'').includes('待决'))return 'appeals';
+ if(topics.some(t=>['joinder','rule20','procedure','due-process'].includes(t)))return 'joinder';
+ if(topics.some(t=>['service','jurisdiction','pj'].includes(t)))return 'jurisdiction';
+ return 'relief';
+}
+function galaxyLabel(c){
+ const first=(c.title.split(' v. ')[0]||c.title).replace(/,?\s+(LLC|Inc\.|Ltd\.|Corp\.|Co\.).*$/i,'').trim();
+ return first.length>14?first.slice(0,13)+'…':first;
+}
+function updateCaseSpotlight(c){
+ const p=c.analysisPoints||{};
+ $('caseSpotlight').innerHTML='<div class="spotlight-kicker">CASE INTELLIGENCE / QUICK VIEW</div><div class="spotlight-case-no">'+esc(c.caseNo)+'</div><h3>'+esc(c.title)+'</h3><div class="spotlight-meta">'+esc(c.court)+' · '+esc(c.date)+'<br>'+esc(c.authorityType)+' · '+esc(c.evidenceType)+'</div><div class="spotlight-detail"><b>核心争点</b><p>'+esc(c.issue||'档案未单列')+'</p></div><div class="spotlight-detail"><b>法院处理</b><p>'+esc(c.decision||'档案未单列')+'</p></div><div class="spotlight-detail"><b>研究意义</b><p>'+esc(c.significance||'档案未单列')+'</p></div><button class="spotlight-open" id="spotlightOpen" type="button">打开完整案件档案 ↗</button>';
+ $('spotlightOpen').onclick=()=>openCase(c.caseNo);
+}
+function showCaseGalaxyTooltip(c,e){
+ const tip=$('caseGalaxyTooltip');
+ tip.innerHTML='<b>'+esc(c.caseNo)+' · '+esc(c.authorityType)+'</b><h4>'+esc(c.title)+'</h4><p>'+esc(c.court)+' · '+esc(c.date)+'</p><p><b>核心争点：</b>'+esc(c.issue||'档案未单列')+'</p><p><b>法院处理：</b>'+esc(c.decision||'档案未单列')+'</p>';
+ tip.classList.add('show');updateCaseSpotlight(c);positionCaseGalaxyTooltip(e);
+}
+function positionCaseGalaxyTooltip(e){
+ const tip=$('caseGalaxyTooltip'),box=$('caseGalaxyStage').getBoundingClientRect();
+ if(window.innerWidth<=650){tip.style.left='12px';tip.style.right='12px';tip.style.top='auto';tip.style.bottom='38px';return;}
+ const w=tip.offsetWidth||330,h=tip.offsetHeight||250;let x=e.clientX-box.left+16,y=e.clientY-box.top+16;
+ if(x+w>box.width-12)x=e.clientX-box.left-w-16;if(y+h>box.height-12)y=e.clientY-box.top-h-16;
+ tip.style.left=Math.max(12,Math.min(x,box.width-w-12))+'px';tip.style.right='auto';tip.style.top=Math.max(78,Math.min(y,box.height-h-12))+'px';tip.style.bottom='auto';
+}
+function renderCaseGalaxy(rows){
+ const groups={appeals:[],jurisdiction:[],joinder:[],relief:[]};
+ rows.forEach(c=>groups[galaxyGroup(c)].push(c));
+ const colors={appeals:'#73e7df',jurisdiction:'#9abfff',joinder:'#c5aaff',relief:'#ffd38a'};
+ Object.entries(GALAXY_GROUPS).forEach(([key,g])=>{const el=$(g.countId);if(el)el.textContent=groups[key].length+' / '+C.cases.filter(c=>galaxyGroup(c)===key).length+' DOSSIERS';});
+ const nodes=[];
+ Object.entries(groups).forEach(([key,items])=>{
+  const g=GALAXY_GROUPS[key],n=items.length,ring=n<=4?66:n<=7?84:105;
+  items.forEach((c,i)=>{
+   const angle=-Math.PI/2+(Math.PI*2*i/Math.max(1,n)),x=g.cx+(n===1?0:ring*Math.cos(angle)),y=g.cy+(n===1?0:ring*Math.sin(angle)),r=27;
+   const no=c.caseNo.replace(/^No\.\s*/,'');const shortNo=no.length>13?no.slice(0,12)+'…':no;
+   nodes.push('<g class="case-galaxy-node" data-case-key="'+esc(c.caseNo)+'" tabindex="0" role="button" aria-label="打开案件档案：'+esc(c.title)+'"><circle class="bubble-aura" cx="'+x+'" cy="'+y+'" r="'+(r+13)+'" fill="'+colors[key]+'"/><circle class="bubble-core" cx="'+x+'" cy="'+y+'" r="'+r+'" fill="'+g.color+'"/><circle class="bubble-ring" cx="'+x+'" cy="'+y+'" r="'+(r-4)+'"/><text class="bubble-label" x="'+x+'" y="'+(y-3)+'">'+esc(galaxyLabel(c))+'</text><text class="bubble-case-no" x="'+x+'" y="'+(y+13)+'">'+esc(shortNo)+'</text><title>'+esc(c.title)+' · '+esc(c.outcomeLabel||'')+'</title></g>');
+  });
+ });
+ $('caseGalaxyNodes').innerHTML=nodes.join('');
+ $('caseGalaxyNodes').onpointerover=e=>{const node=e.target.closest('[data-case-key]');if(node){const c=C.cases.find(x=>x.caseNo===node.dataset.caseKey);if(c)showCaseGalaxyTooltip(c,e);}};
+ $('caseGalaxyNodes').onpointermove=e=>{if(e.target.closest('[data-case-key]'))positionCaseGalaxyTooltip(e);};
+ $('caseGalaxyNodes').onpointerout=e=>{if(!e.relatedTarget?.closest?.('[data-case-key]'))$('caseGalaxyTooltip').classList.remove('show');};
+ $('caseGalaxyNodes').onclick=e=>{const node=e.target.closest('[data-case-key]');if(node)openCase(node.dataset.caseKey);};
+ $('caseGalaxyNodes').onfocusin=e=>{const node=e.target.closest('[data-case-key]');if(node){const c=C.cases.find(x=>x.caseNo===node.dataset.caseKey),b=node.getBoundingClientRect();if(c)showCaseGalaxyTooltip(c,{clientX:b.left+b.width/2,clientY:b.top+b.height/2});}};
+ $('caseGalaxyNodes').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){const node=e.target.closest('[data-case-key]');if(node){e.preventDefault();openCase(node.dataset.caseKey);}}if(e.key==='Escape')$('caseGalaxyTooltip').classList.remove('show');};
+}
+function setCaseVisual(mode){
+ activeCaseVisual=mode;$('caseGalaxyPanel').hidden=mode!=='galaxy';$('caseTimelinePanel').hidden=mode!=='timeline';
+ document.querySelectorAll('[data-case-visual]').forEach(b=>{const active=b.dataset.caseVisual===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});
+ if(mode==='timeline')requestAnimationFrame(()=>charts.caseConstellation?.resize());
+}
 function cases() {
   const q = selected('caseSearch').trim().toLowerCase(), topic = selected('caseTopic');
   const aliases = {pj: ['pj', 'jurisdiction', 'personal-jurisdiction'], tro: ['tro', 'pi'], damages: ['damages','profits'], joinder: ['joinder','rule20'], asset: ['asset','asset-freeze'], service:['service']};
@@ -118,6 +180,7 @@ function cases() {
     && [x.title,x.caseNo,x.court,x.summary,x.issue,x.significance,x.decision,...(x.topics||[])].join(' ').toLowerCase().includes(q));
   $('caseCount').textContent = '显示 ' + arr.length + ' / ' + C.cases.length + ' 案';
   renderCaseConstellation(arr);
+  renderCaseGalaxy(arr);
   $('caseList').innerHTML = arr.map(caseMarkup).join('') || '<div class="callout">没有匹配的案件。可清空搜索或重置档案筛选。</div>';
 }
 const caseMarkup = x => '<details class="case" data-case-key="'+esc(x.caseNo)+'"><summary><div><h3>' + esc(x.title) + '</h3><div class="meta2">' + esc(x.caseNo) + ' · ' + esc(x.court) + ' · ' + esc(x.date) + ' · ' + esc(x.outcomeLabel || '') + '</div></div><span class="tag">' + esc(x.authorityType) + '<br>' + esc(x.evidenceType) + '</span></summary><div class="casebody"><div class="callout">判例效力：' + esc(x.authorityType) + ' ｜ 来源：' + esc(x.evidenceType) + '<br>' + esc(x.sourceNote || '') + '</div>'
@@ -198,7 +261,7 @@ function renderDistrictList(rows){
 function renderCircuits(rows){const root=$('circuitSummary');root.replaceChildren();const groups=[...new Set(D.districts.filter(d=>!$('excludeIllinois').checked||d.code!=='7-52').map(d=>d.circuit))].map(circuit=>({circuit,count:sum(rows.filter(r=>D.districts.find(d=>d.code===r.district).circuit===circuit))})).sort((a,b)=>b.count-a.count);groups.forEach(g=>{const b=document.createElement('button');b.type='button';b.textContent=g.circuit+' · '+fmt(g.count);b.setAttribute('aria-pressed',String(selected('circuitFilter')===g.circuit));b.onclick=()=>{const next=selected('circuitFilter')===g.circuit?'all':g.circuit;$('districtFilter').value='all';$('circuitFilter').value=next;$('circuitFilter').dispatchEvent(new Event('change'));};root.appendChild(b);});}
 function syncQuarters(){const prev=selected('quarterFilter'),year=selected('yearFilter'),el=$('quarterFilter');el.replaceChildren(new Option('全部可用季度','all'));D.quarters.filter(q=>year==='all'||q.label.startsWith(year)).forEach(q=>el.add(new Option(q.label,q.label)));if([...el.options].some(x=>x.value===prev))el.value=prev;}
 function setGeoMode(mode){$('geoMapPanel').hidden=mode!=='map';$('geoListPanel').hidden=mode!=='list';document.querySelectorAll('[data-geo-mode]').forEach(b=>{const active=b.dataset.geoMode===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});if(mode==='map')requestAnimationFrame(()=>{updateMap(filingRows());Object.values(charts).forEach(c=>c.resize());});}
-function setCaseMode(mode){$('caseList').hidden=mode!=='list';$('caseConstellationPanel').hidden=mode!=='constellation';document.querySelectorAll('[data-case-mode]').forEach(b=>{const active=b.dataset.caseMode===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});if(mode==='constellation')requestAnimationFrame(()=>charts.caseConstellation?.resize());}
+function setCaseMode(mode){$('caseList').hidden=mode!=='list';$('caseConstellationPanel').hidden=mode!=='constellation';document.querySelectorAll('[data-case-mode]').forEach(b=>{const active=b.dataset.caseMode===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});if(mode==='constellation'){setCaseVisual(activeCaseVisual||'galaxy');requestAnimationFrame(()=>{charts.caseConstellation?.resize();});}}
 function setTrendView(mode){const panels={month:'monthlyTrendPanel',quarter:'quarterTrendPanel',half:'halfTrendPanel'};for(const [key,id] of Object.entries(panels))$(id).hidden=key!==mode;document.querySelectorAll('[data-trend-view]').forEach(b=>{const active=b.dataset.trendView===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});const chartId={month:'monthlyChart',quarter:'quarterChart',half:'halfTrendChart'}[mode];requestAnimationFrame(()=>charts[chartId]?.resize());}
 function addOptions(id, values) {
   [...new Set(values)].sort().forEach(v => { const o=document.createElement('option'); o.value=v; o.textContent=v; $(id).appendChild(o); });
@@ -234,6 +297,9 @@ function initUI() {
   setTrendView('month');
   document.querySelectorAll('[data-geo-mode]').forEach(b=>b.addEventListener('click',()=>setGeoMode(b.dataset.geoMode)));
   document.querySelectorAll('[data-case-mode]').forEach(b=>b.addEventListener('click',()=>setCaseMode(b.dataset.caseMode)));
+  document.querySelectorAll('[data-case-visual]').forEach(b=>b.addEventListener('click',()=>setCaseVisual(b.dataset.caseVisual)));
+  setCaseVisual('galaxy');
+  setCaseMode('constellation');
   $('caseSearch').addEventListener('input',cases);
   for(const id of ['caseAuthority','caseEvidence','caseCircuit','caseStatus','caseTopic','caseCourt']) $(id).addEventListener('change',cases);
   const reset=document.createElement('button');reset.className='reset';reset.textContent='重置档案筛选';reset.onclick=()=>{$('caseSearch').value='';for(const id of ['caseAuthority','caseEvidence','caseCircuit','caseStatus','caseTopic','caseCourt']) $(id).value='all';cases();};document.querySelector('.tools').appendChild(reset);
