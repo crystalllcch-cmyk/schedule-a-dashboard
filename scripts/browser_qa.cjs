@@ -52,7 +52,12 @@ async function check(name, fn) {
       await page.locator('#monthlyChart').scrollIntoViewIfNeeded();
       const point=await page.evaluate(()=>{const el=document.getElementById('monthlyChart'),chart=echarts.getInstanceByDom(el),xy=chart.convertToPixel({seriesIndex:0},[0,230]),rect=el.getBoundingClientRect();return {x:rect.x+xy[0],y:rect.y+xy[1]};});
       await page.mouse.move(point.x,point.y);await sleep(200);
-      const text=await page.locator('#monthlyChart').innerText();assert.match(text,/FJC R24 v3/);return {sourceTooltip:true};
+      const text=await page.locator('#monthlyChart').innerText();assert.match(text,/同期司法事件/);
+      await page.mouse.click(point.x,point.y);await page.locator('#analysisOverlay').waitFor({state:'visible'});
+      assert.match(await page.locator('#analysisTitle').innerText(),/候选记录变化/);
+      assert.match(await page.locator('#analysisBody').innerText(),/同期司法事件/);
+      await page.keyboard.press('Escape');assert.equal(await page.locator('#analysisOverlay').getAttribute('hidden'),'');
+      return {sourceTooltip:true,analysisDrawer:true,relatedEvents:true};
     });
     await page.locator('[data-module="structure"]').click();
     await sleep(300);
@@ -78,6 +83,9 @@ async function check(name, fn) {
       await page.locator('#filterSummary').filter({hasText:'113 条候选记录'}).waitFor();
       const counts=await page.evaluate(()=>echarts.getInstanceByDom(document.getElementById('monthlyChart')).getOption().series[0].data);
       assert.equal(counts.reduce((a,b)=>a+b,0),113);
+      assert.match(await page.locator('#trendDynamicInsight').innerText(),/113/);
+      assert.match(await page.locator('#geoDynamicInsight').innerText(),/W\\.D\\. Pennsylvania/);
+      assert.match(await page.locator('#nosDynamicInsight').innerText(),/版权 113/);
       await page.screenshot({path:path.join(output,label+'-filtered-geography.png'),fullPage:true});return {total:113,monthlySeries:counts};
     });
     await check(label+' zero result and reset',async()=>{
