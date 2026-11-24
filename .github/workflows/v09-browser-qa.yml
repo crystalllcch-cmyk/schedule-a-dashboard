@@ -1,13 +1,14 @@
 name: V0.9 browser acceptance
 on:
   push:
-    branches: [v0.9-research-integration-2026-11-23]
+    branches: [v0.9-research-integration-2026-11-23, feature/four-module-information-architecture-2026-11-23]
     paths:
       - index.html
       - app.js
       - data/**
       - package.json
       - scripts/browser_qa.cjs
+      - scripts/verify_interactions.cjs
       - scripts/build_standalone.py
       - .github/workflows/v09-browser-qa.yml
 permissions:
