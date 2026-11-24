@@ -272,3 +272,5 @@ Promise.all(['v09_research','case_dossiers','filing_cells'].map(x=>readJSON('./d
   const fallback=document.createElement('details');fallback.className='callout';fallback.innerHTML='<summary>查看当前筛选数据与来源</summary><p>FJC R24 v3：月度 × 地区 × NOS汇总；统计单位为候选案卷记录，零值表示该候选池内没有符合条件的记录。</p><div id="filingData"></div>';$('geography').appendChild(fallback);
   initCharts();initMap();initUI();
 }).catch(error=>{const message=document.createElement('div');message.className='callout warn';message.textContent='数据加载失败：'+error.message;document.querySelector('main').replaceChildren(message);});
+
+// P2 analysis layer implementation begins in this branch.
