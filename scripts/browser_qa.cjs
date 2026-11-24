@@ -58,9 +58,11 @@ async function check(name, fn) {
       assert.match(await page.locator('#analysisBody').innerText(),/同期司法事件/);
       const hoverTipVisible=await page.locator('.echarts-tooltip').isVisible().catch(()=>false);assert.equal(hoverTipVisible,false);
       const panelBox=await page.locator('.analysis-drawer').boundingBox();assert.ok(panelBox&&panelBox.width>0&&panelBox.height>0);
+      await page.mouse.move(panelBox.x+panelBox.width-30,panelBox.y+30);await sleep(120);
+      const tooltipStillVisible=await page.locator('.echarts-tooltip').isVisible().catch(()=>false);assert.equal(tooltipStillVisible,false);
       await page.screenshot({path:path.join(output,label+'-analysis-panel.png'),fullPage:false});
       await page.keyboard.press('Escape');assert.equal(await page.locator('#analysisOverlay').isVisible(),false);
-      return {sourceTooltip:true,analysisDrawer:true,relatedEvents:true,hoverTooltipHidden:!hoverTipVisible,panelWidth:panelBox.width,panelHeight:panelBox.height};
+      return {sourceTooltip:true,analysisDrawer:true,relatedEvents:true,hoverTooltipHidden:!hoverTipVisible&&!tooltipStillVisible,panelWidth:panelBox.width,panelHeight:panelBox.height};
     });
     await page.locator('[data-module="structure"]').click();
     await sleep(300);
