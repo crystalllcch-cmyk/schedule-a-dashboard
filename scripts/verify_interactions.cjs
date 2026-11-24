@@ -34,6 +34,15 @@ async function boot(withCharts=false){
   set('caseEvidence','all');set('caseTopic','pj');assert.equal(w.document.querySelectorAll('.case').length,10);
   set('caseTopic','all');w.document.getElementById('caseSearch').value='24-1538';w.document.getElementById('caseSearch').dispatchEvent(new w.Event('input'));assert.equal(w.document.querySelectorAll('.case').length,1);
   assert.match(w.document.getElementById('caseList').textContent,/非先例上诉处置/);
+  assert.equal(w.document.querySelectorAll('#judicialTimeline .event-period').length,6);
+  assert.equal(w.document.querySelectorAll('#postCutoffEvents .event-period').length,2);
+  assert.equal(w.document.querySelectorAll('#legalThemes .theme-card').length,6);
+  const savedQuery=w.document.getElementById('caseSearch').value;
+  w.document.querySelector('#judicialTimeline [data-research-case]').click();
+  assert.equal(w.document.getElementById('linkedCasePanel').hidden,false);
+  assert.ok(w.document.querySelector('#linkedCaseContent details').open);
+  assert.equal(w.document.getElementById('caseSearch').value,savedQuery);
+  w.document.getElementById('closeLinkedCase').click();assert.equal(w.document.getElementById('linkedCasePanel').hidden,true);
   const ids=[...w.document.querySelectorAll('[id]')].map(e=>e.id);assert.equal(ids.length,new Set(ids).size);
   const button=w.document.querySelector('[data-module="judiciary"]');button.click();assert.equal(w.document.querySelector('.filters').hidden,true);
   assert.equal(w.document.querySelectorAll('.view.active').length,1);assert.equal(w.document.getElementById('cases').classList.contains('active'),true);
