@@ -68,7 +68,7 @@ async function check(name, fn) {
     await sleep(300);
     await check(label+' V0.8 SVG map and synchronized district filtering',async()=>{
       assert.equal(await page.locator('.map-node').count(),22);
-      assert.equal(await page.locator('#usOutline').getAttribute('d')?.startsWith('M'),true);
+      assert.equal(await page.locator('#usOutline').getAttribute('d').then(value=>value.startsWith('M')),true);
       const first=page.locator('.map-node[data-code="7-52"]');
       await first.click();
       await page.locator('#mapSelectedName').filter({hasText:'N.D. Illinois'}).waitFor();
