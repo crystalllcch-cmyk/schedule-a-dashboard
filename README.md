@@ -8,10 +8,11 @@
 - 正式分支：`main`，当前基准提交：`f7885a45f5f4e1044627fa9dd32a59c73e56de2e`。
 - 线上网址：https://crystalllcch-cmyk.github.io/schedule-a-dashboard/
 - V0.8存档分支：`archive/v0.8-before-v0.9-2026-11-23`。
-- 本分支：`feature/four-module-information-architecture-2026-11-23`，属于独立开发及预览候选，**不是线上发布版本**。
+- 高级改版参考分支：`feature/four-module-information-architecture-2026-11-23`。
+- 当前P1工作分支：`feature/p1-content-storytelling-2026-11-24`，属于独立开发分支，**不是线上发布版本**。
 - **用户尚未批准V0.9或高级改版正式发布；不得将本分支合并至`main`，不得触发正式网站部署，除非取得用户新的明确授权。**
 
-本分支最新开发提交为 `bbe0d1d1b5f58c9a4098a85b577d1b45a1b22e38`。GitHub Actions运行 `45320703438` 已对应用代码提交 `4b4d21e` 完成DOM测试、桌面及手机Chromium测试；其后的两个提交仅增加阶段记录与独立预览文件，没有修改应用代码。自动化测试通过不等于用户验收，也不构成发布授权。
+四模块参考分支最新开发提交为 `bbe0d1d1b5f58c9a4098a85b577d1b45a1b22e38`。当前P1工作分支的应用代码提交为 `3f0ed9dac85efcac42f55145750ffb8ef6e4f3ae`，GitHub Actions运行 [#45337751136](https://github.com/crystalllcch-cmyk/schedule-a-dashboard/actions/runs/45337751136) 已通过DOM测试、桌面及手机Chromium测试，并对仓库页面和单文件生成版本分别完成验收。自动化测试通过不等于用户验收，也不构成发布授权。
 
 ## 当前研究与功能内容
 
@@ -42,7 +43,7 @@
 - `data/case_dossiers.json`：26个精选案件档案及时间线、判例效力、来源等级、巡回区、程序状态和原始链接。
 - `data/filing_cells.json`：由已核验候选CSV重建的247个匿名月度×地区×NOS统计单元。
 - `index.html`、`app.js`：高级互动页面与交互逻辑。
-- `review/schedule-a-advanced-preview.html`：独立单文件预览候选。
+- `review/schedule-a-advanced-preview.html`：四模块基线单文件预览；P1—P3优化完成后将重新生成当前工作分支的独立预览。
 - `docs/METHODOLOGY.md`：研究方法、字段定义、统计口径与限制。
 - `docs/PHASE1_FOUR_MODULE_ARCHITECTURE.md` 至 `docs/PHASE5_ACCEPTANCE.md`：阶段记录。
 
