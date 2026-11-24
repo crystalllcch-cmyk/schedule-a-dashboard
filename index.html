@@ -175,4 +175,4 @@ mk("brandChart",{tooltip:{trigger:"axis"},legend:{bottom:0,textStyle:{fontSize:1
 mk("abtlChart",{tooltip:{trigger:"axis"},grid:{left:45,right:15,top:15,bottom:45},xAxis:{type:"category",data:D.abtl.historical.map(x=>x.year+(x.partial?"*":"")),...axis,axisLabel:{interval:0,rotate:35,fontSize:9,color:"#62798b"}},yAxis:{type:"value",...axis},series:[{type:"line",smooth:.2,data:D.abtl.historical.map(x=>x.count),symbolSize:5,lineStyle:{color:"#8d7ca7",width:3},areaStyle:{color:"rgba(141,124,167,.1)"}}]});}
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 
-</script><script src="./app.js"></script></body></html>
+</script><script src="./analysis.js"></script><script src="./app.js"></script></body></html>
