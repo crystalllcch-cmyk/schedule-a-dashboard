@@ -5,6 +5,7 @@ function analysisPreviousMonth(key){const [y,m]=key.split('-').map(Number);const
 function analysisSection(title,text){return '<section class="analysis-section"><h3>'+esc(title)+'</h3><p>'+esc(text)+'</p></section>';}
 function openAnalysisPanel(title,summary,sections,sources=[],eyebrow='图表深度分析'){
   lastAnalysisFocus=document.activeElement;
+  Object.values(charts||{}).forEach(chart=>chart?.dispatchAction?.({type:'hideTip'}));
   $('analysisEyebrow').textContent=eyebrow;$('analysisTitle').textContent=title;$('analysisSummary').textContent=summary;
   $('analysisBody').innerHTML=sections.map(x=>analysisSection(x[0],x[1])).join('');
   $('analysisSources').innerHTML=sources.length?'<h3>研究来源与口径</h3>'+sources.map(x=>'<a href="'+esc(x.url)+'" target="_blank" rel="noopener">'+esc(x.label)+'</a>').join(''):'';
