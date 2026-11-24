@@ -781,11 +781,5 @@
         ]
       }
     }
-  ],
-  "_versionNotice": {
-    "version": "V0.8 historical snapshot",
-    "usedByV09": false,
-    "supersededBy": "v09_research.json and filing_cells.json",
-    "note": "Preserved for historical comparison; old sample and map coverage statements are superseded."
-  }
+  ]
 }
