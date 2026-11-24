@@ -20,7 +20,7 @@ function table(headers, rows) {
     + '</tr></thead><tbody>' + rows.map(row => '<tr>' + row.map(x => '<td>' + esc(x) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>';
 }
 function updateChart(id, option, headers, rows) {
-  if (charts[id]) { option.tooltip = {trigger: id === 'nosChart' ? 'item' : 'axis', confine: true, formatter: params => {const items=Array.isArray(params)?params:[params];return esc(items[0]?.name||'')+'<br>'+items.map(p=>esc(p.seriesName||'候选记录')+'：'+fmt(p.value)).join('<br>')+'<br>当前立案筛选合计：'+fmt(sum(filingRows()))+' 条<br>FJC R24 v3 · FILEDATE截至2026-06-30';}}; charts[id].setOption(option, { replaceMerge: ['series'] }); }
+  if (charts[id]) { option.tooltip = {trigger: id === 'nosChart' ? 'item' : 'axis', confine: true, formatter: params => {const items=Array.isArray(params)?params:[params];return esc(items[0]?.name||'')+'<br>'+items.map(p=>esc(p.seriesName||'候选记录')+'：'+fmt(p.value)).join('<br>')+'<br>'+(['overviewHalf','overviewDistrict','regionNosChart'].includes(id)?'固定比较期间；地理及NOS条件有效':'当前立案筛选合计：'+fmt(sum(filingRows()))+' 条')+'<br>FJC R24 v3 · FILEDATE截至2026-06-30';}}; charts[id].setOption(option, { replaceMerge: ['series'] }); }
   else $(id).innerHTML = table(headers, rows);
 }
 function initMap() {
