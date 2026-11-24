@@ -90,7 +90,7 @@ function cases() {
   renderCaseConstellation(arr);
   $('caseList').innerHTML = arr.map(caseMarkup).join('') || '<div class="callout">没有匹配的案件。可清空搜索或重置档案筛选。</div>';
 }
-const caseMarkup = '<details class="case" data-case-key="'+esc(x.caseNo)+'"><summary><div><h3>' + esc(x.title) + '</h3><div class="meta2">' + esc(x.caseNo) + ' · ' + esc(x.court) + ' · ' + esc(x.date) + ' · ' + esc(x.outcomeLabel || '') + '</div></div><span class="tag">' + esc(x.authorityType) + '<br>' + esc(x.evidenceType) + '</span></summary><div class="casebody"><div class="callout">判例效力：' + esc(x.authorityType) + ' ｜ 来源：' + esc(x.evidenceType) + '<br>' + esc(x.sourceNote || '') + '</div>'
+const caseMarkup = x => '<details class="case" data-case-key="'+esc(x.caseNo)+'"><summary><div><h3>' + esc(x.title) + '</h3><div class="meta2">' + esc(x.caseNo) + ' · ' + esc(x.court) + ' · ' + esc(x.date) + ' · ' + esc(x.outcomeLabel || '') + '</div></div><span class="tag">' + esc(x.authorityType) + '<br>' + esc(x.evidenceType) + '</span></summary><div class="casebody"><div class="callout">判例效力：' + esc(x.authorityType) + ' ｜ 来源：' + esc(x.evidenceType) + '<br>' + esc(x.sourceNote || '') + '</div>'
     + [['案件背景',x.summary],['核心争点',x.issue],['法院处理',x.decision],['研究意义与适用边界',x.significance]].map(([h,t]) => '<h4>'+h+'</h4><p>'+esc(t)+'</p>').join('')
     + '<h4>程序时间线</h4><div class="timeline">' + (x.timeline||[]).map(t => '<div><b>'+esc(t.date)+' · '+esc(t.label)+'</b><br>'+esc(t.detail)+'</div>').join('') + '</div><h4>来源</h4><ul>'
     + (x.sources||[]).map(s => '<li><a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.label)+'</a> <span class="meta2">('+esc(s.role||'')+')</span></li>').join('')+'</ul></div></details>';
