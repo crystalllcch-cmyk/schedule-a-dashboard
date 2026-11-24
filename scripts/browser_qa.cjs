@@ -22,24 +22,24 @@ async function check(name, fn) {
     await page.goto(process.env.QA_URL || 'http://127.0.0.1:8787', {waitUntil:'domcontentloaded',timeout:90000});
     await page.locator('.case').first().waitFor({state:'attached',timeout:60000});
     assert.equal(await page.locator('.case').count(),26);
-    for (const view of ['overview','trend','geography','outcomes','quality','plaintiffs','cases','method']) {
-      await page.locator('[data-view="'+view+'"]').click();
+    for (const view of ['trend','structure','judiciary','validation']) {
+      await page.locator('[data-module="'+view+'"]').click();
       await sleep(400);
-      const detail = await page.evaluate(() => ({viewportWidth:innerWidth,documentWidth:document.documentElement.scrollWidth,charts:[...document.querySelectorAll('.view.active .chart')].map(x=>({id:x.id,width:x.clientWidth,height:x.clientHeight,canvas:x.querySelectorAll('canvas').length,text:x.textContent.slice(0,80)}))}));
+      const detail = await page.evaluate(() => ({viewportWidth:innerWidth,documentWidth:document.documentElement.scrollWidth,charts:[...document.querySelectorAll('.view.active .chart:not(#caseConstellation)')].map(x=>({id:x.id,width:x.clientWidth,height:x.clientHeight,canvas:x.querySelectorAll('canvas').length,text:x.textContent.slice(0,80)}))}));
       await page.screenshot({path:path.join(output,label+'-'+view+'.png'),fullPage:true});
       report.views.push({viewport:label,view,...detail});
       assert.ok(detail.documentWidth <= viewport.width + 1, label+' '+view+' overflows: '+detail.documentWidth);
       assert.ok(detail.charts.every(x=>x.width>0&&x.height>0),label+' '+view+' zero-sized chart');
       assert.ok(detail.charts.every(x=>x.canvas>0),label+' '+view+' missing actual ECharts rendering');
     }
-    await page.locator('[data-view="trend"]').click();
+    await page.locator('[data-module="trend"]').click();
     await check(label+' chart tooltip',async()=>{
       await page.locator('#monthlyChart').scrollIntoViewIfNeeded();
       const point=await page.evaluate(()=>{const el=document.getElementById('monthlyChart'),chart=echarts.getInstanceByDom(el),xy=chart.convertToPixel({seriesIndex:0},[0,230]),rect=el.getBoundingClientRect();return {x:rect.x+xy[0],y:rect.y+xy[1]};});
       await page.mouse.move(point.x,point.y);await sleep(200);
       const text=await page.locator('#monthlyChart').innerText();assert.match(text,/FJC R24 v3/);return {sourceTooltip:true};
     });
-    await page.locator('[data-view="geography"]').click();
+    await page.locator('[data-module="structure"]').click();
     await sleep(300);
     await check(label+' map markers and popup',async()=>{
       assert.equal(await page.locator('.leaflet-interactive').count(),22);
@@ -70,7 +70,29 @@ async function check(name, fn) {
       await page.locator('#resetFilters').click();assert.match(await page.locator('#filterSummary').innerText(),/4,551 条候选记录/);
       assert.equal(await page.locator('#nosFilter').inputValue(),'all');
     });
-    await page.locator('[data-view="cases"]').click();
+    await check(label+' quarter, exclusion and synchronized geographic views',async()=>{
+      await page.selectOption('#yearFilter','2026');await page.selectOption('#quarterFilter','2026 Q2');
+      assert.match(await page.locator('#filterSummary').innerText(),/865 条候选记录/);
+      assert.equal(await page.locator('#quarterFilter option[value="2026 Q3"]').count(),0);
+      await page.locator('#resetFilters').click();await page.check('#excludeIllinois');
+      assert.match(await page.locator('#filterSummary').innerText(),/711 条候选记录/);
+      assert.equal(await page.locator('.leaflet-interactive').count(),21);
+      await page.locator('[data-geo-mode="list"]').click();assert.equal(await page.locator('#districtList tbody tr').count(),21);
+      assert.ok(!(await page.locator('#districtList').innerText()).includes('N.D. Illinois'));
+      await page.locator('[data-geo-mode="map"]').click();await page.locator('#resetFilters').click();
+      return {quarter:865,excluded:711};
+    });
+    await page.locator('[data-module="judiciary"]').click();
+    await check(label+' constellation and non-destructive drill-down',async()=>{
+      await page.selectOption('#caseStatus','pending');
+      await page.locator('[data-case-mode="constellation"]').click();
+      const data=await page.evaluate(()=>echarts.getInstanceByDom(document.getElementById('caseConstellation')).getOption().series.flatMap(s=>s.data));
+      assert.equal(data.length,1);assert.ok(Number.isFinite(data[0].value[0]));
+      await page.evaluate(()=>openCase(echarts.getInstanceByDom(document.getElementById('caseConstellation')).getOption().series.flatMap(s=>s.data)[0].caseKey));
+      assert.equal(await page.locator('#caseStatus').inputValue(),'pending');
+      assert.equal(await page.locator('.case[open]').count(),1);
+      await page.selectOption('#caseStatus','all');return {nodes:data.length,filterPreserved:true};
+    });
     await check(label+' pending appeal filter',async()=>{
       await page.selectOption('#caseStatus','pending');assert.equal(await page.locator('.case').count(),1);assert.match(await page.locator('.case').innerText(),/Adidas/i);
       await page.selectOption('#caseStatus','all');
