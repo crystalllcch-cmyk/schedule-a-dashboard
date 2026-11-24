@@ -25,7 +25,22 @@ async function check(name, fn) {
     for (const view of ['trend','structure','judiciary','validation']) {
       await page.locator('[data-module="'+view+'"]').click();
       await sleep(400);
-      const detail = await page.evaluate(() => ({viewportWidth:innerWidth,documentWidth:document.documentElement.scrollWidth,charts:[...document.querySelectorAll('.view.active .chart:not(#caseConstellation)')].map(x=>({id:x.id,width:x.clientWidth,height:x.clientHeight,canvas:x.querySelectorAll('canvas').length,text:x.textContent.slice(0,80)}))}));
+      if (view === 'trend') {
+        await check(label+' trend period switching', async()=>{
+          const modes=[['month','monthlyChart'],['quarter','quarterChart'],['half','halfTrendChart']];
+          for (const [mode,id] of modes) {
+            await page.locator('[data-trend-view="'+mode+'"]').click();
+            await sleep(180);
+            const box=await page.locator('#'+id).evaluate(el=>({width:el.clientWidth,height:el.clientHeight,canvas:el.querySelectorAll('canvas').length}));
+            assert.ok(box.width>0&&box.height>0,label+' '+mode+' trend chart did not resize');
+            assert.ok(box.canvas>0,label+' '+mode+' trend chart missing canvas');
+          }
+          await page.locator('[data-trend-view="month"]').click();
+          await sleep(180);
+          return {modes:['month','quarter','half'],rendered:true};
+        });
+      }
+      const detail = await page.evaluate(() => ({viewportWidth:innerWidth,documentWidth:document.documentElement.scrollWidth,charts:[...document.querySelectorAll('.view.active .chart:not(#caseConstellation)')].filter(x=>x.getClientRects().length>0).map(x=>({id:x.id,width:x.clientWidth,height:x.clientHeight,canvas:x.querySelectorAll('canvas').length,text:x.textContent.slice(0,80)}))}));
       await page.screenshot({path:path.join(output,label+'-'+view+'.png'),fullPage:true});
       report.views.push({viewport:label,view,...detail});
       assert.ok(detail.documentWidth <= viewport.width + 1, label+' '+view+' overflows: '+detail.documentWidth);
