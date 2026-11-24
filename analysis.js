@@ -113,5 +113,5 @@ function openAnalysisForChart(id,p){
 }
 function bindAnalysisEvents(){
   const ids=['overviewTrend','overviewHalf','overviewDistrict','monthlyChart','quarterChart','halfTrendChart','districtChart','nosChart','regionNosChart','statusChart','dispChart','judgmentChart','precisionChart','brandAnnualChart','brandChart','abtlChart'];
-  ids.forEach(id=>{const chart=charts[id];if(chart&&!chart.__analysisBound){chart.on('click',p=>openAnalysisForChart(id,p));chart.__analysisBound=true;}});
+  ids.forEach(id=>{const chart=charts[id];if(chart){chart.setOption({tooltip:{formatter:p=>chartTooltip(id,p)}});if(!chart.__analysisBound){chart.on('click',p=>openAnalysisForChart(id,p));chart.__analysisBound=true;}}});
 }
