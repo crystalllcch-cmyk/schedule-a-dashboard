@@ -9,10 +9,10 @@
 - 线上网址：https://crystalllcch-cmyk.github.io/schedule-a-dashboard/
 - V0.8存档分支：`archive/v0.8-before-v0.9-2026-11-23`。
 - 高级改版参考分支：`feature/four-module-information-architecture-2026-11-23`。
-- 当前P1工作分支：`feature/p1-content-storytelling-2026-11-24`，属于独立开发分支，**不是线上发布版本**。
+- 当前P1—P2整合工作分支：`feature/p1-content-storytelling-2026-11-24`，属于独立开发分支，**不是线上发布版本**。
 - **用户尚未批准V0.9或高级改版正式发布；不得将本分支合并至`main`，不得触发正式网站部署，除非取得用户新的明确授权。**
 
-四模块参考分支最新开发提交为 `bbe0d1d1b5f58c9a4098a85b577d1b45a1b22e38`。当前P1工作分支的应用代码提交为 `3f0ed9dac85efcac42f55145750ffb8ef6e4f3ae`，GitHub Actions运行 [#45337751136](https://github.com/crystalllcch-cmyk/schedule-a-dashboard/actions/runs/45337751136) 已通过DOM测试、桌面及手机Chromium测试，并对仓库页面和单文件生成版本分别完成验收。自动化测试通过不等于用户验收，也不构成发布授权。
+四模块参考分支最新开发提交为 `bbe0d1d1b5f58c9a4098a85b577d1b45a1b22e38`。当前P1—P2整合分支最新应用提交为 `17af459b94a17a5da3f682e46e96d0b1cc72c895`。GitHub Actions运行 [#45343262769](https://github.com/crystalllcch-cmyk/schedule-a-dashboard/actions/runs/45343262769) 已通过DOM测试、桌面及手机Chromium测试，并对仓库页面和嵌入分析脚本后的单文件版本分别完成验收。自动化测试通过不等于用户验收，也不构成发布授权。
 
 ## 当前研究与功能内容
 
