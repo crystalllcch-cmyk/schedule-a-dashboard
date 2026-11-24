@@ -44,33 +44,39 @@ function updateChart(id, option, headers, rows) {
   if (charts[id]) { option.tooltip = {trigger: id === 'nosChart' ? 'item' : 'axis', confine: true, formatter: params => chartTooltip(id,params)}; charts[id].setOption(option, { replaceMerge: ['series'] }); }
   else $(id).innerHTML = table(headers, rows);
 }
-function initMap() {
-  if (!window.L) { $('map').innerHTML = '<div class="callout">地图未能加载；下方地区数据表仍可查看全部数值。</div>'; return; }
-  map = L.map('map',{zoomSnap:0.5}).setView([38.7, -96], 4);
-  const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 11, attribution: '© OpenStreetMap' });
-  tiles.on('tileerror', () => { $('mapStatus').textContent = '地图底图暂不可用；定位点及下方数据表仍可使用。'; });
-  tiles.addTo(map);
+const US_BOUNDS={west:-125,east:-66,south:24,north:50.5};
+const US_OUTLINE=[[-124.7,48.4],[-123.1,48.2],[-122.9,46.0],[-124.1,42.0],[-123.0,41.9],[-122.3,41.2],[-120.0,39.0],[-119.9,36.9],[-118.0,34.9],[-117.1,32.5],[-114.7,32.7],[-111.1,31.3],[-109.05,31.3],[-109.05,31.8],[-103.0,31.8],[-103.0,29.8],[-101.0,29.0],[-99.0,26.4],[-97.4,25.9],[-96.5,28.0],[-94.5,29.6],[-92.0,29.3],[-90.0,29.2],[-89.4,30.2],[-88.0,30.4],[-87.0,30.3],[-85.0,30.4],[-84.9,29.9],[-82.0,25.0],[-81.0,25.1],[-80.5,27.0],[-80.0,29.0],[-80.8,31.0],[-80.9,32.0],[-79.0,33.0],[-78.5,34.5],[-77.0,35.5],[-76.0,36.5],[-75.5,38.0],[-74.5,40.0],[-73.8,41.0],[-72.0,41.3],[-71.0,41.5],[-70.0,42.2],[-69.5,43.0],[-69.0,44.0],[-69.0,45.0],[-70.7,45.3],[-71.5,45.0],[-73.3,45.0],[-74.7,45.0],[-75.7,44.5],[-76.8,43.6],[-78.7,43.6],[-79.2,43.3],[-79.1,42.0],[-80.5,41.9],[-82.5,41.7],[-83.1,41.9],[-84.8,41.7],[-86.8,41.8],[-87.5,42.5],[-88.0,43.5],[-89.5,46.0],[-90.5,46.7],[-92.0,46.7],[-94.0,49.0],[-95.2,49.0],[-97.2,49.0],[-100.0,49.0],[-104.0,49.0],[-107.0,49.0],[-111.0,49.0],[-114.0,49.0],[-117.0,49.0],[-120.0,49.0],[-122.7,48.9]];
+function projectUS(lon,lat){return{x:(lon-US_BOUNDS.west)/(US_BOUNDS.east-US_BOUNDS.west)*1000,y:(US_BOUNDS.north-lat)/(US_BOUNDS.north-US_BOUNDS.south)*600}}
+function usPath(){return US_OUTLINE.map((p,i)=>{const q=projectUS(p[0],p[1]);return(i?'L':'M')+q.x.toFixed(1)+','+q.y.toFixed(1)}).join(' ')+' Z'}
+function displayOffset(code){return({'7-55':[-17,-24],'7-52':[-6,5],'2-08':[-16,-12],'3-12':[-30,20],'2-07':[16,24],'3-15':[-8,8]})[code]||[0,0]}
+function labelOffset(code){return({'7-52':[-105,-32],'11-3C':[-90,30],'3-15':[-105,-34],'2-08':[22,-28]})[code]||[16,-18]}
+
+let lastMapWidth=0;
+function initMap(){
+ const path=usPath();$('usOutline').setAttribute('d',path);$('usOutlineShine').setAttribute('d',path);$('usClipPath').setAttribute('d',path);
+ const grid=[];for(let x=100;x<1000;x+=100)grid.push('<line class="map-grid-line" x1="'+x+'" y1="0" x2="'+x+'" y2="600"/>');for(let y=80;y<600;y+=80)grid.push('<line class="map-grid-line" x1="0" y1="'+y+'" x2="1000" y2="'+y+'"/>');$('mapGrid').innerHTML=grid.join('');
+ const known=D.districts.filter(d=>Number.isFinite(d.lat)&&Number.isFinite(d.lng));
+ $('mapNodes').innerHTML=known.map(d=>{const p=projectUS(d.lng,d.lat),off=displayOffset(d.code),x=p.x+off[0],y=p.y+off[1],label=['7-52','11-3C','3-15','2-08'].includes(d.code),lo=labelOffset(d.code);
+  const labelSvg=label?'<line class="map-label-line" x1="'+x+'" y1="'+y+'" x2="'+(x+lo[0]*.72)+'" y2="'+(y+lo[1]*.72)+'"/><text class="map-label" x="'+(x+lo[0])+'" y="'+(y+lo[1])+'">'+esc(d.name)+'</text><text class="map-label-count" data-map-count="'+esc(d.code)+'" x="'+(x+lo[0])+'" y="'+(y+lo[1]+14)+'">0</text>':'';
+  return '<g class="map-node" data-code="'+esc(d.code)+'" tabindex="0" role="button" aria-label="'+esc(d.name)+'"><circle class="node-pulse" cx="'+x+'" cy="'+y+'" r="11"/><circle class="node-halo" cx="'+x+'" cy="'+y+'" r="16"/><circle class="node-ring" cx="'+x+'" cy="'+y+'" r="9"/><circle class="node-core" cx="'+x+'" cy="'+y+'" r="7"/>'+labelSvg+'<title>'+esc(d.name)+' · '+esc(d.circuit)+'</title></g>';
+ }).join('');
+ $('mapNodes').onclick=e=>{const node=e.target.closest('[data-code]');if(!node)return;const code=node.dataset.code,next=selected('districtFilter')===code?'all':code;$('districtFilter').value=next;if(next!=='all'){$('excludeIllinois').checked=false;$('circuitFilter').value=D.districts.find(d=>d.code===code).circuit;}$('districtFilter').dispatchEvent(new Event('change'));};
+ $('mapNodes').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){const node=e.target.closest('[data-code]');if(node){e.preventDefault();node.dispatchEvent(new MouseEvent('click',{bubbles:true}));}}};
+ $('mapNodes').onpointerover=e=>{const node=e.target.closest('[data-code]');if(node)showGeoTooltip(node.dataset.code,e);};
+ $('mapNodes').onpointermove=e=>{if(e.target.closest('[data-code]'))positionGeoTooltip(e);};
+ $('mapNodes').onpointerout=e=>{if(!e.relatedTarget?.closest?.('[data-code]'))$('geoTooltip').classList.remove('show');};
+ $('mapClear').onclick=()=>{$('districtFilter').value='all';$('districtFilter').dispatchEvent(new Event('change'));};
+ lastMapWidth=$('map').clientWidth;updateMap(filingRows());
 }
-let lastMapWidth = 0;
-function fitMapView() {
-  if (!map || !document.getElementById('map').clientWidth) return;
-  lastMapWidth = document.getElementById('map').clientWidth;
-  const district = D.districts.find(x => x.code === selected('districtFilter') && districtMatch(x));
-  if (district) {map.setView([district.lat,district.lng],6);return;}
-  const points = D.districts.filter(districtMatch).map(x => [x.lat,x.lng]);
-  if (points.length) map.fitBounds(points,{padding:[24,24],maxZoom:4});
-}
-function updateMap(rows) {
-  if (!map) return;
-  markers.forEach(m => m.remove()); markers = [];
-  D.districts.filter(districtMatch).forEach(d => {
-    const districtRows = rows.filter(x => x.district === d.code), n = sum(districtRows);
-    const quarters = groupRows(districtRows, D.quarters.filter(q => (selected('yearFilter') === 'all' || q.label.startsWith(selected('yearFilter'))) && (selected('quarterFilter')==='all'||q.label===selected('quarterFilter'))).map(q => q.label), quarterOf);
-    const marker = L.circleMarker([d.lat, d.lng], {radius: Math.max(4, Math.min(17, 4 + Math.sqrt(n) / 3)), color: n ? '#356b89' : '#aab8c3', fillColor: n ? '#79a8bb' : '#e2e8ed', fillOpacity: .78, weight: 1}).addTo(map);
-    marker.bindPopup('<b>' + esc(d.name) + '</b><br>' + esc(d.circuit) + '<br>当前筛选候选记录：' + fmt(n) + '<br>近似城市：' + esc(d.locator) + '<br><a target="_blank" rel="noopener" href="' + esc(d.locatorSource) + '">法院城市来源</a><br>' + quarters.map(q => esc(q.key) + '：' + fmt(q.count)).join('<br>'), {maxHeight:200,autoPanPadding:[16,16],keepInView:true});
-    markers.push(marker);
-  });
-  fitMapView();
+function showGeoTooltip(code,e){const d=D.districts.find(x=>x.code===code);if(!d)return;const count=sum(filingRows().filter(x=>x.district===code));$('geoTooltip').innerHTML='<b>'+esc(d.name)+'</b><small>'+esc(d.locator)+' · '+esc(d.circuit)+' · FJC '+esc(d.code)+'</small><strong>'+fmt(count)+'</strong><span>当前筛选下候选记录 · 全池记录 '+fmt(d.count)+'</span>';positionGeoTooltip(e);$('geoTooltip').classList.add('show');}
+function positionGeoTooltip(e){const tip=$('geoTooltip'),box=$('map').getBoundingClientRect();let x=e.clientX-box.left+14,y=e.clientY-box.top+14;if(x+250>box.width)x-=260;if(y+110>box.height)y-=125;tip.style.left=Math.max(8,x)+'px';tip.style.top=Math.max(42,y)+'px';}
+function updateMap(rows){
+ const known=D.districts.filter(d=>Number.isFinite(d.lat)&&Number.isFinite(d.lng)),counts=known.map(d=>({d,count:sum(rows.filter(x=>x.district===d.code))})),max=Math.max(1,...counts.map(x=>x.count));
+ $('mapNodes').querySelectorAll('.map-node').forEach(node=>{const item=counts.find(x=>x.d.code===node.dataset.code);if(!item)return;const r=item.count?6+18*Math.sqrt(item.count/max):4;node.querySelector('.node-core').setAttribute('r',r);node.querySelector('.node-halo').setAttribute('r',r+9);node.querySelector('.node-ring').setAttribute('r',r+2);node.querySelector('.node-pulse').setAttribute('r',r+3);node.classList.toggle('selected',selected('districtFilter')===item.d.code);node.style.opacity=item.count===0?'.2':'1';});
+ $('mapNodes').querySelectorAll('[data-map-count]').forEach(label=>{const item=counts.find(x=>x.d.code===label.dataset.mapCount);if(item)label.textContent=fmt(item.count)+' candidates';});
+ const chosen=D.districts.find(d=>d.code===selected('districtFilter'))||null,total=counts.reduce((n,x)=>n+x.count,0);
+ $('mapSelectedName').textContent=chosen?chosen.name:'全部已映射地区';$('mapSelectedMeta').textContent=chosen?chosen.locator+' · '+chosen.circuit+' · FJC '+chosen.code:'节点大小与数量随顶部筛选实时变化；地区城市为近似定位';
+ $('mapSelectedCount').textContent=fmt(chosen?sum(rows.filter(x=>x.district===chosen.code)):total);
 }
 function updateFilings() {
   const rows = filingRows(), allYears = filingRows(true), year = selected('yearFilter');
@@ -191,7 +197,7 @@ function renderDistrictList(rows){
 }
 function renderCircuits(rows){const root=$('circuitSummary');root.replaceChildren();const groups=[...new Set(D.districts.filter(d=>!$('excludeIllinois').checked||d.code!=='7-52').map(d=>d.circuit))].map(circuit=>({circuit,count:sum(rows.filter(r=>D.districts.find(d=>d.code===r.district).circuit===circuit))})).sort((a,b)=>b.count-a.count);groups.forEach(g=>{const b=document.createElement('button');b.type='button';b.textContent=g.circuit+' · '+fmt(g.count);b.setAttribute('aria-pressed',String(selected('circuitFilter')===g.circuit));b.onclick=()=>{const next=selected('circuitFilter')===g.circuit?'all':g.circuit;$('districtFilter').value='all';$('circuitFilter').value=next;$('circuitFilter').dispatchEvent(new Event('change'));};root.appendChild(b);});}
 function syncQuarters(){const prev=selected('quarterFilter'),year=selected('yearFilter'),el=$('quarterFilter');el.replaceChildren(new Option('全部可用季度','all'));D.quarters.filter(q=>year==='all'||q.label.startsWith(year)).forEach(q=>el.add(new Option(q.label,q.label)));if([...el.options].some(x=>x.value===prev))el.value=prev;}
-function setGeoMode(mode){$('geoMapPanel').hidden=mode!=='map';$('geoListPanel').hidden=mode!=='list';document.querySelectorAll('[data-geo-mode]').forEach(b=>{const active=b.dataset.geoMode===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});if(mode==='map')requestAnimationFrame(()=>{map?.invalidateSize();fitMapView();Object.values(charts).forEach(c=>c.resize());});}
+function setGeoMode(mode){$('geoMapPanel').hidden=mode!=='map';$('geoListPanel').hidden=mode!=='list';document.querySelectorAll('[data-geo-mode]').forEach(b=>{const active=b.dataset.geoMode===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});if(mode==='map')requestAnimationFrame(()=>{updateMap(filingRows());Object.values(charts).forEach(c=>c.resize());});}
 function setCaseMode(mode){$('caseList').hidden=mode!=='list';$('caseConstellationPanel').hidden=mode!=='constellation';document.querySelectorAll('[data-case-mode]').forEach(b=>{const active=b.dataset.caseMode===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});if(mode==='constellation')requestAnimationFrame(()=>charts.caseConstellation?.resize());}
 function setTrendView(mode){const panels={month:'monthlyTrendPanel',quarter:'quarterTrendPanel',half:'halfTrendPanel'};for(const [key,id] of Object.entries(panels))$(id).hidden=key!==mode;document.querySelectorAll('[data-trend-view]').forEach(b=>{const active=b.dataset.trendView===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});const chartId={month:'monthlyChart',quarter:'quarterChart',half:'halfTrendChart'}[mode];requestAnimationFrame(()=>charts[chartId]?.resize());}
 function addOptions(id, values) {
@@ -252,7 +258,7 @@ function initUI() {
     $('moduleDescription').textContent=module.description;
     $('moduleLinks').replaceChildren();
     module.ids.forEach((id,i)=>{const button=document.createElement('button');button.type='button';button.textContent=module.names[i];button.addEventListener('click',()=>$(id).scrollIntoView({behavior:'smooth',block:'start'}));$('moduleLinks').appendChild(button);});
-    requestAnimationFrame(()=>{Object.values(charts).forEach(c=>c.resize());map?.invalidateSize();fitMapView();});
+    requestAnimationFrame(()=>{Object.values(charts).forEach(c=>c.resize());updateMap(filingRows());});
   }
   for (const button of document.querySelectorAll('.tab')) button.addEventListener('click',()=>activateModule(button.dataset.module));
   activateModule('trend');
@@ -264,7 +270,7 @@ function initUI() {
   document.addEventListener('keydown',event=>{if(event.key==='Escape')closeAnalysisPanel();});
   for (const id of ['outcomes','quality','plaintiffs','cases','method']) {const note=document.createElement('div');note.className='callout fixed-scope';note.textContent=id==='cases'?'精选案件档案使用下方独立筛选，不受FJC立案筛选影响。':'本模块保留自身统计总体；不随立案筛选变化。';$(id).prepend(note);}
   document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-pressed',String(b.classList.contains('active'))));
-  window.addEventListener('resize',()=>{const width=document.getElementById('map').clientWidth;if(map&&width&&width!==lastMapWidth){map.invalidateSize();fitMapView();}});
+  window.addEventListener('resize',()=>{const width=document.getElementById('map').clientWidth;if(width&&width!==lastMapWidth){lastMapWidth=width;updateMap(filingRows());}});
   fixedFallbacks(); cases(); updateFilings(); bindAnalysisEvents();
 }
 async function readJSON(path) { const response=await fetch(path);if(!response.ok) throw new Error(path+' HTTP '+response.status);return response.json(); }
