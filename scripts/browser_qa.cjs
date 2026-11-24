@@ -84,7 +84,7 @@ async function check(name, fn) {
       const counts=await page.evaluate(()=>echarts.getInstanceByDom(document.getElementById('monthlyChart')).getOption().series[0].data);
       assert.equal(counts.reduce((a,b)=>a+b,0),113);
       assert.match(await page.locator('#trendDynamicInsight').innerText(),/113/);
-      assert.match(await page.locator('#geoDynamicInsight').innerText(),/W\\.D\\. Pennsylvania/);
+      assert.match(await page.locator('#geoDynamicInsight').innerText(),/W\.D\. Pennsylvania/);
       assert.match(await page.locator('#nosDynamicInsight').innerText(),/版权 113/);
       await page.screenshot({path:path.join(output,label+'-filtered-geography.png'),fullPage:true});return {total:113,monthlySeries:counts};
     });
