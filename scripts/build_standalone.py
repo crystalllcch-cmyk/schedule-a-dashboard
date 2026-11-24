@@ -16,7 +16,7 @@ payload = json.dumps(datasets, ensure_ascii=False).replace('<', '\\u003c')
 html = (root/'index.html').read_text()
 scripts = '<script src="./analysis.js"></script><script src="./app.js"></script>'
 assert html.count(scripts) == 1
-html = html.replace(scripts, '<script>const EMBEDDED_DATA='+payload+';\\n'+analysis+'\\n'+app+'</script>')
+html = html.replace(scripts, '<script>const EMBEDDED_DATA='+payload+';\n'+analysis+'\n'+app+'</script>')
 assert 'fetch(' not in html
 output.parent.mkdir(parents=True,exist_ok=True)
 output.write_text(html)
