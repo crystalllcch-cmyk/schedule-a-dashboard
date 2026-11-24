@@ -88,11 +88,65 @@ function cases() {
     && [x.title,x.caseNo,x.court,x.summary,x.issue,x.significance,x.decision,...(x.topics||[])].join(' ').toLowerCase().includes(q));
   $('caseCount').textContent = '显示 ' + arr.length + ' / ' + C.cases.length + ' 案';
   renderCaseConstellation(arr);
-  $('caseList').innerHTML = arr.map(x => '<details class="case" data-case-key="'+esc(x.caseNo)+'"><summary><div><h3>' + esc(x.title) + '</h3><div class="meta2">' + esc(x.caseNo) + ' · ' + esc(x.court) + ' · ' + esc(x.date) + ' · ' + esc(x.outcomeLabel || '') + '</div></div><span class="tag">' + esc(x.authorityType) + '<br>' + esc(x.evidenceType) + '</span></summary><div class="casebody"><div class="callout">判例效力：' + esc(x.authorityType) + ' ｜ 来源：' + esc(x.evidenceType) + '<br>' + esc(x.sourceNote || '') + '</div>'
+  $('caseList').innerHTML = arr.map(caseMarkup).join('') || '<div class="callout">没有匹配的案件。可清空搜索或重置档案筛选。</div>';
+}
+const caseMarkup = '<details class="case" data-case-key="'+esc(x.caseNo)+'"><summary><div><h3>' + esc(x.title) + '</h3><div class="meta2">' + esc(x.caseNo) + ' · ' + esc(x.court) + ' · ' + esc(x.date) + ' · ' + esc(x.outcomeLabel || '') + '</div></div><span class="tag">' + esc(x.authorityType) + '<br>' + esc(x.evidenceType) + '</span></summary><div class="casebody"><div class="callout">判例效力：' + esc(x.authorityType) + ' ｜ 来源：' + esc(x.evidenceType) + '<br>' + esc(x.sourceNote || '') + '</div>'
     + [['案件背景',x.summary],['核心争点',x.issue],['法院处理',x.decision],['研究意义与适用边界',x.significance]].map(([h,t]) => '<h4>'+h+'</h4><p>'+esc(t)+'</p>').join('')
     + '<h4>程序时间线</h4><div class="timeline">' + (x.timeline||[]).map(t => '<div><b>'+esc(t.date)+' · '+esc(t.label)+'</b><br>'+esc(t.detail)+'</div>').join('') + '</div><h4>来源</h4><ul>'
-    + (x.sources||[]).map(s => '<li><a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.label)+'</a> <span class="meta2">('+esc(s.role||'')+')</span></li>').join('')+'</ul></div></details>').join('') || '<div class="callout">没有匹配的案件。可清空搜索或重置档案筛选。</div>';
+    + (x.sources||[]).map(s => '<li><a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.label)+'</a> <span class="meta2">('+esc(s.role||'')+')</span></li>').join('')+'</ul></div></details>';
+
+const researchEvents = [
+ ['2025-03-24','No.23-2948 · 132 F.4th 526','商标利润计算','相关多店铺先例'],
+ ['2025-04-11','1:25-cv-02970','程序性不合规驳回','程序审查早于2026年'],
+ ['2025-08-14','Nos.24-1471 / 24-1472','设计专利与现有技术','非先例'],
+ ['2025-10-30','No.24-2841','版权利润请求','非先例'],
+ ['2025-12-18','No. 24-313','中国被告邮件送达','第二巡回先例'],
+ ['2026-03-31','No. 25-2074','逐被告个人管辖权','第七巡回先例'],
+ ['2026-04-27','1:25-cv-13806','实际交易证据不足','地区法院适用'],
+ ['2026-05-19','No.25-2340','Rule 20事实分析与Rule 21分离','非先例'],
+ ['2026-05-26','4:26-cv-00169','Nike案PI获准','地区法院反向观察'],
+ ['2026-05-29','No. 25-2205','送达与缺席判决挑战','第七巡回先例'],
+ ['2026-06-18','1:25-cv-13392','TRO不替代PI审查','地区法院裁定'],
+ ['2026-06-23','4:26-cv-00533','Nike案TRO被拒','地区法院对照'],
+ ['2026-08-14','Nos.24-1538 / 24-1826','PI独立审查','非先例'],
+ ['2026-08-14','2:26-cv-01134','被告合并异议被拒','个案反例 · 第三方案卷文本'],
+ ['2026-08-31','6:25-cv-00339-RP','缺席阶段审查被告合并','档案记载的具体裁定日期'],
+ ['2026-09-30','4:25-cv-01220','管辖、送达、冻结及平台命令','地区法院裁定'],
+ ['2026-09-30','4:25-cv-01416-JCB · Dkt.18','管辖、资产限制与保证金','另一独立案件'],
+ ['2026-11-04','No.25-12597','Adidas口头辩论','待决上诉 · 不是判决'],
+ ['2026-11-17','No.25-2048','律师费裁量','非先例 · 非管辖权新规则']
+];
+const legalResearchThemes=[
+ {title:'01 · 个人管辖权',finding:'第七巡回Liu要求被告自身与法院地的实际联系；地区法院已将其用于审查订单及交付证据。',action:'审查每店实际交易、取消或拦截记录及归属关系；不要将未发货测试单当然视为无管辖权，也不要概括为全国强制测试购。',keys:['No. 25-2074','1:25-cv-13806','1:26-cv-04668','No.25-2048']},
+ {title:'02 · 境外送达与缺席救济',finding:'Smart Study与Kangol均涉及海牙公约适用时中国被告邮件送达；地址未知例外及勤勉查找仍需个案分析。',action:'核对真实地址、送达方式、查找记录和裁判巡回区；缺席后也要核对Rule 60(b)(4)路径。Adidas仍待决。',keys:['No. 24-313','No. 25-2205','1:25-cv-06945-TWT','No.25-12597']},
+ {title:'03 · 被告合并与拆案',finding:'Wood要求具体分析及考虑分离，GoodEgg在缺席阶段排除不当合并被告；PLOUT则在特定诉状事实下驳回异议。',action:'检查共同交易、协同证据及专利法§299；案件数量不能直接代表被告数量或证明拆案规模。',keys:['No.25-2340','6:25-cv-00339-RP','2:26-cv-01134']},
+ {title:'04 · TRO、PI与实体证据',finding:'Duoleduo及Jacki Easlick显示TRO获准不替代PI独立审查；两宗Nike案则显示同地区存在不同处理结果。',action:'PI前及时提交侵权比对、现有技术、损害及反证；不要仅因已冻结而放弃PI异议，也不要推断某法院统一拒绝或批准。',keys:['1:25-cv-13392','Nos.24-1538 / 24-1826','4:26-cv-00169','4:26-cv-00533','2:25-cv-01850-CCW']},
+ {title:'05 · 资产限制、平台与保证金',finding:'E.D. Texas两份不同案件裁定对冻结范围、逐被告证据及第三方取证提出具体要求，不能合并为同一裁判。',action:'核对涉案收入与冻结范围、担保依据及Rule 45程序；区分实用专利与商标/版权的救济基础。',keys:['4:25-cv-01220','4:25-cv-01416-JCB · Dkt.18','6:25-cv-00335-LS']},
+ {title:'06 · 缺席赔偿与利润计算',finding:'Dyson为相关商标利润先例；Dolls Kill及Huajie为非先例处置，涉及不同赔偿问题。',action:'核对权利类型、实际侵权销售额、成本扣除、法定赔偿适用条件及判决依据；不能用FJC判决子集比例估计应诉胜率。',keys:['No.23-2948 · 132 F.4th 526','No.24-2841','No.25-2659']}
+];
+function researchLink(key,title,subtitle){
+ const x=C.cases.find(v=>v.caseNo===key);if(!x)throw Error('研究档案关联缺失: '+key);
+ const b=document.createElement('button');b.type='button';b.className='event-link';b.dataset.researchCase=key;
+ b.innerHTML='<b>'+esc(title||x.title)+'</b><small>'+esc(subtitle||x.date)+' · '+esc(x.authorityType)+'</small><small>'+esc(x.caseNo)+' · '+esc(x.evidenceType)+'</small>';
+ return b;
 }
+function renderResearchIntegration(){
+ const groups=$('judicialTimeline'),later=$('postCutoffEvents'),themes=$('legalThemes');
+ groups.replaceChildren();later.replaceChildren();themes.replaceChildren();
+ const events=researchEvents.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+ function period(parent,title,count,items){
+  const row=document.createElement('div');row.className='event-period';
+  const info=document.createElement('div');info.innerHTML='<h4>'+esc(title)+'</h4>'+(count==null?'<p class="sub">无同期FJC数量</p>':'<div class="event-count">'+fmt(count)+'</div><div class="sub">全池候选记录</div>');
+  const content=document.createElement('div');content.className='event-items';
+  items.forEach(e=>content.appendChild(researchLink(e[1],e[2],e[0]+' · '+e[3])));
+  if(!items.length)content.textContent='本次精选事件未覆盖该季度；不代表没有司法活动。';
+  row.append(info,content);parent.appendChild(row);
+ }
+ D.quarters.forEach(q=>period(groups,q.label,q.count,events.filter(e=>quarterOf({month:e[0].slice(0,7)})===q.label)));
+ for(const q of ['2026 Q3','2026 Q4'])period(later,q,null,events.filter(e=>quarterOf({month:e[0].slice(0,7)})===q));
+ legalResearchThemes.forEach(theme=>{const card=document.createElement('article');card.className='theme-card';card.innerHTML='<h4>'+esc(theme.title)+'</h4><p><b>研究判断：</b>'+esc(theme.finding)+'</p><p><b>业务核查：</b>'+esc(theme.action)+'</p>';const details=document.createElement('details');details.innerHTML='<summary>关联案件（'+theme.keys.length+'）</summary>';theme.keys.forEach(key=>details.appendChild(researchLink(key)));card.appendChild(details);themes.appendChild(card);});
+}
+
 function renderCaseConstellation(arr) {
   const el=$('caseConstellation'); if(!el) return;
   if(!window.echarts){el.innerHTML='<div class="callout">图表资源暂不可用；档案列表仍可正常使用。</div>';return;}
@@ -174,6 +228,9 @@ function initUI() {
   }
   for (const button of document.querySelectorAll('.tab')) button.addEventListener('click',()=>activateModule(button.dataset.module));
   activateModule('trend');
+  renderResearchIntegration();
+  document.querySelector('main').addEventListener('click',event=>{const button=event.target.closest('[data-research-case]');if(!button)return;const dossier=C.cases.find(x=>x.caseNo===button.dataset.researchCase);if(!dossier)return;activateModule('judiciary');$('linkedCaseContent').innerHTML=caseMarkup(dossier).replace('class="case"','class="linked-case"');$('linkedCaseContent').querySelector('details').open=true;$('linkedCasePanel').hidden=false;$('linkedCasePanel').scrollIntoView?.({behavior:'smooth',block:'start'});});
+  $('closeLinkedCase').onclick=()=>{$('linkedCasePanel').hidden=true;$('linkedCaseContent').replaceChildren();};
   for (const id of ['outcomes','quality','plaintiffs','cases','method']) {const note=document.createElement('div');note.className='callout fixed-scope';note.textContent=id==='cases'?'精选案件档案使用下方独立筛选，不受FJC立案筛选影响。':'本模块保留自身统计总体；不随立案筛选变化。';$(id).prepend(note);}
   document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-pressed',String(b.classList.contains('active'))));
   window.addEventListener('resize',()=>{const width=document.getElementById('map').clientWidth;if(map&&width&&width!==lastMapWidth){map.invalidateSize();fitMapView();}});
