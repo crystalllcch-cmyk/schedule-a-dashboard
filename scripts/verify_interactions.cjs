@@ -15,6 +15,8 @@ async function boot(withCharts=false){
   const set=(id,value)=>{w.document.getElementById(id).value=value;w.document.getElementById(id).dispatchEvent(new w.Event('change'));};
   const total=()=>w.__qaTotal();
   assert.equal(total(),4551);
+  const exclude=w.document.getElementById('excludeIllinois');exclude.checked=true;exclude.dispatchEvent(new w.Event('change'));assert.equal(total(),711);w.document.getElementById('resetFilters').click();
+  set('yearFilter','2026');set('quarterFilter','2026 Q2');assert.equal(total(),865);assert.equal([...w.document.getElementById('quarterFilter').options].some(x=>x.value==='2026 Q3'),false);set('quarterFilter','all');
   set('yearFilter','2026');assert.equal(total(),1636);
   set('districtFilter','3-15');assert.equal(total(),134);assert.equal(w.document.getElementById('circuitFilter').value,'Third Circuit');
   set('nosFilter','820');assert.equal(total(),113);
@@ -44,6 +46,7 @@ async function boot(withCharts=false){
   w.document.querySelector('[data-geo-mode="map"]').click();assert.equal(w.document.getElementById('geoMapPanel').hidden,false);assert.equal(w.document.getElementById('geoListPanel').hidden,true);
   w.document.querySelector('[data-module="judiciary"]').click();w.document.querySelector('[data-case-mode="constellation"]').click();assert.equal(w.document.getElementById('caseConstellationPanel').hidden,false);assert.equal(w.document.getElementById('caseList').hidden,true);
   w.document.querySelector('[data-case-mode="list"]').click();assert.equal(w.document.getElementById('caseList').hidden,false);assert.equal(w.document.getElementById('caseConstellationPanel').hidden,true);
+  w.document.querySelector('[data-module="trend"]').click();
   assert.deepEqual([...w.document.querySelectorAll('.view.active')].map(x=>x.id),['overview','trend']);
   assert.equal(w.document.querySelectorAll('.tab').length,4);
   assert.equal(w.document.querySelectorAll('.view').length,8);
