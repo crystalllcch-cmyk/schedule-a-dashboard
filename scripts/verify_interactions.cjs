@@ -9,7 +9,7 @@ async function boot(withCharts=false){
   let chartOptions={};
   if(withCharts) w.echarts={init:el=>({setOption:(v)=>{chartOptions[el.id]={...chartOptions[el.id],...v}},resize:()=>{},on:()=>{}})};
   const inline=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n');
-  w.eval(inline+'\n'+fs.readFileSync(path.join(root,'app.js'),'utf8')+'\nwindow.__qaTotal = () => sum(filingRows());');
+  w.eval(inline+'\n'+fs.readFileSync(path.join(root,'analysis.js'),'utf8')+'\n'+fs.readFileSync(path.join(root,'app.js'),'utf8')+'\nwindow.__qaTotal = () => sum(filingRows());');
   for(let i=0;i<20&&!w.document.querySelector('.case');i++)await new Promise(r=>setTimeout(r,5));
   assert.equal(w.document.querySelectorAll('.case').length,26);
   const set=(id,value)=>{w.document.getElementById(id).value=value;w.document.getElementById(id).dispatchEvent(new w.Event('change'));};
@@ -24,6 +24,9 @@ async function boot(withCharts=false){
   set('yearFilter','2026');assert.equal(total(),1636);
   set('districtFilter','3-15');assert.equal(total(),134);assert.equal(w.document.getElementById('circuitFilter').value,'Third Circuit');
   set('nosFilter','820');assert.equal(total(),113);
+  assert.match(w.document.getElementById('trendDynamicInsight').textContent,/113/);
+  assert.match(w.document.getElementById('geoDynamicInsight').textContent,/W\.D\. Pennsylvania/);
+  assert.match(w.document.getElementById('nosDynamicInsight').textContent,/版权 113/);
   if(withCharts) assert.equal(chartOptions.monthlyChart.series[0].data.reduce((a,b)=>a+b,0),113);
   assert.match(w.document.getElementById('filterSummary').textContent,/113 条/);
   set('nosFilter','835');assert.equal(total(),0);assert.ok(!w.document.querySelector('main').textContent.includes('NaN'));
@@ -60,6 +63,13 @@ async function boot(withCharts=false){
   w.document.querySelector('[data-module="judiciary"]').click();w.document.querySelector('[data-case-mode="constellation"]').click();assert.equal(w.document.getElementById('caseConstellationPanel').hidden,false);assert.equal(w.document.getElementById('caseList').hidden,true);
   w.document.querySelector('[data-case-mode="list"]').click();assert.equal(w.document.getElementById('caseList').hidden,false);assert.equal(w.document.getElementById('caseConstellationPanel').hidden,true);
   w.document.querySelector('[data-module="trend"]').click();
+  w.document.getElementById('resetFilters').click();
+  w.openAnalysisForChart('monthlyChart',{name:'2026-06',value:280});
+  assert.equal(w.document.getElementById('analysisOverlay').hidden,false);
+  assert.match(w.document.getElementById('analysisTitle').textContent,/2026-06/);
+  assert.match(w.document.getElementById('analysisBody').textContent,/同期司法事件/);
+  w.document.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Escape'}));
+  assert.equal(w.document.getElementById('analysisOverlay').hidden,true);
   const trendModes=[['quarter','quarterTrendPanel'],['half','halfTrendPanel'],['month','monthlyTrendPanel']];
   for(const [mode,visibleId] of trendModes){
     w.document.querySelector('[data-trend-view="'+mode+'"]').click();
