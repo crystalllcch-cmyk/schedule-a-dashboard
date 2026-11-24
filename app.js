@@ -76,7 +76,8 @@ function updateFilings() {
   const categories = D.nos.filter(x => selected('nosFilter') === 'all' || x.code === selected('nosFilter'));
   const other25 = categories.map(n => sum(other.filter(x => x.nos === n.code && halfOf(x) === '2025 H1'))), other26 = categories.map(n => sum(other.filter(x => x.nos === n.code && halfOf(x) === '2026 H1')));
   updateChart('regionNosChart', {xAxis: {data: categories.map(x => x.code)}, series: [{name: '2025 H1', type: 'bar', data: other25, itemStyle:{color:'#b4c7d1'}},{name: '2026 H1', type: 'bar', data: other26, itemStyle:{color:'#6d9e9b'}}]}, ['NOS', '2025 H1', '2026 H1'], categories.map((n,i) => [n.code, other25[i], other26[i]]));
-  renderDistrictList(rows); renderCircuits(rows);\n  $('filingData').innerHTML = table(['月度', '候选记录'], months.map(x => [x.key, x.count])) + table(['地区', '候选记录'], districts.map(x => [x.name, x.count])) + table(['NOS', '候选记录'], nos.map(x => [x.code + ' · ' + x.label, x.count]));
+  renderDistrictList(rows); renderCircuits(rows);
+  $('filingData').innerHTML = table(['月度', '候选记录'], months.map(x => [x.key, x.count])) + table(['地区', '候选记录'], districts.map(x => [x.name, x.count])) + table(['NOS', '候选记录'], nos.map(x => [x.code + ' · ' + x.label, x.count]));
   updateMap(rows);
 }
 function cases() {
