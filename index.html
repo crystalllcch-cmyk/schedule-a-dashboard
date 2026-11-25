@@ -375,7 +375,7 @@ const dopt={
 const groupTotal=D.candidateGroups.reduce((a,x)=>a+x.count,0);
 const groupNames={'Partnership caption-prefix':'合伙企业名称线索','Individual caption-prefix':'个人姓名线索','Explicit Schedule A text':'案件文字明确提及Schedule A','Unincorporated caption-prefix':'非公司组织名称线索','Defendants identified-prefix':'被告身份标识线索','Partnership singular caption-prefix':'单数合伙企业名称线索'};
 initChart('groups').setOption({
- tooltip:{trigger:'item',backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#fff'},formatter:p=>'<b>'+p.name+'</b><br/>记录数量：'+fmt(p.value)+'条<br/>占候选记录：'+p.percent+'%'},
+ tooltip:{trigger:'item',backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#fff'},formatter:p=>'<b>'+(groupNames[p.name]||p.name)+'</b><br/>记录数量：'+fmt(p.value)+'条<br/>占候选记录：'+p.percent+'%'},
  legend:{bottom:0,textStyle:{color:'#C6D7E4',fontSize:9},formatter:name=>groupNames[name]||name},
  series:[{type:'pie',radius:['40%','67%'],center:['50%','43%'],label:{show:true,color:'#EFF6FC',fontSize:9,formatter:p=>(groupNames[p.name]||p.name)+'\n'+fmt(p.value)+'条'},labelLine:{length:10,length2:6},data:D.candidateGroups.map((x,i)=>({name:x.name,value:x.count,itemStyle:{color:pal[i]}}))}]
 });
