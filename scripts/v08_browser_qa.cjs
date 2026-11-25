@@ -16,9 +16,9 @@ const fail = (name, error) => report.checks.push({ name, passed: false, error: S
     await page.waitForFunction(() => typeof window.echarts !== 'undefined' && document.querySelector('#total')?.textContent.trim() === '4,551', null, { timeout: 30000 });
     pass('数据加载', 'ECharts已加载，首页候选记录总数为4,551');
     const views = [
-      ['overview', ['history', 'quarters', 'geo']],
+      ['overview', ['history', 'quarters', 'geo', 'brandMini']],
       ['activity', ['history2', 'q2', 'nos', 'growth']],
-      ['brands', ['brandAnnual', 'brandMini']],
+      ['brands', ['brandAnnual']],
       ['explorer', ['districts', 'groups', 'heat']]
     ];
     for (const [view, chartIds] of views) {
