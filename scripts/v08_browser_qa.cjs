@@ -31,8 +31,10 @@ const fail = (name, error) => report.checks.push({ name, passed: false, error: S
         });
         if (size.width < 100 || size.height < 100 || size.canvases < 1) throw new Error(view + '/' + id + ' chart not rendered: ' + JSON.stringify(size));
       }
+      const overflow = await page.evaluate(() => ({ documentWidth: document.documentElement.scrollWidth, viewportWidth: window.innerWidth }));
+      if (overflow.documentWidth > overflow.viewportWidth + 1) throw new Error(view + ' 页面出现横向溢出：' + JSON.stringify(overflow));
       await page.screenshot({ path: path.join(out, view + '.png'), fullPage: true });
-      pass('页面图表渲染：' + view, chartIds.join(', ') + ' 均有可见画布及有效尺寸');
+      pass('页面图表渲染：' + view, chartIds.join(', ') + ' 均有可见画布、有效尺寸且无横向溢出');
     }
     await page.locator('[data-view="overview"]').click();
     await page.locator('#year').selectOption('2026');
