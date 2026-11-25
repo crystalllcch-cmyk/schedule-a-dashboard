@@ -56,7 +56,7 @@ const fail = (name, error) => report.checks.push({ name, passed: false, error: S
     await page.locator('#close').click();
     pass('品牌详情交互', '点击品牌详情按钮可打开并关闭详情抽屉');
     await page.locator('[data-view="casefiles"]').click();
-    const firstCase = page.locator('#caseGrid [data-case-id]').first();
+    const firstCase = page.locator('#caseBubbleNodes [data-case-id]').first();
     await firstCase.click();
     if (!(await page.locator('#drawer').evaluate(el => el.classList.contains('open')))) throw new Error('案件档案抽屉未打开');
     await page.screenshot({ path: path.join(out, 'case-dossier.png'), fullPage: true });
