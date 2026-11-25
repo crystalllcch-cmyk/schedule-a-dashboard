@@ -561,7 +561,7 @@
       "citation": "4:26-cv-00169, Dkt. 38",
       "issue": "PI、个人管辖权及平台救济",
       "result": "法院在该案记录基础上批准PI及相关救济。",
-      "effect": "地区法院个案；不代表同院所有法官或所有被告情形。",
+      "effect": "Schelp法官在该案记录基础上批准PI及相关救济。",
       "url": "https://cases.justia.com/federal/district-courts/missouri/moedce/4%3A2026cv00169/226098/38/0.pdf",
       "level": "地区法院裁定副本",
       "analysisPoints": {
@@ -584,7 +584,7 @@
           },
           {
             "label": "适用边界",
-            "text": "不代表同院所有法官或所有被告情形。"
+            "text": "该裁定呈现Schelp法官在本案证据和程序记录下的处理方式。"
           }
         ]
       }
@@ -597,7 +597,7 @@
       "citation": "4:26-cv-00533, Dkt. 36",
       "issue": "仅有一笔平台州内销售能否建立个人管辖权",
       "result": "法院认为仅有通过全国性平台向该州售出一件商品的联系不足以满足第八巡回区个人管辖权标准，拒绝TRO。",
-      "effect": "与Schelp案形成同院不同处理对照；案件时间、法官和证据不同，不能据此计算批准率。",
+      "effect": "与Schelp案形成同院不同处理对照：Schelp法官批准PI，Lanahan法官拒绝TRO，审查重点集中于各案的论坛联系证据及申请记录。",
       "url": "https://www.govinfo.gov/content/pkg/USCOURTS-moed-4_26-cv-00533/pdf/USCOURTS-moed-4_26-cv-00533-0.pdf",
       "level": "官方法院裁定",
       "analysisPoints": {
@@ -624,7 +624,7 @@
           },
           {
             "label": "适用边界",
-            "text": "案件时间、法官和证据不同，不能据此计算批准率。"
+            "text": "两案显示同一法院不同法官对PI/TRO申请的不同处理，差异应结合论坛联系证据及各自程序记录理解。"
           }
         ]
       }
