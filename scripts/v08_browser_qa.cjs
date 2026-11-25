@@ -46,7 +46,7 @@ const fail = (name, error) => report.checks.push({ name, passed: false, error: S
     if ((await page.locator('#total').textContent()).trim() !== '4,551') throw new Error('重置后未恢复4,551');
     pass('筛选重置', '重置后恢复4,551');
     await page.locator('[data-view="geography"]').click();
-    await page.locator('#mapNodes [data-code="3-15"]').click({ force: true });
+    await page.locator('#mapNodes [data-code="3-15"] .node-core').click({ force: true });
     if ((await page.locator('#total').textContent()).trim() !== '178') throw new Error('地图点击宾夕法尼亚西区后数量不等于178');
     pass('地图节点联动', '点击宾夕法尼亚西区节点后，筛选总数更新为178');
     await page.locator('#reset').click();
