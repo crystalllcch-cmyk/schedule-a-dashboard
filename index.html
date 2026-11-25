@@ -475,7 +475,7 @@ function renderGeo(){
  $('geoQuarterTitle').textContent=(chosen?chosen.name:'全部已映射地区')+' · 季度候选变化';
  const vals=D.quarters.map(q=>({label:q.label,value:chosen?(chosen.quarters[q.year+'Q'+q.quarter]||0):rows.reduce((a,d)=>a+(d.quarters[q.year+'Q'+q.quarter]||0),0)}));
  const vmax=Math.max(1,...vals.map(x=>x.value));
- $('geoQuarterBars').innerHTML=vals.map(x=>'<div class="geo-q"><div class="geo-q-bar"><div class="geo-q-fill" style="height:'+(x.value/vmax*100)+'%"></div></div><small>'+x.label+'</small><b>'+fmt(x.value)+'</b></div>').join('');
+ $('geoQuarterBars').innerHTML=vals.map(x=>'<div class="geo-q"><div class="geo-q-bar"><div class="geo-q-fill" style="height:'+(x.value/vmax*100)+'%"></div></div><small>'+x.label.replace(' Q1','年第一季度').replace(' Q2','年第二季度').replace(' Q3','年第三季度').replace(' Q4','年第四季度')+'</small><b>'+fmt(x.value)+'</b></div>').join('');
 }
 function topicName(t){return({service:'境外送达',jurisdiction:'个人管辖权',joinder:'被告合并',pi:'TRO / PI', 'asset-freeze':'资产冻结',evidence:'侵权证据',procedure:'程序合规','judge-variance':'法官差异',patent:'专利案件','design-patent':'设计专利',default:'缺席判决','due-process':'正当程序','defendant-appearance':'被告应诉','judge-practice':'法官个案规则'})[t]||t}
 function evidencePrimary(c){return c.sourceLevel.startsWith('一级')}
