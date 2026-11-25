@@ -321,7 +321,7 @@ const historyOpt={
 const qopt={
  grid:{left:58,right:18,top:32,bottom:42,containLabel:true},
  tooltip:{trigger:'axis',axisPointer:{type:'shadow'},backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#fff'},formatter:p=>'<b>'+p[0].axisValue+'</b><br/>候选案件记录：<b>'+fmt(p[0].value)+'条</b>'},
- xAxis:{type:'category',data:D.quarters.map(q=>q.label),axisLabel:{color:'#BED0DE',fontSize:10,interval:0},axisLine:{lineStyle:{color:'#5C7A93'}}},
+ xAxis:{type:'category',data:D.quarters.map(q=>q.year+'年'+['','第一季度','第二季度','第三季度','第四季度'][q.quarter]),axisLabel:{color:'#BED0DE',fontSize:10,interval:0},axisLine:{lineStyle:{color:'#5C7A93'}}},
  yAxis:{type:'value',name:'记录数量（条）',nameTextStyle:{color:'#AFC5D7',fontSize:10},axisLabel:{color:'#BED0DE',formatter:v=>fmt(v)},splitLine:{lineStyle:{color:'#405D76',type:'dashed'}}},
  series:[{name:'候选案件记录',type:'bar',data:D.quarters.map(q=>q.count),barMaxWidth:48,barMinHeight:2,label:{show:true,position:'top',color:'#EAF7FC',fontSize:10,formatter:p=>fmt(p.value)},itemStyle:{borderRadius:[7,7,1,1],color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#83EAE2'},{offset:1,color:'#608CB8'}])}}]
 };
@@ -371,7 +371,7 @@ const dopt={
  xAxis:{type:'value',name:'记录数量（条）',nameTextStyle:{color:'#AFC5D7',fontSize:10},axisLabel:{color:'#BED0DE',formatter:v=>fmt(v)},splitLine:{lineStyle:{color:'#405D76',type:'dashed'}}},
  yAxis:{type:'category',data:drows.map(x=>x.name),axisLabel:{color:'#C6D9E7',fontSize:10},axisLine:{lineStyle:{color:'#5C7A93'}}},
  series:[{name:'候选案件记录',type:'bar',data:drows.map(x=>x.count),barMaxWidth:24,itemStyle:{color:'#78E5DD',borderRadius:7},label:{show:true,position:'right',color:'#EFF6FC',fontSize:10,formatter:p=>fmt(p.value)}}]
-};initChart('districts').setOption(dopt);
+};initChart('districts').setOption(dopt);charts.districts.on('click',p=>{const d=D.districts.find(x=>x.name===p.name);if(d)selectDistrict(d.code)});
 const groupTotal=D.candidateGroups.reduce((a,x)=>a+x.count,0);
 const groupNames={'Partnership caption-prefix':'合伙企业名称线索','Individual caption-prefix':'个人姓名线索','Explicit Schedule A text':'案件文字明确提及Schedule A','Unincorporated caption-prefix':'非公司组织名称线索','Defendants identified-prefix':'被告身份标识线索','Partnership singular caption-prefix':'单数合伙企业名称线索'};
 initChart('groups').setOption({
@@ -386,7 +386,7 @@ const heatMax=Math.max(1,...hdata.map(x=>x[2]));
 initChart('heat').setOption({
  tooltip:{position:'top',backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#F5FBFF'},formatter:p=>'<b>'+hrows[p.data[1]].name+'</b><br/>'+D.quarters[p.data[0]].label+'<br/>候选案件记录：<b>'+fmt(p.data[2])+'条</b>'},
  grid:{left:130,right:20,top:18,bottom:52,containLabel:true},
- xAxis:{type:'category',data:D.quarters.map(x=>x.label),axisLabel:{color:'#BED0DE',fontSize:10,interval:0},axisLine:{lineStyle:{color:'#5C7A93'}}},
+ xAxis:{type:'category',data:D.quarters.map(x=>x.year+'年'+['','第一季度','第二季度','第三季度','第四季度'][x.quarter]),axisLabel:{color:'#BED0DE',fontSize:10,interval:0},axisLine:{lineStyle:{color:'#5C7A93'}}},
  yAxis:{type:'category',data:hrows.map(x=>x.name),axisLabel:{color:'#C6D8E6',fontSize:10},axisLine:{lineStyle:{color:'#5C7A93'}}},
  visualMap:{min:0,max:heatMax,calculable:true,orient:'horizontal',left:'center',bottom:0,text:['高','低'],textStyle:{color:'#BED0DE'},inRange:{color:['#304F69','#3999A0','#83EAE2']}},
  series:[{type:'heatmap',data:hdata,label:{show:true,color:'#F6FCFF',fontSize:9,formatter:p=>p.value[2]?fmt(p.value[2]):''},itemStyle:{borderColor:'#1B3851',borderWidth:2,borderRadius:4},emphasis:{itemStyle:{shadowBlur:10,shadowColor:'rgba(0,0,0,.25)'}}}]
@@ -426,7 +426,7 @@ $('caseCards').onclick=e=>{const id=e.target.closest('[data-case]')?.dataset.cas
 $('themeDetail').onclick=e=>{const id=e.target.closest('[data-case]')?.dataset.case;const c=R.cases.find(x=>x.id===id);if(c)openInsightCase(c)};
 }
 function buildTimeline(){const events=[['2025.12','Smart Study','第二巡回：海牙公约与中国被告电子送达'],['2026.03','Liu v. Monthly','第七巡回：逐被告证明实际州内销售'],['2026.05','Kangol','第七巡回：邮件链接送达及地址查找勤勉度'],['2026.06','N.D. Ill. Standing Order','Gettleman法官明确逐被告审查要求'],['2026.09','E.D. Texas · Liu','地区法院将送达和个别管辖权分析用于专利案']];$('miniTimeline').innerHTML=events.map((x,i)=>'<div class="timeitem" data-event="'+i+'"><div class="year">'+x[0]+'</div><b>'+x[1]+'</b><small>'+x[2]+'</small></div>').join('');$('miniTimeline').onclick=e=>{let n=e.target.closest('[data-event]')?.dataset.event;if(n!==undefined){const c=R.cases[[0,1,2,10,8][Number(n)]];const p=c.analysisPoints||{};caseDetail(c.name,c.court+' · '+c.date,[{title:'核心争点',points:p.issue,fallback:c.issue},{title:'裁判结果',points:p.result,fallback:c.result},{title:'法律效力与适用范围',points:p.effect,fallback:c.effect}],c.url)}}}
-function refresh(){let qs=D.quarters.filter(q=>(filters.year==='all'||String(q.year)===filters.year)&&(filters.quarter==='all'||String(q.quarter)===filters.quarter));let count=qs.reduce((a,b)=>a+b.count,0);if(filters.district!=='all'){const d=D.districts.find(x=>x.code===filters.district);const dc=DQ.filter(x=>(x.circuit+'-'+x.district)===filters.district&&(filters.year==='all'||String(x.year)===filters.year)&&(filters.quarter==='all'||String(x.quarter)===filters.quarter)).reduce((a,x)=>a+x.count,0);$('filterSummary').textContent=(d?d.name:'所选地区')+' · '+fmt(dc)+' 条案件记录';$('total').textContent=fmt(dc);}else{$('filterSummary').textContent=qs.length+' quarters · '+fmt(count)+' 条案件记录';$('total').textContent=fmt(count);}if(GEO)renderGeo();}
+function refresh(){let qs=D.quarters.filter(q=>(filters.year==='all'||String(q.year)===filters.year)&&(filters.quarter==='all'||String(q.quarter)===filters.quarter));let count=qs.reduce((a,b)=>a+b.count,0);if(filters.district!=='all'){const d=D.districts.find(x=>x.code===filters.district);const dc=DQ.filter(x=>(x.circuit+'-'+x.district)===filters.district&&(filters.year==='all'||String(x.year)===filters.year)&&(filters.quarter==='all'||String(x.quarter)===filters.quarter)).reduce((a,x)=>a+x.count,0);$('filterSummary').textContent=(d?d.name:'所选地区')+' · '+fmt(dc)+' 条案件记录';$('total').textContent=fmt(dc);}else{$('filterSummary').textContent=qs.length+'个季度 · '+fmt(count)+' 条案件记录';$('total').textContent=fmt(count);}if(GEO)renderGeo();}
 ['year','quarter','district'].forEach(id=>$(id).onchange=()=>{filters={year:$('year').value,quarter:$('quarter').value,district:$('district').value};refresh();if(filters.district!=='all'){go('geography');toast('地区筛选已应用：'+$('district').selectedOptions[0].textContent)}});$('reset').onclick=()=>{$('year').value='all';$('quarter').value='all';$('district').value='all';filters={year:'all',quarter:'all',district:'all'};refresh();toast('筛选已重置')};
 $('focus').onclick=()=>{document.querySelector('.top').style.display=document.querySelector('.top').style.display==='none'?'flex':'none';document.querySelector('.footer').style.display=document.querySelector('.footer').style.display==='none'?'block':'none';};
 
