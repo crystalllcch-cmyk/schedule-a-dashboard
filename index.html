@@ -294,7 +294,7 @@ tbody tr:hover{background:#365f78}
 <div class="drawer" id="drawer"><div class="drawerbox"><button class="close" id="close">✕</button><div class="eyebrow">CASE / DECISION DETAIL</div><h2 id="dtitle"></h2><p id="dintro"></p><div id="dbody"></div></div></div><div class="toast" id="toast"></div>
 <script>
 let D=null,R=null,DQ=null,GEO=null,CASES=null,charts={},mapMarkers={},filters={year:'all',quarter:'all',district:'all'},activeTheme='service';
-const $=id=>document.getElementById(id),fmt=n=>Number(n).toLocaleString('en-US');
+const $=id=>document.getElementById(id),fmt=n=>Number(n).toLocaleString('en-US'),periodLabel=q=>q.year+'年'+['','第一季度','第二季度','第三季度','第四季度'][q.quarter];
 const pal=['#73E7DF','#9ABEFF','#C5AAFF','#FFD38A','#8BE2BB','#FFA3AF'];
 function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2100)}
 function go(v){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.view===v));document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+v));setTimeout(()=>{Object.values(charts).forEach(c=>c.resize());if(v==='geography'&&GEO)renderGeo()},100)}
@@ -321,11 +321,11 @@ const historyOpt={
 const qopt={
  grid:{left:58,right:18,top:32,bottom:42,containLabel:true},
  tooltip:{trigger:'axis',axisPointer:{type:'shadow'},backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#fff'},formatter:p=>'<b>'+p[0].axisValue+'</b><br/>候选案件记录：<b>'+fmt(p[0].value)+'条</b>'},
- xAxis:{type:'category',data:D.quarters.map(q=>q.year+'年'+['','第一季度','第二季度','第三季度','第四季度'][q.quarter]),axisLabel:{color:'#BED0DE',fontSize:10,interval:0},axisLine:{lineStyle:{color:'#5C7A93'}}},
+ xAxis:{type:'category',data:D.quarters.map(periodLabel),axisLabel:{color:'#BED0DE',fontSize:10,interval:0},axisLine:{lineStyle:{color:'#5C7A93'}}},
  yAxis:{type:'value',name:'记录数量（条）',nameTextStyle:{color:'#AFC5D7',fontSize:10},axisLabel:{color:'#BED0DE',formatter:v=>fmt(v)},splitLine:{lineStyle:{color:'#405D76',type:'dashed'}}},
  series:[{name:'候选案件记录',type:'bar',data:D.quarters.map(q=>q.count),barMaxWidth:48,barMinHeight:2,label:{show:true,position:'top',color:'#EAF7FC',fontSize:10,formatter:p=>fmt(p.value)},itemStyle:{borderRadius:[7,7,1,1],color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#83EAE2'},{offset:1,color:'#608CB8'}])}}]
 };
-['quarters','q2'].forEach(id=>{if($(id)){initChart(id).setOption(qopt);charts[id].on('click',p=>{const q=D.quarters[p.dataIndex];$('year').value=q.year;$('quarter').value=q.quarter;filters.year=String(q.year);filters.quarter=String(q.quarter);refresh();toast('已定位 '+q.label)})}});
+['quarters','q2'].forEach(id=>{if($(id)){initChart(id).setOption(qopt);charts[id].on('click',p=>{const q=D.quarters[p.dataIndex];$('year').value=q.year;$('quarter').value=q.quarter;filters.year=String(q.year);filters.quarter=String(q.quarter);refresh();toast('已定位 '+periodLabel(q))})}});
 const geoTotals=[1156+160,1292+344];
 const geoOpt={
  grid:{left:82,right:32,top:38,bottom:48,containLabel:true},
@@ -384,14 +384,14 @@ const hdata=[];
 hrows.forEach((d,y)=>D.quarters.forEach((q,x)=>{const v=DQ.filter(r=>r.name===d.name&&r.year===q.year&&r.quarter===q.quarter).reduce((a,b)=>a+b.count,0);hdata.push([x,y,v])}));
 const heatMax=Math.max(1,...hdata.map(x=>x[2]));
 initChart('heat').setOption({
- tooltip:{position:'top',backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#F5FBFF'},formatter:p=>'<b>'+hrows[p.data[1]].name+'</b><br/>'+D.quarters[p.data[0]].label+'<br/>候选案件记录：<b>'+fmt(p.data[2])+'条</b>'},
+ tooltip:{position:'top',backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#F5FBFF'},formatter:p=>'<b>'+hrows[p.data[1]].name+'</b><br/>'+periodLabel(D.quarters[p.data[0]])+'<br/>候选案件记录：<b>'+fmt(p.data[2])+'条</b>'},
  grid:{left:130,right:20,top:18,bottom:52,containLabel:true},
- xAxis:{type:'category',data:D.quarters.map(x=>x.year+'年'+['','第一季度','第二季度','第三季度','第四季度'][x.quarter]),axisLabel:{color:'#BED0DE',fontSize:10,interval:0},axisLine:{lineStyle:{color:'#5C7A93'}}},
+ xAxis:{type:'category',data:D.quarters.map(periodLabel),axisLabel:{color:'#BED0DE',fontSize:10,interval:0},axisLine:{lineStyle:{color:'#5C7A93'}}},
  yAxis:{type:'category',data:hrows.map(x=>x.name),axisLabel:{color:'#C6D8E6',fontSize:10},axisLine:{lineStyle:{color:'#5C7A93'}}},
  visualMap:{min:0,max:heatMax,calculable:true,orient:'horizontal',left:'center',bottom:0,text:['高','低'],textStyle:{color:'#BED0DE'},inRange:{color:['#304F69','#3999A0','#83EAE2']}},
  series:[{type:'heatmap',data:hdata,label:{show:true,color:'#F6FCFF',fontSize:9,formatter:p=>p.value[2]?fmt(p.value[2]):''},itemStyle:{borderColor:'#1B3851',borderWidth:2,borderRadius:4},emphasis:{itemStyle:{shadowBlur:10,shadowColor:'rgba(0,0,0,.25)'}}}]
 });
-charts.heat.on('click',p=>{let d=hrows[p.data[1]],q=D.quarters[p.data[0]];$('district').value=d.code;$('year').value=q.year;$('quarter').value=q.quarter;filters={district:d.code,year:String(q.year),quarter:String(q.quarter)};refresh();toast(d.name+' · '+q.label)});
+charts.heat.on('click',p=>{let d=hrows[p.data[1]],q=D.quarters[p.data[0]];$('district').value=d.code;$('year').value=q.year;$('quarter').value=q.quarter;filters={district:d.code,year:String(q.year),quarter:String(q.quarter)};refresh();toast(d.name+' · '+periodLabel(q))});
 buildBrands();buildCourts();buildTimeline();buildGeo();buildCaseFiles();window.addEventListener('resize',()=>Object.values(charts).forEach(c=>c.resize()));
 }
 function buildBrands(){
@@ -475,7 +475,7 @@ function renderGeo(){
  $('geoQuarterTitle').textContent=(chosen?chosen.name:'全部已映射地区')+' · 季度候选变化';
  const vals=D.quarters.map(q=>({label:q.label,value:chosen?(chosen.quarters[q.year+'Q'+q.quarter]||0):rows.reduce((a,d)=>a+(d.quarters[q.year+'Q'+q.quarter]||0),0)}));
  const vmax=Math.max(1,...vals.map(x=>x.value));
- $('geoQuarterBars').innerHTML=vals.map(x=>'<div class="geo-q"><div class="geo-q-bar"><div class="geo-q-fill" style="height:'+(x.value/vmax*100)+'%"></div></div><small>'+x.label.replace(' Q1','年第一季度').replace(' Q2','年第二季度').replace(' Q3','年第三季度').replace(' Q4','年第四季度')+'</small><b>'+fmt(x.value)+'</b></div>').join('');
+ $('geoQuarterBars').innerHTML=vals.map(x=>'<div class="geo-q"><div class="geo-q-bar"><div class="geo-q-fill" style="height:'+(x.value/vmax*100)+'%"></div></div><small>'+periodLabel({year:Number(x.label.slice(0,4)),quarter:Number(x.label.slice(-1))})+'</small><b>'+fmt(x.value)+'</b></div>').join('');
 }
 function topicName(t){return({service:'境外送达',jurisdiction:'个人管辖权',joinder:'被告合并',pi:'TRO / PI', 'asset-freeze':'资产冻结',evidence:'侵权证据',procedure:'程序合规','judge-variance':'法官差异',patent:'专利案件','design-patent':'设计专利',default:'缺席判决','due-process':'正当程序','defendant-appearance':'被告应诉','judge-practice':'法官个案规则'})[t]||t}
 function evidencePrimary(c){return c.sourceLevel.startsWith('一级')}
