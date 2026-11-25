@@ -386,7 +386,7 @@ function buildGeo(){
  $('districtRanking').onclick=e=>{const row=e.target.closest('[data-district]');if(row)selectDistrict(row.dataset.district)};
  renderGeo();
 }
-function showGeoTooltip(code,e){const d=GEO.districts.find(x=>x.code===code);if(!d)return;const value=geoValue(d);$('geoTooltip').innerHTML='<b>'+escapeHtml(d.name)+'</b><small>'+escapeHtml(d.locator||'District locator')+' · 法院地区编号 '+escapeHtml(d.code)+'</small><strong>'+fmt(value)+'</strong><span>当前筛选下候选记录 · R24总计 '+fmt(d.count)+'</span>';positionGeoTooltip(e);$('geoTooltip').classList.add('show')}
+function showGeoTooltip(code,e){const d=GEO.districts.find(x=>x.code===code);if(!d)return;const value=geoValue(d);$('geoTooltip').innerHTML='<b>'+escapeHtml(d.name)+'</b><small>'+escapeHtml(d.locator||'District locator')+' · 法院地区编号 '+escapeHtml(d.code)+'</small><strong>'+fmt(value)+'</strong><span>当前筛选下案件记录 · 全部期间总计 '+fmt(d.count)+'</span>';positionGeoTooltip(e);$('geoTooltip').classList.add('show')}
 function positionGeoTooltip(e){const tip=$('geoTooltip'),box=$('usMap').getBoundingClientRect();let x=e.clientX-box.left+14,y=e.clientY-box.top+14;if(x+250>box.width)x-=260;if(y+110>box.height)y-=125;tip.style.left=Math.max(8,x)+'px';tip.style.top=Math.max(42,y)+'px'}
 function renderGeo(){
  if(!GEO)return;
