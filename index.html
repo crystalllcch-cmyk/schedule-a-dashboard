@@ -294,7 +294,7 @@ tbody tr:hover{background:#365f78}
 <div class="drawer" id="drawer"><div class="drawerbox"><button class="close" id="close">✕</button><div class="eyebrow">CASE / DECISION DETAIL</div><h2 id="dtitle"></h2><p id="dintro"></p><div id="dbody"></div></div></div><div class="toast" id="toast"></div>
 <script>
 let D=null,R=null,DQ=null,GEO=null,CASES=null,charts={},mapMarkers={},filters={year:'all',quarter:'all',district:'all'},activeTheme='service';
-const $=id=>document.getElementById(id),fmt=n=>Number(n).toLocaleString('en-US'),periodLabel=q=>q.year+'年'+['','第一季度','第二季度','第三季度','第四季度'][q.quarter];
+const $=id=>document.getElementById(id),fmt=n=>Number(n).toLocaleString('en-US'),periodLabel=q=>q.year+'年'+['','第一季度','第二季度','第三季度','第四季度'][q.quarter],periodShort=q=>String(q.year).slice(2)+'年Q'+q.quarter;
 const pal=['#73E7DF','#9ABEFF','#C5AAFF','#FFD38A','#8BE2BB','#FFA3AF'];
 function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2100)}
 function go(v){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.view===v));document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+v));setTimeout(()=>{Object.values(charts).forEach(c=>c.resize());if(v==='geography'&&GEO)renderGeo()},100)}
@@ -320,8 +320,8 @@ const historyOpt={
 ['history','history2'].forEach(id=>{if($(id)){initChart(id).setOption(historyOpt)}});
 const qopt={
  grid:{left:58,right:18,top:32,bottom:42,containLabel:true},
- tooltip:{trigger:'axis',axisPointer:{type:'shadow'},backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#fff'},formatter:p=>'<b>'+p[0].axisValue+'</b><br/>候选案件记录：<b>'+fmt(p[0].value)+'条</b>'},
- xAxis:{type:'category',data:D.quarters.map(periodLabel),axisLabel:{color:'#BED0DE',fontSize:10,interval:0},axisLine:{lineStyle:{color:'#5C7A93'}}},
+ tooltip:{trigger:'axis',axisPointer:{type:'shadow'},backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#fff'},formatter:p=>'<b>'+periodLabel(D.quarters[p[0].dataIndex])+'</b><br/>候选案件记录：<b>'+fmt(p[0].value)+'条</b>'},
+ xAxis:{type:'category',data:D.quarters.map(periodShort),axisLabel:{color:'#BED0DE',fontSize:10,interval:0},axisLine:{lineStyle:{color:'#5C7A93'}}},
  yAxis:{type:'value',name:'记录数量（条）',nameTextStyle:{color:'#AFC5D7',fontSize:10},axisLabel:{color:'#BED0DE',formatter:v=>fmt(v)},splitLine:{lineStyle:{color:'#405D76',type:'dashed'}}},
  series:[{name:'候选案件记录',type:'bar',data:D.quarters.map(q=>q.count),barMaxWidth:48,barMinHeight:2,label:{show:true,position:'top',color:'#EAF7FC',fontSize:10,formatter:p=>fmt(p.value)},itemStyle:{borderRadius:[7,7,1,1],color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#83EAE2'},{offset:1,color:'#608CB8'}])}}]
 };
