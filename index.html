@@ -309,23 +309,96 @@ $('close').onclick=()=>$('drawer').classList.remove('open');$('drawer').onclick=
 function initChart(id){charts[id]=echarts.init($(id));return charts[id]}
 const axis={axisLine:{lineStyle:{color:'#5C7A93'}},axisLabel:{color:'#BED0DE',fontSize:10},splitLine:{lineStyle:{color:'#405D76'}}};
 function init(){
-const hist=R.historical;const historyOpt={grid:{left:48,right:18,top:28,bottom:35},tooltip:{trigger:'axis',backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#F5FBFF'},formatter:p=>p[0].axisValue+'<br/><b>'+fmt(p[0].value)+'</b> filings'},xAxis:{type:'category',data:hist.map(x=>x.year+(x.partial?'*':'')),...axis},yAxis:{type:'value',...axis},series:[{type:'line',smooth:.25,data:hist.map(x=>x.count),symbolSize:8,lineStyle:{width:3,color:'#73E7DF'},itemStyle:{color:'#73E7DF',borderColor:'#F0FFFD',borderWidth:2},areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#73E7DF55'},{offset:1,color:'#73E7DF00'}])}}]};
+const hist=R.historical;
+const historyOpt={
+ grid:{left:58,right:22,top:30,bottom:38,containLabel:true},
+ tooltip:{trigger:'axis',backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#F5FBFF'},formatter:p=>{const d=hist[p[0].dataIndex];return '<b>'+p[0].axisValue.replace('*','')+'</b>'+(d.partial?'<br/>注：该年度为部分年度数据':'')+'<br/>立案数量：<b>'+fmt(p[0].value)+'件</b>'}},
+ xAxis:{type:'category',data:hist.map(x=>x.year+(x.partial?'*':'')),axisLabel:{color:'#BED0DE',fontSize:10,interval:0},axisLine:{lineStyle:{color:'#5C7A93'}},axisTick:{alignWithLabel:true}},
+ yAxis:{type:'value',name:'案件数量（件）',nameTextStyle:{color:'#AFC5D7',fontSize:10},axisLabel:{color:'#BED0DE',formatter:v=>fmt(v)},splitLine:{lineStyle:{color:'#405D76',type:'dashed'}}},
+ series:[{name:'年度立案数',type:'line',smooth:.2,data:hist.map(x=>x.count),symbol:'circle',symbolSize:8,showSymbol:true,lineStyle:{width:3,color:'#73E7DF'},itemStyle:{color:'#73E7DF',borderColor:'#F0FFFD',borderWidth:2},areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#73E7DF44'},{offset:1,color:'#73E7DF00'}])}}]
+};
 ['history','history2'].forEach(id=>{if($(id)){initChart(id).setOption(historyOpt)}});
-const qopt={grid:{left:45,right:15,top:20,bottom:35},tooltip:{trigger:'axis',backgroundColor:'#294B65',textStyle:{color:'#fff'}},xAxis:{type:'category',data:D.quarters.map(q=>q.label),...axis},yAxis:{type:'value',...axis},series:[{type:'bar',data:D.quarters.map(q=>q.count),barWidth:'42%',itemStyle:{borderRadius:[7,7,1,1],color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#83EAE2'},{offset:1,color:'#608CB8'}])}}]};
+const qopt={
+ grid:{left:58,right:18,top:32,bottom:42,containLabel:true},
+ tooltip:{trigger:'axis',axisPointer:{type:'shadow'},backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#fff'},formatter:p=>'<b>'+p[0].axisValue+'</b><br/>候选案件记录：<b>'+fmt(p[0].value)+'条</b>'},
+ xAxis:{type:'category',data:D.quarters.map(q=>q.label),axisLabel:{color:'#BED0DE',fontSize:10,interval:0},axisLine:{lineStyle:{color:'#5C7A93'}}},
+ yAxis:{type:'value',name:'记录数量（条）',nameTextStyle:{color:'#AFC5D7',fontSize:10},axisLabel:{color:'#BED0DE',formatter:v=>fmt(v)},splitLine:{lineStyle:{color:'#405D76',type:'dashed'}}},
+ series:[{name:'候选案件记录',type:'bar',data:D.quarters.map(q=>q.count),barMaxWidth:48,barMinHeight:2,label:{show:true,position:'top',color:'#EAF7FC',fontSize:10,formatter:p=>fmt(p.value)},itemStyle:{borderRadius:[7,7,1,1],color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#83EAE2'},{offset:1,color:'#608CB8'}])}}]
+};
 ['quarters','q2'].forEach(id=>{if($(id)){initChart(id).setOption(qopt);charts[id].on('click',p=>{const q=D.quarters[p.dataIndex];$('year').value=q.year;$('quarter').value=q.quarter;filters.year=String(q.year);filters.quarter=String(q.quarter);refresh();toast('已定位 '+q.label)})}});
-const geoOpt={grid:{left:80,right:25,top:25,bottom:35},legend:{top:0,textStyle:{color:'#BFD1E0'}},xAxis:{type:'category',data:['2025年上半年','2026年上半年'],...axis},yAxis:{type:'value',...axis},series:[{name:'伊利诺伊北区',type:'bar',stack:'a',data:[1156,1292],itemStyle:{color:'#73E7DF'}},{name:'其他法院地区',type:'bar',stack:'a',data:[160,344],itemStyle:{color:'#C5AAFF'}}]};initChart('geo').setOption(geoOpt);
-const nos=R.h1Comparison;initChart('nos').setOption({grid:{left:55,right:20,top:30,bottom:40},legend:{textStyle:{color:'#C6D7E4'}},xAxis:{type:'category',data:['商标案件','版权案件','专利案件'],axisLabel:{color:'#C6D7E4',fontSize:9}},yAxis:{type:'value',...axis},tooltip:{trigger:'axis'},series:[{name:'2025年上半年',type:'bar',data:[823,379,112],itemStyle:{color:'#829CB7'}},{name:'2026年上半年',type:'bar',data:[969,567,99],itemStyle:{color:'#78E5DD'}}]});
-initChart('growth').setOption({tooltip:{trigger:'item'},series:[{type:'pie',radius:['42%','70%'],label:{color:'#EFF6FC',formatter:'{b}\n{d}%'},data:[{name:'伊利诺伊北区增量',value:136},{name:'其他地区增量',value:184}],color:pal}]});
-const ba=R.brands.annual;const bopt={grid:{left:40,right:15,top:25,bottom:40},tooltip:{trigger:'axis'},xAxis:{type:'category',data:ba.map(x=>x.period),axisLabel:{color:'#BFD1E0',fontSize:9,interval:0}},yAxis:{type:'value',...axis},series:[{type:'bar',data:ba.map(x=>x.count),barWidth:'45%',itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#C5AAFF'},{offset:1,color:'#719BC8'}]),borderRadius:[6,6,0,0]}}]};['brandMini','brandAnnual'].forEach(id=>{if($(id))initChart(id).setOption(bopt)});
-const dopt={grid:{left:120,right:35,top:15,bottom:20},tooltip:{trigger:'axis'},xAxis:{type:'value',...axis},yAxis:{type:'category',data:D.districts.slice(0,10).map(x=>x.name).reverse(),axisLabel:{color:'#C6D9E7',fontSize:10}},series:[{type:'bar',data:D.districts.slice(0,10).map(x=>x.count).reverse(),itemStyle:{color:'#78E5DD',borderRadius:7},label:{show:true,position:'right',color:'#EFF6FC'}}]};initChart('districts').setOption(dopt);
-initChart('groups').setOption({tooltip:{trigger:'item'},legend:{bottom:0,textStyle:{color:'#C6D7E4',fontSize:9}},series:[{type:'pie',radius:['42%','68%'],label:{show:false},data:D.candidateGroups.map((x,i)=>({name:x.name,value:x.count,itemStyle:{color:pal[i]}}))}]});
-const hrows=D.districts.slice(0,8);const hdata=[];hrows.forEach((d,y)=>D.quarters.forEach((q,x)=>{const v=DQ.filter(r=>r.name===d.name&&r.year===q.year&&r.quarter===q.quarter).reduce((a,b)=>a+b.count,0);hdata.push([x,y,v])}));initChart('heat').setOption({tooltip:{position:'top',formatter:p=>hrows[p.data[1]].name+' · '+D.quarters[p.data[0]].label+'<br/><b>'+fmt(p.data[2])+'</b>'},grid:{left:130,right:20,top:15,bottom:35},xAxis:{type:'category',data:D.quarters.map(x=>x.label),...axis},yAxis:{type:'category',data:hrows.map(x=>x.name),axisLabel:{color:'#C6D8E6',fontSize:10}},visualMap:{min:0,max:717,calculable:true,orient:'horizontal',left:'center',bottom:0,textStyle:{color:'#BED0DE'},inRange:{color:['#304F69','#3999A0','#83EAE2']}},series:[{type:'heatmap',data:hdata,label:{show:true,color:'#F6FCFF',fontSize:9},itemStyle:{borderColor:'#1B3851',borderWidth:2,borderRadius:4}}]});charts.heat.on('click',p=>{let d=hrows[p.data[1]],q=D.quarters[p.data[0]];$('district').value=d.code;$('year').value=q.year;$('quarter').value=q.quarter;filters={district:d.code,year:String(q.year),quarter:String(q.quarter)};refresh();toast(d.name+' · '+q.label)});
-buildBrands();buildCourts();buildTimeline();buildGeo();buildCaseFiles();document.querySelectorAll('.chart').forEach(()=>{});window.addEventListener('resize',()=>Object.values(charts).forEach(c=>c.resize()));
+const geoTotals=[1156+160,1292+344];
+const geoOpt={
+ grid:{left:82,right:32,top:38,bottom:48,containLabel:true},
+ legend:{top:2,textStyle:{color:'#BFD1E0'},itemWidth:12,itemHeight:8},
+ tooltip:{trigger:'axis',axisPointer:{type:'shadow'},backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#F5FBFF'},formatter:p=>{const total=p.reduce((a,x)=>a+x.value,0);return '<b>'+p[0].axisValue+'</b><br/>'+p.map(x=>x.marker+x.seriesName+'：'+fmt(x.value)+'条（'+(total?(x.value/total*100).toFixed(1):'0.0')+'%）').join('<br/>')+'<br/><b>合计：'+fmt(total)+'条</b>'}},
+ xAxis:{type:'category',data:['2025年上半年','2026年上半年'],axisLabel:{color:'#BED0DE'},axisLine:{lineStyle:{color:'#5C7A93'}}},
+ yAxis:{type:'value',name:'记录数量（条）',nameTextStyle:{color:'#AFC5D7',fontSize:10},axisLabel:{color:'#BED0DE',formatter:v=>fmt(v)},splitLine:{lineStyle:{color:'#405D76',type:'dashed'}}},
+ series:[
+  {name:'伊利诺伊北区',type:'bar',stack:'a',data:[1156,1292],label:{show:true,position:'inside',color:'#173A4B',fontWeight:700,formatter:p=>fmt(p.value)},itemStyle:{color:'#73E7DF'}},
+  {name:'其他法院地区',type:'bar',stack:'a',data:[160,344],label:{show:true,position:'inside',color:'#30294C',fontWeight:700,formatter:p=>fmt(p.value)},itemStyle:{color:'#C5AAFF'}},
+  {name:'合计',type:'bar',stack:'a',data:geoTotals,itemStyle:{color:'transparent'},label:{show:true,position:'top',color:'#F3F8FC',fontWeight:700,formatter:p=>fmt(p.value)},tooltip:{show:false},silent:true}
+ ]
+};initChart('geo').setOption(geoOpt);
+const nos=R.h1Comparison;
+initChart('nos').setOption({
+ grid:{left:58,right:18,top:42,bottom:48,containLabel:true},
+ legend:{top:4,textStyle:{color:'#C6D7E4'},itemWidth:12,itemHeight:8},
+ xAxis:{type:'category',data:['商标案件','版权案件','专利案件'],axisLabel:{color:'#C6D7E4',fontSize:10,interval:0},axisLine:{lineStyle:{color:'#5C7A93'}}},
+ yAxis:{type:'value',name:'记录数量（条）',nameTextStyle:{color:'#AFC5D7',fontSize:10},axisLabel:{color:'#BED0DE',formatter:v=>fmt(v)},splitLine:{lineStyle:{color:'#405D76',type:'dashed'}}},
+ tooltip:{trigger:'axis',axisPointer:{type:'shadow'},backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#fff'},formatter:p=>'<b>'+p[0].axisValue+'</b><br/>'+p.map(x=>x.marker+x.seriesName+'：'+fmt(x.value)+'条').join('<br/>')},
+ series:[
+  {name:'2025年上半年',type:'bar',data:[823,379,112],barMaxWidth:38,label:{show:true,position:'top',color:'#EAF1F7',fontSize:10,formatter:p=>fmt(p.value)},itemStyle:{color:'#829CB7',borderRadius:[5,5,0,0]}},
+  {name:'2026年上半年',type:'bar',data:[969,567,99],barMaxWidth:38,label:{show:true,position:'top',color:'#EAF1F7',fontSize:10,formatter:p=>fmt(p.value)},itemStyle:{color:'#78E5DD',borderRadius:[5,5,0,0]}}
+ ]
+});
+initChart('growth').setOption({
+ tooltip:{trigger:'item',backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#fff'},formatter:p=>'<b>'+p.name+'</b><br/>新增记录：'+fmt(p.value)+'条<br/>占新增总量：'+p.percent+'%'},
+ legend:{bottom:2,textStyle:{color:'#C6D7E4',fontSize:10}},
+ series:[{type:'pie',radius:['43%','70%'],center:['50%','45%'],avoidLabelOverlap:true,label:{show:true,color:'#EFF6FC',fontSize:10,formatter:p=>p.name+'\n'+fmt(p.value)+'条 · '+p.percent+'%'},labelLine:{length:12,length2:8},data:[{name:'伊利诺伊北区增量',value:136,itemStyle:{color:'#73E7DF'}},{name:'其他地区增量',value:184,itemStyle:{color:'#C5AAFF'}}]}]
+});
+const ba=R.brands.annual;
+const bopt={
+ grid:{left:52,right:18,top:35,bottom:48,containLabel:true},
+ tooltip:{trigger:'axis',axisPointer:{type:'shadow'},backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#fff'},formatter:p=>'<b>'+p[0].axisValue+'</b><br/>品牌样本案件：<b>'+fmt(p[0].value)+'件</b>'},
+ xAxis:{type:'category',data:ba.map(x=>x.period),axisLabel:{color:'#BFD1E0',fontSize:9,interval:0},axisLine:{lineStyle:{color:'#5C7A93'}}},
+ yAxis:{type:'value',name:'样本案件数（件）',nameTextStyle:{color:'#AFC5D7',fontSize:10},axisLabel:{color:'#BED0DE',formatter:v=>fmt(v)},splitLine:{lineStyle:{color:'#405D76',type:'dashed'}}},
+ series:[{name:'品牌样本案件',type:'bar',data:ba.map(x=>x.count),barMaxWidth:42,label:{show:true,position:'top',color:'#F1EAFE',fontSize:10,formatter:p=>fmt(p.value)},itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#C5AAFF'},{offset:1,color:'#719BC8'}]),borderRadius:[6,6,0,0]}}]
+};
+['brandMini','brandAnnual'].forEach(id=>{if($(id))initChart(id).setOption(bopt)});
+const drows=D.districts.slice(0,10).reverse();
+const dopt={
+ grid:{left:130,right:48,top:18,bottom:28,containLabel:true},
+ tooltip:{trigger:'axis',axisPointer:{type:'shadow'},backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#fff'},formatter:p=>'<b>'+p[0].name+'</b><br/>候选案件记录：<b>'+fmt(p[0].value)+'条</b>'},
+ xAxis:{type:'value',name:'记录数量（条）',nameTextStyle:{color:'#AFC5D7',fontSize:10},axisLabel:{color:'#BED0DE',formatter:v=>fmt(v)},splitLine:{lineStyle:{color:'#405D76',type:'dashed'}}},
+ yAxis:{type:'category',data:drows.map(x=>x.name),axisLabel:{color:'#C6D9E7',fontSize:10},axisLine:{lineStyle:{color:'#5C7A93'}}},
+ series:[{name:'候选案件记录',type:'bar',data:drows.map(x=>x.count),barMaxWidth:24,itemStyle:{color:'#78E5DD',borderRadius:7},label:{show:true,position:'right',color:'#EFF6FC',fontSize:10,formatter:p=>fmt(p.value)}}]
+};initChart('districts').setOption(dopt);
+const groupTotal=D.candidateGroups.reduce((a,x)=>a+x.count,0);
+initChart('groups').setOption({
+ tooltip:{trigger:'item',backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#fff'},formatter:p=>'<b>'+p.name+'</b><br/>记录数量：'+fmt(p.value)+'条<br/>占候选记录：'+p.percent+'%'},
+ legend:{bottom:0,textStyle:{color:'#C6D7E4',fontSize:9}},
+ series:[{type:'pie',radius:['40%','67%'],center:['50%','43%'],label:{show:true,color:'#EFF6FC',fontSize:9,formatter:p=>p.name+'\n'+fmt(p.value)+'条'},labelLine:{length:10,length2:6},data:D.candidateGroups.map((x,i)=>({name:x.name,value:x.count,itemStyle:{color:pal[i]}}))}]
+});
+const hrows=D.districts.slice(0,8);
+const hdata=[];
+hrows.forEach((d,y)=>D.quarters.forEach((q,x)=>{const v=DQ.filter(r=>r.name===d.name&&r.year===q.year&&r.quarter===q.quarter).reduce((a,b)=>a+b.count,0);hdata.push([x,y,v])}));
+const heatMax=Math.max(1,...hdata.map(x=>x[2]));
+initChart('heat').setOption({
+ tooltip:{position:'top',backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#F5FBFF'},formatter:p=>'<b>'+hrows[p.data[1]].name+'</b><br/>'+D.quarters[p.data[0]].label+'<br/>候选案件记录：<b>'+fmt(p.data[2])+'条</b>'},
+ grid:{left:130,right:20,top:18,bottom:52,containLabel:true},
+ xAxis:{type:'category',data:D.quarters.map(x=>x.label),axisLabel:{color:'#BED0DE',fontSize:10,interval:0},axisLine:{lineStyle:{color:'#5C7A93'}}},
+ yAxis:{type:'category',data:hrows.map(x=>x.name),axisLabel:{color:'#C6D8E6',fontSize:10},axisLine:{lineStyle:{color:'#5C7A93'}}},
+ visualMap:{min:0,max:heatMax,calculable:true,orient:'horizontal',left:'center',bottom:0,text:['高','低'],textStyle:{color:'#BED0DE'},inRange:{color:['#304F69','#3999A0','#83EAE2']}},
+ series:[{type:'heatmap',data:hdata,label:{show:true,color:'#F6FCFF',fontSize:9,formatter:p=>p.value[2]?fmt(p.value[2]):''},itemStyle:{borderColor:'#1B3851',borderWidth:2,borderRadius:4},emphasis:{itemStyle:{shadowBlur:10,shadowColor:'rgba(0,0,0,.25)'}}}]
+});
+charts.heat.on('click',p=>{let d=hrows[p.data[1]],q=D.quarters[p.data[0]];$('district').value=d.code;$('year').value=q.year;$('quarter').value=q.quarter;filters={district:d.code,year:String(q.year),quarter:String(q.quarter)};refresh();toast(d.name+' · '+q.label)});
+buildBrands();buildCourts();buildTimeline();buildGeo();buildCaseFiles();window.addEventListener('resize',()=>Object.values(charts).forEach(c=>c.resize()));
 }
 function buildBrands(){
-$('brandBars').innerHTML=R.brands.brandRows.map((b,i)=>'<div class="brandrow"><div class="brandname">'+b.brand+'</div><div><div class="track"><div class="fill old" style="width:'+(b['2025']/31*100)+'%"></div></div><small style="color:#B5C9D9">2025 · '+b['2025']+'</small></div><div><div class="track"><div class="fill" style="width:'+(b['2026']/31*100)+'%"></div></div><small style="color:#B5C9D9">2026 Jan–Aug · '+b['2026']+'</small></div><button data-brand="'+b.brand+'">详情 ↗</button></div>').join('');
+const brandMax=Math.max(1,...R.brands.brandRows.flatMap(b=>[b['2025'],b['2026']]));
+$('brandBars').innerHTML=R.brands.brandRows.map((b,i)=>'<div class="brandrow"><div class="brandname">'+b.brand+'</div><div><div class="track"><div class="fill old" style="width:'+(b['2025']/brandMax*100)+'%"></div></div><small style="color:#B5C9D9">2025全年 · '+fmt(b['2025'])+'件</small></div><div><div class="track"><div class="fill" style="width:'+(b['2026']/brandMax*100)+'%"></div></div><small style="color:#B5C9D9">2026年1—8月 · '+fmt(b['2026'])+'件</small></div><button data-brand="'+b.brand+'">详情 ↗</button></div>').join('');
 $('brandBars').onclick=e=>{const b=R.brands.brandRows.find(x=>x.brand===e.target.dataset.brand);if(b)detail(b.brand,'品牌样本年度变化',[['2025全年',b['2025']+'件'],['2026年1—8月',b['2026']+'件'],['月均速度比',b.speedRatio===null?'2026年新进入样本':b.speedRatio+'倍'],['研究观察',b.brand==='Stüssy'?'2026年前八个月出现16件，成为该样本的新进入者':b.brand==='Louis Vuitton'?'同期案件数量下降':'该品牌在样本中的诉讼活动保持较高水平']],R.brands.url)};
-$('brandCards').innerHTML=R.brands.brandRows.map((b,i)=>'<div class="card panel"><div class="eyebrow">BRAND / 0'+(i+1)+'</div><h3>'+b.brand+'</h3><div style="font-size:25px;font-weight:800;margin:9px 0">'+b['2026']+' <small style="font-size:10px;color:#B9CCDC">vs '+b['2025']+'</small></div><div class="sub">2026 Jan–Aug vs 2025 full year</div><div class="tagrow"><span class="pill">'+(b.speedRatio===null?'New entrant':b.speedRatio.toFixed(2)+'× monthly pace')+'</span></div></div>').join('');
+$('brandCards').innerHTML=R.brands.brandRows.map((b,i)=>'<div class="card panel"><div class="eyebrow">BRAND / 0'+(i+1)+'</div><h3>'+b.brand+'</h3><div style="font-size:25px;font-weight:800;margin:9px 0">'+fmt(b['2026'])+' <small style="font-size:10px;color:#B9CCDC">vs '+fmt(b['2025'])+'</small></div><div class="sub">2025全年 vs 2026年1—8月</div><div class="tagrow"><span class="pill">'+(b.speedRatio===null?'2026年新进入样本':b.speedRatio.toFixed(2)+'倍月均速度')+'</span></div></div>').join('');
 }
 function buildCourts(){
 $('themeButtons').innerHTML=R.legalThemes.map(t=>'<button class="tab '+(t.id===activeTheme?'active':'')+'" data-theme="'+escapeHtml(t.id)+'">'+escapeHtml(t.title)+'</button>').join('');
