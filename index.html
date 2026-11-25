@@ -335,8 +335,7 @@ const geoOpt={
  yAxis:{type:'value',name:'记录数量（条）',nameTextStyle:{color:'#AFC5D7',fontSize:10},axisLabel:{color:'#BED0DE',formatter:v=>fmt(v)},splitLine:{lineStyle:{color:'#405D76',type:'dashed'}}},
  series:[
   {name:'伊利诺伊北区',type:'bar',stack:'a',data:[1156,1292],label:{show:true,position:'inside',color:'#173A4B',fontWeight:700,formatter:p=>fmt(p.value)},itemStyle:{color:'#73E7DF'}},
-  {name:'其他法院地区',type:'bar',stack:'a',data:[160,344],label:{show:true,position:'inside',color:'#30294C',fontWeight:700,formatter:p=>fmt(p.value)},itemStyle:{color:'#C5AAFF'}},
-  {name:'合计',type:'bar',stack:'a',data:geoTotals,itemStyle:{color:'transparent'},label:{show:true,position:'top',color:'#F3F8FC',fontWeight:700,formatter:p=>fmt(p.value)},tooltip:{show:false},silent:true}
+  {name:'其他法院地区',type:'bar',stack:'a',data:[160,344],label:{show:true,position:'top',color:'#F3F8FC',fontWeight:700,formatter:p=>fmt(geoTotals[p.dataIndex])},itemStyle:{color:'#C5AAFF'}}
  ]
 };initChart('geo').setOption(geoOpt);
 const nos=R.h1Comparison;
