@@ -237,8 +237,8 @@ tbody tr:hover{background:#365f78}
 <div class="geo-layout section">
 <div class="card panel"><div class="head"><div><h3>联邦司法区候选记录分布</h3><div class="sub">悬停节点查看司法区信息；点击节点或右侧排名，联动查看该司法区的季度结构。</div></div><span class="tag">13 MAPPED DISTRICTS</span></div>
 <div id="usMap" class="us-map">
-<div class="map-toolbar"><span>CONTIGUOUS UNITED STATES · DISTRICT LOCATORS</span><span>FJC / 2025 Q1 — 2026 Q2</span></div>
-<svg id="usMapSvg" class="map-svg" viewBox="0 0 1000 600" role="img" aria-label="美国本土轮廓及联邦地区法院候选记录发光节点图">
+<div class="map-toolbar"><span>美国本土示意图 · 联邦司法区代表城市定位</span><span>FJC / 2025 Q1 — 2026 Q2</span></div>
+<svg id="usMapSvg" class="map-svg" viewBox="0 0 1000 600" role="img" aria-label="美国本土轮廓及联邦司法区候选记录节点图">
 <defs>
 <linearGradient id="landGradient" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2C6C7A"/><stop offset=".48" stop-color="#315D7B"/><stop offset="1" stop-color="#3C4F72"/></linearGradient>
 <filter id="landGlow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
@@ -254,7 +254,7 @@ tbody tr:hover{background:#365f78}
 <div class="map-legend"><span><i class="legend-dot"></i> 候选司法区</span><span>○ 节点越大，候选数量越多</span><span>点击查看季度变化</span></div>
 </div>
 <div class="map-selected"><div><strong id="mapSelectedName">选择一个联邦司法区节点</strong><small id="mapSelectedMeta">查看候选记录数量与季度变化</small></div><div style="display:flex;align-items:center;gap:12px"><span class="map-selected-count" id="mapSelectedCount">—</span><button class="map-reset" id="mapClear">清除司法区筛选</button></div></div>
-<div class="sub" style="margin-top:10px">说明：轮廓为美国本土示意图；节点以司法区代表城市定位，不代表司法区边界或具体被告所在地。东北部及五大湖附近相邻节点作轻微视觉错位以避免重叠，悬停可查看地图定位城市与FJC司法区代码。阿拉斯加、夏威夷及未映射司法区代码未绘制。</div>
+<div class="sub" style="margin-top:10px">说明：轮廓为美国本土示意图；节点以司法区代表城市定位，不代表司法区边界或具体被告所在地。东北部及五大湖附近相邻节点作轻微视觉错位以避免重叠，悬停可查看地图定位城市与FJC司法区代码。阿拉斯加、夏威夷及9条未映射FJC司法区代码未绘制。</div>
 </div>
 <div class="geo-side">
 <div class="card panel"><div class="head"><div><h3>联邦司法区候选排名</h3><div class="sub">根据顶部年份、季度筛选实时变化</div></div></div><div id="districtRanking" class="rank-list"></div></div>
@@ -375,7 +375,7 @@ function buildGeo(){
  $('mapNodes').innerHTML=known.map(d=>{
   const p=projectUS(d.lng,d.lat),off=displayOffset(d.code),x=p.x+off[0],y=p.y+off[1],r=6+18*Math.sqrt(geoValue(d)/Math.max(1,...known.map(x=>geoValue(x)))),label=['7-52','11-3C','3-15','2-08'].includes(d.code),lo=labelOffset(d.code);
   const labelSvg=label?'<line class="map-label-line" x1="'+x+'" y1="'+y+'" x2="'+(x+lo[0]*.72)+'" y2="'+(y+lo[1]*.72)+'"/><text class="map-label" x="'+(x+lo[0])+'" y="'+(y+lo[1])+'">'+escapeHtml(d.name)+'</text><text class="map-label-count" data-map-count="'+escapeHtml(d.code)+'" x="'+(x+lo[0])+'" y="'+(y+lo[1]+14)+'">'+fmt(geoValue(d))+' candidates</text>':'';
-  return '<g class="map-node" data-code="'+escapeHtml(d.code)+'" tabindex="0" role="button" aria-label="'+escapeHtml(d.name)+' '+fmt(d.count)+' candidates"><circle class="node-pulse" cx="'+x+'" cy="'+y+'" r="'+(r+3)+'"/><circle class="node-halo" cx="'+x+'" cy="'+y+'" r="'+(r+9)+'"/><circle class="node-ring" cx="'+x+'" cy="'+y+'" r="'+(r+2)+'"/><circle class="node-core" cx="'+x+'" cy="'+y+'" r="'+r+'"/>'+labelSvg+'<title>'+escapeHtml(d.name)+' · '+fmt(d.count)+' FJC candidates</title></g>';
+  return '<g class="map-node" data-code="'+escapeHtml(d.code)+'" tabindex="0" role="button" aria-label="'+escapeHtml(d.name)+' '+fmt(d.count)+' 条候选记录"><circle class="node-pulse" cx="'+x+'" cy="'+y+'" r="'+(r+3)+'"/><circle class="node-halo" cx="'+x+'" cy="'+y+'" r="'+(r+9)+'"/><circle class="node-ring" cx="'+x+'" cy="'+y+'" r="'+(r+2)+'"/><circle class="node-core" cx="'+x+'" cy="'+y+'" r="'+r+'"/>'+labelSvg+'<title>'+escapeHtml(d.name)+' · '+fmt(d.count)+' 条FJC候选记录</title></g>';
  }).join('');
  $('mapNodes').onclick=e=>{const node=e.target.closest('[data-code]');if(node)selectDistrict(node.dataset.code)};
  $('mapNodes').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){const node=e.target.closest('[data-code]');if(node){e.preventDefault();selectDistrict(node.dataset.code)}}};
@@ -387,7 +387,7 @@ function buildGeo(){
  $('districtRanking').onclick=e=>{const row=e.target.closest('[data-district]');if(row)selectDistrict(row.dataset.district)};
  renderGeo();
 }
-function showGeoTooltip(code,e){const d=GEO.districts.find(x=>x.code===code);if(!d)return;const value=geoValue(d);$('geoTooltip').innerHTML='<b>'+escapeHtml(d.name)+'</b><small>'+escapeHtml(d.locator||'District locator')+' · FJC '+escapeHtml(d.code)+'</small><strong>'+fmt(value)+'</strong><span>当前筛选下候选记录 · R24总计 '+fmt(d.count)+'</span>';positionGeoTooltip(e);$('geoTooltip').classList.add('show')}
+function showGeoTooltip(code,e){const d=GEO.districts.find(x=>x.code===code);if(!d)return;const value=geoValue(d);$('geoTooltip').innerHTML='<b>'+escapeHtml(d.name)+'</b><small>'+escapeHtml(d.locator||'司法区代表城市')+' · FJC司法区代码 '+escapeHtml(d.code)+'</small><strong>'+fmt(value)+'</strong><span>当前筛选下候选记录 · R24总计 '+fmt(d.count)+'</span>';positionGeoTooltip(e);$('geoTooltip').classList.add('show')}
 function positionGeoTooltip(e){const tip=$('geoTooltip'),box=$('usMap').getBoundingClientRect();let x=e.clientX-box.left+14,y=e.clientY-box.top+14;if(x+250>box.width)x-=260;if(y+110>box.height)y-=125;tip.style.left=Math.max(8,x)+'px';tip.style.top=Math.max(42,y)+'px'}
 function renderGeo(){
  if(!GEO)return;
@@ -395,7 +395,7 @@ function renderGeo(){
  const max=Math.max(1,...rows.map(d=>d.value));
  $('districtRanking').innerHTML=rows.map((d,i)=>'<div class="rank-row '+(filters.district===d.code?'selected':'')+'" data-district="'+escapeHtml(d.code)+'"><span class="rank-num">'+String(i+1).padStart(2,'0')+'</span><div><div class="rank-name">'+escapeHtml(d.name)+'</div><div class="rank-track"><div class="rank-fill" style="width:'+(d.value/max*100)+'%"></div></div></div><span class="rank-count">'+fmt(d.value)+'</span></div>').join('');
  $('mapNodes').querySelectorAll('.map-node').forEach(node=>{const d=GEO.districts.find(x=>x.code===node.dataset.code);if(!d)return;const value=geoValue(d),r=value?6+18*Math.sqrt(value/max):4;const core=node.querySelector('.node-core'),halo=node.querySelector('.node-halo'),ring=node.querySelector('.node-ring');core.setAttribute('r',r);halo.setAttribute('r',r+9);ring.setAttribute('r',r+2);node.classList.toggle('selected',filters.district===d.code);node.style.opacity=value===0?'.2':'1';});
- $('mapNodes').querySelectorAll('[data-map-count]').forEach(label=>{const d=GEO.districts.find(x=>x.code===label.dataset.mapCount);if(d)label.textContent=fmt(geoValue(d))+' candidates';});
+ $('mapNodes').querySelectorAll('[data-map-count]').forEach(label=>{const d=GEO.districts.find(x=>x.code===label.dataset.mapCount);if(d)label.textContent=fmt(geoValue(d))+' 条候选记录';});
  const chosen=GEO.districts.find(d=>d.code===filters.district&&Number.isFinite(d.lat))||null;
  $('mapSelectedName').textContent=chosen?chosen.name:'全部已映射司法区';
  $('mapSelectedMeta').textContent=chosen?(chosen.locator+' · FJC司法区代码 '+chosen.code+' · R24总量 '+fmt(chosen.count)):'选择节点可筛选联邦司法区；当前地图显示全部13个已映射司法区';
