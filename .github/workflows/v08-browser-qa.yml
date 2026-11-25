@@ -1,0 +1,39 @@
+name: V0.8 desktop browser acceptance
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - index.html
+      - data/**
+      - scripts/v08_browser_qa.cjs
+      - .github/workflows/v08-browser-qa.yml
+  push:
+    branches: [v08-phase1-content-corrections-2026-11-25]
+    paths:
+      - index.html
+      - data/**
+      - scripts/v08_browser_qa.cjs
+      - .github/workflows/v08-browser-qa.yml
+permissions:
+  contents: read
+jobs:
+  desktop-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright
+      - run: npx playwright install --with-deps chromium
+      - name: Run local static server and desktop browser checks
+        run: |
+          python3 -m http.server 8787 --bind 127.0.0.1 > /tmp/schedule-a-http.log 2>&1 &
+          node scripts/v08_browser_qa.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v08-desktop-browser-acceptance
+          path: browser-qa-results/
+          if-no-files-found: ignore
