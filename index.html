@@ -374,11 +374,11 @@ const dopt={
 };initChart('districts').setOption(dopt);charts.districts.on('click',p=>{const d=D.districts.find(x=>x.name===p.name);if(d)selectDistrict(d.code)});
 const groupTotal=D.candidateGroups.reduce((a,x)=>a+x.count,0);
 const groupNames={'Partnership caption-prefix':'合伙企业名称线索','Individual caption-prefix':'个人姓名线索','Explicit Schedule A text':'案件文字明确提及Schedule A','Unincorporated caption-prefix':'非公司组织名称线索','Defendants identified-prefix':'被告身份标识线索','Partnership singular caption-prefix':'单数合伙企业名称线索'};
-const groupRows=D.candidateGroups.map((x,i)=>({name:groupNames[x.name]||x.name,value:x.count,itemStyle:{color:pal[i]}}));
+const groupRows=D.candidateGroups.map((x,i)=>({name:groupNames[x.name]||x.name,value:x.count,itemStyle:{color:pal[i]}})).reverse();
 initChart('groups').setOption({
  grid:{left:150,right:48,top:18,bottom:30,containLabel:true},
  tooltip:{trigger:'axis',axisPointer:{type:'shadow'},backgroundColor:'#294B65',borderColor:'#587892',textStyle:{color:'#fff'},formatter:p=>'<b>'+p[0].name+'</b><br/>记录数量：'+fmt(p[0].value)+'条<br/>占候选记录：'+(p[0].value/groupTotal*100).toFixed(1)+'%'},
- xAxis:{type:'value',name:'记录数量（条）',nameTextStyle:{color:'#AFC5D7',fontSize:9},axisLabel:{color:'#BED0DE',formatter:v=>fmt(v)},splitLine:{lineStyle:{color:'#405D76',type:'dashed'}}},
+ xAxis:{type:'value',name:'记录数量（条）',nameTextStyle:{color:'#AFC5D7',fontSize:9},interval:1000,axisLabel:{color:'#BED0DE',formatter:v=>v===0?'0':(v/1000)+'千'},splitLine:{lineStyle:{color:'#405D76',type:'dashed'}}},
  yAxis:{type:'category',data:groupRows.map(x=>x.name),axisLabel:{color:'#C6D8E6',fontSize:9},axisLine:{lineStyle:{color:'#5C7A93'}}},
  series:[{type:'bar',data:groupRows,barMaxWidth:24,itemStyle:{borderRadius:6},label:{show:true,position:'right',color:'#EFF6FC',fontSize:9,formatter:p=>fmt(p.value)}}]
 });
