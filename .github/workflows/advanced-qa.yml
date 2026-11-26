@@ -1,7 +1,7 @@
 name: Advanced dashboard desktop acceptance
 on:
   push:
-    branches: [work/formal-industry-warning-20261126]
+    branches: [work/restore-v08-colors-20261126]
 permissions:
   contents: read
 jobs:
