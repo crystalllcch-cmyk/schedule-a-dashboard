@@ -28,17 +28,17 @@ try{
  await p.locator('#serviceReset').click();check('service reset',await p.locator('#serviceState').inputValue().then(v=>v==='all'));
  await p.locator('#serviceYear').selectOption('2025');check('year comparison changes',await p.evaluate(()=>charts.serviceMonthly.getOption().series[0].name==='2024'));
  await p.locator('#serviceReset').click();
- await p.locator('[data-view="geography"]').click();await p.waitForTimeout(250);
+ await p.locator('[data-module="structure"]').click();await p.locator('[data-view="geography"]').click();await p.waitForTimeout(250);
  check('map visible',await p.locator('#usMap').isVisible());check('secondary filters visible on map',await p.locator('.filters').isVisible());
  await p.locator('#year').selectOption('2026');check('FJC unavailable quarters disabled',await p.locator('#quarter option[value="3"]').isDisabled());
  await p.locator('#excludeNDIL').check();check('exclude NDIL reconciles',await p.locator('#district option[value="7-52"]').isDisabled());
  await p.screenshot({path:out+'/map.png',fullPage:true});await p.locator('#reset').click();
- await p.locator('[data-view="casefiles"]').click();await p.waitForTimeout(250);check('archive count actual',await p.locator('#caseResultCount').innerText().then(t=>t.includes('31 / 31')));
+ await p.locator('[data-module="legal"]').click();await p.locator('[data-view="casefiles"]').click();await p.waitForTimeout(250);check('archive count actual',await p.locator('#caseResultCount').innerText().then(t=>t.includes('31 / 31')));
  await p.locator('#caseSearch').fill('Dior');check('archive search',await p.locator('#caseResultCount').innerText().then(t=>t.includes('1 / 31')));
  await p.locator('.case-bubble-node[data-case-id="dior-kocoras"]').click();check('new Dior dossier opens',await p.locator('#dtitle').innerText().then(t=>t.includes('Dior')));await p.keyboard.press('Escape');await p.locator('#resetCases').click();
  await p.screenshot({path:out+'/archive.png',fullPage:true});
- await p.locator('[data-view="brands"]').click();check('monthly brand units',await p.locator('#brandBars').innerText().then(t=>t.includes('件/月')));
- await p.locator('[data-view="courts"]').click();check('seven legal themes',await p.locator('#themeButtons [data-r-theme]').count().then(n=>n===7));
+ await p.locator('[data-module="audit"]').click();await p.locator('[data-view="brands"]').click();check('monthly brand units',await p.locator('#brandBars').innerText().then(t=>t.includes('件/月')));
+ await p.locator('[data-module="legal"]').click();await p.locator('[data-view="courts"]').click();check('seven legal themes',await p.locator('#themeButtons [data-r-theme]').count().then(n=>n===7));
  check('no horizontal overflow',await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
  check('no JavaScript exceptions',errors.length===0);
 }catch(e){errors.push(e.stack);await p.screenshot({path:out+'/failure.png',fullPage:true});}
