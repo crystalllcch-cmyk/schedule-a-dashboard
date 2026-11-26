@@ -972,6 +972,146 @@
           }
         ]
       }
+    },
+    {
+      "id": "goodegg",
+      "name": "GoodEgg Stuff LLC v. Schedule A Defendants",
+      "court": "W.D. Texas · Pitman",
+      "date": "2026-08-31",
+      "citation": "6:25-cv-00339-RP, Dkt. 67",
+      "issue": "实用专利案件中，49名Schedule A被告是否符合35 U.S.C. §299及Rule 20合并要求？",
+      "result": "缺席判决阶段，法院将49名被告无偏见驳回，仅对Ahomi店铺保留永久禁令；原告随后撤回对Ahomi的损害赔偿请求，案件于2026-09-02结案。",
+      "effect": "地区法院对专利案件被告合并的个案裁定；可用于说明同一专利侵权指控不足以自动支持大规模合并，但不应直接推广到商标或版权案件。",
+      "url": "https://docs.justia.com/cases/federal/district-courts/texas/txwdce/6%3A2025cv00339/1172858000/67",
+      "level": "法院缺席判决命令全文副本",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "被告合并",
+            "text": "49名被告是否符合35 U.S.C. §299及Rule 20规定的共同交易或系列交易要求？"
+          }
+        ],
+        "result": [
+          {
+            "label": "被告范围",
+            "text": "法院将49名被告无偏见驳回，仅对Ahomi店铺保留永久禁令。"
+          },
+          {
+            "label": "损害赔偿",
+            "text": "原告随后撤回对Ahomi的损害赔偿请求，案件于2026-09-02结案。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "适用范围",
+            "text": "这是W.D. Texas地区法院在实用专利案件中的个案裁定。"
+          },
+          {
+            "label": "规则意义",
+            "text": "相同专利及相似侵权指控不足以当然支持大规模被告合并；但该案不应直接推广到商标或版权案件。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "steel-city",
+      "name": "Steel City Enterprises, Inc. v. Schedule A Defendants",
+      "court": "W.D. Texas · Schydlower",
+      "date": "2026-03-28",
+      "citation": "6:25-cv-00335-LS, Dkt. 12",
+      "issue": "原告尚未申请传票、完成送达或开展早期取证，能否对64名身份和联系信息不明的境外被告整体冻结资产并概括授权电子送达？",
+      "result": "法院拒绝密封状态下的整体资产冻结和概括电子送达请求；指出原告未申请传票、未完成送达、未寻求早期取证，且冻结请求可能导致平台错误冻结无辜第三方资金。",
+      "effect": "W.D. Texas地区法院个案裁定；可用于分析资产冻结与电子送达的程序门槛，不是全院或第五巡回统一规则。",
+      "url": "https://www.govinfo.gov/content/pkg/USCOURTS-txwd-6_25-cv-00335/pdf/USCOURTS-txwd-6_25-cv-00335-0.pdf",
+      "level": "GovInfo官方法院裁定PDF",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "资产冻结",
+            "text": "未查明64名境外被告身份及资产关联时，能否在密封和未送达状态下整体冻结资金？"
+          },
+          {
+            "label": "境外送达",
+            "text": "未确认被告国籍、地址及送达方式前，能否概括授权电子送达？"
+          }
+        ],
+        "result": [
+          {
+            "label": "资产限制",
+            "text": "法院拒绝整体冻结，指出请求主要针对实际或法定损害，且可能使平台错误冻结无辜主体资金。"
+          },
+          {
+            "label": "送达",
+            "text": "法院指出原告未申请传票、未完成送达、未开展早期取证，无法进行逐被告、逐国家的送达分析。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "裁判性质",
+            "text": "W.D. Texas地区法院个案裁定。"
+          },
+          {
+            "label": "适用边界",
+            "text": "不能直接称为W.D. Texas全院或第五巡回统一规则。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "coules",
+      "name": "Debra Coules v. Schedule A Defendants",
+      "court": "W.D. Pennsylvania · Bissoon",
+      "date": "2026-08-27",
+      "citation": "2:26-cv-00049, Dkt. 29",
+      "issue": "版权Schedule A案件中，法院能否依据宾夕法尼亚州法及Rule 64作出判前资产限制，并将相关命令延伸至第三方平台？",
+      "result": "法院在无人提出反对的PI听证后维持TRO、批准PI及资产限制，$5,000保证金留存；命令同时明确，未具名潜在侵权者仅可被要求下架listing，不能被冻结资产或被判决。",
+      "effect": "W.D. Pennsylvania地区法院在无人反对的版权案件中的PI裁定；展示州法及Rule 64可能影响判前资产限制，但不构成经平台或被告对抗审查后的普遍规则。",
+      "url": "https://law.counselstack.com/opinion/debra-coules-v-schedule-a-defendants-pawd-2026",
+      "level": "法院PI命令全文转录副本",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "判前资产限制",
+            "text": "版权案件中，宾夕法尼亚州法及Rule 64是否支持判前资产限制？"
+          },
+          {
+            "label": "第三方平台",
+            "text": "平台是否可被命令冻结具名被告资金、提供资料或停止服务？"
+          },
+          {
+            "label": "未具名主体",
+            "text": "对未列入Schedule A的潜在侵权者，禁令可以延伸到什么范围？"
+          }
+        ],
+        "result": [
+          {
+            "label": "资产限制",
+            "text": "法院依据宾夕法尼亚州法及Rule 64，并结合原告请求衡平性救济的理由，批准资产限制；$5,000保证金留存。"
+          },
+          {
+            "label": "平台与未具名主体",
+            "text": "PI命令延伸至已收到通知的相关平台和金融机构；但未具名潜在侵权者仅可被要求下架listing，不能冻结其资产或对其作出判决。"
+          },
+          {
+            "label": "对抗情况",
+            "text": "无人提交反对意见，第三方服务商及金融机构亦未出庭。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "裁判性质",
+            "text": "W.D. Pennsylvania地区法院在无人反对的版权案件中的PI裁定。"
+          },
+          {
+            "label": "适用边界",
+            "text": "该命令显示州法及Rule 64可能影响资产限制，但不能替代对Rule 65(d)(2)及第三方平台实际参与关系的分析。"
+          },
+          {
+            "label": "对抗程度",
+            "text": "无人反对的PI命令不能视为经平台或被告对抗审查后确立的普遍规则。"
+          }
+        ]
+      }
     }
   ],
   "updated": "2026-11-26"
