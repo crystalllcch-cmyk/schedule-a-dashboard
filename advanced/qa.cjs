@@ -1,7 +1,7 @@
 const {chromium}=require('playwright'),fs=require('fs'),assert=require('assert'),crypto=require('crypto');
 (async()=>{const out='advanced/qa-results';fs.mkdirSync(out,{recursive:true});const b=await chromium.launch();const p=await b.newPage({viewport:{width:1440,height:1000}}),checks=[],errors=[];p.on('pageerror',e=>errors.push(e.message));const ok=(name,value)=>{checks.push({name,passed:!!value});assert(value,name)};const snap=async name=>{await p.waitForTimeout(450);await p.screenshot({path:out+'/'+name+'.png',fullPage:true})};try{
 await p.goto('http://127.0.0.1:8787/advanced/',{waitUntil:'networkidle'});await p.waitForTimeout(500);
-ok('six ordered navigation pages',await p.locator('#nav [data-view]').evaluateAll(es=>es.map(e=>e.dataset.view).join(',')).then(s=>s==='overview,activity,geography,courts,brands,casefiles'));
+ok('original V08 root palette',await p.evaluate(()=>{const s=getComputedStyle(document.documentElement);return s.getPropertyValue('--bg').trim().toLowerCase()==='#183149'&&s.getPropertyValue('--cyan').trim().toLowerCase()==='#73e7df'&&s.getPropertyValue('--text').trim().toLowerCase()==='#f5faff'}));ok('light theme override removed',await p.locator('#v08-brightness').count()===0);ok('light column labels on dark panels',await p.evaluate(()=>charts.quarters.getOption().series.every(s=>s.label.color==='#F5FAFF')));ok('six ordered navigation pages',await p.locator('#nav [data-view]').evaluateAll(es=>es.map(e=>e.dataset.view).join(',')).then(s=>s==='overview,activity,geography,courts,brands,casefiles'));
 ok('six pages without explorer',await p.locator('section.view').count()===6&&await p.locator('#view-explorer').count()===0);
 ok('global filter bar and controls removed',await p.locator('.filters,#year,#quarter,#district,#reset,#filterSummary').count()===0);
 ok('four same-source KPI labels',await p.locator('.kpi label').allTextContents().then(es=>es.join(',')==='联邦监测案件总量,今年上半年同比,版权类案件同比,伊利诺伊北区占比'));
@@ -12,7 +12,7 @@ ok('plain-language source transition',await p.locator('.data-transition').innerT
 ok('source datasets unchanged',await p.evaluate(()=>JSON.stringify(originalData)).then(s=>crypto.createHash('sha256').update(s).digest('hex')==='f36fb790a284d5885b5ea19784e8b447a02a501fe0b9194b7c9d9855b4c228c0'));
 ok('all seven court topic contents unchanged',await p.evaluate(()=>JSON.stringify(DEPTH)).then(s=>crypto.createHash('sha256').update(s).digest('hex')==='e2e298d38314e0e9db70f2c75efb264ce3739b887701bde5ab795e6137e0869c'));
 ok('annual chart values retained',await p.evaluate(()=>charts.history.getOption().series[0].data.slice(0,4).join(',')==='612,801,1319,2547'&&charts.history.getOption().series[2].data[4]===2969));
-ok('teal and brown legend retained',await p.evaluate(()=>charts.history.getOption().series[0].itemStyle.color==='#409893'&&charts.history.getOption().series[2].itemStyle.color==='#bd8d48'));
+ok('teal and brown legend retained',await p.evaluate(()=>charts.history.getOption().series[0].itemStyle.color==='#73E7DF'&&charts.history.getOption().series[2].itemStyle.color==='#FFD38A'));
 ok('quarter labels retained',await p.evaluate(()=>charts.quarters.getOption().series.every(s=>s.label.show)));
 await snap('overview');await p.locator('[data-view="activity"]').click();ok('regional split interpretation',await p.locator('#publicNote').innerText().then(t=>t.includes('252')&&t.includes('107')&&t.includes('佛州')));
 ok('NOS labels retained',await p.evaluate(()=>charts.nos.getOption().series.every(s=>s.label.show)));
