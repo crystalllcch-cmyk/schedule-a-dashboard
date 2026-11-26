@@ -1,0 +1,26 @@
+name: Advanced dashboard desktop acceptance
+on:
+  push:
+    branches: [work/advanced-integrated-2026-11-26]
+permissions:
+  contents: read
+jobs:
+  desktop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright
+      - run: npx playwright install --with-deps chromium
+      - name: Desktop acceptance
+        run: |
+          python3 -m http.server 8787 > /tmp/advanced-http.log 2>&1 &
+          node advanced/qa.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: advanced-desktop-acceptance
+          path: advanced/qa-results/
