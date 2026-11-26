@@ -45,7 +45,9 @@
   "historicalSource": {
     "name": "ABTL Orange County Report, Spring 2026, Figure 1, p.10; data attributed to Lex Machina",
     "url": "https://www.allenmatkins.com/a/web/5jtKChmncRtSMrDQtfg52x/brKH8S/2026-volume-1.pdf",
-    "cutoff": "2025-11-11"
+    "cutoff": "2025-11-11",
+    "chartPeriod": "2016-01-01 through 2025-11-11",
+    "note": "ABTL Orange County Report, Spring 2026, Figure 1. Counts are attributed by the report to Lex Machina. The 2025 figure is partial through November 11, not a full calendar year."
   },
   "h1Comparison": {
     "2025": {
@@ -111,31 +113,136 @@
         "2025": 16,
         "2026": 31,
         "brand": "Dior",
-        "speedRatio": 2.91
+        "speedRatio": 2.91,
+        "annual": {
+          "2021": 8,
+          "2022": 8,
+          "2023": 10,
+          "2024": 6,
+          "2025": 16,
+          "2026": 31
+        },
+        "monthlyRates": [
+          0.667,
+          0.667,
+          0.833,
+          0.5,
+          1.333,
+          3.875
+        ],
+        "totalCases": 79,
+        "shareOfSample": 38.9,
+        "shareOf2026": 41.9,
+        "monthlyChange": 2.54,
+        "strategy": "样本中最活跃的Schedule A原告。TFL识别其79件Schedule A案件；同期具名零售商等传统商标诉讼相对较少，Schedule A在其联邦商标执法组合中占据突出位置。"
       },
       {
         "2025": 11,
         "2026": 22,
         "brand": "Chrome Hearts",
-        "speedRatio": 3
+        "speedRatio": 3,
+        "annual": {
+          "2021": 3,
+          "2022": 4,
+          "2023": 7,
+          "2024": 10,
+          "2025": 11,
+          "2026": 22
+        },
+        "monthlyRates": [
+          0.25,
+          0.333,
+          0.583,
+          0.833,
+          0.917,
+          2.75
+        ],
+        "totalCases": 57,
+        "shareOfSample": 28.1,
+        "shareOf2026": 29.7,
+        "monthlyChange": 1.83,
+        "strategy": "双轨并行。除57件Schedule A案件外，还持续针对具名零售商、竞争者及其他商业主体提起传统商标诉讼，2026年两类执法活动均保持活跃。"
       },
       {
         "2025": 5,
         "2026": 3,
         "brand": "Louis Vuitton",
-        "speedRatio": 0.9
+        "speedRatio": 0.9,
+        "annual": {
+          "2021": 3,
+          "2022": 7,
+          "2023": 12,
+          "2024": 8,
+          "2025": 5,
+          "2026": 3
+        },
+        "monthlyRates": [
+          0.25,
+          0.583,
+          1,
+          0.667,
+          0.417,
+          0.375
+        ],
+        "totalCases": 38,
+        "shareOfSample": 18.7,
+        "shareOf2026": 4.1,
+        "monthlyChange": -0.04,
+        "strategy": "相对均衡。Schedule A是其反假冒和商标维权方式之一，同时持续采用针对具名网站、零售商和商业主体的其他诉讼方式；2023年达到样本峰值后回落。"
       },
       {
         "2025": 0,
         "2026": 16,
         "brand": "Stüssy",
-        "speedRatio": null
+        "speedRatio": null,
+        "annual": {
+          "2021": 0,
+          "2022": 0,
+          "2023": 0,
+          "2024": 0,
+          "2025": 0,
+          "2026": 16
+        },
+        "monthlyRates": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          2
+        ],
+        "totalCases": 16,
+        "shareOfSample": 7.9,
+        "shareOf2026": 21.6,
+        "monthlyChange": 2,
+        "strategy": "2026年突然进入Schedule A样本。2021—2025年未识别到符合标准的Schedule A案件，2026年前八个月的16件全部位于N.D. Illinois。"
       },
       {
         "2025": 3,
         "2026": 2,
         "brand": "Gucci",
-        "speedRatio": 1
+        "speedRatio": 1,
+        "annual": {
+          "2021": 1,
+          "2022": 2,
+          "2023": 4,
+          "2024": 1,
+          "2025": 3,
+          "2026": 2
+        },
+        "monthlyRates": [
+          0.083,
+          0.167,
+          0.333,
+          0.083,
+          0.25,
+          0.25
+        ],
+        "totalCases": 13,
+        "shareOfSample": 6.4,
+        "shareOf2026": 2.7,
+        "monthlyChange": 0,
+        "strategy": "相对选择性使用。Schedule A数量明显低于Dior、Chrome Hearts和Louis Vuitton，并与针对具名网站、零售商及商业主体的其他维权方式并行。"
       }
     ],
     "monthlyRate": {
@@ -143,38 +250,79 @@
       "2026JanAug": 9.25,
       "ratio": 3.17
     },
-    "concentratedBrandsShare": 93.2
+    "concentratedBrandsShare": 93.2,
+    "periods": [
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025",
+      "2026*"
+    ],
+    "studyPeriod": "2021-01-01 to 2026-08-31",
+    "scope": "TFL reviewed federal trademark actions filed by Dior, Chrome Hearts, Louis Vuitton, Stüssy and Gucci from 2021-01-01 through 2026-08-31. A case was counted as Schedule A where the caption or docket expressly identified a Schedule A, or the court expressly treated it as such. Other forms of litigation are described, not presented as an exhaustive quantitative breakdown of each brand's full federal litigation portfolio.",
+    "trendAnalysis": [
+      {
+        "label": "整体加速",
+        "text": "五品牌样本2026年1—8月记录74件，2025全年35件；月均记录量由2.92件升至9.25件，约为3.17倍。"
+      },
+      {
+        "label": "增量来源",
+        "text": "月均净增主要来自Dior（+2.54件/月）、Chrome Hearts（+1.83件/月）和Stüssy（+2.00件/月）；Louis Vuitton约减少0.04件/月，Gucci持平。"
+      },
+      {
+        "label": "品牌分化",
+        "text": "Dior与Chrome Hearts延续并加快既有Schedule A活动，Stüssy在2026年突然进入样本；Louis Vuitton回落，Gucci维持低位。2026年前八个月前三品牌合计69件，占同期五品牌样本的93.2%。"
+      }
+    ]
   },
   "legalThemes": [
     {
       "id": "service",
       "title": "境外送达",
-      "summary": "Smart Study 与 Kangol 将海牙公约适用、中国对第10条的反对与地址查找勤勉度纳入电子送达审查。",
-      "business": "先核查被告实体地址是否已知或可合理查明，再评估替代送达路径；不能把 Rule 4(f)(3) 当作绕过公约的通用方案。",
+      "summary": "Smart Study与Kangol明确：海牙公约适用时其规定的送达方式构成封闭范围，公约未授权邮件送达；中国对第10条邮寄渠道提出反对。地址未知例外须结合原告是否合理勤勉查找地址判断。Dior 1:26-cv-10747显示，概括性调查声明不足，但逐被告补充调查后电子送达仍可能获准。",
+      "business": "先查明并核实被告实体地址，保存每一步查找记录；只有在地址确实未知且勤勉调查有据时，才进一步分析海牙公约第1条是否不适用。",
       "cases": [
         "smart-study",
         "kangol",
-        "edtx-liu"
+        "edtx-liu",
+        "dior-kocoras"
       ],
       "analysisPoints": {
         "summary": [
           {
             "label": "Smart Study",
-            "text": "海牙公约适用且中国对第10条方式提出反对时，不能将Rule 4(f)(3)作为邮件送达的通用绕行路径。"
+            "text": "第二巡回认定海牙公约适用时，公约未授权邮件送达；中国对第10条邮寄渠道提出反对，一般紧急情况不能绕过公约。"
           },
           {
             "label": "Kangol",
-            "text": "通过邮件发送诉讼文件网页链接仍属于司法文书送达；法院还会审查原告查找实体地址的勤勉程度。"
+            "text": "邮件附网页链接仍属于司法文书送达；第七巡回发回要求地区法院判断被告地址是否未知及海牙公约是否适用。"
+          },
+          {
+            "label": "地址调查",
+            "text": "地址未知是海牙公约第1条的适用门槛；原告须合理勤勉查找并核实地址，不能仅以卖家来自中国或平台信息不完整就直接认定地址未知。"
+          },
+          {
+            "label": "地区法院应用 · Dior 1:26-cv-10747",
+            "text": "Kocoras法官先拒绝概括性地址调查声明；原告逐被告补充调查后，电子送达申请获准。地址未知例外并非不存在，但须有具体记录。"
           }
         ],
         "business": [
           {
             "label": "先查地址",
-            "text": "先核查被告实体地址是否已知或可合理查明，再评估替代送达路径。"
+            "text": "先查明并核实被告实体地址，保存公司登记、店铺信息、供应链及其他地址查找记录。"
           },
           {
             "label": "不要绕行",
-            "text": "不能把Rule 4(f)(3)当作绕过海牙公约的通用方案。"
+            "text": "海牙公约适用时，不要把Rule 4(f)(3)或一般紧急情况当作绕过公约的通用路径；中国对第10条邮寄渠道提出反对，邮件也不属于公约授权的送达方式。"
+          },
+          {
+            "label": "分清实际知悉与有效送达",
+            "text": "被告知道诉讼或参与和解，不当然等于完成有效送达；反过来，积极进行实体诉讼也可能影响其送达异议是否被放弃。"
+          },
+          {
+            "label": "逐被告记录",
+            "text": "如果主张地址未知，应保存每名被告的地址线索、搜索步骤、进一步核查及排除结果；仅称调查机构无法确认地址不足。"
           }
         ]
       }
@@ -182,8 +330,8 @@
     {
       "id": "jurisdiction",
       "title": "个人管辖权",
-      "summary": "Liu v. Monthly 要求针对每名被告证明其自身与法院地的联系；店铺可访问、开放配送或未完成结账页面不能单独证明实际销售。",
-      "business": "逐被告核对订单、付款、发货和交付证据；不能把一个店铺的交易自动归属于其他被告。",
+      "summary": "Liu v. Monthly要求逐被告证明其自身与法院地的联系；完成销售可支持特定管辖权，但店铺可访问、开放配送或未完成结账页面不足以证明实际销售。",
+      "business": "逐被告核对订单、付款、发货和交付证据；一名卖家的交易不能自动归属于其他店铺、关联企业或同一Schedule A中的其他被告。",
       "cases": [
         "liu-monthly",
         "intercontinental",
@@ -193,22 +341,30 @@
       "analysisPoints": {
         "summary": [
           {
-            "label": "逐被告证明",
-            "text": "Liu v. Monthly要求针对每名被告证明其自身与法院地的联系。"
+            "label": "上诉规则",
+            "text": "第七巡回Liu v. Monthly要求每名被告分别具有与法院地相关的实际联系；网站可访问和开放配送不够。"
           },
           {
-            "label": "销售证据",
-            "text": "店铺可访问、开放配送或未完成结账页面，不能单独证明实际销售。"
+            "label": "完成销售",
+            "text": "法院在Schedule A案件中曾以完成的论坛州销售支持特定个人管辖权，但须证明该销售属于具体被告。"
+          },
+          {
+            "label": "地区法院适用",
+            "text": "Intercontinental与Hublot说明结账截图、报价沟通和配送意愿不能替代完成销售证据；E.D. Texas Liu则只对有一笔完成Amazon订单的店铺经营者暂时假定管辖权基础。"
           }
         ],
         "business": [
           {
-            "label": "逐项核对",
-            "text": "逐被告核对订单、付款、发货和交付证据。"
+            "label": "逐被告核对",
+            "text": "将每个店铺、运营主体、订单、付款、发货和交付证据一一对应。"
           },
           {
             "label": "避免归属推定",
-            "text": "不能把一个店铺的交易自动归属于其他被告。"
+            "text": "同一品牌、关联企业、共同邮箱或相似商品，不会自动把一个店铺的州内销售归属于其他被告。"
+          },
+          {
+            "label": "不要扩大测试购规则",
+            "text": "Liu v. Monthly没有制定全国所有案件必须逐店测试购买的固定规则；关键是能否以具体事实证明该被告与法院地的联系。"
           }
         ]
       }
@@ -216,8 +372,8 @@
     {
       "id": "injunction",
       "title": "TRO与PI分别审查",
-      "summary": "取得TRO不意味着PI必然获准；法院仍会审查侵权证据、管辖权及救济范围。",
-      "business": "分别核对TRO与PI阶段证据，关注设计整体视觉差异、真实销售、被告个体联系和冻结资产范围。",
+      "summary": "TRO是单方、临时救济；PI阶段仍须独立证明胜诉可能性及其他要件。Duoleduo案中，原告已取得TRO且存在完成销售，PI仍因初始动议缺乏具体专利侵权分析而被拒。",
+      "business": "分别准备TRO与PI证据；在初始PI动议中提交逐项权利要求或设计整体视觉比较，不能指望在reply中补交核心论证。",
       "cases": [
         "duoleduo",
         "nike-schelp",
@@ -227,21 +383,29 @@
         "summary": [
           {
             "label": "TRO不等于PI",
-            "text": "取得TRO不意味着PI必然获准。"
+            "text": "单方TRO是在被告尚未充分反驳时作出的临时决定，不能替代对抗式PI审查。"
           },
           {
-            "label": "仍需审查",
-            "text": "法院仍会审查侵权证据、个人管辖权及救济范围。"
+            "label": "Duoleduo",
+            "text": "法院拒绝PI的核心原因是原告在初始动议中仅作结论性陈述，直到reply才提出实质侵权论证；法院认定新论点被放弃，即使考虑仍不足以证明设计专利侵权可能性。"
+          },
+          {
+            "label": "分阶段与分被告",
+            "text": "Milwaukee案显示PI结果可按被告分别处理；对出庭被告拒绝PI，不代表其余被告自动获得相同结果。"
           }
         ],
         "business": [
           {
-            "label": "分阶段核对",
-            "text": "分别核对TRO与PI阶段的证据，不将单方TRO视为后续救济的当然依据。"
+            "label": "初始动议要完整",
+            "text": "在PI初始动议中提交具体侵权分析、适用法律和证据对应关系，不要依赖reply补救。"
           },
           {
-            "label": "重点证据",
-            "text": "关注设计整体视觉差异、真实销售、被告个体联系和冻结资产范围。"
+            "label": "设计专利",
+            "text": "外观设计专利应围绕权利要求所主张的整体视觉设计进行具体比较，并区分虚线不构成权利要求设计的部分。"
+          },
+          {
+            "label": "逐被告记录",
+            "text": "分别记录哪些被告出庭、反对、被拒PI或获准PI，避免把整案压缩成单一结果。"
           }
         ]
       }
@@ -249,33 +413,62 @@
     {
       "id": "judge-variance",
       "title": "法官尺度差异",
-      "summary": "同一地区法院的不同法官可能对相近申请作出不同处理，案件事实、程序阶段与证据质量均会影响结果。",
-      "business": "研究应落到具体法官、具体案卷和具体动议，不能用单一地区的个案代表全院。",
+      "summary": "同一地区法院不同法官的Standing Order和个案处理可能不同。Gettleman要求早期提交Rule 20及逐被告管辖权备忘录；Kendall的2026-08-11版本规定每名被告推定保证金10,000美元，并对近期销售、合并、送达、平台及侵权分析提出具体要求。Alonso法官的官方页面及Rowland法官2026-01-08 minute entry则采用每名被告1,000美元的保证金。保证金必须按分配法官及其适用版本核对，不能概括为全院统一标准。",
+      "business": "确认案件分配法官后，直接核对该法官当前Standing Order及后续修订；不同法官的保证金、举证和拟议命令要求可能不同。Kendall 2026-08-11版本为每名被告推定10,000美元，Alonso与Rowland的公开规则样本为1,000美元。",
       "cases": [
         "nike-schelp",
         "nike-lanahan",
         "gettleman-order",
-        "kendall-order"
+        "kendall-order",
+        "advance-magazine"
       ],
       "analysisPoints": {
         "summary": [
           {
-            "label": "同院不同法官",
-            "text": "同一地区法院的不同法官可能对相近申请作出不同处理。"
+            "label": "Gettleman · 2026-04-04",
+            "text": "起诉后两周内提交不超过10页备忘录，说明Rule 20被告合并及法院对每名被告的个人管辖权；涉及境外被告的缺席判决申请前或同时，另提交不超过5页的地址已知情况及查找努力说明。"
           },
           {
-            "label": "个案因素",
-            "text": "案件事实、程序阶段与证据质量均会影响结果。"
+            "label": "Kendall · 2026-08-11",
+            "text": "要求单一宣誓声明逐被告说明近两个月销售或要约、即时损害、事实联系及不通知风险；同时规定Rule 20、个人管辖权、海牙送达、平台约束、实用专利资产限制、保证金、缺席判决及具体侵权分析。"
+          },
+          {
+            "label": "适用范围",
+            "text": "两份命令均为法官个人Standing Order，不是N.D. Illinois全院规则。"
+          },
+          {
+            "label": "Kendall · 2026-08-11",
+            "text": "正式日期版本规定推定每名被告10,000美元；2026-11-10 Advance Magazine案亦按30名被告对应300,000美元计算。"
+          },
+          {
+            "label": "Alonso · 官方法官页面",
+            "text": "Schedule A页面规定推定每名被告1,000美元。"
+          },
+          {
+            "label": "Rowland · 2026-01-08",
+            "text": "Gimme Golf Tool案minute entry要求每名被告1,000美元，并将Schedule A被告数量限制为200名。"
+          },
+          {
+            "label": "版本冲突提醒",
+            "text": "Kendall法官页面仍可访问的通用PDF标注2026-06-30，内容为每名被告1,000美元；后续2026-08-11正式版本改为10,000美元，11月10日裁定再次按10,000美元适用。不得把较早PDF当作后续案件的现行版本。"
           }
         ],
         "business": [
           {
-            "label": "具体到法官",
-            "text": "研究应落到具体法官、具体案卷和具体动议。"
+            "label": "先确认分配法官",
+            "text": "案件立案后先确认具体分配法官，并读取其现行Standing Order及后续修改。"
           },
           {
-            "label": "控制外推",
-            "text": "不能用单一地区的个案代表全院。"
+            "label": "提前准备材料",
+            "text": "Gettleman案件提前准备逐被告合并和管辖权备忘录；Kendall案件准备单一宣誓声明、近期销售证据、地址调查记录、侵权比对及保证金。"
+          },
+          {
+            "label": "避免外推",
+            "text": "不同法官的要求不能互相替代，也不能将个人规则描述为N.D. Illinois全院统一标准。"
+          },
+          {
+            "label": "核对命令版本",
+            "text": "不要仅凭法官主页上的通用文件链接引用保证金；应核对文件日期、后续版本及最新个案是否已实际适用。"
           }
         ]
       }
@@ -307,6 +500,111 @@
           {
             "label": "区分裁判性质",
             "text": "区分程序驳回、TRO拒绝与实体败诉。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "joinder",
+      "title": "被告合并",
+      "summary": "Rule 20要求被告之间存在同一交易或系列交易及共同法律或事实问题；专利案件还受35 U.S.C. §299限制。共同侵犯同一权利或商品相似，并不当然足以把大量卖家合并起诉。Advance Magazine 1:26-cv-11858进一步显示，30名被告、4个平台及17个商标的批量组合，仍不能替代被告之间的具体交易联系及逐被告侵权论证。",
+      "business": "逐被告整理共同经营、货源、履约、账号控制及交易关联证据；同时单独证明个人管辖权，不能把被告合并与管辖权混为一谈。",
+      "cases": [
+        "edtx-liu",
+        "goodegg",
+        "gettleman-order",
+        "kendall-order",
+        "advance-magazine"
+      ],
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "Rule 20",
+            "text": "被告合并需要同一交易或系列交易，以及共同法律或事实问题；仅有相同侵权主张并不足够。"
+          },
+          {
+            "label": "专利案件",
+            "text": "35 U.S.C. §299进一步限制专利案件中的被告合并，不能仅因多人被指控侵犯同一专利就合并。"
+          },
+          {
+            "label": "个案差异",
+            "text": "GoodEgg案最终将49名被告无偏见驳回，仅对Ahomi店铺保留永久禁令；E.D. Texas Liu则基于共同经营证据，在当时记录下允许五名被告继续合并审理。"
+          },
+          {
+            "label": "近期适用 · Advance Magazine",
+            "text": "Kendall法官拒绝将30名销售不同产品、分布于4个平台的被告仅因共同涉及17个商标而合并；原告未提供被告之间的具体交易联系，也未逐被告分析侵权。"
+          }
+        ],
+        "business": [
+          {
+            "label": "建立被告关系证据",
+            "text": "逐项收集共同运营主体、共享身份信息、货源、履约、控制关系及协同行为证据。"
+          },
+          {
+            "label": "合并不等于管辖权",
+            "text": "即使Rule 20或§299合并成立，也仍须对每名被告分别证明个人管辖权。"
+          },
+          {
+            "label": "区分不同裁判",
+            "text": "分别记录法院是否准许合并、是否驳回部分被告，以及最终禁令和损害赔偿覆盖哪些被告。"
+          },
+          {
+            "label": "批量列名不能代替关联证据",
+            "text": "被告数量、平台数量或商标数量本身不构成共同交易证据；必须具体说明被告之间的联系。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "asset-platform",
+      "title": "资产冻结与平台约束",
+      "summary": "Schedule A单方资产冻结并非当然救济。法院会分别审查冻结的法律基础、资产与涉案行为的联系、Rule 65通知要求，以及平台是否属于Rule 65(d)(2)可约束的主体。",
+      "business": "不要把平台冻结资金、账户取证、商品下架和禁令约束混成一项救济；逐项核对法律依据、涉案收益范围、平台参与关系和通知程序。",
+      "cases": [
+        "edtx-liu",
+        "steel-city",
+        "coules",
+        "kendall-order"
+      ],
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "Steel City · W.D. Texas",
+            "text": "法院拒绝在被告身份不明、无人送达且未开展早期取证时，对64名境外被告整体冻结资产；指出请求主要追索法定或实际损害，而非衡平性金钱救济。"
+          },
+          {
+            "label": "E.D. Texas Liu",
+            "text": "法院拒绝冻结全部资金及非涉案产品收益，因原告未证明资产与涉案销售收益之间的联系；同时拒绝仅凭平台收到通知就要求平台冻结或下架。"
+          },
+          {
+            "label": "Kendall Standing Order",
+            "text": "对实用专利案件，Kendall法官要求原告说明为何ABC Prods.关于资产限制的规则不适用；第三方平台须有积极协助或参与事实，并获事前通知和陈述机会。"
+          },
+          {
+            "label": "Coules · W.D. Pennsylvania",
+            "text": "Bissoon法官依据宾夕法尼亚州法及Rule 64，并结合原告同时请求衡平性救济的理由，批准资产限制；但该PI听证无人反对，金融机构及平台也未出庭，不能视为经对抗审查确立的普遍规则。法院还明确，未具名潜在侵权者仅可被要求下架listing，不能冻结其资产或对其作出判决。"
+          }
+        ],
+        "business": [
+          {
+            "label": "区分冻结对象",
+            "text": "区分被告账户余额、涉案产品收益、非涉案经营收入及平台自身资产，不以“账户关联”替代资产范围论证。"
+          },
+          {
+            "label": "核对法律基础",
+            "text": "审查原告请求的是法定损害赔偿还是衡平性金钱救济，并核对适用州法、Rule 64及Grupo Mexicano等规则。"
+          },
+          {
+            "label": "平台约束",
+            "text": "平台收到TRO副本不当然使其成为积极协助者；需证明Rule 65(d)(2)要求的代理、参与或协助关系。"
+          },
+          {
+            "label": "通知与误伤",
+            "text": "单方冻结应具体说明不通知的必要性，并评估错误冻结无辜第三方资金及冻结非涉案经营收入的风险。"
+          },
+          {
+            "label": "审查对抗程度",
+            "text": "区分无人反对的PI命令与平台、被告实际出庭后的对抗裁定；前者不能直接证明法院已审查并接受平台的全部异议。"
           }
         ]
       }
@@ -519,36 +817,52 @@
       "court": "N.D. Illinois",
       "date": "2026-06-18",
       "citation": "1:25-cv-13392, Dkt. 86",
-      "issue": "TRO后PI阶段的侵权证据",
-      "result": "先前取得TRO且存在实际销售及程序异议放弃，PI仍可能因侵权证据及设计专利整体视觉差异被拒。",
-      "effect": "地区法院个案；TRO与PI是不同程序阶段，不能将TRO签发理解为PI自动获准。",
+      "issue": "原告在单方TRO阶段获准冻结账户后，能否在PI阶段仅凭诉状和结论性比对获得持续禁令？三名出庭反对的被告是否已放弃个人管辖权及送达异议？",
+      "result": "法院仅对三名出庭并反对PI的被告拒绝PI并撤销其TRO；法院认为原告在reply中首次提出的核心侵权论点已被放弃，且即使考虑仍不足以证明设计专利侵权可能性。其余被告此前已分别自愿撤诉或被缺席处理。",
+      "effect": "N.D. Illinois地区法院对三名出庭被告的个案PI裁定；说明单方TRO不能替代对抗式PI举证，且判决范围应按被告分别记录。不是对全部七名被告作出的统一实体裁定。",
       "url": "https://cases.justia.com/federal/district-courts/illinois/ilndce/1%3A2025cv13392/489109/86/0.pdf",
       "level": "地区法院裁定",
       "analysisPoints": {
         "issue": [
           {
-            "label": "TRO与PI",
-            "text": "先前取得TRO后，原告是否仍须在PI阶段独立证明侵权可能性及设计整体视觉相似？"
+            "label": "PI证明责任",
+            "text": "单方TRO获准后，原告是否仍须在对抗式PI阶段独立证明设计专利侵权可能性？"
+          },
+          {
+            "label": "迟延补充论点",
+            "text": "原告未在初始动议中充分比较、仅在reply中补充关键分析，能否满足举证责任？"
+          },
+          {
+            "label": "被告个别程序",
+            "text": "三名出庭被告的程序抗辩是否因其积极参与诉讼而被放弃？"
           }
         ],
         "result": [
           {
-            "label": "PI审查",
-            "text": "法院认为现有材料不足以证明设计专利侵权可能性。"
+            "label": "裁判范围",
+            "text": "法院仅对三名出庭并反对PI的被告拒绝PI并撤销其TRO。"
           },
           {
-            "label": "裁判结果",
-            "text": "PI被拒绝，先前TRO被撤销。"
+            "label": "证据评价",
+            "text": "原告在reply中首次提出的核心侵权论点被视为放弃；即使考虑，现有材料仍不足以证明设计专利侵权可能性。"
+          },
+          {
+            "label": "其他被告",
+            "text": "其余被告此前已分别自愿撤诉或被缺席处理。"
           }
         ],
         "effect": [
           {
-            "label": "裁判性质",
-            "text": "地区法院个案。"
+            "label": "程序规则",
+            "text": "单方TRO不能替代对抗式PI阶段的实体证明。"
           },
           {
-            "label": "适用范围",
-            "text": "TRO与PI属于不同程序阶段，不能将TRO签发理解为PI自动获准。"
+            "label": "证据要求",
+            "text": "外观设计专利案件应在初始PI动议中提供充分、具体的整体视觉比较，不能依赖reply补救。"
+          },
+          {
+            "label": "适用边界",
+            "text": "本裁定仅处理三名出庭反对的被告；不能概括为法院对全部Schedule A被告作出相同裁判。"
           }
         ]
       }
@@ -713,38 +1027,46 @@
       "id": "gettleman-order",
       "name": "Gettleman Schedule A Standing Order",
       "court": "N.D. Illinois · Judge Gettleman",
-      "date": "2026-06-23",
+      "date": "2026-04-04",
       "citation": "Standing Order",
-      "issue": "逐被告管辖权、Rule 20与海牙送达说明",
-      "result": "对其本人Schedule A案件提出特定备忘录与证明要求。",
-      "effect": "仅适用于该法官案件，不是N.D. Illinois全院规则。",
-      "url": "https://www.ilnd.uscourts.gov/_assets/_documents/_forms/_judges/Gettleman/Schedule%20A%20Standing%20Order.pdf",
-      "level": "法官Standing Order",
+      "issue": "Gettleman法官名下Schedule A案件的被告合并、逐被告个人管辖权及境外被告缺席判决前的地址调查说明要求。",
+      "result": "起诉后两周内提交不超过10页的备忘录，分别说明Rule 20被告合并依据及法院对每名被告的个人管辖权；在涉及境外被告的缺席判决申请前或同时，提交不超过5页的备忘录说明被告地址是否已知，若未知则说明查找地址的具体努力。",
+      "effect": "仅适用于分配给Gettleman法官的Schedule A案件，不是N.D. Illinois全院规则。",
+      "url": "https://www.ilnd.uscourts.gov/_assets/_documents/_forms/_judges/Gettleman/Schedule%20A%20Standing%20Order_final.pdf",
+      "level": "法官Standing Order｜官方法院PDF",
       "analysisPoints": {
         "issue": [
           {
-            "label": "个人管辖权",
-            "text": "如何逐被告说明与法院地的联系？"
-          },
-          {
             "label": "被告合并",
-            "text": "如何说明Rule 20合并依据？"
+            "text": "原告如何说明Schedule A被告符合Rule 20的共同交易或共同问题要求？"
           },
           {
-            "label": "境外送达",
-            "text": "如何说明海牙公约及境外送达问题？"
+            "label": "个人管辖权",
+            "text": "原告如何分别说明法院对每名被告具有个人管辖权？"
+          },
+          {
+            "label": "境外被告缺席判决",
+            "text": "在申请缺席判决前，原告是否查明境外被告地址；若地址未知，采取了哪些查找措施？"
           }
         ],
         "result": [
           {
-            "label": "法官要求",
-            "text": "Standing Order对其本人Schedule A案件提出特定备忘录与证明要求。"
+            "label": "起诉后两周内",
+            "text": "提交不超过10页的备忘录，分别论证Rule 20被告合并及对每名被告的个人管辖权。"
+          },
+          {
+            "label": "缺席判决前或同时",
+            "text": "涉及境外被告时，提交不超过5页的备忘录，说明地址是否已知；若未知，说明查找地址的具体努力。"
           }
         ],
         "effect": [
           {
-            "label": "适用范围",
-            "text": "仅适用于Gettleman法官本人审理的案件，不是N.D. Illinois全院规则。"
+            "label": "规则性质",
+            "text": "这是Gettleman法官个人Standing Order，不是N.D. Illinois全院规则。"
+          },
+          {
+            "label": "业务意义",
+            "text": "该法官案件需在起诉早期准备被告关系和逐被告管辖权材料，并在申请缺席判决前保留地址调查记录。"
           }
         ]
       }
@@ -754,32 +1076,553 @@
       "name": "Kendall Schedule A Standing Order",
       "court": "N.D. Illinois · Judge Kendall",
       "date": "2026-08-11",
-      "citation": "Standing Order",
-      "issue": "Schedule A案件保证金",
-      "result": "对其本人部分Schedule A案件提出每名被告保证金要求。",
-      "effect": "法官个人规则；实际适用范围应结合具体案件核验。",
-      "url": "https://www.ilnd.uscourts.gov/",
-      "level": "法官Standing Order",
+      "citation": "Chief Judge Kendall’s Standing Order for “Schedule A” Litigation",
+      "issue": "Schedule A案件的TRO宣誓材料、逐被告管辖权、Rule 20合并、境外送达、第三方平台、资产限制、保证金、缺席判决及侵权比对要求。",
+      "result": "要求单一宣誓声明逐被告列明过去两个月的销售或要约、即时损害、被告与行为的事实联系及不通知的具体风险；以具体、非结论性事实支持Rule 20合并及逐被告管辖权；中国被告不得以邮件送达，地址未知例外须先勤勉查找；第三方平台须证明积极协助并给予事前通知及陈述机会；实用专利案件申请资产限制须处理ABC Prods.；保证金原则上为每名被告10,000美元；缺席判决需证明送达、通知及合理回应机会；外文证据须提供可采英文翻译，侵权分析须具体到权利要求和适用法律。",
+      "effect": "该命令由Chief Judge Kendall签发，适用于分配给她的Schedule A案件；每名被告10,000美元为推定要求，不是N.D. Illinois全院统一保证金规则。",
+      "url": "https://www.ilnd.uscourts.gov/_assets/_documents/_forms/_judges/Kendall/Standing%20Order%20-%20Schedule%20A%20-%208-11-2026%20-%20Final.pdf",
+      "level": "法官Standing Order｜官方法院PDF",
       "analysisPoints": {
         "issue": [
           {
-            "label": "保证金",
-            "text": "Schedule A案件的保证金要求及其对具体案件的适用范围。"
+            "label": "TRO证据",
+            "text": "是否逐被告说明近两个月销售或要约、即时损害、事实联系及不通知的具体风险？"
+          },
+          {
+            "label": "被告合并与管辖权",
+            "text": "是否以具体、非结论性事实证明Rule 20共同交易及对每名被告的个人管辖权？"
+          },
+          {
+            "label": "送达与平台",
+            "text": "中国被告邮件送达、地址未知例外及第三方平台约束是否符合海牙公约与Rule 65(d)(2)？"
+          },
+          {
+            "label": "资产限制与保证金",
+            "text": "实用专利案件是否能说明资产限制依据；保证金应如何计算？"
+          },
+          {
+            "label": "缺席判决与侵权证明",
+            "text": "是否证明送达、通知及合理回应机会；是否对每项权利要求提供具体侵权分析？"
           }
         ],
         "result": [
           {
-            "label": "法官要求",
-            "text": "Standing Order对其本人部分Schedule A案件提出每名被告保证金要求。"
+            "label": "单一宣誓声明",
+            "text": "律师须提交一份简明、签署并在伪证处罚下作出的声明，覆盖Standing Order规定的各项要求。"
+          },
+          {
+            "label": "逐被告事实",
+            "text": "逐被告列明近两个月销售或要约、即时损害、被告与被控行为的联系，以及不通知的具体风险。"
+          },
+          {
+            "label": "Rule 20与管辖权",
+            "text": "必须以具体、非结论性、非推测性事实说明被告之间的共同交易或关联行为，并分别说明法院对每名被告的管辖权；仅称多人以类似方式侵犯同一IP不足。"
+          },
+          {
+            "label": "境外送达",
+            "text": "中国境内实体不得以邮件方式送达；主张海牙公约因地址未知而不适用的，须先勤勉查找并在声明中具体说明。"
+          },
+          {
+            "label": "第三方平台",
+            "text": "Amazon、eBay等非当事平台不能仅因收到通知就被列为积极协助者；须证明积极协助或参与，并在法院对其作出命令前给予事前通知及陈述机会。"
+          },
+          {
+            "label": "资产限制",
+            "text": "实用专利案件申请TRO或PI时，原则上不应寻求资产限制，除非能说明ABC Prods.裁定不适用。"
+          },
+          {
+            "label": "保证金",
+            "text": "Chief Judge Kendall推定要求每名被告10,000美元保证金。"
+          },
+          {
+            "label": "缺席判决",
+            "text": "须以单一宣誓声明证明所有被告已获有效送达、通过相同获准渠道收到缺席动议通知，并获得合理回应机会。"
+          },
+          {
+            "label": "证据与侵权分析",
+            "text": "外文证据须附可采英文翻译；侵权论证应列明具体权利要求、各要素适用法律及逐项分析，不能仅笼统引用图片。"
           }
         ],
         "effect": [
           {
             "label": "适用范围",
-            "text": "属于法官个人规则；实际适用范围仍需结合具体案件核验。"
+            "text": "这是Chief Judge Kendall个人Standing Order，适用于分配给她的Schedule A案件，不是N.D. Illinois全院规则。"
+          },
+          {
+            "label": "保证金口径",
+            "text": "每名被告10,000美元是推定要求，不应描述为所有案件一律固定适用；需结合命令原文及个案后续裁定。"
+          },
+          {
+            "label": "与其他规则的关系",
+            "text": "该命令把逐被告证据、被告合并、送达、平台约束、资产限制和保证金放在同一程序框架中，但各项仍有各自的适用条件。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "goodegg",
+      "name": "GoodEgg Stuff LLC v. Schedule A Defendants",
+      "court": "W.D. Texas · Pitman",
+      "date": "2026-08-31",
+      "citation": "6:25-cv-00339-RP, Dkt. 67",
+      "issue": "实用专利案件中，49名Schedule A被告是否符合35 U.S.C. §299及Rule 20合并要求？",
+      "result": "缺席判决阶段，法院将49名被告无偏见驳回，仅对Ahomi店铺保留永久禁令；原告随后撤回对Ahomi的损害赔偿请求，案件于2026-09-02结案。",
+      "effect": "地区法院对专利案件被告合并的个案裁定；可用于说明同一专利侵权指控不足以自动支持大规模合并，但不应直接推广到商标或版权案件。",
+      "url": "https://docs.justia.com/cases/federal/district-courts/texas/txwdce/6%3A2025cv00339/1172858000/67",
+      "level": "法院缺席判决命令全文副本",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "被告合并",
+            "text": "49名被告是否符合35 U.S.C. §299及Rule 20规定的共同交易或系列交易要求？"
+          }
+        ],
+        "result": [
+          {
+            "label": "被告范围",
+            "text": "法院将49名被告无偏见驳回，仅对Ahomi店铺保留永久禁令。"
+          },
+          {
+            "label": "损害赔偿",
+            "text": "原告随后撤回对Ahomi的损害赔偿请求，案件于2026-09-02结案。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "适用范围",
+            "text": "这是W.D. Texas地区法院在实用专利案件中的个案裁定。"
+          },
+          {
+            "label": "规则意义",
+            "text": "相同专利及相似侵权指控不足以当然支持大规模被告合并；但该案不应直接推广到商标或版权案件。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "steel-city",
+      "name": "Steel City Enterprises, Inc. v. Schedule A Defendants",
+      "court": "W.D. Texas · Schydlower",
+      "date": "2026-03-28",
+      "citation": "6:25-cv-00335-LS, Dkt. 12",
+      "issue": "原告尚未申请传票、完成送达或开展早期取证，能否对64名身份和联系信息不明的境外被告整体冻结资产并概括授权电子送达？",
+      "result": "法院拒绝密封状态下的整体资产冻结和概括电子送达请求；指出原告未申请传票、未完成送达、未寻求早期取证，且冻结请求可能导致平台错误冻结无辜第三方资金。",
+      "effect": "W.D. Texas地区法院个案裁定；可用于分析资产冻结与电子送达的程序门槛，不是全院或第五巡回统一规则。",
+      "url": "https://www.govinfo.gov/content/pkg/USCOURTS-txwd-6_25-cv-00335/pdf/USCOURTS-txwd-6_25-cv-00335-0.pdf",
+      "level": "GovInfo官方法院裁定PDF",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "资产冻结",
+            "text": "未查明64名境外被告身份及资产关联时，能否在密封和未送达状态下整体冻结资金？"
+          },
+          {
+            "label": "境外送达",
+            "text": "未确认被告国籍、地址及送达方式前，能否概括授权电子送达？"
+          }
+        ],
+        "result": [
+          {
+            "label": "资产限制",
+            "text": "法院拒绝整体冻结，指出请求主要针对实际或法定损害，且可能使平台错误冻结无辜主体资金。"
+          },
+          {
+            "label": "送达",
+            "text": "法院指出原告未申请传票、未完成送达、未开展早期取证，无法进行逐被告、逐国家的送达分析。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "裁判性质",
+            "text": "W.D. Texas地区法院个案裁定。"
+          },
+          {
+            "label": "适用边界",
+            "text": "不能直接称为W.D. Texas全院或第五巡回统一规则。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "coules",
+      "name": "Debra Coules v. Schedule A Defendants",
+      "court": "W.D. Pennsylvania · Bissoon",
+      "date": "2026-08-27",
+      "citation": "2:26-cv-00049, Dkt. 29",
+      "issue": "版权Schedule A案件中，法院能否依据宾夕法尼亚州法及Rule 64作出判前资产限制，并将相关命令延伸至第三方平台？",
+      "result": "法院在无人提出反对的PI听证后维持TRO、批准PI及资产限制，$5,000保证金留存；命令同时明确，未具名潜在侵权者仅可被要求下架listing，不能被冻结资产或被判决。",
+      "effect": "W.D. Pennsylvania地区法院在无人反对的版权案件中的PI裁定；展示州法及Rule 64可能影响判前资产限制，但不构成经平台或被告对抗审查后的普遍规则。",
+      "url": "https://law.counselstack.com/opinion/debra-coules-v-schedule-a-defendants-pawd-2026",
+      "level": "法院PI命令全文转录副本",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "判前资产限制",
+            "text": "版权案件中，宾夕法尼亚州法及Rule 64是否支持判前资产限制？"
+          },
+          {
+            "label": "第三方平台",
+            "text": "平台是否可被命令冻结具名被告资金、提供资料或停止服务？"
+          },
+          {
+            "label": "未具名主体",
+            "text": "对未列入Schedule A的潜在侵权者，禁令可以延伸到什么范围？"
+          }
+        ],
+        "result": [
+          {
+            "label": "资产限制",
+            "text": "法院依据宾夕法尼亚州法及Rule 64，并结合原告请求衡平性救济的理由，批准资产限制；$5,000保证金留存。"
+          },
+          {
+            "label": "平台与未具名主体",
+            "text": "PI命令延伸至已收到通知的相关平台和金融机构；但未具名潜在侵权者仅可被要求下架listing，不能冻结其资产或对其作出判决。"
+          },
+          {
+            "label": "对抗情况",
+            "text": "无人提交反对意见，第三方服务商及金融机构亦未出庭。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "裁判性质",
+            "text": "W.D. Pennsylvania地区法院在无人反对的版权案件中的PI裁定。"
+          },
+          {
+            "label": "适用边界",
+            "text": "该命令显示州法及Rule 64可能影响资产限制，但不能替代对Rule 65(d)(2)及第三方平台实际参与关系的分析。"
+          },
+          {
+            "label": "对抗程度",
+            "text": "无人反对的PI命令不能视为经平台或被告对抗审查后确立的普遍规则。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dior-kocoras",
+      "name": "Christian Dior v. Schedule A Defendants",
+      "court": "N.D. Illinois · Judge Charles P. Kocoras",
+      "date": "2026-09-17 — 2026-10-09",
+      "citation": "No. 1:26-cv-10747, Dkts.19, 27, 29, 36 (N.D. Ill. 2026)",
+      "issue": "海牙公约第1条地址未知例外；逐被告地址调查",
+      "result": "电子送达初次被拒；补充逐被告调查声明后获准；PI无人反对获准。",
+      "effect": "地区法院个案程序记录；说明地址未知例外可适用，但必须有逐被告、可复核的调查记录。",
+      "url": "https://dockets.justia.com/docket/illinois/ilndce/1:2026cv10747/507290",
+      "level": "公开docket minute entry",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "地址未知",
+            "text": "一般性调查方法和覆盖整个Schedule A的一句结论，是否足以证明每名被告地址未知？"
+          }
+        ],
+        "result": [
+          {
+            "label": "初次申请",
+            "text": "法院于9-17无偏见驳回电子送达申请，要求逐被告列明地址搜索、已取得线索及结果。"
+          },
+          {
+            "label": "补充申请",
+            "text": "原告10-02提交补充调查声明，10-05电子送达获准。"
+          },
+          {
+            "label": "PI",
+            "text": "10-09在无人反对的情况下批准PI。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "适用边界",
+            "text": "地址未知例外仍可适用，但不能以概括性声明替代逐被告调查。"
+          },
+          {
+            "label": "程序区分",
+            "text": "TRO、电子送达与PI是不同程序节点，应分别记录。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "advance-magazine",
+      "name": "Advance Magazine Publishers Inc. v. Schedule A Defendants",
+      "court": "N.D. Illinois · Chief Judge Virginia M. Kendall",
+      "date": "2026-11-10",
+      "citation": "No. 1:26-cv-11858, Dkt.23 (N.D. Ill. Nov. 10, 2026)",
+      "issue": "30名被告、4个平台、17个商标的Rule 20合并及逐被告侵权证明",
+      "result": "法院拒绝原告的TRO及相关单方救济动议；资产限制和加速取证请求未作独立实体判断。",
+      "effect": "Kendall法官2026-08-11 Standing Order的近期个案适用；不是上诉法院先例或全院统一规则。",
+      "url": "https://docs.justia.com/cases/federal/district-courts/illinois/ilndce/1:2026cv11858/508673/23",
+      "level": "法院Opinion & Order全文副本",
+      "analysisPoints": {
+        "issue": [
+          {
+            "label": "被告合并",
+            "text": "共同侵犯同一品牌、在多个平台销售不同商品，是否足以证明Rule 20要求的交易联系？"
+          },
+          {
+            "label": "逐被告证明",
+            "text": "原告是否必须说明每名被告具体侵犯哪些商标及如何侵权？"
+          }
+        ],
+        "result": [
+          {
+            "label": "Rule 20",
+            "text": "原告没有事实说明30名被告之间的交易联系、共同经营或相互关系。"
+          },
+          {
+            "label": "侵权论证",
+            "text": "约两页的概括性论证没有逐被告分析具体商品与商标。"
+          },
+          {
+            "label": "保证金",
+            "text": "30名被告按Kendall法官2026-08-11 Standing Order的每名被告10,000美元推定额，对应300,000美元；原告仅提出30,000美元。"
+          },
+          {
+            "label": "资产与取证",
+            "text": "法院基于其他独立理由拒绝整体动议，资产限制和加速取证请求未再作实体判断。"
+          }
+        ],
+        "effect": [
+          {
+            "label": "Rule 20",
+            "text": "同一品牌或相似侵权主张不足以自动支持大规模合并。"
+          },
+          {
+            "label": "适用范围",
+            "text": "这是N.D. Illinois地区法院个案及法官个人Standing Order的适用，不是第七巡回先例。"
           }
         ]
       }
     }
-  ]
+  ],
+  "updated": "2026-11-26",
+  "litigationActivity": {
+    "updated": "2026-11-26",
+    "candidateTrend": {
+      "period": "2025 Q1 — 2026 Q2",
+      "total": 4551,
+      "quarterly": [
+        {
+          "period": "2025 Q1",
+          "count": 638
+        },
+        {
+          "period": "2025 Q2",
+          "count": 678
+        },
+        {
+          "period": "2025 Q3",
+          "count": 752
+        },
+        {
+          "period": "2025 Q4",
+          "count": 847
+        },
+        {
+          "period": "2026 Q1",
+          "count": 771
+        },
+        {
+          "period": "2026 Q2",
+          "count": 865
+        }
+      ],
+      "metrics": {
+        "h12025": 1316,
+        "h22025": 1599,
+        "h12026": 1636,
+        "h12025QuarterlyAverage": 658,
+        "h22025QuarterlyAverage": 799.5,
+        "h12026QuarterlyAverage": 818,
+        "h12026YoYGrowthPct": 24.32,
+        "h22025VsH12025Pct": 21.5,
+        "h12026VsH22025Pct": 2.31,
+        "ndiH12025": 1156,
+        "ndiH12026": 1292,
+        "ndiGrowthPct": 11.76,
+        "otherDistrictsH12025": 160,
+        "otherDistrictsH12026": 344,
+        "otherDistrictsGrowthPct": 115,
+        "ndiShareH12025Pct": 87.84,
+        "ndiShareH12026Pct": 78.97,
+        "trademarkH12025": 823,
+        "trademarkH12026": 969,
+        "trademarkGrowthPct": 17.74,
+        "copyrightH12025": 379,
+        "copyrightH12026": 567,
+        "copyrightGrowthPct": 49.6,
+        "patentH12025": 112,
+        "patentH12026": 99,
+        "patentGrowthPct": -11.61
+      },
+      "cards": [
+        {
+          "label": "2025 H2台阶上移",
+          "value": "+21.5%",
+          "text": "2025 H2季度均值由2025 H1的658条升至799.5条。"
+        },
+        {
+          "label": "2026 H1高位延续",
+          "value": "818条 / 季",
+          "text": "较2025 H2季度均值再增2.3%；期间Q1回落至771条，Q2反弹至865条，不是连续单边上涨。"
+        },
+        {
+          "label": "地域分布更分散",
+          "value": "87.8% → 79.0%",
+          "text": "N.D. Illinois在H1候选记录中的占比下降；其余司法区合计由160增至344条（+115%），但伊利诺伊州北区仍是最大单一区域。"
+        },
+        {
+          "label": "类别增量不同步",
+          "value": "版权 +49.6%",
+          "text": "H1版权候选记录由379增至567，商标由823增至969（+17.7%），专利由112降至99（−11.6%）。"
+        }
+      ],
+      "interpretation": [
+        "2025 H2出现明显台阶上移；2026 H1没有再出现同等幅度跃升，而是在更高水平上延续并伴随季度波动。",
+        "增长的地域来源正在扩散：N.D. Illinois仍居首，但其他联邦司法区的增长速度明显更快。",
+        "2026 H1增量主要出现在版权和商标NOS类别，专利类别未同步增加。"
+      ],
+      "limitations": [
+        "4,551条是FJC IDB中按案件标题、诉状文本特征筛选的候选记录，不等于逐案确认的Schedule A案件总量。",
+        "季度、司法区及NOS分析使用同一筛选口径；不能与ABTL / Lex Machina长期序列直接拼接。",
+        "N.D. Illinois之外的候选记录增长，不等于这些司法区已形成与N.D. Illinois相同规模或相同程序模式。"
+      ]
+    },
+    "marketContext": [
+      {
+        "label": "联邦地区法院商标案件",
+        "value": "4,211件",
+        "change": "+25%（+848件）",
+        "period": "FY2025",
+        "scope": "美国联邦地区法院全部商标案件；不是Schedule A专门统计。",
+        "source": "U.S. Courts, Judicial Business 2025",
+        "url": "https://www.uscourts.gov/data-news/reports/statistical-reports/judicial-business-united-states-courts/judicial-business-2025/us-district-courts-judicial-business-2025"
+      },
+      {
+        "label": "专利案件中的Schedule A",
+        "value": "约9%",
+        "change": "2025年",
+        "period": "2025",
+        "scope": "Cornerstone按Lex Machina标签统计：带有Schedule A的专利案件占Lex Machina专利案件约9%；不代表全部Schedule A案件中专利案件占9%。",
+        "source": "Cornerstone, Intellectual Property Litigation: U.S. Trends in Global Perspective (June 2026), p.7 & endnote 30",
+        "url": "https://www.cornerstone.com/wp-content/uploads/2026/06/IP-Litigation-US-Trends-in-Global-Perspective-June-2026.pdf"
+      }
+    ],
+    "plaintiffBehavior": {
+      "source": "The Fashion Law, Inside the State of Schedule A Litigation in Fashion (2026-09-22)",
+      "url": "https://www.thefashionlaw.com/inside-the-state-of-schedule-a-litigation-in-fashion/",
+      "period": "2021-01-01 — 2026-08-31",
+      "sample": "TFL从五个品牌2021-01-01至2026-08-31的联邦商标案卷中识别出203件符合其标准的Schedule A案件；其他非Schedule A诉讼仅作定性描述，不计入203件。",
+      "findings": [
+        {
+          "label": "品牌模式分化",
+          "text": "Dior在样本中最依赖Schedule A；Chrome Hearts采用Schedule A与具名零售商等传统商标诉讼双轨并行；Louis Vuitton相对均衡；Gucci使用量较低；Stüssy在2026年突然进入样本。"
+        },
+        {
+          "label": "活动集中",
+          "text": "2026年1—8月五品牌记录74件，其中Dior 31件、Chrome Hearts 22件、Stüssy 16件，三者合计69件，占同期样本93.2%。"
+        },
+        {
+          "label": "增长并非全面同步",
+          "text": "2026年前八个月月均记录量达到2025年的3.17倍，但主要由Dior、Chrome Hearts提速及Stüssy新进入样本推动；Louis Vuitton略降，Gucci基本持平。"
+        }
+      ],
+      "docketExample": {
+        "brand": "Christian Dior",
+        "caseNo": "1:26-cv-10747",
+        "filed": "2026-09-04",
+        "court": "N.D. Illinois",
+        "judge": "Charles P. Kocoras",
+        "counsel": "Paul Joseph Kossof",
+        "asOf": "2026-10-28",
+        "url": "https://dockets.justia.com/docket/illinois/ilndce/1:2026cv10747/507290",
+        "timeline": [
+          {
+            "date": "09-11",
+            "text": "TRO获准。"
+          },
+          {
+            "date": "09-17",
+            "text": "电子送达申请因地址调查声明过于概括而被无偏见驳回；法院要求逐被告说明地址线索、调查步骤和排除结果。"
+          },
+          {
+            "date": "10-02 / 10-05",
+            "text": "原告提交补充调查声明并重新申请，电子送达获准。"
+          },
+          {
+            "date": "10-09",
+            "text": "PI在无人反对的情况下获准。"
+          },
+          {
+            "date": "10-27 / 10-28",
+            "text": "原告提出缺席判决动议；截至公开案卷最后检索日仍待审。"
+          }
+        ],
+        "interpretation": "这是Dior重复提起Schedule A诉讼并由同一律师代理的一个程序样本，也展示原告在Kangol后补充地址调查材料的做法。单一案卷不能用来推算该律师或品牌全部案件的成功率、送达模式或全国趋势。"
+      }
+    },
+    "courtResponse": {
+      "cases": [
+        {
+          "id": "advance-magazine",
+          "caseNo": "1:26-cv-11858",
+          "date": "2026-11-10",
+          "judge": "Chief Judge Virginia M. Kendall",
+          "headline": "30名被告、4个平台、17个商标；Rule 20和逐被告侵权证明均不足，TRO申请被拒。",
+          "bond": "$10,000/被告；30名被告对应$300,000。原告仅提出$30,000。",
+          "assetScope": "资产限制与加速取证请求未作独立实体判断，因整体动议基于其他理由被拒而未再处理。",
+          "url": "https://docs.justia.com/cases/federal/district-courts/illinois/ilndce/1:2026cv11858/508673/23"
+        },
+        {
+          "id": "dior-kocoras",
+          "caseNo": "1:26-cv-10747",
+          "date": "2026-09-17 — 2026-10-09",
+          "judge": "Judge Charles P. Kocoras",
+          "headline": "概括性地址调查声明不足；逐被告补充调查后电子送达获准，PI无人反对获准。",
+          "bond": "本档案不据此推断保证金规则。",
+          "assetScope": "该案用于说明境外送达与原告调查材料的适用，不作为资产冻结裁判样本。",
+          "url": "https://dockets.justia.com/docket/illinois/ilndce/1:2026cv10747/507290"
+        }
+      ],
+      "bondVariation": {
+        "note": "以下是不同法官的个别规则或个案记录，不是N.D. Illinois全院统一保证金标准。",
+        "rows": [
+          {
+            "judge": "Chief Judge Kendall",
+            "amount": "$10,000 / 被告",
+            "source": "2026-08-11正式Standing Order；2026-11-10 Advance Magazine案按30名被告计算$300,000。",
+            "url": "https://www.ilnd.uscourts.gov/_assets/_documents/_forms/_judges/Kendall/Standing%20Order%20-%20Schedule%20A%20-%208-11-2026%20-%20Final.pdf"
+          },
+          {
+            "judge": "Judge Alonso",
+            "amount": "$1,000 / 被告",
+            "source": "N.D. Illinois官方法官页面的Schedule A专门规则。",
+            "url": "https://www.ilnd.uscourts.gov/judge_display.php?LastName=Alonso"
+          },
+          {
+            "judge": "Judge Rowland",
+            "amount": "$1,000 / 被告",
+            "source": "2026-01-08 Gimme Golf Tool案minute entry；同时限制Schedule A不超过200名被告。",
+            "url": "https://dockets.justia.com/docket/illinois/ilndce/1:2025cv15743/492170"
+          }
+        ],
+        "versionWarning": "Kendall法官主页仍可访问的通用PDF标注2026-06-30，内容为$1,000/被告；后续2026-08-11正式版本改为$10,000/被告，2026-11-10个案裁定再次确认按$10,000/被告计算。研究和实务引用应使用日期明确的后续版本。"
+      }
+    },
+    "commentaryAudit": [
+      {
+        "source": "NYSBA, Schedule A Litigation Is a Powerful Enforcement Tool for Brand Owners Facing Widespread Online Infringement (2026-09-04)",
+        "url": "https://nysba.org/schedule-a-litigation-is-a-powerful-enforcement-tool-for-brand-owners-facing-widespread-online-infringement/",
+        "finding": "文章所称2025财年联邦地区法院商标案件4,211件、同比增长25%，与U.S. Courts Judicial Business 2025一致；但这是全部商标案件，不是Schedule A案件数量。",
+        "qualification": "可以作为商标诉讼大环境，不可作为Schedule A全国数量。"
+      },
+      {
+        "source": "NYSBA article · Hague service discussion",
+        "url": "https://nysba.org/schedule-a-litigation-is-a-powerful-enforcement-tool-for-brand-owners-facing-widespread-online-infringement/",
+        "finding": "文章将Kangol概括为最终认定电子送达无效并要求撤销缺席判决，表述过宽。第七巡回实际撤销下级法院拒绝撤销缺席判决的裁定并发回，要求先判断地址未知例外及海牙公约是否适用；并未在该案直接最终裁定地址已知或送达无效。",
+        "qualification": "引用Kangol时应以第七巡回判决原文为准，区分其一般规则与发回后的待决事实问题。"
+      }
+    ]
+  }
 }
