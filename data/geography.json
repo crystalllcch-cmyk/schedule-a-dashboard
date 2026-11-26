@@ -337,6 +337,6 @@
       "delta": -75
     }
   ],
-  "stateSummaryNote": "按FJC联邦司法区所属州归并；9条未映射代码无法可靠归州，单独列示。地图、排名和筛选仍以联邦司法区为单位。",
+  "stateSummaryNote": "按FJC联邦司法区所属州归并；9个未映射司法区代码共对应9条候选记录，无法可靠归州，单独列示。地图、排名和筛选仍以联邦司法区为单位。",
   "stateSummaryPeriod": "Full period: 2025 Q1–2026 Q2. H1 comparison: 2025-01-01 to 2025-06-30 versus 2026-01-01 to 2026-06-30."
 }
