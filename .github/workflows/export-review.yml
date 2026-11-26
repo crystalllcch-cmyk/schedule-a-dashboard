@@ -1,0 +1,24 @@
+name: Export dashboard PDF and source
+on:
+  push:
+    branches: [work/pdf-source-export-20261126]
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright
+      - run: npx playwright install --with-deps chromium
+      - run: sudo apt-get update -qq && sudo apt-get install -y fonts-noto-cjk
+      - run: |
+          python3 -m http.server 8787 > /tmp/export-http.log 2>&1 &
+          node advanced/export-review.cjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dashboard-review-export
+          path: exports/
