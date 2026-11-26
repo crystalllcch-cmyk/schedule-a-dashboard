@@ -45,7 +45,9 @@
   "historicalSource": {
     "name": "ABTL Orange County Report, Spring 2026, Figure 1, p.10; data attributed to Lex Machina",
     "url": "https://www.allenmatkins.com/a/web/5jtKChmncRtSMrDQtfg52x/brKH8S/2026-volume-1.pdf",
-    "cutoff": "2025-11-11"
+    "cutoff": "2025-11-11",
+    "chartPeriod": "2016-01-01 through 2025-11-11",
+    "note": "ABTL Orange County Report, Spring 2026, Figure 1. Counts are attributed by the report to Lex Machina. The 2025 figure is partial through November 11, not a full calendar year."
   },
   "h1Comparison": {
     "2025": {
@@ -143,7 +145,31 @@
       "2026JanAug": 9.25,
       "ratio": 3.17
     },
-    "concentratedBrandsShare": 93.2
+    "concentratedBrandsShare": 93.2,
+    "periods": [
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025",
+      "2026*"
+    ],
+    "studyPeriod": "2021-01-01 to 2026-08-31",
+    "scope": "TFL reviewed federal trademark actions filed by Dior, Chrome Hearts, Louis Vuitton, Stüssy and Gucci from 2021-01-01 through 2026-08-31. A case was counted as Schedule A where the caption or docket expressly identified a Schedule A, or the court expressly treated it as such. Other forms of litigation are described, not presented as an exhaustive quantitative breakdown of each brand's full federal litigation portfolio.",
+    "trendAnalysis": [
+      {
+        "label": "整体加速",
+        "text": "五品牌样本2026年1—8月记录74件，2025全年35件；月均记录量由2.92件升至9.25件，约为3.17倍。"
+      },
+      {
+        "label": "增量来源",
+        "text": "月均净增主要来自Dior（+2.54件/月）、Chrome Hearts（+1.83件/月）和Stüssy（+2.00件/月）；Louis Vuitton约减少0.04件/月，Gucci持平。"
+      },
+      {
+        "label": "品牌分化",
+        "text": "Dior与Chrome Hearts延续并加快既有Schedule A活动，Stüssy在2026年突然进入样本；Louis Vuitton回落，Gucci维持低位。2026年前八个月前三品牌合计69件，占同期五品牌样本的93.2%。"
+      }
+    ]
   },
   "legalThemes": [
     {
