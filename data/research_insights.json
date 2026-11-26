@@ -713,38 +713,46 @@
       "id": "gettleman-order",
       "name": "Gettleman Schedule A Standing Order",
       "court": "N.D. Illinois · Judge Gettleman",
-      "date": "2026-06-23",
+      "date": "2026-04-04",
       "citation": "Standing Order",
-      "issue": "逐被告管辖权、Rule 20与海牙送达说明",
-      "result": "对其本人Schedule A案件提出特定备忘录与证明要求。",
-      "effect": "仅适用于该法官案件，不是N.D. Illinois全院规则。",
-      "url": "https://www.ilnd.uscourts.gov/_assets/_documents/_forms/_judges/Gettleman/Schedule%20A%20Standing%20Order.pdf",
-      "level": "法官Standing Order",
+      "issue": "Gettleman法官名下Schedule A案件的被告合并、逐被告个人管辖权及境外被告缺席判决前的地址调查说明要求。",
+      "result": "起诉后两周内提交不超过10页的备忘录，分别说明Rule 20被告合并依据及法院对每名被告的个人管辖权；在涉及境外被告的缺席判决申请前或同时，提交不超过5页的备忘录说明被告地址是否已知，若未知则说明查找地址的具体努力。",
+      "effect": "仅适用于分配给Gettleman法官的Schedule A案件，不是N.D. Illinois全院规则。",
+      "url": "https://www.ilnd.uscourts.gov/_assets/_documents/_forms/_judges/Gettleman/Schedule%20A%20Standing%20Order_final.pdf",
+      "level": "法官Standing Order｜官方法院PDF",
       "analysisPoints": {
         "issue": [
           {
-            "label": "个人管辖权",
-            "text": "如何逐被告说明与法院地的联系？"
-          },
-          {
             "label": "被告合并",
-            "text": "如何说明Rule 20合并依据？"
+            "text": "原告如何说明Schedule A被告符合Rule 20的共同交易或共同问题要求？"
           },
           {
-            "label": "境外送达",
-            "text": "如何说明海牙公约及境外送达问题？"
+            "label": "个人管辖权",
+            "text": "原告如何分别说明法院对每名被告具有个人管辖权？"
+          },
+          {
+            "label": "境外被告缺席判决",
+            "text": "在申请缺席判决前，原告是否查明境外被告地址；若地址未知，采取了哪些查找措施？"
           }
         ],
         "result": [
           {
-            "label": "法官要求",
-            "text": "Standing Order对其本人Schedule A案件提出特定备忘录与证明要求。"
+            "label": "起诉后两周内",
+            "text": "提交不超过10页的备忘录，分别论证Rule 20被告合并及对每名被告的个人管辖权。"
+          },
+          {
+            "label": "缺席判决前或同时",
+            "text": "涉及境外被告时，提交不超过5页的备忘录，说明地址是否已知；若未知，说明查找地址的具体努力。"
           }
         ],
         "effect": [
           {
-            "label": "适用范围",
-            "text": "仅适用于Gettleman法官本人审理的案件，不是N.D. Illinois全院规则。"
+            "label": "规则性质",
+            "text": "这是Gettleman法官个人Standing Order，不是N.D. Illinois全院规则。"
+          },
+          {
+            "label": "业务意义",
+            "text": "该法官案件需在起诉早期准备被告关系和逐被告管辖权材料，并在申请缺席判决前保留地址调查记录。"
           }
         ]
       }
@@ -754,32 +762,89 @@
       "name": "Kendall Schedule A Standing Order",
       "court": "N.D. Illinois · Judge Kendall",
       "date": "2026-08-11",
-      "citation": "Standing Order",
-      "issue": "Schedule A案件保证金",
-      "result": "对其本人部分Schedule A案件提出每名被告保证金要求。",
-      "effect": "法官个人规则；实际适用范围应结合具体案件核验。",
-      "url": "https://www.ilnd.uscourts.gov/",
-      "level": "法官Standing Order",
+      "citation": "Chief Judge Kendall’s Standing Order for “Schedule A” Litigation",
+      "issue": "Schedule A案件的TRO宣誓材料、逐被告管辖权、Rule 20合并、境外送达、第三方平台、资产限制、保证金、缺席判决及侵权比对要求。",
+      "result": "要求单一宣誓声明逐被告列明过去两个月的销售或要约、即时损害、被告与行为的事实联系及不通知的具体风险；以具体、非结论性事实支持Rule 20合并及逐被告管辖权；中国被告不得以邮件送达，地址未知例外须先勤勉查找；第三方平台须证明积极协助并给予事前通知及陈述机会；实用专利案件申请资产限制须处理ABC Prods.；保证金原则上为每名被告10,000美元；缺席判决需证明送达、通知及合理回应机会；外文证据须提供可采英文翻译，侵权分析须具体到权利要求和适用法律。",
+      "effect": "该命令由Chief Judge Kendall签发，适用于分配给她的Schedule A案件；每名被告10,000美元为推定要求，不是N.D. Illinois全院统一保证金规则。",
+      "url": "https://www.ilnd.uscourts.gov/_assets/_documents/_forms/_judges/Kendall/Standing%20Order%20-%20Schedule%20A%20-%208-11-2026%20-%20Final.pdf",
+      "level": "法官Standing Order｜官方法院PDF",
       "analysisPoints": {
         "issue": [
           {
-            "label": "保证金",
-            "text": "Schedule A案件的保证金要求及其对具体案件的适用范围。"
+            "label": "TRO证据",
+            "text": "是否逐被告说明近两个月销售或要约、即时损害、事实联系及不通知的具体风险？"
+          },
+          {
+            "label": "被告合并与管辖权",
+            "text": "是否以具体、非结论性事实证明Rule 20共同交易及对每名被告的个人管辖权？"
+          },
+          {
+            "label": "送达与平台",
+            "text": "中国被告邮件送达、地址未知例外及第三方平台约束是否符合海牙公约与Rule 65(d)(2)？"
+          },
+          {
+            "label": "资产限制与保证金",
+            "text": "实用专利案件是否能说明资产限制依据；保证金应如何计算？"
+          },
+          {
+            "label": "缺席判决与侵权证明",
+            "text": "是否证明送达、通知及合理回应机会；是否对每项权利要求提供具体侵权分析？"
           }
         ],
         "result": [
           {
-            "label": "法官要求",
-            "text": "Standing Order对其本人部分Schedule A案件提出每名被告保证金要求。"
+            "label": "单一宣誓声明",
+            "text": "律师须提交一份简明、签署并在伪证处罚下作出的声明，覆盖Standing Order规定的各项要求。"
+          },
+          {
+            "label": "逐被告事实",
+            "text": "逐被告列明近两个月销售或要约、即时损害、被告与被控行为的联系，以及不通知的具体风险。"
+          },
+          {
+            "label": "Rule 20与管辖权",
+            "text": "必须以具体、非结论性、非推测性事实说明被告之间的共同交易或关联行为，并分别说明法院对每名被告的管辖权；仅称多人以类似方式侵犯同一IP不足。"
+          },
+          {
+            "label": "境外送达",
+            "text": "中国境内实体不得以邮件方式送达；主张海牙公约因地址未知而不适用的，须先勤勉查找并在声明中具体说明。"
+          },
+          {
+            "label": "第三方平台",
+            "text": "Amazon、eBay等非当事平台不能仅因收到通知就被列为积极协助者；须证明积极协助或参与，并在法院对其作出命令前给予事前通知及陈述机会。"
+          },
+          {
+            "label": "资产限制",
+            "text": "实用专利案件申请TRO或PI时，原则上不应寻求资产限制，除非能说明ABC Prods.裁定不适用。"
+          },
+          {
+            "label": "保证金",
+            "text": "Chief Judge Kendall推定要求每名被告10,000美元保证金。"
+          },
+          {
+            "label": "缺席判决",
+            "text": "须以单一宣誓声明证明所有被告已获有效送达、通过相同获准渠道收到缺席动议通知，并获得合理回应机会。"
+          },
+          {
+            "label": "证据与侵权分析",
+            "text": "外文证据须附可采英文翻译；侵权论证应列明具体权利要求、各要素适用法律及逐项分析，不能仅笼统引用图片。"
           }
         ],
         "effect": [
           {
             "label": "适用范围",
-            "text": "属于法官个人规则；实际适用范围仍需结合具体案件核验。"
+            "text": "这是Chief Judge Kendall个人Standing Order，适用于分配给她的Schedule A案件，不是N.D. Illinois全院规则。"
+          },
+          {
+            "label": "保证金口径",
+            "text": "每名被告10,000美元是推定要求，不应描述为所有案件一律固定适用；需结合命令原文及个案后续裁定。"
+          },
+          {
+            "label": "与其他规则的关系",
+            "text": "该命令把逐被告证据、被告合并、送达、平台约束、资产限制和保证金放在同一程序框架中，但各项仍有各自的适用条件。"
           }
         ]
       }
     }
-  ]
+  ],
+  "updated": "2026-11-26"
 }
