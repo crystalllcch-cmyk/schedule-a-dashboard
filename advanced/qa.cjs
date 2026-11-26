@@ -5,6 +5,7 @@ try{
  await p.goto('http://127.0.0.1:8787/advanced/',{waitUntil:'networkidle'});await p.waitForTimeout(600);
  console.log('STARTUP',await p.evaluate(()=>({rd:!!RD,cases:CASES?.cases.length,charts:Object.keys(charts),toast:document.getElementById('toast').textContent})));
  check('startup data',await p.evaluate(()=>!!RD&&!!CASES&&!!charts.serviceMonthly));
+ check('archive heading count consistent',await p.locator('#view-casefiles').innerText().then(t=>!t.includes('29 RESEARCHED')&&t.includes('31 RESEARCHED')));
  check('31 archived cases retained',await p.evaluate(()=>CASES.cases.length===31&&document.querySelectorAll('.case-bubble-node').length===31));
  check('8248 source cases',await p.evaluate(()=>sr.length===8248));
  check('current KPIs',await p.locator('.kpis').innerText().then(t=>t.includes('2,969')&&t.includes('+30.6%')));
