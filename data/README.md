@@ -15,3 +15,12 @@ The geography markers are orientation points, not district boundary geometry or 
 - Each `case_dossiers.json` profile retains its original searchable text fields and adds `analysisPoints`: labeled bullet arrays for `summary`, `issue`, `response` (where a party response is recorded), `decision`, and `significance`. The dashboard renders these as structured lists in the bubble tooltip, quick-view panel, and full case drawer. Labels organize the source-supported analysis; they do not add new factual findings.
 
 - `case_dossiers.json` powers the interactive case archive's clustered bubble view and searchable list view. Hover/focus previews show issues, recorded party responses, court handling and research significance; click/keyboard activation opens the full point-by-point dossier, timeline and original sources.
+
+
+## V0.8 content-layer updates (2026-11-26)
+
+- `geography.json`: `stateSummary` adds a state-level aggregation derived from the 13 mapped FJC judicial-district codes. Nine unmapped district codes correspond to nine candidate records and remain separate. Maps, rankings and filters continue to use federal judicial districts.
+- `research_insights.json`: the legal analysis now contains seven themes, including dedicated defendant-joinder and asset-restraint / third-party-platform themes. The decision library includes 15 linked rule and case records. Gettleman’s Standing Order is dated 2026-04-04; Kendall’s is dated 2026-08-11. Both are judge-specific, not district-wide rules.
+- `research_insights.json` brand sample: TFL’s 203 Schedule A cases across five fashion brands (2021-01-01 to 2026-08-31) are stored by brand and year. Monthly rates divide full-year counts by 12 and 2026 Jan–Aug counts by 8, so the trend chart compares like-for-like monthly activity. Brand strategy summaries follow TFL’s qualitative discussion; its non-Schedule-A litigation descriptions are not treated as exhaustive counts.
+- `research_insights.json` historical series: ABTL Orange County Report Figure 1, attributed to Lex Machina, covers 2016 through 2025-11-11. The 2025 value is partial and is not a full-year count.
+- `case_dossiers.json`: `sourceClass` distinguishes `official` (official court-hosted material), `court-copy` (full court document mirrored by a third party), `docket-index` (public docket index / minute-entry record), and `mixed` (court material plus secondary status information). This class describes the source channel, not the legal authority or weight of the underlying ruling.
