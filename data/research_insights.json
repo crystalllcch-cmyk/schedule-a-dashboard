@@ -113,31 +113,136 @@
         "2025": 16,
         "2026": 31,
         "brand": "Dior",
-        "speedRatio": 2.91
+        "speedRatio": 2.91,
+        "annual": {
+          "2021": 8,
+          "2022": 8,
+          "2023": 10,
+          "2024": 6,
+          "2025": 16,
+          "2026": 31
+        },
+        "monthlyRates": [
+          0.667,
+          0.667,
+          0.833,
+          0.5,
+          1.333,
+          3.875
+        ],
+        "totalCases": 79,
+        "shareOfSample": 38.9,
+        "shareOf2026": 41.9,
+        "monthlyChange": 2.54,
+        "strategy": "样本中最活跃的Schedule A原告。TFL识别其79件Schedule A案件；同期具名零售商等传统商标诉讼相对较少，Schedule A在其联邦商标执法组合中占据突出位置。"
       },
       {
         "2025": 11,
         "2026": 22,
         "brand": "Chrome Hearts",
-        "speedRatio": 3
+        "speedRatio": 3,
+        "annual": {
+          "2021": 3,
+          "2022": 4,
+          "2023": 7,
+          "2024": 10,
+          "2025": 11,
+          "2026": 22
+        },
+        "monthlyRates": [
+          0.25,
+          0.333,
+          0.583,
+          0.833,
+          0.917,
+          2.75
+        ],
+        "totalCases": 57,
+        "shareOfSample": 28.1,
+        "shareOf2026": 29.7,
+        "monthlyChange": 1.83,
+        "strategy": "双轨并行。除57件Schedule A案件外，还持续针对具名零售商、竞争者及其他商业主体提起传统商标诉讼，2026年两类执法活动均保持活跃。"
       },
       {
         "2025": 5,
         "2026": 3,
         "brand": "Louis Vuitton",
-        "speedRatio": 0.9
+        "speedRatio": 0.9,
+        "annual": {
+          "2021": 3,
+          "2022": 7,
+          "2023": 12,
+          "2024": 8,
+          "2025": 5,
+          "2026": 3
+        },
+        "monthlyRates": [
+          0.25,
+          0.583,
+          1,
+          0.667,
+          0.417,
+          0.375
+        ],
+        "totalCases": 38,
+        "shareOfSample": 18.7,
+        "shareOf2026": 4.1,
+        "monthlyChange": -0.04,
+        "strategy": "相对均衡。Schedule A是其反假冒和商标维权方式之一，同时持续采用针对具名网站、零售商和商业主体的其他诉讼方式；2023年达到样本峰值后回落。"
       },
       {
         "2025": 0,
         "2026": 16,
         "brand": "Stüssy",
-        "speedRatio": null
+        "speedRatio": null,
+        "annual": {
+          "2021": 0,
+          "2022": 0,
+          "2023": 0,
+          "2024": 0,
+          "2025": 0,
+          "2026": 16
+        },
+        "monthlyRates": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          2
+        ],
+        "totalCases": 16,
+        "shareOfSample": 7.9,
+        "shareOf2026": 21.6,
+        "monthlyChange": 2,
+        "strategy": "2026年突然进入Schedule A样本。2021—2025年未识别到符合标准的Schedule A案件，2026年前八个月的16件全部位于N.D. Illinois。"
       },
       {
         "2025": 3,
         "2026": 2,
         "brand": "Gucci",
-        "speedRatio": 1
+        "speedRatio": 1,
+        "annual": {
+          "2021": 1,
+          "2022": 2,
+          "2023": 4,
+          "2024": 1,
+          "2025": 3,
+          "2026": 2
+        },
+        "monthlyRates": [
+          0.083,
+          0.167,
+          0.333,
+          0.083,
+          0.25,
+          0.25
+        ],
+        "totalCases": 13,
+        "shareOfSample": 6.4,
+        "shareOf2026": 2.7,
+        "monthlyChange": 0,
+        "strategy": "相对选择性使用。Schedule A数量明显低于Dior、Chrome Hearts和Louis Vuitton，并与针对具名网站、零售商及商业主体的其他维权方式并行。"
       }
     ],
     "monthlyRate": {
