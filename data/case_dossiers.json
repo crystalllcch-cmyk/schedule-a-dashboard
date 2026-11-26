@@ -1,6 +1,6 @@
 {
   "updated": "2026-11-26",
-  "description": "16 selected, source-checked case dossiers. Source channel is separately classified as official court-hosted material, mirrored court documents, docket-index records, or mixed sources. This is not a comprehensive case census.",
+  "description": "18 selected, source-checked case dossiers. Source channel is separately classified as official court-hosted material, mirrored court documents, docket-index records, or mixed sources. This is not a comprehensive case census.",
   "evidenceLevels": [
     "一级｜完整上诉法院判决",
     "一级｜GovInfo官方法院文件",
@@ -1698,6 +1698,245 @@
         ]
       },
       "sourceClass": "official"
+    },
+    {
+      "id": "dior-kocoras",
+      "title": "Christian Dior, S.A. v. Schedule A Defendants",
+      "caseNo": "1:26-cv-10747",
+      "court": "N.D. Illinois",
+      "judge": "Charles P. Kocoras",
+      "date": "2026-09-17 — 2026-10-28",
+      "period": "2026",
+      "topics": [
+        "service",
+        "procedure",
+        "pi",
+        "judge-practice"
+      ],
+      "outcome": "pi-granted-unopposed",
+      "outcomeLabel": "地址调查不足导致电子送达初次被拒；补充逐被告材料后获准，PI无人反对获准",
+      "sourceLevel": "一级程序记录｜公开docket minute entry",
+      "sourceNote": "公开案卷索引记录Dkt.19对电子送达申请无偏见驳回、Dkt.27补充地址调查声明、Dkt.29准许重新申请的电子送达、Dkt.36批准PI及Dkt.40缺席判决动议。Justia案卷页最后检索日期为2026-10-28；本档案依据minute entry摘要，不将其表述为完整书面判决。",
+      "summary": "Christian Dior于2026-09-04在N.D. Illinois提起Schedule A商标诉讼，由Paul Joseph Kossof代理。Kocoras法官于9-11批准TRO，但9-17拒绝原告电子送达申请，理由是调查声明仅描述调查机构的一般方法，并以一句话概括整个Schedule A，未逐被告说明查找地址的具体步骤、线索及结果。法院要求对每名被告分别说明调查过程；对发现的地址线索，还须说明进一步核查及排除该地址的依据。原告10-02提交新的地址调查声明并重新申请，10-05电子送达获准；10-09在无人提出异议的情况下批准PI。10-27原告申请缺席判决，截至10-28案卷记录显示该动议仍在审理中。",
+      "issue": "原告能否仅以调查机构的一般方法和覆盖全部Schedule A的一句结论，证明被告地址未知并适用海牙公约第1条例外？法院要求的逐被告地址调查具体程度如何？",
+      "decision": "Dkt.19于2026-09-17将电子送达申请无偏见驳回。法院指出，原告没有逐被告列明已取得的地址、进行的搜索及其结果；对于可识别的实体地点，还须说明是否进行试寄、实地调查或电话核查，并通过调查结果排除该地址，而非仅称无法确认被告在该地址。对只通过社交媒体或即时通讯平台经营、平台不提供注册地址的被告，若能逐被告证明调查未发现任何可识别实体地点，可能足以支持地址未知。原告10-02提交新的调查声明后，法院10-05准许电子送达；10-09在无人反对的情况下批准PI。该程序显示，初次拒绝并非永久禁止电子送达，法院要求的是与每名被告对应的具体地址调查证明。",
+      "significance": "本案展示Kangol之后的地区法院实际操作：电子送达并非一概不可行，但地址未知例外必须有逐被告、可复核的调查记录。尤其要区分“没有确认被告住在某地址”与“已通过调查排除该地址”；两者不是同一证明。另须区分TRO、送达和PI：本案TRO先获准，电子送达随后被拒并在补充材料后获准，PI又是在无人反对时获准，不能简化成法院先拒绝整个案件、后又全面接受原告主张。",
+      "timeline": [
+        {
+          "date": "2026-09-04",
+          "label": "Dior提起Schedule A商标诉讼",
+          "detail": "案件分配给N.D. Illinois法官Charles P. Kocoras，原告律师为Paul Joseph Kossof。"
+        },
+        {
+          "date": "2026-09-11",
+          "label": "TRO获准",
+          "detail": "法院批准原告的单方TRO申请。"
+        },
+        {
+          "date": "2026-09-17",
+          "label": "电子送达申请无偏见驳回",
+          "detail": "法院认为地址调查声明过于概括，未逐被告列明调查步骤、地址线索和调查结果。"
+        },
+        {
+          "date": "2026-10-02",
+          "label": "原告提交补充地址调查声明",
+          "detail": "原告重新申请电子送达，并提交调查被告实体地址的补充声明。"
+        },
+        {
+          "date": "2026-10-05",
+          "label": "电子送达获准",
+          "detail": "法院准许重新提出的电子送达申请。"
+        },
+        {
+          "date": "2026-10-09",
+          "label": "PI获准",
+          "detail": "案卷记录无人回应PI动议，法院批准PI。"
+        },
+        {
+          "date": "2026-10-27 — 10-28",
+          "label": "缺席判决动议待审",
+          "detail": "原告提出缺席判决动议；截至案卷最后检索日2026-10-28，法院尚未作出结果。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Public docket index · Dkts.19, 27, 29, 36, 40",
+          "url": "https://dockets.justia.com/docket/illinois/ilndce/1:2026cv10747/507290",
+          "role": "公开案卷minute entry及程序记录；最后检索日期2026-10-28"
+        }
+      ],
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "案件与原告律师",
+            "text": "Christian Dior于2026-09-04提起Schedule A商标诉讼，原告律师为Paul Joseph Kossof。"
+          },
+          {
+            "label": "TRO与送达分开处理",
+            "text": "TRO于9-11获准，但电子送达申请于9-17被无偏见驳回。"
+          },
+          {
+            "label": "补充调查后",
+            "text": "原告10-02提交新的地址调查声明，10-05电子送达获准；10-09 PI在无人反对的情况下获准。"
+          }
+        ],
+        "issue": [
+          {
+            "label": "地址未知",
+            "text": "调查声明能否仅以一般方法和整体性结论，证明每名被告地址未知？"
+          },
+          {
+            "label": "调查深度",
+            "text": "对已出现的地址线索，原告是否进一步核查并排除，而非仅称无法确认？"
+          }
+        ],
+        "decision": [
+          {
+            "label": "初次申请",
+            "text": "法院认为原告没有逐被告列明具体搜索、已取得地址及搜索结果，拒绝电子送达申请。"
+          },
+          {
+            "label": "地址线索",
+            "text": "对于可识别的实体地点，原告须说明进一步核查步骤及排除地址的结果；仅无法确认被告在该处并不足够。"
+          },
+          {
+            "label": "平台信息缺失",
+            "text": "对只通过社交媒体或即时通讯平台经营、平台不提供注册地址的被告，逐被告证明调查未发现可识别实体地点，可能足以支持地址未知。"
+          },
+          {
+            "label": "后续程序",
+            "text": "补充调查声明后电子送达获准；PI在无人反对时获准。"
+          }
+        ],
+        "significance": [
+          {
+            "label": "不是全面禁止",
+            "text": "本案说明地址未知例外仍可适用，但必须逐被告、具体、可复核。"
+          },
+          {
+            "label": "证据标准",
+            "text": "“无法确认被告在该地址”不等于“已排除该地址”。"
+          },
+          {
+            "label": "程序区分",
+            "text": "TRO获准、电子送达获准和PI获准属于不同程序节点，不能合并成一个整体结果。"
+          }
+        ]
+      },
+      "sourceClass": "docket-index"
+    },
+    {
+      "id": "advance-magazine",
+      "title": "Advance Magazine Publishers Inc. v. Schedule A Defendants",
+      "caseNo": "1:26-cv-11858",
+      "court": "N.D. Illinois",
+      "judge": "Chief Judge Virginia M. Kendall",
+      "date": "2026-11-10",
+      "period": "2026",
+      "topics": [
+        "joinder",
+        "pi",
+        "evidence",
+        "judge-variance"
+      ],
+      "outcome": "tro-denied",
+      "outcomeLabel": "TRO申请被拒；资产限制及加速取证请求未作实体判断",
+      "sourceLevel": "二级｜法院Opinion & Order全文副本",
+      "sourceNote": "Dkt.23完整Opinion & Order副本由Justia托管。裁定全文记载Rule 20合并、逐被告侵权分析及保证金要求；法院最终拒绝原告的单方救济动议。该来源是法院裁定全文的第三方托管副本，不是法院官网原始PDF。",
+      "summary": "原告Advance Magazine Publishers Inc.在1:26-cv-11858案中针对30名Schedule A被告申请TRO、临时禁令、资产限制及加速取证。法院指出，30名被告销售不同产品、分布于4个平台，原告主张涉及17个商标，但未说明各被告之间存在何种交易联系或共同经营关系；原告提交的Rule 20论证主要是模板化结论，宣誓声明也没有逐被告说明事实。原告仅用约两页内容笼统主张全部被告侵权，未说明每名被告分别如何侵犯哪些商标。法院于2026-11-10拒绝该单方救济动议。",
+      "issue": "共同侵犯同一品牌的商标、销售不同产品或在多个平台经营，是否足以满足Rule 20的同一交易或系列交易及共同问题要求？原告是否必须逐被告说明具体侵权事实？",
+      "decision": "法院认定原告未满足Rule 20被告合并要求：没有事实说明被告之间的交易关系、共同经营或相互联系，不能仅凭共同侵犯同一知识产权及相似方式将30名被告合并。原告的侵权论证仅约两页，未逐被告说明具体商品与商标之间的侵权关系，亦不符合Kendall法官Standing Order对事实具体化的要求。保证金方面，原告提出30,000美元，但Kendall法官2026-08-11 Standing Order规定推定每名被告10,000美元，30名被告对应300,000美元。法院基于合并和实体证明等独立理由拒绝动议，因此没有进一步审理资产限制和加速取证请求，相关请求作为无须处理的事项搁置。法院要求原告最迟于2026-12-27完成送达，否则案件将被驳回。",
+      "significance": "这是Kendall法官2026-08-11 Standing Order的近期实际适用样本。法院将被告合并、逐被告侵权证明和保证金分别审查，说明批量列名本身不能替代交易联系与个别侵权分析。尤其需要区分裁定范围：TRO及相关单方救济动议被拒；资产限制与加速取证请求并非经独立实体审查后判定不合法，而是因动议已基于其他理由被拒而未再处理。该案是N.D. Illinois地区法院个案，不是第七巡回或全院统一判例。",
+      "timeline": [
+        {
+          "date": "2026-11-10",
+          "label": "Dkt.23 Opinion & Order",
+          "detail": "法院以Rule 20合并缺乏事实支持、逐被告侵权论证不足及保证金金额不符合Kendall法官Standing Order为由，拒绝原告单方救济动议。"
+        },
+        {
+          "date": "2026-12-27",
+          "label": "原告送达期限",
+          "detail": "法院要求原告在该日期前完成对被告的送达；未遵守将导致案件被驳回。"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Dkt.23 Opinion & Order · full text copy",
+          "url": "https://docs.justia.com/cases/federal/district-courts/illinois/ilndce/1:2026cv11858/508673/23",
+          "role": "法院Opinion & Order全文第三方托管副本"
+        }
+      ],
+      "analysisPoints": {
+        "summary": [
+          {
+            "label": "原告请求",
+            "text": "原告针对30名被告申请TRO、临时禁令、资产限制及加速取证。"
+          },
+          {
+            "label": "被告结构",
+            "text": "30名被告销售不同产品，涉及4个平台及17个被主张商标。"
+          },
+          {
+            "label": "核心缺陷",
+            "text": "原告未提供具体事实说明被告之间的交易联系，也未逐被告分析侵权。"
+          }
+        ],
+        "issue": [
+          {
+            "label": "Rule 20",
+            "text": "同一品牌或相似侵权主张，是否足以证明被告之间存在同一交易或系列交易及共同问题？"
+          },
+          {
+            "label": "逐被告侵权",
+            "text": "能否用一组概括性图片和商标清单，替代每名被告的具体侵权分析？"
+          },
+          {
+            "label": "保证金",
+            "text": "30名被告的案件是否可按30,000美元总保证金提交？"
+          }
+        ],
+        "decision": [
+          {
+            "label": "被告合并",
+            "text": "没有事实说明被告之间的交易关系、共同经营或相互联系；仅共同侵犯同一知识产权及相似方式不足以支持Rule 20合并。"
+          },
+          {
+            "label": "侵权证明",
+            "text": "原告仅用约两页笼统论证，未逐被告说明具体商品与商标的侵权关系。"
+          },
+          {
+            "label": "保证金",
+            "text": "Kendall法官2026-08-11 Standing Order规定推定每名被告10,000美元；30名被告对应300,000美元，原告提出的30,000美元不符合要求。"
+          },
+          {
+            "label": "资产与取证",
+            "text": "法院因其他独立理由拒绝整体动议，未进一步审理资产限制及加速取证请求；不能把它们表述为经过实体审查后被单独否定。"
+          },
+          {
+            "label": "送达期限",
+            "text": "原告须在2026-12-27前完成送达，否则案件将被驳回。"
+          }
+        ],
+        "significance": [
+          {
+            "label": "Rule 20适用",
+            "text": "共同品牌、相似商品或多个平台并不足以自动证明被告之间存在同一交易或系列交易。"
+          },
+          {
+            "label": "个别化举证",
+            "text": "批量案件仍须说明每名被告的具体商品、商标及侵权关系。"
+          },
+          {
+            "label": "保证金差异",
+            "text": "Kendall法官的每名被告10,000美元要求是其2026-08-11个人Standing Order，不是N.D. Illinois全院统一保证金。"
+          },
+          {
+            "label": "裁判范围",
+            "text": "资产限制及加速取证请求因整体动议被拒而未进一步处理，不能据此概括为法院已对其实体合法性作出裁判。"
+          }
+        ]
+      },
+      "sourceClass": "court-copy"
     }
   ]
 }
