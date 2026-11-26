@@ -35,7 +35,7 @@ try{
  await p.screenshot({path:out+'/map.png',fullPage:true});await p.locator('#reset').click();
  await p.locator('[data-module="legal"]').click();await p.locator('[data-view="casefiles"]').click();await p.waitForTimeout(250);check('archive count actual',await p.locator('#caseResultCount').innerText().then(t=>t.includes('31 / 31')));
  await p.locator('#caseSearch').fill('Dior');check('archive search',await p.locator('#caseResultCount').innerText().then(t=>t.includes('1 / 31')));
- await p.locator('.case-bubble-node[data-case-id="dior-kocoras"]').click();check('new Dior dossier opens',await p.locator('#dtitle').innerText().then(t=>t.includes('Dior')));await p.keyboard.press('Escape');await p.locator('#resetCases').click();
+ await p.locator('.case-bubble-node[data-case-id="dior-kocoras"]').press('Enter');check('new Dior dossier opens',await p.locator('#dtitle').innerText().then(t=>t.includes('Dior')));await p.keyboard.press('Escape');await p.locator('#resetCases').click();
  await p.screenshot({path:out+'/archive.png',fullPage:true});
  await p.locator('[data-module="audit"]').click();await p.locator('[data-view="brands"]').click();check('monthly brand units',await p.locator('#brandBars').innerText().then(t=>t.includes('件/月')));
  await p.locator('[data-module="legal"]').click();await p.locator('[data-view="courts"]').click();check('seven legal themes',await p.locator('#themeButtons [data-r-theme]').count().then(n=>n===7));
