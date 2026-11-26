@@ -1,7 +1,7 @@
 name: Advanced dashboard desktop acceptance
 on:
   push:
-    branches: [work/v08-analysis-reading-2026-11-26]
+    branches: [work/four-requested-fixes]
 permissions:
   contents: read
 jobs:
