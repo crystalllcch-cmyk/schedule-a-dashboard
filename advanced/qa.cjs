@@ -1,8 +1,9 @@
 const {chromium}=require('playwright'),fs=require('fs'),assert=require('assert');
-(async()=>{const out='advanced/qa-results';fs.mkdirSync(out,{recursive:true});const b=await chromium.launch({headless:true});const p=await b.newPage({viewport:{width:1440,height:1000}});const errors=[],checks=[];p.on('pageerror',e=>errors.push(e.stack));
+(async()=>{const out='advanced/qa-results';fs.mkdirSync(out,{recursive:true});const b=await chromium.launch({headless:true});const p=await b.newPage({viewport:{width:1440,height:1000}});const errors=[],checks=[];p.on('pageerror',e=>errors.push(e.stack));p.on('console',m=>console.log('BROWSER',m.type(),m.text()));
 const check=(name,cond)=>{checks.push({name,passed:!!cond});assert(cond,name)};
 try{
  await p.goto('http://127.0.0.1:8787/advanced/',{waitUntil:'networkidle'});await p.waitForTimeout(600);
+ console.log('STARTUP',await p.evaluate(()=>({rd:!!RD,cases:CASES?.cases.length,charts:Object.keys(charts),toast:document.getElementById('toast').textContent})));
  check('startup data',await p.evaluate(()=>!!RD&&!!CASES&&!!charts.serviceMonthly));
  check('31 archived cases retained',await p.evaluate(()=>CASES.cases.length===31&&document.querySelectorAll('.case-bubble-node').length===31));
  check('8248 source cases',await p.evaluate(()=>sr.length===8248));
