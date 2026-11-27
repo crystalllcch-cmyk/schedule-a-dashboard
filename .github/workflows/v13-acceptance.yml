@@ -1,0 +1,26 @@
+name: V1.3 specified copy acceptance
+on:
+  push:
+    branches: [work/v13-specified-copy-20261127]
+jobs:
+  desktop:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright
+      - run: npx playwright install --with-deps chromium
+      - name: Build and verify
+        run: |
+          python3 -m http.server 8787 >/tmp/http.log 2>&1 &
+          node build_v13.cjs
+          node advanced/qa_v13.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v13-specified-copy
+          path: |
+            exports/
+            advanced/qa-results/
