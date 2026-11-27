@@ -5,6 +5,8 @@ const fs=require('fs'),{chromium}=require('playwright');
  old=old.replace('</head>','<style>.release-stamp{display:flex;align-items:center;gap:14px;padding:13px 0;color:var(--muted);font-size:12px}.release-stamp strong{color:var(--cyan);font-size:14px}</style></head>').replace('<div class="hero">','<div class="release-stamp"><strong>V1.0 正式汇报版</strong><span>2026年11月26日 · 历史版本</span></div><div class="hero">');
  fs.mkdirSync('versions/v1.0',{recursive:true});fs.writeFileSync('versions/v1.0/index.html',old);
  let s=fs.readFileSync('advanced/index.html','utf8').replaceAll('../../versions/v1.0/','/schedule-a-dashboard/versions/v1.0/');fs.writeFileSync('advanced/index.html',s);
+ if(s.includes('id="interactive-hydration"')){fs.copyFileSync('advanced/index.html','exports/index_v11.html');fs.copyFileSync('versions/v1.0/index.html','exports/index_v10.html');return;}
+
  const browser=await chromium.launch();const p=await browser.newPage({viewport:{width:1440,height:1000}});const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto('http://127.0.0.1:8787/advanced/',{waitUntil:'networkidle'});await p.waitForTimeout(700);
  for(const view of ['overview','activity','geography','courts','brands','casefiles']){await p.locator('[data-view="'+view+'"]').click();await p.waitForTimeout(100)}
  if(errors.length)throw new Error(errors.join('\n'));
