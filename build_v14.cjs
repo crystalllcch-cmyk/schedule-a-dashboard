@@ -2,7 +2,13 @@ const fs=require('fs'),{chromium}=require('playwright');
 (async()=>{
  fs.mkdirSync('exports',{recursive:true});
  let s=fs.readFileSync('advanced/index.html','utf8');
- if(s.includes('id="interactive-hydration"')){fs.copyFileSync('advanced/index.html','exports/index_v14.html');return;}
+ if(s.includes('id="interactive-hydration"')){
+ const boot=s.match(/<script id="interactive-hydration">[\s\S]*?<\/script>/);if(!boot)throw Error('Missing hydration block');
+ const encoded=boot[0].match(/atob\("([A-Za-z0-9+/=]+)"\)/)[1];
+ const head=s.slice(0,s.indexOf('<body>')).replace(/<title>[\s\S]*?<\/title>/,'<title>美国批量侵权诉讼行业风险看板｜V1.4 趋势分析修订版</title>');
+ s=head+'<body>'+Buffer.from(encoded,'base64').toString('utf8')+s.slice(boot.index+boot[0].length);
+ fs.writeFileSync('advanced/index.html',s);
+ }
  const browser=await chromium.launch();const p=await browser.newPage({viewport:{width:1440,height:1000}});const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto('http://127.0.0.1:8787/advanced/',{waitUntil:'networkidle'});await p.waitForTimeout(700);
  for(const view of ['overview','activity','geography','courts','brands','casefiles']){await p.locator('[data-view="'+view+'"]').click();await p.waitForTimeout(100)}
  if(errors.length)throw new Error(errors.join('\n'));
