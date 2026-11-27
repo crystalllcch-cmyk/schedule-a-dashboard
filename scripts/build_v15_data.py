@@ -4,6 +4,8 @@ s=(ROOT/'advanced/index.html').read_text();p=s.index('const originalData=')+len(
 # Postal-state and court-name normalization is based on the court identifier.
 for r in rows:
  if r['court']=='tnmd':r['state']='TN'
+for y in ('2025','2026'):summary['years'][y]['states']=dict(collections.Counter(r['state'] for r in rows if r['date'].startswith(y)))
+(OUT/'summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2))
 oldg=old['data/geography.json'];oldD=old['data/dashboard.json']
 ct={'ilnd':'7-52','flsd':'11-3C','pawd':'3-15','nysd':'2-08','txwd':'5-42','innd':'7-55','txed':'5-40','flmd':'11-3A','vaed':'4-22','njd':'3-12','moed':'8-65','txsd':'5-41','mad':'1-01','cacd':'9-73','ksd':'10-83','wawd':'9-81'}
 extras={'gand':('11-gand','N.D. Georgia','佐治亚北区','GA',33.749,-84.388,'Atlanta'),'ned':('8-ned','D. Nebraska','内布拉斯加联邦法院','NE',41.2565,-95.9345,'Omaha'),'tnmd':('6-tnmd','M.D. Tennessee','田纳西中区','TN',36.1627,-86.7816,'Nashville'),'ord':('9-ord','D. Oregon','俄勒冈联邦法院','OR',45.5152,-122.6784,'Portland'),'wied':('7-wied','E.D. Wisconsin','威斯康星东区','WI',43.0389,-87.9065,'Milwaukee'),'cod':('10-cod','D. Colorado','科罗拉多联邦法院','CO',39.7392,-104.9903,'Denver')}

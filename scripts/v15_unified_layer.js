@@ -16,12 +16,14 @@ const v15PriorRefresh=refresh;refresh=function(){v15PriorRefresh();if(v15Ready){
 const v15PriorGeo=renderGeo;renderGeo=function(){v15PriorGeo();if(!v15Ready)return;
  const chosen=GEO.districts.find(d=>d.code===filters.district);
  const label=chosen?(UNIFIED.court_names[chosen.code]||chosen.name):'全部收录地区';
+ const period=$('mapPeriod');if(period)period.value=filters.year;
+ const badge=$('view-geography').querySelector('.section-title .tag');if(badge)badge.textContent=(filters.year==='all'?'两年同期':filters.year+'年同期')+' · '+fmt(chosen?geoValue(chosen):GEO.districts.reduce((n,d)=>n+geoValue(d),0))+'件';
  $('mapSelectedName').textContent=label;
  $('mapSelectedMeta').textContent=(filters.year==='all'?'2025—2026年同期合计':filters.year+'年'+v15Period)+' · 点击法院查看季度分布';
  $('mapSelectedCount').textContent=fmt(chosen?geoValue(chosen):GEO.districts.reduce((n,d)=>n+geoValue(d),0));
  $('geoQuarterTitle').textContent=label+' · 季度案件变化';
  const qs=D.quarters.filter(q=>filters.year==='all'||String(q.year)===filters.year);
- const vals=qs.map(q=>({label:q.label,value:chosen?(chosen.quarters[q.year+'Q'+q.quarter]||0):GEO.districts.reduce((n,d)=>n+(d.quarters[q.year+'Q'+q.quarter]||0),0)}));
+ const vals=qs.map(q=>({label:chineseText(q.label),value:chosen?(chosen.quarters[q.year+'Q'+q.quarter]||0):GEO.districts.reduce((n,d)=>n+(d.quarters[q.year+'Q'+q.quarter]||0),0)}));
  updateGeoQuarterLine(vals);specifiedChartSpace();
  const text=$('geoQuarterTitle').parentElement.querySelector('.sub');
  if(chosen){const a=Object.entries(chosen.quarters).filter(([q])=>q.startsWith('2025')).reduce((n,[,v])=>n+v,0),b=Object.entries(chosen.quarters).filter(([q])=>q.startsWith('2026')).reduce((n,[,v])=>n+v,0);putSpecified(text,{lead:label+'：两年同期对比',points:['2025年同期'+fmt(a)+'件，2026年同期'+fmt(b)+'件，净变化'+(b-a>=0?'+':'')+fmt(b-a)+'件。第四季度均统计至11月25日。']})}else putSpecified(text,SPECIFIED_COPY.geoLine);
