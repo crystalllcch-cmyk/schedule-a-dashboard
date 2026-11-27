@@ -2,7 +2,7 @@ const fs=require('fs'),{chromium}=require('playwright');
 (async()=>{
  fs.mkdirSync('exports',{recursive:true});
  let old=fs.readFileSync('original_v10.html','utf8');old=old.replace('<title>美国批量侵权诉讼行业风险看板</title>','<title>美国批量侵权诉讼行业风险看板｜V1.0 正式汇报版</title>');
- old=old.replace('</head>','<style>.release-stamp{display:flex;align-items:center;gap:14px;padding:13px 0;color:var(--muted);font-size:12px}.release-stamp strong{color:var(--cyan);font-size:14px}</style></head>').replace('<div class="hero">','<div class="release-stamp"><strong>V1.0 正式汇报版</strong><span>2026年11月26日 · 历史版本</span></div><div class="hero">');
+ old=old.replace('</head>','<style>.release-stamp{display:flex;align-items:center;gap:14px;padding:13px 0;color:var(--muted);font-size:12px}.release-stamp strong{color:var(--cyan);font-size:14px}</style></head>').replace('<section class="hero">','<div class="release-stamp"><strong>V1.0 正式汇报版</strong><span>2026年11月26日 · 历史版本</span></div><section class="hero">');
  fs.mkdirSync('versions/v1.0',{recursive:true});fs.writeFileSync('versions/v1.0/index.html',old);
  let s=fs.readFileSync('advanced/index.html','utf8').replaceAll('../../versions/v1.0/','/schedule-a-dashboard/versions/v1.0/');fs.writeFileSync('advanced/index.html',s);
  if(s.includes('id="interactive-hydration"')){fs.copyFileSync('advanced/index.html','exports/index_v11.html');fs.copyFileSync('versions/v1.0/index.html','exports/index_v10.html');return;}
